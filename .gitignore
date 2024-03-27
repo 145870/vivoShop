@@ -1,4 +1,3 @@
-.settings/
 /build/
 .classpath
 .project
@@ -30,4 +29,3 @@ captures/
 *.iml
 # Keystore files
 *.jks
-/target/
