@@ -14,18 +14,20 @@ public class ProductsClassDAO extends BaseDAO{
 		String sql = "select * from products_class";
 		return this.executeQuery(sql, new Mapper<ProductsClass>() {
 
-			@Override
 			public List<ProductsClass> mapper(ResultSet rs) throws SQLException {
-				List<ProductsClass> list = new ArrayList<ProductsClass>();
-				while(rs.next()) {
-					list.add(new ProductsClass(
-								rs.getLong(1),
-								rs.getString(2)
-							));
-					
-				}
-				return list;
+					List<ProductsClass> list = new ArrayList<ProductsClass>();
+					while(rs.next()) {
+						list.add(new ProductsClass(
+									rs.getLong(1),
+									rs.getString(2)
+								));
+						
+					}
+					return list;
+
 			}
+
+			
 		});
 	}
 }
