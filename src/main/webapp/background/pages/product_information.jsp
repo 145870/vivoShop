@@ -249,7 +249,12 @@
 								$.ajax({
 								    url: '/vivoShop/background/gopages/goEditProductpane',
 								    data:{
-								    	product:data.id
+								    	name:data.information_name,
+								    	id:data.id,
+								    	type:data.type,
+								    	status:data.status,
+								    	is_last:data.is_last
+								    	
 								    },
 								    success: function(html) {
 								        layer.open({

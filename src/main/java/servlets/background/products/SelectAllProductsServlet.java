@@ -46,7 +46,18 @@ public class SelectAllProductsServlet extends HttpServlet{
 		    dataMap.put("id", product.getId());
 		    dataMap.put("description", product.getDescription());
 		    dataMap.put("type", product.getClassName());
-		    dataMap.put("status", product.getInformationStatus() == 1 ? "已上架" : "未上架");
+		    
+		    int sta = product.getInformationStatus();
+		    String status = "";
+		    if (sta == 0) {
+		        status = "已上架";
+		    } else if (sta == 1) {
+		        status = "未上架";
+		    } else if (sta == 2) {
+		        status = "已下架";
+		    }
+		    dataMap.put("status",status);
+		    
 		    dataMap.put("is_last", product.getIsLast() == 1 ? "是" : "否");
 		    dataMap.put("create_time", product.getCreateTime());
 		    dataMap.put("shelves_time", product.getShelvesTime().toString());
