@@ -43,6 +43,7 @@ public class SelectAllProductsServlet extends HttpServlet{
 		for (ProductsInformation product : list) {
 		    Map<String, Object> dataMap = new HashMap<>();
 		    dataMap.put("information_name", product.getInformationName());
+		    dataMap.put("id", product.getId());
 		    dataMap.put("description", product.getDescription());
 		    dataMap.put("type", product.getClassName());
 		    dataMap.put("status", product.getInformationStatus() == 1 ? "已上架" : "未上架");

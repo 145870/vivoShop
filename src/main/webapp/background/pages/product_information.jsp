@@ -6,16 +6,11 @@
 <head>
 <meta charset="utf-8">
 <title></title>
-<!-- 
-<script src="jquery-3.5.1.min.js"></script>
-
-<link rel="stylesheet" href="../lib/layui/css/layui.css">
-<script type="text/javascript" src="../lib/layui/layui.js"
-	charset="utf-8"></script> 
--->
-
-
+	<script type="text/javascript" src="/vivoShop/background/lib/layui/layui.js"></script>
+	<link href="/vivoShop/background/lib/layui/css/layui.css" rel="stylesheet">
 </head>
+
+
 <body>
 	<style type="text/css">
 /* 重写 */
@@ -190,7 +185,10 @@
 			{
 				type : 'checkbox',
 				fixed : 'left'
-			}, {
+			},{
+                field: 'id',
+                hide: true // 隐藏列
+            },{
 				field : 'information_name',
 				title : '产品名',
 				width : 100
@@ -234,23 +232,40 @@
 		// 每页默认显示的数量
 		});
 
+		  var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
+
+	        function getBody(content){
+	            var result = REG_BODY.exec(content);
+	            if(result && result.length === 2)
+	                return result[1];
+	            return content;
+	        }
+		
 		// 触发单元格工具事件
-		table
-				.on(
-						'tool(product-information-body-table)',
-						function(obj) { // 双击 toolDouble
+		table.on('tool(product-information-body-table)',function(obj) { // 双击 toolDouble
 							var data = obj.data; // 获得当前行数据
+							
 							if (obj.event === 'edit') {
-								layer
-										.open({
-											type : 2,
-											title : '编辑'
-													+ data.information_name,
-											shadeClose : true,
-											maxmin : true, //开启最大化最小化按钮
-											area : [ '400px', '450px' ],
-											content : 'pages/function/product_information/EditProductpanel.html'
-										});
+								$.ajax({
+								    url: '/vivoShop/background/gopages/goEditProductpane',
+								    data:{
+								    	product:data.id
+								    },
+								    success: function(html) {
+								        layer.open({
+								            title: '编辑' + data.information_name,
+								            shadeClose: true,
+								            maxmin: true,
+								            area: ['400px', '400px'],
+								            content: html,
+								            resize: false
+								        });
+								        
+								        form.render();
+								    }
+								
+								});
+								
 							} else if (obj.event === 'more') {
 								// 更多 - 下拉菜单
 								dropdown

@@ -6,7 +6,7 @@
 		<title></title>
 		<script src="../static/jquery-3.5.1.min.js"></script>
 		
-		<link rel="stylesheet" href="./lib/layui/css/layui.css">
+		<link href="/vivoShop/background/lib/layui/css/layui.css" rel="stylesheet">
 		<script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
 		
 		<script src='js/vivo.js'></script>
