@@ -16,9 +16,8 @@ public class GoProductInformationServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		ProductsClassDAO dao = new ProductsClassDAO();
-		// 获取商品类别信息，并存储到 ServletContext
-        ServletContext context = getServletContext();
-        context.setAttribute("product_type", dao.getProductsClasses());
+		
+        req.getSession().setAttribute("product_type", dao.getProductsClasses());
 		
 		resp.sendRedirect("/vivoShop/background/pages/product_information.jsp");
 	}

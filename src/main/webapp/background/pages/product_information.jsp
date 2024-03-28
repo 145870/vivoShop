@@ -241,10 +241,11 @@
 	            return content;
 	        }
 		
+	        
 		// 触发单元格工具事件
 		table.on('tool(product-information-body-table)',function(obj) { // 双击 toolDouble
 							var data = obj.data; // 获得当前行数据
-							
+							var index1;
 							if (obj.event === 'edit') {
 								$.ajax({
 								    url: '/vivoShop/background/gopages/goEditProductpane',
@@ -253,20 +254,53 @@
 								    	id:data.id,
 								    	type:data.type,
 								    	status:data.status,
-								    	is_last:data.is_last
-								    	
+								    	is_last:data.is_last,
+								    	description:data.description
 								    },
 								    success: function(html) {
-								        layer.open({
+								    	index1=layer.open({
+								        	type:1,
 								            title: '编辑' + data.information_name,
 								            shadeClose: true,
 								            maxmin: true,
-								            area: ['400px', '400px'],
+								            area: ['470px', '540px'],
 								            content: html,
 								            resize: false
 								        });
 								        
 								        form.render();
+								        
+								        $("#editProductpanel").submit(function(){
+											 event.preventDefault();
+											 layer.confirm('是否确认修改？', {icon: 3}, function(){
+													//确认
+													var formData = $("#editProductpanel").serialize();
+													//修改
+													$.ajax({
+														url:"/vivoShop/background/pages/function/product_information/update",
+														data:formData,
+														dataType:'text',
+														type:'get',
+														success:function(txt){
+															
+														},error: function(xhr, status, error) {
+															//console.log(xhr)
+															layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+													    }
+													})
+											        layer.msg('修改成功', {icon: 1});
+											        if(index1){
+														 layer.close(index1);
+													 }
+											 }, function(){
+											        //取消
+												 if(index1){
+													 layer.close(index1);
+												 }
+											 });
+											 
+											 
+										})
 								    }
 								
 								});
@@ -305,6 +339,8 @@
 											style : 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' // 设置额外样式
 										})
 							}
+							
+							
 						});
 	</script>
 

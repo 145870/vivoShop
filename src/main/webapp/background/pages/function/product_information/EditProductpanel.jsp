@@ -45,8 +45,9 @@
 }
 
 #editProductpanel .layui-input-group>.layui-input-prefix {
-	width: 100px;
+	width: 175px;
 	text-align: right;
+	font-weight: bold;
 }
 
 #editProductpanel .layui-input {
@@ -58,16 +59,17 @@
 }
 </style>
 	<form class="layui-form" id="editProductpanel" style="margin-top: 30px">
+		<input name='id' value='${product.id}' hidden>
 		<!-- 产品名 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">产品名:</div>
-			<input type="text" placeholder="" class="layui-input right-text"
+			<input type="text" name="name" placeholder="" class="layui-input right-text"
 				value="${product.informationName}">
 		</div>
 		<!-- 分类 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">分类:</div>
-			<select class="layui-input" name="className">
+			<select class="layui-input" name="type">
     <option value="">请选择</option>
     <c:forEach items="${product_type}" var="name">
         <c:choose>
@@ -84,7 +86,7 @@
 		<!-- 上架状态 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">上架状态:</div>
-			<select name="information_status">
+			<select name="status">
 				<option value="">请选择</option>
 				<c:choose>
 					<c:when test="${product.informationStatus eq 0}">
@@ -115,13 +117,19 @@
 		<!-- 是否新品 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">是否新品:</div>
-			<input type="checkbox" name="isNew" lay-skin="switch">
+			<input type="checkbox" name="isNew" lay-skin="switch" ${product.isLast == 0 ? 'checked' : ''}>
+		</div>
+		<!-- 描述 -->
+		<div class="layui-input-group">
+			<div class="layui-input-prefix">产品描述:</div>
+			<textarea style="resize: none;" name="description" placeholder="产品描述" class="layui-textarea right-text"></textarea>
 		</div>
 
-		<!-- <button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认修改</button> -->
+		 <button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认修改</button>
 	</form>
 </body>
 <script type="text/javascript">
+
 	
 </script>
 </html>

@@ -61,4 +61,9 @@ public class ProductsInformationDAO extends BaseDAO {
 		Map<String, Object> map = dao.getProductsInformation();
 		System.out.println(map.get("list"));
 	}
+	//修改产品信息
+	public int updateById(String id,String name,String description,String type,String status,String isNew) {
+		String sql="update products_information set information_name=?,description=?,class_id=?,information_status=?,is_last=? where id=?";
+		return this.execute(sql, name,description,type,status,isNew,id);
+	}
 }
