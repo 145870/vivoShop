@@ -58,7 +58,7 @@ public class SelectAllProductsServlet extends HttpServlet{
 		    }
 		    dataMap.put("status",status);
 		    
-		    dataMap.put("is_last", product.getIsLast() == 1 ? "是" : "否");
+		    dataMap.put("is_last", product.getIsLast() == 1 ? "否" : "是");
 		    dataMap.put("create_time", product.getCreateTime());
 		    dataMap.put("shelves_time", product.getShelvesTime().toString());
 		    

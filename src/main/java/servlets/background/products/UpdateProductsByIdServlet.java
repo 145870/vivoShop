@@ -1,6 +1,7 @@
 package servlets.background.products;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,16 +30,17 @@ public class UpdateProductsByIdServlet extends HttpServlet{
 			status = "2";
 		}
     	
-    	String isNew = req.getParameter("isNew");
+    	String isNew = req.getParameter("isNew")==null?"1":"0";
     	String description = req.getParameter("description");
     	
     	System.out.println(name+id+type+status+isNew+description);
-//    	if (is_last.equals(is_last)) {
-//			
-//		}
-//    	
-//    	if (dao.updateById(id,name,type,status,isNew)) {
-//			
-//		}
+    	
+    	if (dao.updateById(id,name,description,type,status,isNew)>0) {
+    		 // 返回文本内容给前端
+    	    resp.setContentType("text/plain");
+    	    resp.setCharacterEncoding("UTF-8");
+    	    PrintWriter out = resp.getWriter();
+    	    out.print("true");
+		}
 	}
 }

@@ -66,4 +66,10 @@ public class ProductsInformationDAO extends BaseDAO {
 		String sql="update products_information set information_name=?,description=?,class_id=?,information_status=?,is_last=? where id=?";
 		return this.execute(sql, name,description,type,status,isNew,id);
 	}
+	
+	//删除产品
+	public int deleteById(String id) {
+		String sql="delete from products_information where id=?";
+		return this.execute(sql, id);
+	}
 }

@@ -141,6 +141,9 @@
 				<button class="layui-btn layui-bg-blue">编辑单个产品</button>
 				<button class="layui-btn layui-bg-blue">删除选中产品</button>
 				<button class="layui-btn layui-bg-blue">批量上架</button>
+				<button onclick="refreshTable()" style="float: right;" class="layui-btn layui-bg-blue">
+						<i class="layui-icon layui-icon-refresh" style=""></i>
+				</button>
 			</div>
 
 			<div class="tabel">
@@ -177,61 +180,70 @@
 		//表格渲染
 		var table = layui.table;
 		var dropdown = layui.dropdown;
-
+		
+		var inst;
 		// 已知数据渲染
-		var inst = table.render({
-			elem : '#product-information-body-table',
-			cols : [ [ //标题栏
-			{
-				type : 'checkbox',
-				fixed : 'left'
-			},{
-                field: 'id',
-                hide: true // 隐藏列
-            },{
-				field : 'information_name',
-				title : '产品名',
-				width : 100
-			}, {
-				field : 'description',
-				title : '描述',
-				minWidth : 120
-			}, {
-				field : 'type',
-				title : '分类',
-				width : 80
-			}, {
-				field : 'status',
-				title : '上架状态',
-				width : 100
-			}, {
-				field : 'is_last',
-				title : '是否新品',
-				width : 100
-			}, {
-				field : 'create_time',
-				title : '创建时间',
-				width : 200
-			}, {
-				field : 'shelves_time',
-				title : '上市时间',
-				width : 200
-			}, {
-				fixed : 'right',
-				title : '操作',
-				width : 134,
-				minWidth : 125,
-				toolbar : '#barDemo'
-			} ] ],
-			url : "pages/function/product_information/selAll",
-			//skin: 'line', // 表格风格
-			//even: true,
-			page : true, // 是否显示分页
-			limits : [ 5, 10, 15 ],
-			limit : 5
-		// 每页默认显示的数量
-		});
-
+		function refreshTable(){
+			// 销毁当前表格实例
+			if(inst){
+				inst.reload({}); // 先清空数据
+				inst.reload('null'); // 然后销毁表格
+			}
+			
+			inst=table.render({
+				elem : '#product-information-body-table',
+				cols : [ [ //标题栏
+				{
+					type : 'checkbox',
+					fixed : 'left'
+				},{
+	                field: 'id',
+	                hide: true // 隐藏列
+	            },{
+					field : 'information_name',
+					title : '产品名',
+					width : 100
+				}, {
+					field : 'description',
+					title : '描述',
+					minWidth : 120
+				}, {
+					field : 'type',
+					title : '分类',
+					width : 80
+				}, {
+					field : 'status',
+					title : '上架状态',
+					width : 100
+				}, {
+					field : 'is_last',
+					title : '是否新品',
+					width : 100
+				}, {
+					field : 'create_time',
+					title : '创建时间',
+					width : 200
+				}, {
+					field : 'shelves_time',
+					title : '上市时间',
+					width : 200
+				}, {
+					fixed : 'right',
+					title : '操作',
+					width : 134,
+					minWidth : 125,
+					toolbar : '#barDemo'
+				} ] ],
+				url : "pages/function/product_information/selAll",
+				//skin: 'line', // 表格风格
+				//even: true,
+				page : true, // 是否显示分页
+				limits : [ 5, 10, 15 ],
+				limit : 5
+			// 每页默认显示的数量
+			});
+		}
+		refreshTable();
 		  var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
 
 	        function getBody(content){
@@ -274,7 +286,17 @@
 											 event.preventDefault();
 											 layer.confirm('是否确认修改？', {icon: 3}, function(){
 													//确认
-													var formData = $("#editProductpanel").serialize();
+													//var formData = $("#editProductpanel").serialize();
+													var formData = $("#editProductpanel").serializeArray();
+				
+
+													 // 检查除了name为isnew以外的所有字段是否都有值
+												    for (var i = 0; i < formData.length; i++) {												        if (formData[i].name !== "description" && formData[i].value === "") {
+												            isValid = false;
+															layer.msg('内容不能为空!', {icon: 0,time:1000});
+												            return;
+												        }
+												    }
 													//修改
 													$.ajax({
 														url:"/vivoShop/background/pages/function/product_information/update",
@@ -282,20 +304,28 @@
 														dataType:'text',
 														type:'get',
 														success:function(txt){
-															
+															if(txt=="true"){
+																layer.msg('修改成功', {icon: 1});
+															}else{
+																layer.msg('修改失败', {icon: 0});
+															}
 														},error: function(xhr, status, error) {
 															//console.log(xhr)
 															layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
 													    }
 													})
-											        layer.msg('修改成功', {icon: 1});
+											        
 											        if(index1){
 														 layer.close(index1);
-													 }
+														 //重新渲染
+														 refreshTable();
+													}
 											 }, function(){
 											        //取消
 												 if(index1){
 													 layer.close(index1);
+													 //重新渲染
+													 refreshTable();
 												 }
 											 });
 											 
@@ -325,15 +355,33 @@
 												id : 'go'
 											}, ],
 											click : function(menudata) {
-												// if(menudata.id === 'detail'){
-												//   layer.msg('查看操作，当前行 ID:'+ data.id);
-												// } else if(menudata.id === 'del'){
-												//   layer.confirm('真的删除行 [id: '+ data.id +'] 么', function(index){
-												//     obj.del(); // 删除对应行（tr）的DOM结构
-												//     layer.close(index);
-												//     // 向服务端发送删除指令
-												//   });
-												// } 
+												 if(menudata.id === 'selAll'){
+												   layer.msg('查看操作，当前行 ID:'+ data.id);
+												 } else if(menudata.id === 'selImg'){
+												   
+												 } else if(menudata.id === 'del'){
+													 layer.confirm('删除 ['+ data.information_name +'] 么?',{icon: 3}, function(index){
+													     $.ajax({
+													    	 url:"/vivoShop/background/pages/function/product_information/delete",
+													    	 data:{id:data.id},
+													    	 success:function(txt){
+																if(txt=="true"){
+																	layer.msg('删除成功', {icon: 1});
+																}else{
+																	layer.msg('删除失败', {icon: 0});
+																}
+															},error: function(xhr, status, error) {
+																//console.log(xhr)
+																layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+															}
+													     })
+														 //obj.del(); // 删除对应行（tr）的DOM结构
+													     layer.close(index);
+													 });
+												}else if(menudata.id === 'go'){
+													//跳转
+													window.location.href = "/vivoShop/";
+												}
 											},
 											align : 'right', // 右对齐弹出
 											style : 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' // 设置额外样式
