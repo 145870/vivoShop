@@ -2,6 +2,7 @@ package servlets.background.products;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,9 +59,13 @@ public class SelectAllProductsServlet extends HttpServlet{
 		    }
 		    dataMap.put("status",status);
 		    
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String createTimeString = sdf.format(product.getCreateTime());
+		    String shelvesTimeString = sdf.format(product.getShelvesTime());
+		    
 		    dataMap.put("is_last", product.getIsLast() == 1 ? "否" : "是");
-		    dataMap.put("create_time", product.getCreateTime());
-		    dataMap.put("shelves_time", product.getShelvesTime().toString());
+		    dataMap.put("create_time", createTimeString);
+		    dataMap.put("shelves_time", shelvesTimeString);
 		    
 		    dataList.add(dataMap);
 		}

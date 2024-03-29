@@ -72,4 +72,11 @@ public class ProductsInformationDAO extends BaseDAO {
 		String sql="delete from products_information where id=?";
 		return this.execute(sql, id);
 	}
+
+	public int setProducts(String name, String type, String date, String isNew, String description) {
+		String sql="INSERT INTO products_information (information_name, description, class_id, is_last, shelves_time) \n"
+				+ "VALUES \n"
+				+ "(?,?,?,?,?)";
+		return this.execute(sql, name,description,type,isNew,date);
+	}
 }

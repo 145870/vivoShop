@@ -122,7 +122,7 @@
 		<!-- 描述 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">产品描述:</div>
-			<textarea style="resize: none;" name="description" placeholder="产品描述" class="layui-textarea right-text">${product.description}</textarea>
+			<textarea style="resize: none;width:200px;" name="description" placeholder="产品描述" class="layui-textarea right-text">${product.description}</textarea>
 		</div>
 
 		 <button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认修改</button>
