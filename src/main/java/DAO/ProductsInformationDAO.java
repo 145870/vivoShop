@@ -79,4 +79,9 @@ public class ProductsInformationDAO extends BaseDAO {
 				+ "(?,?,?,?,?)";
 		return this.execute(sql, name,description,type,isNew,date);
 	}
+
+	public int updateStatuOnTrue(String id) {
+		String sql="update products_information set information_status=0 where id=?";
+		return this.execute(sql,id);
+	}
 }

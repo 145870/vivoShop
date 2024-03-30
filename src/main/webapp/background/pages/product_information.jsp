@@ -145,7 +145,7 @@
 				<button onclick="addNewProdcut()" class="layui-btn layui-bg-blue">添加新产品</button>
 				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑单个产品</button>
 				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除选中产品</button>
-				<button onclick="refreshTable()" class="layui-btn layui-bg-blue">批量上架</button>
+				<button onclick="bulkListings()" class="layui-btn layui-bg-blue">批量上架</button>
 				<button onclick="refreshTable()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
@@ -479,7 +479,7 @@
 			//获取被选中的行的内容
 			var datas=table.checkStatus("product-information-body-table");
 			if(datas.data.length){
-				layer.confirm('删除么?',{icon: 3}, function(index){
+				layer.confirm('确认删除么?',{icon: 3}, function(index){
 					datas.data.forEach(function(row) {
 						$.ajax({
 					    	 url:"/vivoShop/background/pages/function/product_information/delete",
@@ -497,6 +497,37 @@
 					     })
 					});
 					layer.msg('删除完成', {icon: 1});
+					refreshTable();
+					layer.close(index);
+				 });
+				
+			}else{
+				layer.msg('请选中一行!', {icon: 0,time:1300});
+			}
+		}
+		//批量上架
+		function bulkListings(){
+			var datas=table.checkStatus("product-information-body-table");
+			if(datas.data.length){
+				layer.confirm('确认上架选中的吗?',{icon: 3}, function(index){
+					datas.data.forEach(function(row) {
+						$.ajax({
+					    	 url:"/vivoShop/background/pages/function/product_information/shelves",
+					    	 data:{id:row.id},
+					    	// async: false,
+					    	 success:function(txt){
+								if(txt=="true"){
+									
+								}else{
+									layer.msg('上架失败：'+row.information_name, {icon: 0});
+								}
+							},error: function(xhr, status, error) {
+								//console.log(xhr)	
+								layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+							}
+					     })
+					});
+					layer.msg('上架完成', {icon: 1});
 					refreshTable();
 					layer.close(index);
 				 });
