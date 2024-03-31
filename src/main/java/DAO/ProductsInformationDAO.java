@@ -13,7 +13,7 @@ import util.Mapper;
 
 public class ProductsInformationDAO extends BaseDAO {
 	public Map<String, Object> getProductsInformation() {
-		String sql = "SELECT * FROM products_information i " + "LEFT JOIN products_class c ON c.id = i.class_id";
+		String sql = "SELECT * FROM products_information i " + "LEFT JOIN products_class c ON c.id = i.class_id  ORDER BY i.id DESC";
 		List<ProductsInformation> list = this.executeQuery(sql, new Mapper<ProductsInformation>() {
 			@Override
 			public List<ProductsInformation> mapper(ResultSet rs) throws SQLException {

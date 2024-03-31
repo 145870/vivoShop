@@ -11,7 +11,7 @@ import util.Mapper;
 
 public class ProductsClassDAO extends BaseDAO{
 	public List<ProductsClass> getProductsClasses(){
-		String sql = "select * from products_class";
+		String sql = "select * from products_class ORDER BY id DESC";
 		return this.executeQuery(sql, new Mapper<ProductsClass>() {
 
 			@Override

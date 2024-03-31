@@ -8,22 +8,24 @@
 <title></title>
 	<script type="text/javascript" src="/vivoShop/background/lib/layui/layui.js"></script>
 	<link href="/vivoShop/background/lib/layui/css/layui.css" rel="stylesheet">
+	
+	<script type="text/javascript" src="/vivoShop/static/jquery-3.5.1.min.js"></script>
 </head>
 
 
 <body>
 	<style type="text/css">
 /* 重写 */
-#product-information .layui-table-checked {
+#product-detailed .layui-table-checked {
 	background-color: rgb(244, 244, 255);
 }
 }
-#product-information .layui-laydate .layui-this, .layui-laydate .layui-this>div {
+#product-detailed .layui-laydate .layui-this, .layui-laydate .layui-this>div {
     background-color: rgb(85, 170, 255) !important;
     color: #fff !important;
 }
 /* 重写 */
-#product-information .layui-laydate .layui-this>div {
+#product-detailed .layui-laydate .layui-this>div {
 	background-color: rgb(85, 170, 255) !important;
 }
 
@@ -32,115 +34,87 @@
     color: #fff !important;
 }
 /* 重写 */
-#product-information .layui-form-select dl dd.layui-this {
+#product-detailed .layui-form-select dl dd.layui-this {
 	color: rgb(102, 117, 255);
 }
 
-#product-information-select span {
+#product-detailed-select span:not(.no){
 	width: 80px;
 }
 
 /* 重写 */
-#product-information-select div:last-child button:hover {
+#product-detailed-select div:last-child button:hover {
 	color: rgb(85, 170, 255);
 	background-color: rgb(250, 250, 250);
 }
 
 /* 重写表格样式 */
-#product-information-body .tabel .layui-laypage .layui-laypage-curr .layui-laypage-em
+#product-detailed-body .tabel .layui-laypage .layui-laypage-curr .layui-laypage-em
 	{
 	background-color: rgb(89, 189, 255);
 }
 
-#product-information-body .tabel .layui-table-click, .layui-table-hover,
+#product-detailed-body .tabel .layui-table-click, .layui-table-hover,
 	.layui-table[lay-even] tbody tr:nth-child(even) {
 	background-color: rgb(250, 250, 255);
 }
 
-#product-information-body .tabel .layui-form-checked[lay-skin=primary]>i
+#product-detailed-body .tabel .layui-form-checked[lay-skin=primary]>i
 	{
 	border-color: rgb(89, 189, 255) !important;
 	background-color: rgb(89, 189, 255);
 	color: #fff;
 }
 
-#product-information-body {
+#product-detailed-body {
 	padding: 16px;
 }
 
-#product-information-body .buttons {
+#product-detailed-body .buttons {
 	margin-bottom: 20px;
 }
 </style>
-	<div id="product-information" class="layui-font-14">
+	<div id="product-detailed" class="layui-font-14">
 
 		<!-- 查询区域 -->
-		<div id='product-information-select'>
-			<form class="layui-form">
-				<div class="layui-row layui-col-space16">
-					<div class="layui-col-md3 layui-input-group">
-						<span class="layui-input-prefix">产品名称:</span> <input type="text"
-							id="product-name" placeholder="产品名" class="layui-input">
-					</div>
-
-					<div class="layui-col-md3 layui-input-group">
-						<span class="layui-input-prefix">是否新品:</span> <select>
+		<div id='product-detailed-select'>
+			<form class="layui-form layui-col-space20">
+				<!-- 价格区间 -->
+				<div class="layui-input-group layui-col-md6">
+    				<span class="layui-input-prefix">价格区间:</span>
+   					 <input id="minPrice" type="number" min='0' lay-affix="number" placeholder="最低价" step="0.1" lay-precision="2" class="layui-input">
+    				<span class="layui-input-prefix no">至</span>
+    				<input id="maxPrice" type="number" min='0.10' lay-affix="number" placeholder="最高价" step="0.1" lay-precision="2" class="layui-input">
+		</div>
+			
+				<c:forEach items="${pslist}" var='ps'>
+					<div class="layui-input-group layui-col-md3">
+						<span class="layui-input-prefix">${ps.specificationsName}:</span>
+						<select name="spec_${ps.id}">
 							<option value="">请选择</option>
-							<option value="0">是</option>
-							<option value="1">否</option>
+							<c:forEach items="${psvalues}" var="psd">
+                				<c:if test="${psd.key == ps.id}">
+                					<c:forEach items='${psd.value}' var='v'>
+                						<option>${v.detailedValue}</option>
+                					</c:forEach>
+               					 </c:if>
+                			</c:forEach>
 						</select>
 					</div>
+				</c:forEach>
 
-
-					<div class="layui-col-md6">
-						<span>日期范围:</span>
-						<div class="layui-inline" id="product-select-date">
-							<div class="layui-input-inline">
-								<input type="text" autocomplete="off"
-									id="product-select-start-date" class="layui-input"
-									placeholder="开始日期">
-							</div>
-							<span>至</span>
-							<div class="layui-input-inline">
-								<input type="text" autocomplete="off"
-									id="product-select-end-date" class="layui-input"
-									placeholder="结束日期">
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="layui-row layui-col-space16">
-					<div class="layui-col-md3 layui-input-group">
-						<span class="layui-input-prefix">产品类别:</span> 
-						<select>
-							<option value="">请选择</option>
-							<c:forEach items="${product_type}" var='name'>
-							<option value="${name.id}">${name.className}</option>
-							</c:forEach>
-						</select>
-
-					</div>
-
-					<div class="layui-col-md3 layui-input-group">
-						<span class="layui-input-prefix">上架状态:</span> <select id="appda">
-							<option value="">请选择</option>
-							<option value="0">已上架</option>
-							<option value="1">未上架</option>
-							<option value="2">已下架</option>
-						</select>
-					</div>
-
-					<div class="layui-col-md3">
-						<button style="width: 125px; color: rgb(85, 170, 255);"
-							type="button"
-							class="layui-btn layui-btn-primary layui-btn-radius">搜索</button>
-					</div>
+				<div class="layui-col-md3">
+					<button style="width: 125px; color: rgb(85, 170, 255);" type="button" class="layui-btn layui-btn-primary layui-btn-radius">搜索</button>
 				</div>
 			</form>
 		</div>
+		
+		
 		<hr style="margin-top: 25px;">
+		
+		
 		<!-- 显示内容 -->
-		<div id="product-information-body">
+		<div id="product-detailed-body">
 			<div class="buttons">
 				<button onclick="addNewProdcut()" class="layui-btn layui-bg-blue">添加新产品</button>
 				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑单个产品</button>
@@ -152,7 +126,7 @@
 			</div>
 
 			<div class="tabel">
-				<table class="layui-hide" id="product-information-body-table">
+				<table class="layui-hide" id="product-detailed-body-table">
 				</table>
 				<script type="text/html" id="barDemo">
 			  <div class="layui-clear-space">
@@ -173,15 +147,6 @@
 		// 当表单元素被动态插入时，需主动进行组件渲染才能显示
 		form.render(); // 渲染全部表单
 
-		var laydate = layui.laydate;
-		// 日期范围 - 左右面板独立选择模式
-		laydate
-				.render({
-					elem : '#product-select-date',
-					range : [ '#product-select-start-date',
-							'#product-select-end-date' ]
-				});
-
 		//表格渲染
 		var table = layui.table;
 		var dropdown = layui.dropdown;
@@ -196,7 +161,7 @@
 			}
 			
 			inst=table.render({
-				elem : '#product-information-body-table',
+				elem : '#product-detailed-body-table',
 				cols : [ [ //标题栏
 				{
 					type : 'checkbox',
@@ -205,7 +170,7 @@
 	                field: 'id',
 	                hide: true // 隐藏列
 	            },{
-					field : 'information_name',
+					field : 'detailed_name',
 					title : '产品名',
 					width : 100
 				}, {
@@ -239,7 +204,7 @@
 					minWidth : 125,
 					toolbar : '#barDemo'
 				} ] ],
-				url : "pages/function/product_information/selAll",
+				url : "/vivoShop/background/pages/function/product_detailed/selAll",
 				//skin: 'line', // 表格风格
 				//even: true,
 				page : true, // 是否显示分页
@@ -260,7 +225,7 @@
 		
 	        
 		// 触发单元格工具事件
-		table.on('tool(product-information-body-table)',function(obj) { // 双击 toolDouble
+		table.on('tool(product-detailed-body-table)',function(obj) { // 双击 toolDouble
 							var data = obj.data; // 获得当前行数据
 							var index1;
 							if (obj.event === 'edit') {
@@ -286,18 +251,7 @@
 											}, ],
 											click : function(menudata) {
 												 if(menudata.id === 'selAll'){
-													 //查看详细
-												   	 $.ajax({
-												   		url:'/vivoShop/background/gopages/goProductDetaile',
-												   		data:{id:data.id},
-												    	success:function(html){
-															
-														},error: function(xhr, status, error) {
-															//console.log(xhr)	
-															layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
-														}
-												   	 })
-													 
+												   layer.msg('查看操作，当前行 ID:'+ data.id);
 												 } else if(menudata.id === 'selImg'){
 												   
 												 } else if(menudata.id === 'del'){
@@ -319,7 +273,7 @@
 		function addNewProdcut(){
 			var index;
 			$.ajax({
-				url:"/vivoShop/background/pages/function/product_information/addNewProduct.jsp",
+				url:"/vivoShop/background/pages/function/product_detailed/addNewProduct.jsp",
 				data:{},
 				success:function(html){
 					index=layer.open({
@@ -350,7 +304,7 @@
 						}
 						//新增
 						$.ajax({
-							url:"/vivoShop/background/pages/function/product_information/add",
+							url:"/vivoShop/background/pages/function/product_detailed/add",
 							data:formData,
 							dataType:'text',
 							type:'get',
@@ -382,7 +336,7 @@
 			$.ajax({
 			    url: '/vivoShop/background/gopages/goEditProductpane',
 			    data:{
-			    	name:data.information_name,
+			    	name:data.detailed_name,
 			    	id:data.id,
 			    	type:data.type,
 			    	status:data.status,
@@ -392,7 +346,7 @@
 			    success: function(html) {
 			    	index1=layer.open({
 			        	type:1,
-			            title: '编辑' + data.information_name,
+			            title: '编辑' + data.detailed_name,
 			            shadeClose: true,
 			            maxmin: true,
 			            area: ['470px', '540px'],
@@ -419,7 +373,7 @@
 							    }
 								//修改
 								$.ajax({
-									url:"/vivoShop/background/pages/function/product_information/update",
+									url:"/vivoShop/background/pages/function/product_detailed/update",
 									data:formData,
 									dataType:'text',
 									type:'get',
@@ -456,7 +410,7 @@
 		//修改选中商品
 		function updateCheckedProdcut(){
 			//获取被选中的行的内容
-			var datas=table.checkStatus("product-information-body-table");
+			var datas=table.checkStatus("product-detailed-body-table");
 			if(datas.data.length){
 				updateProduct(datas.data[0]);
 			}else{
@@ -465,9 +419,9 @@
 		}
 		//删除商品
 		function delProdcut(data){
-			 layer.confirm('删除 ['+ data.information_name +'] 么?',{icon: 3}, function(index){
+			 layer.confirm('删除 ['+ data.detailed_name +'] 么?',{icon: 3}, function(index){
 			     $.ajax({
-			    	 url:"/vivoShop/background/pages/function/product_information/delete",
+			    	 url:"/vivoShop/background/pages/function/product_detailed/delete",
 			    	 data:{id:data.id},
 			    	 success:function(txt){
 						if(txt=="true"){
@@ -488,18 +442,18 @@
 		//删除选中商品
 		function delCheckedProdcut(){
 			//获取被选中的行的内容
-			var datas=table.checkStatus("product-information-body-table");
+			var datas=table.checkStatus("product-detailed-body-table");
 			if(datas.data.length){
 				layer.confirm('确认删除么?',{icon: 3}, function(index){
 					datas.data.forEach(function(row) {
 						$.ajax({
-					    	 url:"/vivoShop/background/pages/function/product_information/delete",
+					    	 url:"/vivoShop/background/pages/function/product_detailed/delete",
 					    	 data:{id:row.id},
 					    	 success:function(txt){
 								if(txt=="true"){
 									
 								}else{
-									layer.msg('删除失败：'+row.information_name, {icon: 0});
+									layer.msg('删除失败：'+row.detailed_name, {icon: 0});
 								}
 							},error: function(xhr, status, error) {
 								//console.log(xhr)	
@@ -518,19 +472,19 @@
 		}
 		//批量上架
 		function bulkListings(){
-			var datas=table.checkStatus("product-information-body-table");
+			var datas=table.checkStatus("product-detailed-body-table");
 			if(datas.data.length){
 				layer.confirm('确认上架选中的吗?',{icon: 3}, function(index){
 					datas.data.forEach(function(row) {
 						$.ajax({
-					    	 url:"/vivoShop/background/pages/function/product_information/shelves",
+					    	 url:"/vivoShop/background/pages/function/product_detailed/shelves",
 					    	 data:{id:row.id},
 					    	// async: false,
 					    	 success:function(txt){
 								if(txt=="true"){
 									
 								}else{
-									layer.msg('上架失败：'+row.information_name, {icon: 0});
+									layer.msg('上架失败：'+row.detailed_name, {icon: 0});
 								}
 							},error: function(xhr, status, error) {
 								//console.log(xhr)	
