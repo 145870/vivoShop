@@ -28,8 +28,16 @@ public class SelectAllProductsServlet extends HttpServlet{
         resp.setContentType("application/json");
         resp.setCharacterEncoding("UTF-8");
         
+        // 获取表单数据
+        String name = req.getParameter("name");
+        String isNew = req.getParameter("isNew");
+        String startTime = req.getParameter("startTime");
+        String endTime = req.getParameter("endTime");
+        String type = req.getParameter("type");
+        String status = req.getParameter("status");
+        
         ProductsInformationDAO dao = new ProductsInformationDAO();
-		Map<String, Object> map = dao.getProductsInformation();
+		Map<String, Object> map = dao.getProductsInformationByWhere(name,isNew,startTime,endTime,type,status);
 		
 		List<ProductsInformation> list =(List<ProductsInformation>)map.get("list");
 		ObjectMapper objectMapper = new ObjectMapper();
@@ -49,7 +57,7 @@ public class SelectAllProductsServlet extends HttpServlet{
 		    dataMap.put("type", product.getClassName());
 		    
 		    int sta = product.getInformationStatus();
-		    String status = "";
+		    status = "";
 		    if (sta == 0) {
 		        status = "已上架";
 		    } else if (sta == 1) {

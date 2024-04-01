@@ -79,12 +79,14 @@
 			<form class="layui-form">
 				<div class="layui-row layui-col-space16">
 					<div class="layui-col-md3 layui-input-group">
-						<span class="layui-input-prefix">产品名称:</span> <input type="text"
-							id="product-name" placeholder="产品名" class="layui-input">
+						<span class="layui-input-prefix">产品名称:</span> 
+						
+						<input name="name" type="text" id="product-name" placeholder="产品名" class="layui-input">
 					</div>
 
 					<div class="layui-col-md3 layui-input-group">
-						<span class="layui-input-prefix">是否新品:</span> <select>
+						<span class="layui-input-prefix">是否新品:</span> 
+						<select name="isNew">
 							<option value="">请选择</option>
 							<option value="0">是</option>
 							<option value="1">否</option>
@@ -96,13 +98,13 @@
 						<span>日期范围:</span>
 						<div class="layui-inline" id="product-select-date">
 							<div class="layui-input-inline">
-								<input type="text" autocomplete="off"
+								<input name='startTime' type="text" autocomplete="off"
 									id="product-select-start-date" class="layui-input"
 									placeholder="开始日期">
 							</div>
 							<span>至</span>
 							<div class="layui-input-inline">
-								<input type="text" autocomplete="off"
+								<input name='endTime' type="text" autocomplete="off"
 									id="product-select-end-date" class="layui-input"
 									placeholder="结束日期">
 							</div>
@@ -112,7 +114,7 @@
 				<div class="layui-row layui-col-space16">
 					<div class="layui-col-md3 layui-input-group">
 						<span class="layui-input-prefix">产品类别:</span> 
-						<select>
+						<select name='type'>
 							<option value="">请选择</option>
 							<c:forEach items="${product_type}" var='name'>
 							<option value="${name.id}">${name.className}</option>
@@ -122,7 +124,8 @@
 					</div>
 
 					<div class="layui-col-md3 layui-input-group">
-						<span class="layui-input-prefix">上架状态:</span> <select id="appda">
+						<span class="layui-input-prefix">上架状态:</span> 
+						<select name='status' id="appda">
 							<option value="">请选择</option>
 							<option value="0">已上架</option>
 							<option value="1">未上架</option>
@@ -132,7 +135,6 @@
 
 					<div class="layui-col-md3">
 						<button style="width: 125px; color: rgb(85, 170, 255);"
-							type="button"
 							class="layui-btn layui-btn-primary layui-btn-radius">搜索</button>
 					</div>
 				</div>
@@ -146,7 +148,7 @@
 				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑单个产品</button>
 				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除选中产品</button>
 				<button onclick="bulkListings()" class="layui-btn layui-bg-blue">批量上架</button>
-				<button onclick="refreshTable()" style="float: right;" class="layui-btn layui-bg-blue">
+				<button onclick="refreshAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
 			</div>
@@ -186,9 +188,20 @@
 		var table = layui.table;
 		var dropdown = layui.dropdown;
 		
+		function refreshAndClearForm() {
+	        // 清空表单内容
+	        $('#product-name').val('');
+	        $('#product-select-start-date').val('');
+	        $('#product-select-end-date').val('');
+	        $('select[name="isNew"]').val('');
+	        $('select[name="type"]').val('');
+	        $('select[name="status"]').val('');
+	        refreshPITable();
+	    }
+		
 		var inst;
 		// 已知数据渲染
-		function refreshTable(){
+		function refreshPITable(){
 			// 销毁当前表格实例
 			if(inst){
 				inst.reload({}); // 先清空数据
@@ -248,7 +261,7 @@
 			// 每页默认显示的数量
 			});
 		}
-		refreshTable();
+		refreshPITable();
 		  var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
 
 	        function getBody(content){
@@ -287,17 +300,7 @@
 											click : function(menudata) {
 												 if(menudata.id === 'selAll'){
 													 //查看详细
-												   	 $.ajax({
-												   		url:'/vivoShop/background/gopages/goProductDetaile',
-												   		data:{id:data.id},
-												    	success:function(html){
-															
-														},error: function(xhr, status, error) {
-															//console.log(xhr)	
-															layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
-														}
-												   	 })
-													 
+												   	openDetaile(data);
 												 } else if(menudata.id === 'selImg'){
 												   
 												 } else if(menudata.id === 'del'){
@@ -363,7 +366,7 @@
 								if(index){
 									 layer.close(index);
 									 //重新渲染
-									 refreshTable();
+									 refreshPITable();
 								}
 							},error: function(xhr, status, error) {
 								//console.log(xhr)
@@ -438,7 +441,7 @@
 						        if(index1){
 									 layer.close(index1);
 									 //重新渲染
-									 refreshTable();
+									 refreshPITable();
 								}
 						 }, function(){
 						        //取消
@@ -472,7 +475,7 @@
 			    	 success:function(txt){
 						if(txt=="true"){
 							layer.msg('删除成功', {icon: 1});
-							refreshTable();
+							refreshPITable();
 						}else{
 							layer.msg('删除失败', {icon: 0});
 						}
@@ -508,7 +511,7 @@
 					     })
 					});
 					layer.msg('删除完成', {icon: 1});
-					refreshTable();
+					refreshPITable();
 					layer.close(index);
 				 });
 				
@@ -539,14 +542,58 @@
 					     })
 					});
 					layer.msg('上架完成', {icon: 1});
-					refreshTable();
+					refreshPITable();
 					layer.close(index);
 				 });
 				
 			}else{
 				layer.msg('请选中一行!', {icon: 0,time:1300});
 			}
+			
 		}
+		
+		
+		//查看商品详细
+		function openDetaile(data){
+			 $.ajax({
+			   		url:'/vivoShop/background/gopages/goProductDetaile',
+			   		data:{id:data.id},
+			    	success:function(html){
+			    		var index=layer.open({
+					   		type:1,
+					   		title: '商品详细:'+data.information_name,
+					   		shadeClose: true,
+					   		maxmin: true,
+					   		area: ['80%', '80%'],
+					   		content: html,
+						});
+			    		
+			    		form.render();
+					},error: function(xhr, status, error) {
+						//console.log(xhr)	
+						layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+					}
+			   	 })
+		}
+		
+		
+		//商品搜索
+		$("#product-information-select form").submit(function(){
+			event.preventDefault();
+
+		    // 将表单转换为序列化对象
+		    var formData = $(this).serializeArray();
+			// 将数组转换为对象
+		    var serializedData = formData.reduce(function(obj, item) {
+		        obj[item.name] = item.value;
+		        return obj;
+		    }, {});
+		    // 重新加载表格数据
+		    inst.reload({
+		        url: '/vivoShop/background/pages/function/product_information/selAll',
+		        where: serializedData
+		    });
+		})
 	</script>
 
 

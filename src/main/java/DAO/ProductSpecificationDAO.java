@@ -5,23 +5,29 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.gson.Gson;
+import com.mysql.cj.conf.StringProperty;
+
 import entity.ProductSpecification;
 import util.BaseDAO;
 import util.Mapper;
 
 public class ProductSpecificationDAO extends BaseDAO{
 	public List<ProductSpecification> getProductSpecificationById(String id){
-		String sql="SELECT * FROM products_specifications WHERE information_id = ? ORDER BY id DESC";
+		String sql="SELECT * FROM products_specifications WHERE information_id = ? ";
 		return this.executeQuery(sql, new Mapper<ProductSpecification>() {
 
 			@Override
 			public List<ProductSpecification> mapper(ResultSet rs) throws SQLException {
 				List<ProductSpecification> list = new ArrayList<ProductSpecification>();
 				while(rs.next()) {
+					
+					
 					list.add(new ProductSpecification(
 								rs.getLong(1),
 								rs.getInt(2),
-								rs.getString(3)
+								rs.getString(3),
+								new Gson().fromJson(rs.getString(4),String[].class)
 							));
 				}
 				return list;
@@ -44,11 +50,8 @@ public class ProductSpecificationDAO extends BaseDAO{
 					ProductSpecification p = new ProductSpecification(
 							rs.getLong(1),
 							rs.getInt(2),
-							rs.getString(3)
-						);
-					p.setSpecifications_detailed_id(rs.getLong(4));
-					p.setDetailed_value(rs.getString(6));
-					
+							rs.getString(3),
+							new Gson().fromJson(rs.getString(4),String[].class)						);
 					list.add(p);
 				}
 				return list;
