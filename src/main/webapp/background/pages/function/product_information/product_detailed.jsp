@@ -128,7 +128,7 @@
 			<div class="tabel">
 				<table class="layui-hide" id="product-detailed-body-table">
 				</table>
-				<script type="text/html" id="barDemo">
+				<script type="text/html" id="product_detailed_edit">
 			  <div class="layui-clear-space">
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="more">
@@ -162,48 +162,14 @@
 			
 			inst=table.render({
 				elem : '#product-detailed-body-table',
-				cols : [ [ //标题栏
-				{
-					type : 'checkbox',
-					fixed : 'left'
-				},{
-	                field: 'id',
-	                hide: true // 隐藏列
-	            },{
-					field : 'detailed_name',
-					title : '产品名',
-					width : 100
-				}, {
-					field : 'description',
-					title : '描述',
-					minWidth : 120
-				}, {
-					field : 'type',
-					title : '分类',
-					width : 80
-				}, {
-					field : 'status',
-					title : '上架状态',
-					width : 100
-				}, {
-					field : 'is_last',
-					title : '是否新品',
-					width : 100
-				}, {
-					field : 'create_time',
-					title : '创建时间',
-					width : 200
-				}, {
-					field : 'shelves_time',
-					title : '上市时间',
-					width : 200
-				}, {
-					fixed : 'right',
-					title : '操作',
-					width : 134,
-					minWidth : 125,
-					toolbar : '#barDemo'
-				} ] ],
+				cols : [ ${tableHead}
+				//{
+				//	fixed : 'right',
+				//	title : '操作',
+				//	width : 134,
+				//	minWidth : 125,
+				//	toolbar : '#product_detailed_edit'}]
+				],
 				url : "/vivoShop/background/pages/function/product_detailed/selAll",
 				//skin: 'line', // 表格风格
 				//even: true,

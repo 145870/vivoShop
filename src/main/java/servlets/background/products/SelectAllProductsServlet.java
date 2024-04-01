@@ -73,7 +73,7 @@ public class SelectAllProductsServlet extends HttpServlet{
 		jsonData.put("data", dataList);
 
 		String jsonOutput = objectMapper.writeValueAsString(jsonData);
-
+		
         // 将JSON字符串作为响应发送回客户端
         PrintWriter out = resp.getWriter();
         out.print(jsonOutput);
