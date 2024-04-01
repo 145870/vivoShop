@@ -2,14 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+
 <!DOCTYPE html>
 <head>
 <meta charset="utf-8">
 <title></title>
+	<%--
 	<script type="text/javascript" src="/vivoShop/background/lib/layui/layui.js"></script>
 	<link href="/vivoShop/background/lib/layui/css/layui.css" rel="stylesheet">
 	
 	<script type="text/javascript" src="/vivoShop/static/jquery-3.5.1.min.js"></script>
+	 --%>
 </head>
 
 
@@ -70,8 +73,13 @@
 	padding: 16px;
 }
 
+
 #product-detailed-body .buttons {
 	margin-bottom: 20px;
+}
+
+#product-detailed{
+	margin: 20px;
 }
 </style>
 	<div id="product-detailed" class="layui-font-14">
@@ -87,18 +95,14 @@
     				<input id="maxPrice" type="number" min='0.10' lay-affix="number" placeholder="最高价" step="0.1" lay-precision="2" class="layui-input">
 		</div>
 			
-				<c:forEach items="${pslist}" var='ps'>
+				<c:forEach items="${psList}" var='ps' varStatus="loop">
 					<div class="layui-input-group layui-col-md3">
 						<span class="layui-input-prefix">${ps.specificationsName}:</span>
 						<select name="spec_${ps.id}">
 							<option value="">请选择</option>
-							<c:forEach items="${psvalues}" var="psd">
-                				<c:if test="${psd.key == ps.id}">
-                					<c:forEach items='${psd.value}' var='v'>
-                						<option>${v.detailedValue}</option>
-                					</c:forEach>
-               					 </c:if>
-                			</c:forEach>
+                				<c:forEach items='${valList[loop.index]}' var='v'>
+                					<option>${v}</option>
+                				</c:forEach>
 						</select>
 					</div>
 				</c:forEach>
@@ -116,10 +120,9 @@
 		<!-- 显示内容 -->
 		<div id="product-detailed-body">
 			<div class="buttons">
-				<button onclick="addNewProdcut()" class="layui-btn layui-bg-blue">添加新产品</button>
-				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑单个产品</button>
-				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除选中产品</button>
-				<button onclick="bulkListings()" class="layui-btn layui-bg-blue">批量上架</button>
+				<button onclick="addNewProdcut()" class="layui-btn layui-bg-blue">添加规格组合</button>
+				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑规格组合</button>
+				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除规格组合</button>
 				<button onclick="refreshTable()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
@@ -131,16 +134,14 @@
 				<script type="text/html" id="product_detailed_edit">
 			  <div class="layui-clear-space">
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
-			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="more">
-			      更多 
-			      <i class="layui-icon layui-icon-down"></i>
-			    </a>
+			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="del">删除</a>
 			  </div>
 			</script>
 			</div>
 
 		</div>
 	</div>
+	
 	<script>
 		var form = layui.form;
 
@@ -151,16 +152,16 @@
 		var table = layui.table;
 		var dropdown = layui.dropdown;
 		
-		var inst;
+		var pdinst;
 		// 已知数据渲染
-		function refreshTable(){
+		function refreshPDTable(){
 			// 销毁当前表格实例
-			if(inst){
-				inst.reload({}); // 先清空数据
-				inst.reload('null'); // 然后销毁表格
+			if(pdinst){
+				pdinst.reload({}); // 先清空数据
+				pdinst.reload('null'); // 然后销毁表格
 			}
 			
-			inst=table.render({
+			pdinst=table.render({
 				elem : '#product-detailed-body-table',
 				cols : [ ${tableHead}
 				//{
@@ -170,7 +171,7 @@
 				//	minWidth : 125,
 				//	toolbar : '#product_detailed_edit'}]
 				],
-				url : "/vivoShop/background/pages/function/product_detailed/selAll",
+				url : '/vivoShop/background/pages/function/product_detailed/selAll?id=<%=request.getAttribute("id")%>',
 				//skin: 'line', // 表格风格
 				//even: true,
 				page : true, // 是否显示分页
@@ -179,7 +180,7 @@
 			// 每页默认显示的数量
 			});
 		}
-		refreshTable();
+		refreshPDTable();
 		  var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
 
 	        function getBody(content){
@@ -190,46 +191,18 @@
 	        }
 		
 	        
+	        
+	        
+	      <!-- 
 		// 触发单元格工具事件
 		table.on('tool(product-detailed-body-table)',function(obj) { // 双击 toolDouble
 							var data = obj.data; // 获得当前行数据
 							var index1;
 							if (obj.event === 'edit') {
 								updateProduct(data);
-							} else if (obj.event === 'more') {
-								// 更多 - 下拉菜单
-								dropdown
-										.render({
-											elem : this, // 触发事件的 DOM 对象
-											show : true, // 外部事件触发即显示
-											data : [ {
-												title : '查看详细',
-												id : 'selAll'
-											}, {
-												title : '查看产品图',
-												id : 'selImg'
-											}, {
-												title : '删除该产品',
-												id : 'del'
-											}, {
-												title : '访问商品页',
-												id : 'go'
-											}, ],
-											click : function(menudata) {
-												 if(menudata.id === 'selAll'){
-												   layer.msg('查看操作，当前行 ID:'+ data.id);
-												 } else if(menudata.id === 'selImg'){
-												   
-												 } else if(menudata.id === 'del'){
-													 delProdcut(data)
-												}else if(menudata.id === 'go'){
-													//跳转
-													window.location.href = "/vivoShop/";
-												}
-											},
-											align : 'right', // 右对齐弹出
-											style : 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' // 设置额外样式
-										})
+							} else if (obj.event === 'del') {
+								//删除
+								delProdcut(data)
 							}
 							
 							
@@ -466,7 +439,7 @@
 			}else{
 				layer.msg('请选中一行!', {icon: 0,time:1300});
 			}
-		}
+		}-->
 	</script>
 
 

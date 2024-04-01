@@ -15,31 +15,29 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import DAO.ProductSpecificationDAO;
-import DAO.ProductSpecificationDetailedDAO;
 import entity.ProductSpecification;
-import entity.ProductSpecificationDetailed;
 
 @WebServlet("/background/gopages/goProductDetaile")
 public class GoProductDetaileServlet extends HttpServlet{
 	ProductSpecificationDAO psdao=new ProductSpecificationDAO();
-	ProductSpecificationDetailedDAO psddao=new ProductSpecificationDetailedDAO();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		String id=req.getParameter("id");
 		
-		//查询商品规格名称有哪些
-		List<ProductSpecification> pslist = psdao.getProductSpecificationById("2");
+		//查询商品规格内容
+		List<ProductSpecification> pslist = psdao.getProductSpecificationById(id);
 		//存储对应值
-		Map<String,List<ProductSpecificationDetailed>> map = new HashMap<String, List<ProductSpecificationDetailed>>();
+		List<String[]> valList = new ArrayList<String[]>();
+		Gson gson = new Gson();
 		
-		for(ProductSpecification ps:pslist) {
-			List<ProductSpecificationDetailed> psdList = psddao.getProductSpecificationDetailedBySpecifications_id(ps.getId()+"");
-			map.put(ps.getId().toString(), psdList);
+		for(ProductSpecification p:pslist) {
+			valList.add(p.getSpecificationsValues());
 		}
 		
-		req.setAttribute("pslist", pslist);
-		req.setAttribute("psvalues", map);
+		req.setAttribute("id",id);
+		req.setAttribute("psList", pslist);
+		req.setAttribute("valList", valList);
 		
 		List<Map<String, Object>> columns = new ArrayList();
 		
@@ -56,12 +54,14 @@ public class GoProductDetaileServlet extends HttpServlet{
 		columns.add(staticColumn2);
 		
 		//动态表头
+		int index = 0;
 		for (ProductSpecification ps : pslist) {
 		    Map<String, Object> dynamicColumn = new HashMap<>();
-		    dynamicColumn.put("field", "spec_"+ps.getId());
+		    dynamicColumn.put("field", "spec_"+index);
 		    dynamicColumn.put("title", ps.getSpecificationsName());
 		    dynamicColumn.put("minWidth", 100);
 		    columns.add(dynamicColumn);
+		    index++;
 		}
 		
 		Map<String, Object> staticColumn3 = new HashMap<>();

@@ -1,44 +1,41 @@
 package entity;
 
 public class ProductSpecification {
-    private Long id;
+	private Long id;
     private Integer informationId;
     private String specificationsName;
+    private String[] specificationsValues;
     
-    private Long specifications_detailed_id;
-    private String detailed_value;
     
 
-    public Long getSpecifications_detailed_id() {
-		return specifications_detailed_id;
+    public ProductSpecification(Long id, Integer informationId, String specificationsName,
+			String[] specificationsValues) {
+		super();
+		this.id = id;
+		this.informationId = informationId;
+		this.specificationsName = specificationsName;
+		this.specificationsValues = specificationsValues;
 	}
 
 
-	public void setSpecifications_detailed_id(Long specifications_detailed_id) {
-		this.specifications_detailed_id = specifications_detailed_id;
+
+
+	public String[] getSpecificationsValues() {
+		return specificationsValues;
 	}
 
 
-	public String getDetailed_value() {
-		return detailed_value;
-	}
 
 
-	public void setDetailed_value(String detailed_value) {
-		this.detailed_value = detailed_value;
+
+	public void setSpecificationsValues(String[] specificationsValues) {
+		this.specificationsValues = specificationsValues;
 	}
 
 
 	public ProductSpecification() {
     }
     
-
-    public ProductSpecification(Long id, Integer informationId, String specificationsName) {
-		super();
-		this.id = id;
-		this.informationId = informationId;
-		this.specificationsName = specificationsName;
-	}
 
 
 	// Getters and setters
