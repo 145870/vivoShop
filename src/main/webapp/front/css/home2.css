@@ -1,0 +1,107 @@
+@charset "UTF-8";
+/*倒计时*/
+	#dao-box{
+		width: 100%;
+		height: 57px;
+		background-color: #ccc;
+		margin-top: 30px;
+		display: inline-flex;
+		align-items: center;
+	}
+	
+	#dao-box img{
+		width: 96px;
+		height: 36px;
+		display: inline;
+		margin-top: 10px;
+	}
+	
+	
+	#dao{
+		margin-left: 10px;
+	}
+	
+/*限时秒杀*/
+	#re-box{
+		width: 1511px;
+		height: 420px;
+		background-color: aqua;
+	}
+	
+	
+	#v {
+	    width: 1200px; /* 设定外部容器的宽度 */
+	    overflow: hidden;
+		margin-left: 155px;
+		
+		
+	}
+	.v:hover{
+		box-shadow:3px 3px 3px 5px rgb(200,200,200,0.2); /* 水平偏移2px，垂直偏移2px，模糊半径5px，颜色为淡黑色 */
+		 transform: translateY(-5px); /* 向上移动5px */
+	}
+	#re{
+		display:inline-block;
+		
+	}
+	
+	#ree-div {
+	    display: -webkit-inline-box;
+	    width: 700px; /* 设定内部容器的宽度，确保内容超出以便滚动 */
+	    transition: transform 0.5s; /* 添加过渡效果 */
+	}
+	
+	
+	.v {
+	    width: 293px;
+	    height: 380px;
+	    background-color: white;
+	    margin: 5px;
+		transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
+		margin-top:20px;
+		align-items:center;
+		text-align:center;
+	}
+	
+	.miao-span {
+	  width: 40px;
+	  height: 40px;
+	  border-radius: 50%;
+	  background-color: rgba(255, 255, 255, 0.5);
+	  
+	  margin-top: 185px;
+	}
+	
+	.miao-span button {
+	  background-color: transparent;
+	  border: none;
+	  cursor: pointer;
+	  width: 40px;
+	  height: 40px;
+	  align-items: center;
+	  text-align: center;
+		 
+	}
+	
+	#but-zuo {
+	  position: absolute;
+	  left: 100px;
+	}
+	
+	#but-you {
+	  position: absolute;
+	  right: 100px;
+	}
+	
+	.v-div{
+		width:157px;
+		height:138px;
+		margin-top:40px;
+		margin-left:65px;
+		
+	}
+	.tupian{
+		width:100%;
+		height:100%;
+		
+	}  	

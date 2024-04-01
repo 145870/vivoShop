@@ -10,5 +10,14 @@
             <el-ignored>false</el-ignored>
         </jsp-property-group>
     </jsp-config>
+    <servlet>
+    <servlet-name>CountdownServlet</servlet-name>
+    <servlet-class>com.yourpackage.CountdownServlet</servlet-class>
+</servlet>
+
+<servlet-mapping>
+    <servlet-name>CountdownServlet</servlet-name>
+    <url-pattern>/countdown</url-pattern>
+</servlet-mapping>
 
 </web-app>

@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import entity.Products_information;
+
 
 /**
  * 父类DAO，为抽象类
@@ -23,7 +25,7 @@ public class BaseDAO {
 	public Connection getConnection() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vivoshop?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8", "root", "123456");
+			Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/vivoshop?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8", "root", "790205");
 			return conn;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
@@ -157,7 +159,7 @@ public class BaseDAO {
 				}
 				return list;
 			}
-			
+
 		}, params);
 		
 		return list.get(0);//只需要List集合中的第0个元素
