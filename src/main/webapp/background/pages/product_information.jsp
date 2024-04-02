@@ -193,9 +193,9 @@
 	        $('#product-name').val('');
 	        $('#product-select-start-date').val('');
 	        $('#product-select-end-date').val('');
-	        $('select[name="isNew"]').val('');
-	        $('select[name="type"]').val('');
-	        $('select[name="status"]').val('');
+	        $('#product-information-select select[name="isNew"]').val('');
+	        $('#product-information-select select[name="type"]').val('');
+	        $('#product-information-select select[name="status"]').val('');
 	        refreshPITable();
 	    }
 		
@@ -232,19 +232,23 @@
 				}, {
 					field : 'status',
 					title : '上架状态',
-					width : 100
+					width : 100,
+					sort: true
 				}, {
 					field : 'is_last',
 					title : '是否新品',
-					width : 100
+					width : 100,
+					sort: true
 				}, {
 					field : 'create_time',
 					title : '创建时间',
-					width : 200
+					width : 200,
+					sort: true
 				}, {
 					field : 'shelves_time',
 					title : '上市时间',
-					width : 200
+					width : 200,
+					sort: true
 				}, {
 					fixed : 'right',
 					title : '操作',

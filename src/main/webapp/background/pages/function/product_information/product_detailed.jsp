@@ -87,6 +87,8 @@
 		<!-- 查询区域 -->
 		<div id='product-detailed-select'>
 			<form class="layui-form layui-col-space20">
+			
+			<input name='id' value='${id}' hidden>
 				<!-- 价格区间 -->
 				<div class="layui-input-group layui-col-md6">
     				<span class="layui-input-prefix">价格区间:</span>
@@ -123,7 +125,7 @@
 				<button onclick="addNewProdcut()" class="layui-btn layui-bg-blue">添加规格组合</button>
 				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑规格组合</button>
 				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除规格组合</button>
-				<button onclick="refreshTable()" style="float: right;" class="layui-btn layui-bg-blue">
+				<button onclick="refreshPDAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
 			</div>
@@ -152,6 +154,19 @@
 		var table = layui.table;
 		var dropdown = layui.dropdown;
 		
+		
+		//刷新并清空表单
+		function refreshPDAndClearForm(){
+			// 清空价格区间输入框的值
+			$('#minPrice').val('');
+			$('#maxPrice').val('');
+
+			// 清空规格选择框的值
+			$('#product-detailed-select select[name^="spec"]').val('');
+
+			refreshPDTable()
+		}
+		//该页面的表格
 		var pdinst;
 		// 已知数据渲染
 		function refreshPDTable(){
@@ -163,14 +178,7 @@
 			
 			pdinst=table.render({
 				elem : '#product-detailed-body-table',
-				cols : [ ${tableHead}
-				//{
-				//	fixed : 'right',
-				//	title : '操作',
-				//	width : 134,
-				//	minWidth : 125,
-				//	toolbar : '#product_detailed_edit'}]
-				],
+				cols : [ ${t  ableHead}],
 				url : '/vivoShop/background/pages/function/product_detailed/selAll?id=<%=request.getAttribute("id")%>',
 				//skin: 'line', // 表格风格
 				//even: true,
@@ -192,8 +200,9 @@
 		
 	        
 	  	      
+	       
 	        
-	      <!-- 
+	        
 		// 触发单元格工具事件
 		table.on('tool(product-detailed-body-table)',function(obj) { // 双击 toolDouble
 			var data = obj.data; // 获得当前行数据
@@ -218,13 +227,16 @@
 		        obj[item.name] = item.value;
 		        return obj;
 		    }, {});
-			console.log(formData)
+			
 		    // 重新加载表格数据
-		    inst.reload({
+		    pdinst.reload({
 		        url: '/vivoShop/background/pages/function/product_detailed/selWhere',
 		        where: serializedData
 		    });
 		})
+		
+		
+		
 	</script>
 
 

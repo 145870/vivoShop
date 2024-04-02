@@ -75,6 +75,7 @@ public class BaseDAO {
 					e.printStackTrace();
 				}
 			}
+			System.out.println(stmt);
 		}
 	}
 	
