@@ -326,7 +326,7 @@
 		function addNewProdcut(){
 			var index;
 			$.ajax({
-				url:"/vivoShop/background/pages/function/product_information/addNewProduct.jsp",
+				url:"/vivoShop/background/pages/product/function/information/addNewProduct.jsp",
 				data:{},
 				success:function(html){
 					index=layer.open({

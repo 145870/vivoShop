@@ -122,7 +122,8 @@
 		<!-- 显示内容 -->
 		<div id="product-detailed-body">
 			<div class="buttons">
-				<button onclick="addNewProdcut()" class="layui-btn layui-bg-blue">添加规格组合</button>
+				<button style='margin-right: 10px' onclick="addNewProdcutDetailed()" class="layui-btn layui-bg-blue">添加规格</button>
+				<button onclick="addNewProdcutDetailed()" class="layui-btn layui-bg-blue">添加规格组合</button>
 				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑规格组合</button>
 				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除规格组合</button>
 				<button onclick="refreshPDAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
@@ -178,7 +179,7 @@
 			
 			pdinst=table.render({
 				elem : '#product-detailed-body-table',
-				cols : [ ${t  ableHead}],
+				cols : [ ${tableHead}],
 				url : '/vivoShop/background/pages/function/product_detailed/selAll?id=<%=request.getAttribute("id")%>',
 				//skin: 'line', // 表格风格
 				//even: true,
@@ -235,7 +236,10 @@
 		    });
 		})
 		
-		
+		//新增规格组合
+		function addNewProdcutDetailed(){
+			
+		}
 		
 	</script>
 

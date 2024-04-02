@@ -45,6 +45,7 @@ public class SelectAllServlet extends HttpServlet{
 		for (ProductAttrValue pav : list) {
 		    Map<String, Object> dataMap = new HashMap<>();
 		    int index = 0;
+		    dataMap.put("id",pav.getId());
 		    for(String val:pav.getAttrVals()) {
 		    	dataMap.put("spec_"+index,val);
 		    	index++;

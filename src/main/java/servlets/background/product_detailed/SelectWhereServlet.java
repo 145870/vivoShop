@@ -54,13 +54,13 @@ public class SelectWhereServlet extends HttpServlet{
 			
 			for (ProductAttrValue pav : list) {
 			    Map<String, Object> dataMap = new HashMap<>();
+			    dataMap.put("id",pav.getId());
 			    int index = 0;
 			    for(String val:pav.getAttrVals()) {
 			    	dataMap.put("spec_"+index,val);
 			    	index++;
 			    }
 			    dataMap.put("price",pav.getSaleAmount());
-			    
 			    dataList.add(dataMap);
 			}
 			jsonData.put("data", dataList);

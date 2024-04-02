@@ -41,6 +41,6 @@ public class GoEditProductpaneServlet extends HttpServlet{
     	p.setDescription(description);
     	
 		req.setAttribute("product",p);
-		req.getRequestDispatcher("/background/pages/function/product_information/EditProductpanel.jsp").forward(req, resp);
+		req.getRequestDispatcher("/background/pages/product/function/information/EditProductpanel.jsp").forward(req, resp);
 	}
 }

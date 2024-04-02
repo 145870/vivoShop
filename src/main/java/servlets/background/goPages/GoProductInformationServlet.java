@@ -19,6 +19,6 @@ public class GoProductInformationServlet extends HttpServlet{
 		
         req.getSession().setAttribute("product_type", dao.getProductsClasses());
 		
-		resp.sendRedirect("/vivoShop/background/pages/product_information.jsp");
+		resp.sendRedirect("/vivoShop/background/pages/product/product_information.jsp");
 	}
 }
