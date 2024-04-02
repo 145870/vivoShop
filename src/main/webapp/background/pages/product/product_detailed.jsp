@@ -241,13 +241,30 @@
 		
 		//新增规格组合
 		function addNewProdcutDetailed(){
-			
+			$.ajax({
+		   		url:'/vivoShop/background/pages/product/function/detailed/addDetailed.jsp',
+		    	success:function(html){
+		    		var index=layer.open({
+				   		type:1,
+				   		title: '新增规格组合',
+				   		shadeClose: true,
+				   		maxmin: true,
+				   		area: ['60%', '60%'],
+				   		content: html,
+					});
+		    		
+		    		form.render();
+				},error: function(xhr, status, error) {
+					//console.log(xhr)	
+					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+				}
+		   	 })
 		}
 		
 		//查看商品所有规格
 		function openProduct_Specifications(){
 			$.ajax({
-		   		url:'/vivoShop/background/gopages/goProductSpecifications?productid='+${productid},
+		   		url:'/vivoShop/background/pages/product/product_specifications.jsp',
 		    	success:function(html){
 		    		var index=layer.open({
 				   		type:1,

@@ -59,19 +59,32 @@
 }
 </style>
 	<form class="layui-form" id="addNewProduct" style="margin-top: 30px">
-		<!-- 规格名 -->
-		<div class="layui-input-group">
-			<div class="layui-input-prefix">规格名称:</div>
-			<input type="text" name="name" placeholder="" class="layui-input right-text">
-		</div>
-		
-		<!-- 描述 -->
-		<div class="layui-input-group">
-			<div class="layui-input-prefix">产品描述:</div>
-			<textarea style="resize: none;width:200px;" name="description" placeholder="产品描述" class="layui-textarea right-text"></textarea>
-		</div>
-
-		 <button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认添加</button>
+		<input name='id' value='${productid}' hidden>
+		<c:choose>
+    		<c:when test="${not empty psList}">
+        		<c:forEach items="${psList}" var="ps" varStatus="loop">
+            		<div class="layui-input-group layui-col-md3">
+                		<span class="layui-input-prefix">${ps.specificationsName}:</span>
+                		<select name="spec_${loop.index}">
+                    		<option value="">请选择</option>
+                    		<c:forEach items="${valList[loop.index]}" var="v">
+                        		<option>${v}</option>
+                   			</c:forEach>
+                		</select>
+            		</div>
+        		</c:forEach>
+        		
+        		<div class="layui-input-group layui-col-md6">
+					<span class="layui-input-prefix">售价:</span>
+   					<input name='price' type="number" min='0' lay-affix="number" placeholder="售价" step="0.1" lay-precision="2" class="layui-input">
+				</div>
+				
+				<button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认添加</button>
+    		</c:when>
+    		<c:otherwise>
+        		<div>psList为空时显示的内容</div>
+    		 </c:otherwise>
+		</c:choose> 
 	</form>
 </body>
 <script type="text/javascript">

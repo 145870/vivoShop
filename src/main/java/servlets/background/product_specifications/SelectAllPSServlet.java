@@ -27,7 +27,7 @@ public class SelectAllPSServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("UTF-8");
-        String id = req.getParameter("id");
+        String id = req.getSession().getAttribute("productid")+"";
         
         String name = req.getParameter("name");
 

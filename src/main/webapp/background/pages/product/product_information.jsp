@@ -570,6 +570,25 @@
 					   		maxmin: true,
 					   		area: ['80%', '80%'],
 					   		content: html,
+					   		end: function() {
+					   	        // 弹窗关闭后执行的操作
+					   	        index = null; // 清除 index 变量
+
+					   	        // 使用Ajax请求删除session中的属性
+					   	        $.ajax({
+					   	            url: '/vivoShop/deleteSessionAttributes',
+					   	            type: 'POST',
+					   	            data: {
+					   	                keys: ['productid', 'psList', 'valList'] // 需要删除的session属性名
+					   	            },
+					   	            success: function(response) {
+					   	                console.log('作用域删除完成')
+					   	            },
+					   	            error: function(error) {
+					   	                // 删除失败的处理逻辑
+					   	            }
+					   	        });
+					   	    }
 						});
 			    		
 			    		form.render();

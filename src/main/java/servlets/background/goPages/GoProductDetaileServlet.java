@@ -11,6 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
@@ -33,10 +34,10 @@ public class GoProductDetaileServlet extends HttpServlet{
 		for(ProductSpecification p:pslist) {
 			valList.add(p.getSpecificationsValues());
 		}
-		
-		req.setAttribute("productid",id);
-		req.setAttribute("psList", pslist);
-		req.setAttribute("valList", valList);
+		HttpSession session = req.getSession();
+		session.setAttribute("productid",id);
+		session.setAttribute("psList", pslist);
+		session.setAttribute("valList", valList);
 		
 		List<Map<String, Object>> columns = new ArrayList();
 		
