@@ -7,7 +7,7 @@
 <head>
 <meta charset="utf-8">
 <title></title>
-	<%--
+	<%-- 
 	<script type="text/javascript" src="/vivoShop/background/lib/layui/layui.js"></script>
 	<link href="/vivoShop/background/lib/layui/css/layui.css" rel="stylesheet">
 	
@@ -19,16 +19,16 @@
 <body>
 	<style type="text/css">
 /* 重写 */
-#product-detailed .layui-table-checked {
+#product-specifications .layui-table-checked {
 	background-color: rgb(244, 244, 255);
 }
 }
-#product-detailed .layui-laydate .layui-this, .layui-laydate .layui-this>div {
+#product-specifications .layui-laydate .layui-this, .layui-laydate .layui-this>div {
     background-color: rgb(85, 170, 255) !important;
     color: #fff !important;
 }
 /* 重写 */
-#product-detailed .layui-laydate .layui-this>div {
+#product-specifications .layui-laydate .layui-this>div {
 	background-color: rgb(85, 170, 255) !important;
 }
 
@@ -37,77 +37,64 @@
     color: #fff !important;
 }
 /* 重写 */
-#product-detailed .layui-form-select dl dd.layui-this {
+#product-specifications .layui-form-select dl dd.layui-this {
 	color: rgb(102, 117, 255);
 }
 
-#product-detailed-select span:not(.no){
+#product-specifications-select span:not(.no){
 	width: 80px;
 }
 
 /* 重写 */
-#product-detailed-select div:last-child button:hover {
+#product-specifications-select div:last-child button:hover {
 	color: rgb(85, 170, 255);
 	background-color: rgb(250, 250, 250);
 }
 
 /* 重写表格样式 */
-#product-detailed-body .tabel .layui-laypage .layui-laypage-curr .layui-laypage-em
+#product-specifications-body .tabel .layui-laypage .layui-laypage-curr .layui-laypage-em
 	{
 	background-color: rgb(89, 189, 255);
 }
 
-#product-detailed-body .tabel .layui-table-click, .layui-table-hover,
+#product-specifications-body .tabel .layui-table-click, .layui-table-hover,
 	.layui-table[lay-even] tbody tr:nth-child(even) {
 	background-color: rgb(250, 250, 255);
 }
 
-#product-detailed-body .tabel .layui-form-checked[lay-skin=primary]>i
+#product-specifications-body .tabel .layui-form-checked[lay-skin=primary]>i
 	{
 	border-color: rgb(89, 189, 255) !important;
 	background-color: rgb(89, 189, 255);
 	color: #fff;
 }
 
-#product-detailed-body {
+#product-specifications-body {
 	padding: 16px;
 }
 
 
-#product-detailed-body .buttons {
+#product-specifications-body .buttons {
 	margin-bottom: 20px;
 }
 
-#product-detailed{
+#product-specifications{
 	margin: 20px;
 }
 </style>
-	<div id="product-detailed" class="layui-font-14">
+	<div id="product-specifications" class="layui-font-14">
 
 		<!-- 查询区域 -->
-		<div id='product-detailed-select'>
+		<div id='product-specifications-select'>
 			<form class="layui-form layui-col-space20">
 			
-			<input name='id' value='${productid}' hidden>
-				<!-- 价格区间 -->
-				<div class="layui-input-group layui-col-md6">
-    				<span class="layui-input-prefix">价格区间:</span>
-   					 <input name='minPrice' id="minPrice" type="number" min='0' lay-affix="number" placeholder="最低价" step="0.1" lay-precision="2" class="layui-input">
-    				<span class="layui-input-prefix no">至</span>
-    				<input name='maxPrice' id="maxPrice" type="number" min='0.10' lay-affix="number" placeholder="最高价" step="0.1" lay-precision="2" class="layui-input">
-		</div>
-			
-				<c:forEach items="${psList}" var='ps' varStatus="loop">
-					<div class="layui-input-group layui-col-md3">
-						<span class="layui-input-prefix">${ps.specificationsName}:</span>
-						<select name="spec_${loop.index}">
-							<option value="">请选择</option>
-                				<c:forEach items='${valList[loop.index]}' var='v'>
-                					<option>${v}</option>
-                				</c:forEach>
-						</select>
-					</div>
-				</c:forEach>
+			<input name='id' value='${productid}' hidden="">
+				
+				<div class="layui-col-md6 layui-input-group">
+					<span style='width:80px;text-align: right;' class="layui-input-prefix">规格名称:</span> 
+					<input style="width:200px;" name="name" type="text" id="product-name" placeholder="规格名称" class="layui-input">
+				</div>
+				
 
 				<div class="layui-col-md3">
 					<button style="width: 125px; color: rgb(85, 170, 255);" class="layui-btn layui-btn-primary layui-btn-radius">搜索</button>
@@ -120,24 +107,20 @@
 		
 		
 		<!-- 显示内容 -->
-		<div id="product-detailed-body">
+		<div id="product-specifications-body">
 			<div class="buttons">
-				
-				<button onclick="addNewProdcutDetailed()" class="layui-btn layui-bg-blue">添加规格组合</button>
-				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑规格组合</button>
-				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除规格组合</button>
-				
-				<button style='margin-left: 20px' onclick="openProduct_Specifications()" class="layui-btn layui-bg-blue">查看该商品所有规格</button>
-				
+				<button onclick="addNewProdcutspecifications()" class="layui-btn layui-bg-blue">添加规格</button>
+				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑规格</button>
+				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除选中规格</button>
 				<button onclick="refreshPDAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
 			</div>
 
 			<div class="tabel">
-				<table class="layui-hide" id="product-detailed-body-table">
+				<table class="layui-hide" id="product-specifications-body-table">
 				</table>
-				<script type="text/html" id="product_detailed_edit">
+				<script type="text/html" id="product_specifications_edit">
 			  <div class="layui-clear-space">
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="del">删除</a>
@@ -166,24 +149,46 @@
 			$('#maxPrice').val('');
 
 			// 清空规格选择框的值
-			$('#product-detailed-select select[name^="spec"]').val('');
+			$('#product-specifications-select select[name^="spec"]').val('');
 
 			refreshPDTable()
 		}
 		//该页面的表格
-		var pdinst;
+		var pavtable;
 		// 已知数据渲染
-		function refreshPDTable(){
+		function refreshPAVTable(){
 			// 销毁当前表格实例
-			if(pdinst){
-				pdinst.reload({}); // 先清空数据
-				pdinst.reload('null'); // 然后销毁表格
+			if(pavtable){
+				pavtable.reload({}); // 先清空数据
+				pavtable.reload('null'); // 然后销毁表格
 			}
 			
-			pdinst=table.render({
-				elem : '#product-detailed-body-table',
-				cols : [ ${tableHead}],
-				url : '/vivoShop/background/pages/function/product_detailed/selAll?id='+${productid},
+			var productid = $("#product-specifications-select input[name='id']").val();
+			pavtable=table.render({
+				elem : '#product-specifications-body-table',
+				cols : [[ //标题栏
+					{
+						type : 'checkbox',
+						fixed : 'left'
+					},{
+		                field: 'id',
+		                hide: true // 隐藏列
+		            },{
+						field : 'ps_name',
+						title : '规格名称',
+						width : 200
+					}, {
+						field : 'ps_val',
+						title : '规格值',
+						minWidth : 400
+					}, {
+						fixed : 'right',
+						title : '操作',
+						width : 134,
+						minWidth : 125,
+						toolbar : '#barDemo'
+					} ]],
+				url : '/vivoShop/background/pages/function/product_specifications/selAll?id='+productid,
 				//skin: 'line', // 表格风格
 				//even: true,
 				page : true, // 是否显示分页
@@ -192,7 +197,7 @@
 			// 每页默认显示的数量
 			});
 		}
-		refreshPDTable();
+		refreshPAVTable();
 		  var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
 
 	        function getBody(content){
@@ -208,7 +213,7 @@
 	        
 	        
 		// 触发单元格工具事件
-		table.on('tool(product-detailed-body-table)',function(obj) { // 双击 toolDouble
+		table.on('tool(product-specifications-body-table)',function(obj) { // 双击 toolDouble
 			var data = obj.data; // 获得当前行数据
 			var index1;
 			if (obj.event === 'edit') {
@@ -221,7 +226,7 @@
 		
 		
 		//搜索
-		$("#product-detailed-select form").submit(function(event){
+		$("#product-specifications-select form").submit(function(event){
 			event.preventDefault();
 
 		    // 将表单转换为序列化对象
@@ -233,37 +238,15 @@
 		    }, {});
 			
 		    // 重新加载表格数据
-		    pdinst.reload({
-		        url: '/vivoShop/background/pages/function/product_detailed/selWhere',
+		    pavtable.reload({
+		        url: '/vivoShop/background/pages/function/product_specifications/selAll',
 		        where: serializedData
 		    });
 		})
 		
 		//新增规格组合
-		function addNewProdcutDetailed(){
+		function addNewProdcutspecifications(){
 			
-		}
-		
-		//查看商品所有规格
-		function openProduct_Specifications(){
-			$.ajax({
-		   		url:'/vivoShop/background/gopages/goProductSpecifications?productid='+${productid},
-		    	success:function(html){
-		    		var index=layer.open({
-				   		type:1,
-				   		title: '规格详细',
-				   		shadeClose: true,
-				   		maxmin: true,
-				   		area: ['60%', '60%'],
-				   		content: html,
-					});
-		    		
-		    		form.render();
-				},error: function(xhr, status, error) {
-					//console.log(xhr)	
-					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
-				}
-		   	 })
 		}
 		
 	</script>

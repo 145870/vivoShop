@@ -26,7 +26,7 @@ public class GoProductDetaileServlet extends HttpServlet{
 		String id=req.getParameter("id");
 		
 		//查询商品规格内容
-		List<ProductSpecification> pslist = psdao.getProductSpecificationById(id);
+		List<ProductSpecification> pslist = (List<ProductSpecification>) psdao.getProductSpecificationById(id).get("list");
 		//存储对应值
 		List<String[]> valList = new ArrayList<String[]>();
 		
@@ -34,7 +34,7 @@ public class GoProductDetaileServlet extends HttpServlet{
 			valList.add(p.getSpecificationsValues());
 		}
 		
-		req.setAttribute("id",id);
+		req.setAttribute("productid",id);
 		req.setAttribute("psList", pslist);
 		req.setAttribute("valList", valList);
 		
