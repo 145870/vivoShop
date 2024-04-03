@@ -14,56 +14,37 @@
 </head>
 <body>
 <style>
-#addNewProduct .layui-form {
-	margin: 0 auto;
-	width: 345px;
+#addProductAttrVals {
+    height: 265px;
+    width: 345px;
+    margin: 0 auto;
+    overflow: auto; /* 添加滚动条 */
+}
+#addProductAttrVals .layui-form {
 	padding: 20px;
 }
-
-#addNewProduct .layui-form-onswitch {
-	border-color: rgb(85, 170, 255);
-	background-color: rgb(85, 170, 255);
-}
-
-#addNewProduct .layui-table-checked {
-	background-color: rgb(244, 244, 255);
-}
-
-/* 重写 */
-#addNewProduct .layui-laydate .layui-this>div {
-	background-color: rgb(85, 170, 255) !important;
-}
-
-#addNewProduct .layui-laydate .layui-this, .layui-laydate .layui-this>div
-	{
-	background-color: rgb(85, 170, 255) !important;
-}
-
-/* 重写 */
-#addNewProduct .layui-form-select dl dd.layui-this {
-	color: rgb(102, 117, 255);
-}
-
-#addNewProduct .layui-input-group>.layui-input-prefix {
-	width: 175px;
-	text-align: right;
+#addProductAttrVals span{
+	min-width:70px;
 	font-weight: bold;
+	text-align: right;
 }
 
-#addNewProduct .layui-input {
-	width: 200px;
+#addProductAttrVals div.layui-input-group{
+	margin: 20px;
+}
+#addProductAttrVals .layui-input{
+	width:200px;
 }
 
-#addNewProduct .layui-input-group {
-	margin-bottom: 20px;
+ #addProductAttrVals .layui-form-select dl dd.layui-this {
+   color: rgb(102, 117, 255);
 }
+
 </style>
-	<form class="layui-form" id="addNewProduct" style="margin-top: 30px">
+	<form class="layui-form" id="addProductAttrVals" style="margin-top: 30px">
 		<input name='id' value='${productid}' hidden>
-		<c:choose>
-    		<c:when test="${not empty psList}">
         		<c:forEach items="${psList}" var="ps" varStatus="loop">
-            		<div class="layui-input-group layui-col-md3">
+            		<div class="layui-input-group">
                 		<span class="layui-input-prefix">${ps.specificationsName}:</span>
                 		<select name="spec_${loop.index}">
                     		<option value="">请选择</option>
@@ -74,17 +55,12 @@
             		</div>
         		</c:forEach>
         		
-        		<div class="layui-input-group layui-col-md6">
+        		<div class="layui-input-group">
 					<span class="layui-input-prefix">售价:</span>
    					<input name='price' type="number" min='0' lay-affix="number" placeholder="售价" step="0.1" lay-precision="2" class="layui-input">
 				</div>
 				
-				<button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认添加</button>
-    		</c:when>
-    		<c:otherwise>
-        		<div>psList为空时显示的内容</div>
-    		 </c:otherwise>
-		</c:choose> 
+				<button style="margin-top: 30px;position: absolute;right: 75px;" class="layui-btn layui-bg-blue">确认添加</button>
 	</form>
 </body>
 <script type="text/javascript">

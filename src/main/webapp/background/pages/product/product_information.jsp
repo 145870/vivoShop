@@ -560,7 +560,7 @@
 		//查看商品详细
 		function openDetaile(data){
 			 $.ajax({
-			   		url:'/vivoShop/background/gopages/goProductDetaile',
+			   		url:'/vivoShop/background/gopages/goProductAttrVals',
 			   		data:{id:data.id},
 			    	success:function(html){
 			    		var index=layer.open({

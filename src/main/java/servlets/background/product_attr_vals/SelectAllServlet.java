@@ -1,4 +1,4 @@
-package servlets.background.product_detailed;
+package servlets.background.product_attr_vals;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,7 @@ import entity.ProductAttrValue;
 import entity.ProductSpecification;
 import entity.ProductsInformation;
 
-@WebServlet("/background/pages/function/product_detailed/selAll")
+@WebServlet("/background/pages/function/product_attr_vals/selAll")
 public class SelectAllServlet extends HttpServlet{
 	ProductAttrValueDAO dao=new ProductAttrValueDAO();
 	@Override

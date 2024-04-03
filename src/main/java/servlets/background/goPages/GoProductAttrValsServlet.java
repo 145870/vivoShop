@@ -18,8 +18,8 @@ import com.google.gson.Gson;
 import DAO.ProductSpecificationDAO;
 import entity.ProductSpecification;
 
-@WebServlet("/background/gopages/goProductDetaile")
-public class GoProductDetaileServlet extends HttpServlet{
+@WebServlet("/background/gopages/goProductAttrVals")
+public class GoProductAttrValsServlet extends HttpServlet{
 	ProductSpecificationDAO psdao=new ProductSpecificationDAO();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -75,13 +75,13 @@ public class GoProductDetaileServlet extends HttpServlet{
 		staticColumn4.put("fixed", "right");
 		staticColumn4.put("title", "操作");
 		staticColumn4.put("width", 134);
-		staticColumn4.put("toolbar", "#product_detailed_edit");
+		staticColumn4.put("toolbar", "#product_AttrVals_edit");
 		columns.add(staticColumn4);
 		
 		// 将结果转换为JSON格式
 		String jsonColumns = new Gson().toJson(columns);
 		req.setAttribute("tableHead", jsonColumns);
 		
-		req.getRequestDispatcher("/background/pages/product/product_detailed.jsp").forward(req, resp);
+		req.getRequestDispatcher("/background/pages/product/product_attr_vals.jsp").forward(req, resp);
 	}
 }

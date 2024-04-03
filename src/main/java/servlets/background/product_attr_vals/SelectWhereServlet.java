@@ -1,4 +1,4 @@
-package servlets.background.product_detailed;
+package servlets.background.product_attr_vals;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,7 +19,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import DAO.ProductAttrValueDAO;
 import entity.ProductAttrValue;
 
-@WebServlet("/background/pages/function/product_detailed/selWhere")
+@WebServlet("/background/pages/function/product_attr_vals/selWhere")
 public class SelectWhereServlet extends HttpServlet{
 	ProductAttrValueDAO dao = new ProductAttrValueDAO();
 	@Override
