@@ -36,8 +36,12 @@ public class SelectAllProductsServlet extends HttpServlet{
         String type = req.getParameter("type");
         String status = req.getParameter("status");
         
+        //获取分页属性
+        String page = req.getParameter("page");
+        String limit = req.getParameter("limit");
+        
         ProductsInformationDAO dao = new ProductsInformationDAO();
-		Map<String, Object> map = dao.getProductsInformationByWhere(name,isNew,startTime,endTime,type,status);
+		Map<String, Object> map = dao.getProductsInformationByWhere(name,isNew,startTime,endTime,type,status,page,limit);
 		
 		List<ProductsInformation> list =(List<ProductsInformation>)map.get("list");
 		ObjectMapper objectMapper = new ObjectMapper();

@@ -188,7 +188,7 @@
 						minWidth : 125,
 						toolbar : '#barDemo'
 					} ]],
-				url : '/vivoShop/background/pages/function/product_specifications/selAll?id='+productid,
+				url : '/vivoShop/background/pages/function/product_specifications/selAll',
 				//skin: 'line', // 表格风格
 				//even: true,
 				page : true, // 是否显示分页

@@ -12,7 +12,14 @@ public class ProductsInformation {
 	 private Date createTime;
 	 private Date shelvesTime;
 	 
-	 private String className;
+	 private int count;
+	 public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	private String className;
 	public String getClassName() {
 		return className;
 	}

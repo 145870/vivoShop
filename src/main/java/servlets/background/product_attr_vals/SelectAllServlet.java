@@ -31,9 +31,13 @@ public class SelectAllServlet extends HttpServlet{
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("UTF-8");
-        String id = req.getParameter("id");
+        String id = req.getSession().getAttribute("productid")+"";
+        
+        //获取分页属性
+        String page = req.getParameter("page");
+        String limit = req.getParameter("limit");
 
-        Map<String, Object> map = dao.getAllAndCountByProductId(id);
+        Map<String, Object> map = dao.getAllAndCountByProductId(id,page,limit);
         Map<String, Object> jsonData = new HashMap();
         List<ProductAttrValue> list = (List<ProductAttrValue>) map.get("list");
 		jsonData.put("code", 0);

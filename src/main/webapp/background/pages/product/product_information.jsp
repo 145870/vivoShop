@@ -345,7 +345,7 @@
 					    fullPanel: true
 					});
 					
-					$("#addNewProduct").submit(function(){
+					$("#addNewProduct").off("submit").on("submit", function(event){
 							event.preventDefault();
 							var formData = $("#addNewProduct").serializeArray();
 							// 检查除了name为isnew以外的所有字段是否都有值

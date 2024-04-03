@@ -262,6 +262,40 @@
 					});
 		    		
 		    		form.render();
+		    		
+		    		$("#addProductAttrVals").off("submit").on("submit", function(event){
+						event.preventDefault();
+						var formData = $("#addProductAttrVals").serializeArray();
+						// 检查除了name为isnew以外的所有字段是否都有值
+						for (var i = 0; i < formData.length; i++) {												        if (formData[i].name !== "description" && formData[i].value === "") {
+							isValid = false;
+							layer.msg('内容不能为空!', {icon: 0,time:1000});
+							return;
+						}
+					}
+					//新增
+					$.ajax({
+						url:"/vivoShop/background/pages/function/product_attr_vals/add",
+						data:formData,
+						dataType:'text',
+						type:'get',
+						success:function(txt){
+							if(txt=="新增成功"){
+								layer.msg('添加成功', {icon: 1});
+							}else{
+								layer.msg(txt, {icon: 0});
+							}
+							if(index){
+								 layer.close(index);
+								 //重新渲染
+								 refreshPDTable();
+							}
+						},error: function(xhr, status, error) {
+							//console.log(xhr)
+							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+						}
+					})
+				});
 				},error: function(xhr, status, error) {
 					//console.log(xhr)	
 					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
