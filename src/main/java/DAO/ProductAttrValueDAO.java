@@ -154,7 +154,7 @@ public class ProductAttrValueDAO extends BaseDAO {
 				return list;
 			}
 
-		}, params);
+		}, params.toArray());
 
 		int count = listcount.size();
 

@@ -154,7 +154,7 @@ public class ProductsInformationDAO extends BaseDAO {
 					return list;
 				}
 		    	
-		    },params);
+		    },params.toArray());
 	    	
 	    	
 	    int count = listcount.size();
