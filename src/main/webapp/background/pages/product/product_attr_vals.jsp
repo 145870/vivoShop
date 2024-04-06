@@ -308,6 +308,7 @@
 				//获取被选中的行的内容
 				var datas=table.checkStatus("product-attrVals-body-table");
 				if(datas.data.length){
+					console.log(datas.data[0])
 					updateProductAttrVals(datas.data[0]);
 				}else{
 					layer.msg('请选中一行!', {icon: 0,time:1300});
@@ -317,16 +318,16 @@
 		function updateProductAttrVals(data){
 			$.ajax({
 			    url: '/vivoShop/background/gopages/goEditProductAttrVals',
-			    data:{
-			    	id:data.id
-			    },
+			    method: 'POST',
+		        contentType: 'application/json',
+		        data: JSON.stringify(data),
 			    success: function(html) {
 			    	index1=layer.open({
 			        	type:1,
-			            title: '编辑' + data.information_name,
+			            title: '编辑规格组合',
 			            shadeClose: true,
 			            maxmin: true,
-			            area: ['470px', '540px'],
+			            area: ['430px', '430px'],
 			            content: html,
 			            resize: false
 			        });
