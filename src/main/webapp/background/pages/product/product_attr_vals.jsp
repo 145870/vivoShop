@@ -125,7 +125,7 @@
 				
 				<button onclick="addNewProdcutattrVals()" class="layui-btn layui-bg-blue">添加规格组合</button>
 				<button onclick="updateCheckedProductAttrVals()" class="layui-btn layui-bg-blue">编辑规格组合</button>
-				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除规格组合</button>
+				<button onclick="delCheckedProductAttrVals()" class="layui-btn layui-bg-blue">删除规格组合</button>
 				
 				<button style='margin-left: 20px' onclick="openProduct_Specifications()" class="layui-btn layui-bg-blue">查看该商品所有规格</button>
 				
@@ -137,7 +137,7 @@
 			<div class="tabel">
 				<table class="layui-hide" id="product-attrVals-body-table">
 				</table>
-				<script type="text/html" id="product_attrVals_edit">
+				<script type="text/html" id="product-attrVals-table-operate">
 			  <div class="layui-clear-space">
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="del">删除</a>
@@ -181,7 +181,7 @@
 			
 			pdinst=table.render({
 				elem : '#product-attrVals-body-table',
-				cols : [ ${tableHead}],
+				cols : [${tableHead}],
 				url : '/vivoShop/background/pages/function/product_attr_vals/selAll?id='+${productid},
 				//skin: 'line', // 表格风格
 				//even: true,
@@ -191,34 +191,7 @@
 			// 每页默认显示的数量
 			});
 		}
-		refreshPDTable();
-		  var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
-
-	        function getBody(content){
-	            var result = REG_BODY.exec(content);
-	            if(result && result.length === 2)
-	                return result[1];
-	            return content;
-	        }
-		
-	        
-	  	      
-	       
-	        
-	        
-		// 触发单元格工具事件
-		table.on('tool(product-attrVals-body-table)',function(obj) { // 双击 toolDouble
-			var data = obj.data; // 获得当前行数据
-			var index1;
-			if (obj.event === 'edit') {
-				updateProduct(data);
-			} else if (obj.event === 'del') {
-				//删除
-				delProdcut(data)
-			}			
-		});
-		
-		
+		refreshPDTable()
 		//搜索
 		$("#product-attrVals-select form").submit(function(event){
 			event.preventDefault();
@@ -267,7 +240,8 @@
 						event.preventDefault();
 						var formData = $("#addProductAttrVals").serializeArray();
 						// 检查除了name为isnew以外的所有字段是否都有值
-						for (var i = 0; i < formData.length; i++) {												        if (formData[i].name !== "description" && formData[i].value === "") {
+						for (var i = 0; i < formData.length; i++) {												        
+							if (formData[i].name !== "description" && formData[i].value === "") {
 							isValid = false;
 							layer.msg('内容不能为空!', {icon: 0,time:1000});
 							return;
@@ -334,14 +308,11 @@
 			        
 			        form.render();
 			        
-			        $("#editProductpanel").submit(function(){
+			        $("#updateProductAttrVals").submit(function(){
 						 event.preventDefault();
 						 layer.confirm('是否确认修改？', {icon: 3}, function(){
 								//确认
-								//var formData = $("#editProductpanel").serialize();
-								var formData = $("#editProductpanel").serializeArray();
-
-
+								var formData = $("#updateProductAttrVals").serializeArray();
 								 // 检查除了name为isnew以外的所有字段是否都有值
 							    for (var i = 0; i < formData.length; i++) {												        if (formData[i].name !== "description" && formData[i].value === "") {
 							            isValid = false;
@@ -351,27 +322,27 @@
 							    }
 								//修改
 								$.ajax({
-									url:"/vivoShop/background/pages/function/product_information/update",
+									url:"/vivoShop/background/pages/function/product_attr_vals/update",
 									data:formData,
 									dataType:'text',
 									type:'get',
 									success:function(txt){
-										if(txt=="true"){
+										if(txt=="修改成功"){
 											layer.msg('修改成功', {icon: 1});
 										}else{
-											layer.msg('修改失败', {icon: 0});
+											layer.msg(txt, {icon: 0});
+										}
+										if(index1){
+											 layer.close(index1);
+											 //重新渲染
+											 refreshPDTable();
 										}
 									},error: function(xhr, status, error) {
-										//console.log(xhr)
 										layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
 								    }
 								})
 						        
-						        if(index1){
-									 layer.close(index1);
-									 //重新渲染
-									 refreshPITable();
-								}
+						        
 						 }, function(){
 						        //取消
 							 if(index1){
@@ -384,6 +355,59 @@
 			    }
 			
 			});
+		}
+		//删除选中组合
+		function delCheckedProductAttrVals(){
+			//获取被选中的行的内容
+			var datas=table.checkStatus("product-attrVals-body-table");
+			if(datas.data.length){
+				layer.confirm('确认删除么?',{icon: 3}, function(index){
+					datas.data.forEach(function(row) {
+						$.ajax({
+					    	 url:"/vivoShop/background/pages/function/product_attr_vals/delete",
+					    	 data:{id:row.id},
+					    	 success:function(txt){
+								if(txt=="true"){
+									
+								}else{
+									layer.msg('删除失败：'+row.information_name, {icon: 0});
+								}
+								refreshPDTable();
+							},error: function(xhr, status, error) {
+								//console.log(xhr)	
+								layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+							}
+					     })
+					});
+					layer.msg('删除完成', {icon: 1});
+					layer.close(index);
+				 });
+				
+			}else{
+				layer.msg('请选中一行!', {icon: 0,time:1300});
+			}
+		}
+		
+		//删除组合
+		function delProductAttrVals(data){
+			layer.confirm('确认删除么?',{icon: 3}, function(index){
+					$.ajax({
+				    	 url:"/vivoShop/background/pages/function/product_attr_vals/delete",
+				    	 data:{id:data.id},
+				    	 success:function(txt){
+							if(txt=="true"){
+								layer.msg('删除成功', {icon: 1});
+							}else{
+								layer.msg('删除失败', {icon: 0});
+							}
+							refreshPDTable();
+						},error: function(xhr, status, error) {
+							//console.log(xhr)	
+							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+						}
+				     })
+				layer.close(index);
+			 });
 		}
 		
 		//查看商品所有规格
@@ -408,6 +432,16 @@
 		   	 })
 		}
 		
+		// 触发单元格工具事件
+		table.on('tool(product-attrVals-body-table)',function(obj) { // 双击 toolDouble
+			var data = obj.data; // 获得当前行数据
+			var index1;
+			if (obj.event === 'edit') {
+				updateProductAttrVals(data);
+			} else if (obj.event === 'del') {
+				delProductAttrVals(data)
+			}
+		});
 	</script>
 
 

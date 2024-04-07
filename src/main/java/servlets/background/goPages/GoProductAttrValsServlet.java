@@ -75,7 +75,7 @@ public class GoProductAttrValsServlet extends HttpServlet{
 		staticColumn4.put("fixed", "right");
 		staticColumn4.put("title", "操作");
 		staticColumn4.put("width", 134);
-		staticColumn4.put("toolbar", "#product_AttrVals_edit");
+		staticColumn4.put("toolbar", "#product-attrVals-table-operate");
 		columns.add(staticColumn4);
 		
 		// 将结果转换为JSON格式

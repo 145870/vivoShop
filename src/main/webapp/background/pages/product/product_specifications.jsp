@@ -120,7 +120,7 @@
 			<div class="tabel">
 				<table class="layui-hide" id="product-specifications-body-table">
 				</table>
-				<script type="text/html" id="product_specifications_edit">
+				<script type="text/html" id="product_specifications_operate">
 			  <div class="layui-clear-space">
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="del">删除</a>
@@ -186,11 +186,9 @@
 						title : '操作',
 						width : 134,
 						minWidth : 125,
-						toolbar : '#barDemo'
+						toolbar : '#product_specifications_operate'
 					} ]],
 				url : '/vivoShop/background/pages/function/product_specifications/selAll',
-				//skin: 'line', // 表格风格
-				//even: true,
 				page : true, // 是否显示分页
 				limits : [ 5, 10, 15 ],
 				limit : 5
@@ -198,29 +196,15 @@
 			});
 		}
 		refreshPAVTable();
-		  var REG_BODY = /<body[^>]*>([\s\S]*)<\/body>/;
-
-	        function getBody(content){
-	            var result = REG_BODY.exec(content);
-	            if(result && result.length === 2)
-	                return result[1];
-	            return content;
-	        }
-		
-	        
-	  	      
-	       
-	        
-	        
+ 
 		// 触发单元格工具事件
 		table.on('tool(product-specifications-body-table)',function(obj) { // 双击 toolDouble
 			var data = obj.data; // 获得当前行数据
 			var index1;
 			if (obj.event === 'edit') {
-				updateProduct(data);
+				
 			} else if (obj.event === 'del') {
-				//删除
-				delProdcut(data)
+				
 			}			
 		});
 		
@@ -244,7 +228,7 @@
 		    });
 		})
 		
-		//新增规格组合
+		//新增规格
 		function addNewProdcutspecifications(){
 			
 		}

@@ -6,8 +6,10 @@
 <head>
 <meta charset="utf-8">
 <title></title>
-	<script type="text/javascript" src="/vivoShop/background/lib/layui/layui.js"></script>
+	<!-- 
+		<script type="text/javascript" src="/vivoShop/background/lib/layui/layui.js"></script>
 	<link href="/vivoShop/background/lib/layui/css/layui.css" rel="stylesheet">
+	 -->
 </head>
 
 
@@ -156,7 +158,7 @@
 			<div class="tabel">
 				<table class="layui-hide" id="product-information-body-table">
 				</table>
-				<script type="text/html" id="barDemo">
+				<script type="text/html" id="product-information-table-operate">
 			  <div class="layui-clear-space">
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="more">
@@ -220,7 +222,7 @@
 	            },{
 					field : 'information_name',
 					title : '产品名',
-					width : 100
+					width : 150
 				}, {
 					field : 'description',
 					title : '描述',
@@ -232,12 +234,12 @@
 				}, {
 					field : 'status',
 					title : '上架状态',
-					width : 100,
+					width : 120,
 					sort: true
 				}, {
 					field : 'is_last',
 					title : '是否新品',
-					width : 100,
+					width : 120,
 					sort: true
 				}, {
 					field : 'create_time',
@@ -254,7 +256,7 @@
 					title : '操作',
 					width : 134,
 					minWidth : 125,
-					toolbar : '#barDemo'
+					toolbar : '#product-information-table-operate'
 				} ] ],
 				url : "pages/function/product_information/selAll",
 				//skin: 'line', // 表格风格
@@ -436,17 +438,18 @@
 										}else{
 											layer.msg('修改失败', {icon: 0});
 										}
+										if(index1){
+											 layer.close(index1);
+											 //重新渲染
+											 refreshPITable();
+										}
 									},error: function(xhr, status, error) {
 										//console.log(xhr)
 										layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
 								    }
 								})
 						        
-						        if(index1){
-									 layer.close(index1);
-									 //重新渲染
-									 refreshPITable();
-								}
+						        
 						 }, function(){
 						        //取消
 							 if(index1){
@@ -508,6 +511,7 @@
 								}else{
 									layer.msg('删除失败：'+row.information_name, {icon: 0});
 								}
+								refreshPITable();
 							},error: function(xhr, status, error) {
 								//console.log(xhr)	
 								layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
@@ -515,7 +519,7 @@
 					     })
 					});
 					layer.msg('删除完成', {icon: 1});
-					refreshPITable();
+					
 					layer.close(index);
 				 });
 				

@@ -61,7 +61,6 @@
         </select>
     </div>
 </c:forEach>
-        		
         		<div class="layui-input-group">
 					<span class="layui-input-prefix">售价:</span>
    					<input value='${price}' name='price' type="number" min='0' lay-affix="number" placeholder="售价" step="0.1" lay-precision="2" class="layui-input">
@@ -72,6 +71,5 @@
 </body>
 <script type="text/javascript">
 
-	
 </script>
 </html>

@@ -187,8 +187,7 @@ $(function(){
 	})
 	
 	// tab切换事件触发捕获
-	element.on('tab(home-tab)', function(obj){
-		
+	element.on('tab(home-tab)', function(){
 		//获取id值
 		var tab_id=this.getAttribute('lay-id')-1;
 		//获取a标签
@@ -213,16 +212,9 @@ $(function(){
 		tit.push(a.text());
 		//去重
 		var uniqueArray = Array.from(new Set(tit));
-		
+
 		//切换标题
 		toggleTheTitleStatus(uniqueArray);
-		//模拟刷新
-		// $("#main-body .layui-tab-content .layui-tab-item .tab-body").each(function(){
-		//     if($(this).attr('tab-id') == tab_id){
-				
-		//     }
-		// })
-		// var loadIndex = layer.load(0);
 		
 		//判断是否有子菜单 筛选掉子菜单中的a
 		if(a.not('.sidebar-menu .menu').length){

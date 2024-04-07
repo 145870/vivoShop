@@ -166,8 +166,8 @@ public class ProductAttrValueDAO extends BaseDAO {
 
 	// 查询是否存在 商品id,json数据, 长度
 	public boolean isAttrValsExistsByPid(String pid, String attr_vals, int attr_valsLen) {
-		String sql = "SELECT * \r\n" + "FROM product_attr_vals \r\n" + "WHERE JSON_CONTAINS(attr_vals, ?) \r\n"
-				+ "  AND JSON_LENGTH(attr_vals) = ? \r\n" + "  AND product_id = ?;";
+		String sql = "SELECT * FROM product_attr_vals WHERE JSON_CONTAINS(attr_vals, ?) "
+				+ "  AND JSON_LENGTH(attr_vals) = ? AND product_id = ?;";
 
 		return this.executeQuery(sql, new Mapper<Object>() {
 
@@ -199,5 +199,28 @@ public class ProductAttrValueDAO extends BaseDAO {
 		}
 
 		return this.execute(sql, params.toArray()) > 0 ? "新增成功" : "新增失败";
+	}
+	
+	public String updateById(String pid,List<String> attr_vals, String price,String pavid) {
+		String sql = "UPDATE product_attr_vals SET attr_vals = ?,sale_amount = ? WHERE id = ?";
+		List<Object> params = new ArrayList<>();
+		;
+		JsonArray jsonArray = new JsonArray();
+		for (String w : attr_vals) {
+			jsonArray.add(w);
+		}
+		params.add(jsonArray.toString());
+		params.add(price);
+		params.add(pavid);
+
+		if (isAttrValsExistsByPid(pid, jsonArray.toString(), attr_vals.size())) {
+			return "搭配已存在!";
+		}
+		return this.execute(sql, params.toArray()) > 0 ? "修改成功" : "修改失败";
+	}
+	
+	public int deleteById(String id) {
+		String sql = "delete from product_attr_vals where id = ?";
+		return this.execute(sql, id);
 	}
 }
