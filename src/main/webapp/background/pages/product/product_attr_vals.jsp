@@ -220,7 +220,7 @@
 		    			layer.confirm('你还没有规格是否去添加规格？', {
 		    		        btn: ['确定', '关闭'] //按钮
 		    		      }, function(){
-		    		        layer.msg('跳转到新增规格页，还未完成', {icon: 1});
+		    		    	  addProdcutspecifications();
 		    		      });
 		    			return;
 		    		}
@@ -442,6 +442,64 @@
 				delProductAttrVals(data)
 			}
 		});
+		
+		
+		
+		
+		
+		//新增规格
+		function addProdcutspecifications(){
+			$.ajax({
+				url:"/vivoShop/background/pages/product/function/specifications/addProductSpecifications.jsp",
+				success:function(html){
+					var index=layer.open({
+				   		type:1,
+				   		title: '新增规格',
+				   		shadeClose: true,
+				   		maxmin: true,
+				   		area: ['430px', '375px'],
+				   		content: html,
+					});
+					
+					$("#addProductSpecifications").off("submit").on("submit", function(event){
+						event.preventDefault();
+						var formData = $("#addProductSpecifications").serializeArray();
+						// 检查所有字段是否都有值
+						for (var i = 0; i < formData.length; i++) {												        
+							if (formData[i].value === "") {
+								layer.msg('内容不能为空!', {icon: 0,time:1000});
+								return;
+							}
+						}
+					//新增
+					$.ajax({
+						url:"/vivoShop/background/pages/function/productSpecifications/add",
+						data:formData,
+						dataType:'text',
+						type:'get',
+						success:function(txt){
+							if(txt=="新增成功"){
+								layer.msg('添加成功', {icon: 1});
+							}else{
+								layer.msg(txt, {icon: 0});
+							}
+							if(index){
+								 layer.close(index);
+								 //重新渲染
+								 refreshPSTable();
+							}
+						},error: function(xhr, status, error) {
+							//console.log(xhr)
+							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+						}
+					})
+				});
+				},error: function(xhr, status, error) {
+					//console.log(xhr)	
+					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+				}
+			})
+		}
 	</script>
 
 

@@ -109,9 +109,9 @@
 		<!-- 显示内容 -->
 		<div id="product-specifications-body">
 			<div class="buttons">
-				<button onclick="addNewProdcutspecifications()" class="layui-btn layui-bg-blue">添加规格</button>
-				<button onclick="updateCheckedProdcut()" class="layui-btn layui-bg-blue">编辑规格</button>
-				<button onclick="delCheckedProdcut()" class="layui-btn layui-bg-blue">删除选中规格</button>
+				<button onclick="addProdcutspecifications()" class="layui-btn layui-bg-blue">添加规格</button>
+				<button onclick="updateProdcutspecifications()" class="layui-btn layui-bg-blue">编辑规格</button>
+				<button onclick="delProdcutspecifications()" class="layui-btn layui-bg-blue">删除选中规格</button>
 				<button onclick="refreshPDAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
@@ -143,28 +143,21 @@
 		
 		
 		//刷新并清空表单
-		function refreshPDAndClearForm(){
-			// 清空价格区间输入框的值
-			$('#minPrice').val('');
-			$('#maxPrice').val('');
+		function refreshPSAndClearForm(){
 
-			// 清空规格选择框的值
-			$('#product-specifications-select select[name^="spec"]').val('');
-
-			refreshPDTable()
 		}
 		//该页面的表格
-		var pavtable;
+		var pstable;
 		// 已知数据渲染
-		function refreshPAVTable(){
+		function refreshPSTable(){
 			// 销毁当前表格实例
-			if(pavtable){
-				pavtable.reload({}); // 先清空数据
-				pavtable.reload('null'); // 然后销毁表格
+			if(pstable){
+				pstable.reload({}); // 先清空数据
+				pstable.reload('null'); // 然后销毁表格
 			}
 			
 			var productid = $("#product-specifications-select input[name='id']").val();
-			pavtable=table.render({
+			pstable=table.render({
 				elem : '#product-specifications-body-table',
 				cols : [[ //标题栏
 					{
@@ -195,7 +188,7 @@
 			// 每页默认显示的数量
 			});
 		}
-		refreshPAVTable();
+		refreshPSTable();
  
 		// 触发单元格工具事件
 		table.on('tool(product-specifications-body-table)',function(obj) { // 双击 toolDouble
@@ -228,11 +221,15 @@
 		    });
 		})
 		
-		//新增规格
-		function addNewProdcutspecifications(){
+		//新增规格在pav.jsp中
+		//修改规格
+		function updateProdcutspecifications(){
 			
 		}
-		
+		//删除规格
+		function delProdcutspecifications(){
+			
+		}
 	</script>
 
 

@@ -35,7 +35,10 @@
 			*{
 				padding: 0;
 				margin: 0;
+				user-select: none;
 			}
+			
+
 			/* 设置左侧菜单栏样式 */
 			#sidebar{
 				position:fixed;

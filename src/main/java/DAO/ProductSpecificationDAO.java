@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.mysql.cj.conf.StringProperty;
 
 import entity.ProductSpecification;
@@ -85,5 +86,17 @@ public class ProductSpecificationDAO extends BaseDAO {
 		map.put("count", list.size());
 
 		return map;
+	}
+	
+	public String doInsert(String pid,String[] vals) {
+		String sql = "INSERT INTO products_specifications (information_id, specifications_name, specifications_values) VALUES "
+				+ "(?, ?, ?)";
+		JsonArray jsonArray = new JsonArray();
+		for (String w : vals) {
+			jsonArray.add(w);
+		}
+		
+		System.out.println(jsonArray.toString());
+		return null;
 	}
 }
