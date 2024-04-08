@@ -62,12 +62,12 @@
 		<!-- 规格名 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">规格名称:</div>
-			<input type="text" name="name" placeholder="" class="layui-input right-text">
+			<input type="text" name="name" placeholder="规格名称" class="layui-input right-text">
 		</div>
 		<!-- 规格值 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">规格值:</div>
-			<textarea style="resize: none;width:200px;" name="val" placeholder="产品描述" class="layui-textarea right-text"></textarea>
+			<textarea style="resize: none;width:200px;" name="val" placeholder="规格值" class="layui-textarea right-text"></textarea>
 		</div>
 		<div style = "position: absolute;left: 140px;margin-top: -16px;font-size: 11px;color: red;">使用逗号(,)进行分割</div>
 

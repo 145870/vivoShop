@@ -112,7 +112,7 @@
 				<button onclick="addProdcutspecifications()" class="layui-btn layui-bg-blue">添加规格</button>
 				<button onclick="updateProdcutspecifications()" class="layui-btn layui-bg-blue">编辑规格</button>
 				<button onclick="delProdcutspecifications()" class="layui-btn layui-bg-blue">删除选中规格</button>
-				<button onclick="refreshPDAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
+				<button onclick="refreshPSAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
 			</div>
@@ -127,67 +127,15 @@
 			  </div>
 			</script>
 			</div>
-
+  
 		</div>
 	</div>
 	
 	<script>
-		var form = layui.form;
 
 		// 当表单元素被动态插入时，需主动进行组件渲染才能显示
 		form.render(); // 渲染全部表单
-
-		//表格渲染
-		var table = layui.table;
-		var dropdown = layui.dropdown;
 		
-		
-		//刷新并清空表单
-		function refreshPSAndClearForm(){
-
-		}
-		//该页面的表格
-		var pstable;
-		// 已知数据渲染
-		function refreshPSTable(){
-			// 销毁当前表格实例
-			if(pstable){
-				pstable.reload({}); // 先清空数据
-				pstable.reload('null'); // 然后销毁表格
-			}
-			
-			var productid = $("#product-specifications-select input[name='id']").val();
-			pstable=table.render({
-				elem : '#product-specifications-body-table',
-				cols : [[ //标题栏
-					{
-						type : 'checkbox',
-						fixed : 'left'
-					},{
-		                field: 'id',
-		                hide: true // 隐藏列
-		            },{
-						field : 'ps_name',
-						title : '规格名称',
-						width : 200
-					}, {
-						field : 'ps_val',
-						title : '规格值',
-						minWidth : 400
-					}, {
-						fixed : 'right',
-						title : '操作',
-						width : 134,
-						minWidth : 125,
-						toolbar : '#product_specifications_operate'
-					} ]],
-				url : '/vivoShop/background/pages/function/product_specifications/selAll',
-				page : true, // 是否显示分页
-				limits : [ 5, 10, 15 ],
-				limit : 5
-			// 每页默认显示的数量
-			});
-		}
 		refreshPSTable();
  
 		// 触发单元格工具事件

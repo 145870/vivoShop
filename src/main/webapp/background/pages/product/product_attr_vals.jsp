@@ -127,8 +127,10 @@
 				<button onclick="updateCheckedProductAttrVals()" class="layui-btn layui-bg-blue">编辑规格组合</button>
 				<button onclick="delCheckedProductAttrVals()" class="layui-btn layui-bg-blue">删除规格组合</button>
 				
-				<button style='margin-left: 20px' onclick="openProduct_Specifications()" class="layui-btn layui-bg-blue">查看该商品所有规格</button>
-				
+				<!--
+				暂时丢弃放入到其他页面
+				<button sztyle='margin-left: 20px' onclick="openProduct_Specifications()" class="layui-btn layui-bg-blue">查看该商品所有规格</button>
+				-->
 				<button onclick="refreshPDAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
@@ -182,7 +184,7 @@
 			pdinst=table.render({
 				elem : '#product-attrVals-body-table',
 				cols : [${tableHead}],
-				url : '/vivoShop/background/pages/function/product_attr_vals/selAll?id='+${productid},
+				url : '/vivoShop/background/pages/function/product_attr_vals/selAll',
 				//skin: 'line', // 表格风格
 				//even: true,
 				page : true, // 是否显示分页
@@ -444,7 +446,54 @@
 		});
 		
 		
-		
+		//刷新并清空表单
+		function refreshPSAndClearForm(){
+			$("#product-specifications-select input").val("");
+			
+			refreshPSTable();
+		}
+		//该页面的表格
+		var pstable;
+		// 已知数据渲染
+		function refreshPSTable(){
+			// 销毁当前表格实例
+			if(pstable){
+				pstable.reload({}); // 先清空数据
+				pstable.reload('null'); // 然后销毁表格
+			}
+			
+			var productid = $("#product-specifications-select input[name='id']").val();
+			pstable=table.render({
+				elem : '#product-specifications-body-table',
+				cols : [[ //标题栏
+					{
+						type : 'checkbox',
+						fixed : 'left'
+					},{
+		                field: 'id',
+		                hide: true // 隐藏列
+		            },{
+						field : 'ps_name',
+						title : '规格名称',
+						width : 200
+					}, {
+						field : 'ps_val',
+						title : '规格值',
+						minWidth : 400
+					}, {
+						fixed : 'right',
+						title : '操作',
+						width : 134,
+						minWidth : 125,
+						toolbar : '#product_specifications_operate'
+					} ]],
+				url : '/vivoShop/background/pages/function/product_specifications/selAll',
+				page : true, // 是否显示分页
+				limits : [ 5, 10, 15 ],
+				limit : 5
+			// 每页默认显示的数量
+			});
+		}
 		
 		
 		//新增规格
@@ -486,7 +535,7 @@
 							if(index){
 								 layer.close(index);
 								 //重新渲染
-								 refreshPSTable();
+								 refreshPSAndClearForm();
 							}
 						},error: function(xhr, status, error) {
 							//console.log(xhr)
@@ -500,6 +549,8 @@
 				}
 			})
 		}
+		
+		
 	</script>
 
 

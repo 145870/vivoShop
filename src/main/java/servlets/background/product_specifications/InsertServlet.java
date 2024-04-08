@@ -18,10 +18,13 @@ public class InsertServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
+		resp.setCharacterEncoding("UTF-8");
 		String pid = req.getSession().getAttribute("productid").toString();
 		String name = req.getParameter("name");
 		String[] vals = req.getParameter("val").split(",");                                  
 		
-		String jg = dao.doInsert(pid,vals);
+		String jg = dao.doInsert(pid,name,vals);
+		
+		resp.getWriter().print(jg);
 	}
 }

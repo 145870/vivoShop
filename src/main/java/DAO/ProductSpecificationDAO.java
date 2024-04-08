@@ -88,7 +88,22 @@ public class ProductSpecificationDAO extends BaseDAO {
 		return map;
 	}
 	
-	public String doInsert(String pid,String[] vals) {
+	public boolean isExistsByNameAndPid(String name,String pid) {
+		String sql = "select * from products_specifications where specifications_name = ? and information_id = ?";
+		return this.executeQuery(sql, new Mapper<Object>() {
+
+			@Override
+			public List<Object> mapper(ResultSet rs) throws SQLException {
+				if (rs.next()) {
+					return new ArrayList<Object>();
+				}
+				return null;
+			}
+		},name,pid) != null;
+	}
+	
+	
+	public String doInsert(String pid,String name,String[] vals) {
 		String sql = "INSERT INTO products_specifications (information_id, specifications_name, specifications_values) VALUES "
 				+ "(?, ?, ?)";
 		JsonArray jsonArray = new JsonArray();
@@ -96,7 +111,10 @@ public class ProductSpecificationDAO extends BaseDAO {
 			jsonArray.add(w);
 		}
 		
-		System.out.println(jsonArray.toString());
-		return null;
+		if (isExistsByNameAndPid(name,pid)) {
+			return "该规格已经存在";
+		}
+		
+		return this.execute(sql, pid,name,jsonArray.toString()) > 0 ? "新增成功":"新增失败";
 	}
 }

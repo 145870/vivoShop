@@ -97,7 +97,7 @@
 
 
 					<div class="layui-col-md6">
-						<span>日期范围:</span>
+						<span>上架时间:</span>
 						<div class="layui-inline" id="product-select-date">
 							<div class="layui-input-inline">
 								<input name='startTime' type="text" autocomplete="off"
@@ -308,7 +308,8 @@
 													 //查看详细
 												   	openDetaile(data);
 												 } else if(menudata.id === 'selImg'){
-												   
+													 //查看图片
+												   	openImgs(data)
 												 } else if(menudata.id === 'del'){
 													 delProdcut(data)
 												}else if(menudata.id === 'go'){
@@ -621,6 +622,49 @@
 		        where: serializedData
 		    });
 		})
+		
+		
+		//查看图片
+		function openImgs(data){
+			 $.ajax({
+			   		url:'/vivoShop/background/gopages/goProductImgs',
+			   		data:{id:data.id},
+			    	success:function(html){
+			    		var index=layer.open({
+					   		type:1,
+					   		title: '商品详细:'+data.information_name,
+					   		shadeClose: true,
+					   		maxmin: true,
+					   		area: ['80%', '80%'],
+					   		content: html,
+					   		end: function() {
+					   	        // 弹窗关闭后执行的操作
+					   	        index = null; // 清除 index 变量
+
+					   	        // 使用Ajax请求删除session中的属性
+					   	        $.ajax({
+					   	            url: '/vivoShop/deleteSessionAttributes',
+					   	            type: 'POST',
+					   	            data: {
+					   	                keys: ['productid', 'psList', 'valList'] // 需要删除的session属性名
+					   	            },
+					   	            success: function(response) {
+					   	                console.log('作用域删除完成')
+					   	            },
+					   	            error: function(error) {
+					   	                // 删除失败的处理逻辑
+					   	            }
+					   	        });
+					   	    }
+						});
+			    		
+			    		form.render();
+					},error: function(xhr, status, error) {
+						//console.log(xhr)	
+						layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+					}
+			   	 })
+		}
 	</script>
 
 
