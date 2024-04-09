@@ -632,10 +632,11 @@
 			    	success:function(html){
 			    		var index=layer.open({
 					   		type:1,
-					   		title: '商品详细:'+data.information_name,
+					   		title: '商品图片:'+data.information_name,
 					   		shadeClose: true,
-					   		maxmin: true,
-					   		area: ['80%', '80%'],
+					   		maxmin: false,
+					   	 	resize: false,
+					   		area: ['1080px', '80%'],
 					   		content: html,
 					   		end: function() {
 					   	        // 弹窗关闭后执行的操作
@@ -658,7 +659,7 @@
 					   	    }
 						});
 			    		
-			    		form.render();
+			    		
 					},error: function(xhr, status, error) {
 						//console.log(xhr)	
 						layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});

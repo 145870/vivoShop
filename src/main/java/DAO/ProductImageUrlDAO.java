@@ -15,7 +15,7 @@ import util.Mapper;
 public class ProductImageUrlDAO extends BaseDAO{
 	public Map<String, Object> getAllByWhere(String pid,String type,String startTime,String endTime,String page,String limit){
 		 // 构建 SQL 查询语句的基础部分
-        StringBuilder sql = new StringBuilder("SELECT * FROM products_images_url ");
+        StringBuilder sql = new StringBuilder("SELECT * FROM products_images_url");
         // 构建 WHERE 子句
         StringBuilder whereClause = new StringBuilder(" WHERE 1 = 1");
         // 存储查询参数
@@ -45,6 +45,7 @@ public class ProductImageUrlDAO extends BaseDAO{
             params.add(endTime);
         }
         
+        whereClause.append(" ORDER BY id DESC");
         // 拼接完整的 SQL 查询语句
         sql.append(whereClause);
         
@@ -67,7 +68,7 @@ public class ProductImageUrlDAO extends BaseDAO{
         // 添加分页限制
         Integer li = Integer.valueOf(limit);
 	    Integer pag = Integer.valueOf(page);
-        sql.append("LIMIT "+limit+" OFFSET "+(pag-1)*li);    
+        sql.append(" LIMIT "+limit+" OFFSET "+(pag-1)*li);    
         
         List<ProductImageUrl> list = this.executeQuery(sql.toString(), new Mapper<ProductImageUrl>() {
 			@Override
@@ -91,4 +92,37 @@ public class ProductImageUrlDAO extends BaseDAO{
         
         return map;
    }
+	//判断指定url是否存在
+	public boolean isUrlExistsByPid(String url) {
+		String sql = "select * from products_images_url where url=?";
+		return this.executeQuery(sql, new Mapper<Object>() {
+
+			@Override
+			public List<Object> mapper(ResultSet rs) throws SQLException {
+				if (rs.next()) {
+					return new ArrayList<Object>();
+				}
+				return null;
+			}
+
+		},url) != null;
+	}
+	//根据商品id增加数据
+	public String doInsertByPid(String pid,String type,String url) {
+		String sql = "INSERT INTO products_images_url (information_id, class_name, url) VALUES(?,?,?) ";
+		if (isUrlExistsByPid(url)) {
+			return "路径已经存在";
+		}
+		
+		return this.execute(sql,pid,type,url) > 0 ? "新增成功" : "新增失败";
+	}
+	
+	public String updateById(String id,String type,String url) {
+		String sql = "update products_images_url set class_name = ?, url = ? where id = ? ";
+		if (isUrlExistsByPid(url)) {
+			return "路径已经存在";
+		}
+		
+		return this.execute(sql,type,url,id) > 0 ? "修改成功" : "修改失败";
+	}
 }

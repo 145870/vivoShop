@@ -13,6 +13,8 @@ import com.aliyun.oss.OSSException;
 import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
+import com.aliyun.oss.model.OSSObjectSummary;
+import com.aliyun.oss.model.ObjectListing;
 import com.aliyun.oss.model.PutObjectRequest;
 
 public class AliyunOssUtil {
@@ -101,6 +103,14 @@ public class AliyunOssUtil {
     	ossClient.deleteObject(bucketName, objectName);
     }
     
+    public void outObjectListing(String objectName) {
+    	// 设置要列举的目录路径，并执行列举操作
+        ObjectListing objectListing = ossClient.listObjects(bucketName, objectName);
+        // 遍历目录下的对象信息
+        for (OSSObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+            System.out.println(" - " + objectSummary.getKey());
+        }
+    }
     //返回拼接后的图片url
     public String getImageUrl(String objectName) {
         // 拼接图片的访问路径
@@ -132,5 +142,6 @@ public class AliyunOssUtil {
     		
     		//获取图片链接 用于发布到网页等 参数为服务器上的地址
 			//System.out.println(u.getImageUrl("images/1.jpg"));
+    	//u.outObjectListing("");
 	}
 }

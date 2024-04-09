@@ -89,7 +89,6 @@ public class SelectALLServlet extends HttpServlet{
 
 		String jsonOutput = objectMapper.writeValueAsString(jsonData);
 		
-		System.out.println(jsonOutput);
         // 将JSON字符串作为响应发送回客户端
         PrintWriter out = resp.getWriter();
         out.print(jsonOutput);
