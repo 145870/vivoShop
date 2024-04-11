@@ -27,15 +27,14 @@ public class SelectAllPSServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("UTF-8");
-        String id = req.getSession().getAttribute("productid")+"";
         
-        String name = req.getParameter("name");
-        
+        String pname = req.getParameter("pname");
+        String psname = req.getParameter("psname");
         //获取分页属性
         String page = req.getParameter("page");
         String limit = req.getParameter("limit");
 
-        Map<String, Object> map = dao.getProductSpecificationByIdAndName(id,name,page,limit);
+        Map<String, Object> map = dao.getProductSpecificationByNames(pname,psname,page,limit);
         Map<String, Object> jsonData = new HashMap();
         List<ProductSpecification> list = (List<ProductSpecification>) map.get("list");
 		jsonData.put("code", 0);
@@ -46,7 +45,10 @@ public class SelectAllPSServlet extends HttpServlet{
 		
 		for (ProductSpecification ps : list) {
 		    Map<String, Object> dataMap = new HashMap<>();
-		    dataMap.put("id",ps.getId());
+		    
+		    dataMap.put("psid",ps.getId());
+		    dataMap.put("pid",ps.getPid());
+		    dataMap.put("pname",ps.getPname());
 		    dataMap.put("ps_name",ps.getSpecificationsName());
 		    
 		    String vals[] = ps.getSpecificationsValues();

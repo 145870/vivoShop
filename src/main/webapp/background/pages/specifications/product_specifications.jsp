@@ -87,12 +87,15 @@
 		<!-- 查询区域 -->
 		<div id='product-specifications-select'>
 			<form class="layui-form layui-col-space20">
-			
-			<input name='id' value='${productid}' hidden="">
-				
-				<div class="layui-col-md6 layui-input-group">
+				<!-- 商品名称 -->
+				<div class="layui-col-md3 layui-input-group">
+					<span style='width:80px;text-align: right;' class="layui-input-prefix">商品名称:</span> 
+					<input style="width:200px;" name="pname" type="text" id="product-name" placeholder="商品名称" class="layui-input">
+				</div>
+				<!-- 规格名称 -->
+				<div class="layui-col-md3 layui-input-group">
 					<span style='width:80px;text-align: right;' class="layui-input-prefix">规格名称:</span> 
-					<input style="width:200px;" name="name" type="text" id="product-name" placeholder="规格名称" class="layui-input">
+					<input style="width:200px;" name="psname" type="text" id="product-name" placeholder="规格名称" class="layui-input">
 				</div>
 				
 
@@ -110,8 +113,6 @@
 		<div id="product-specifications-body">
 			<div class="buttons">
 				<button onclick="addProdcutspecifications()" class="layui-btn layui-bg-blue">添加规格</button>
-				<button onclick="updateProdcutspecifications()" class="layui-btn layui-bg-blue">编辑规格</button>
-				<button onclick="delProdcutspecifications()" class="layui-btn layui-bg-blue">删除选中规格</button>
 				<button onclick="refreshPSAndClearForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
@@ -136,7 +137,119 @@
 		// 当表单元素被动态插入时，需主动进行组件渲染才能显示
 		form.render(); // 渲染全部表单
 		
+		//刷新并清空表单
+		function refreshPSAndClearForm(){
+			$("#product-specifications-select input").val("");
+			
+			refreshPSTable();
+		}
+		//该页面的表格
+		var pstable;
+		// 已知数据渲染
+		function refreshPSTable(){
+			// 销毁当前表格实例
+			if(pstable){
+				pstable.reload({}); // 先清空数据
+				pstable.reload('null'); // 然后销毁表格
+			}
+			
+			var productid = $("#product-specifications-select input[name='id']").val();
+			pstable=table.render({
+				elem : '#product-specifications-body-table',
+				cols : [[ //标题栏
+					{
+		                field: 'psid',
+		                hide: true // 隐藏列
+		            },{
+		                field: 'pid',
+		                hide: true // 隐藏列
+		            },{
+						field : 'pname',
+						title : '商品名称',
+						width : 200,
+						merge: true
+					},{
+						field : 'ps_name',
+						title : '规格名称',
+						width : 200
+					}, {
+						field : 'ps_val',
+						title : '规格值',
+						minWidth : 400
+					}, {
+						fixed : 'right',
+						title : '操作',
+						width : 134,
+						minWidth : 125,
+						toolbar : '#product_specifications_operate'
+					} ]],
+				url : '/vivoShop/background/pages/function/product_specifications/selAll',
+				page : true, // 是否显示分页
+				limits : [ 10, 15, 20 ],
+				limit : 5,
+				done: function(){
+			        tableMerge.render(this)
+			    }
+			// 每页默认显示的数量
+			});
+		}
 		refreshPSTable();
+		
+		//新增规格
+		function addProdcutspecifications(){
+			$.ajax({
+				url:"/vivoShop/background/pages/product/function/specifications/addProductSpecifications.jsp",
+				success:function(html){
+					var index=layer.open({
+				   		type:1,
+				   		title: '新增规格',
+				   		shadeClose: true,
+				   		maxmin: true,
+				   		area: ['430px', '375px'],
+				   		content: html,
+					});
+					
+					$("#addProductSpecifications").off("submit").on("submit", function(event){
+						event.preventDefault();
+						var formData = $("#addProductSpecifications").serializeArray();
+						// 检查所有字段是否都有值
+						for (var i = 0; i < formData.length; i++) {												        
+							if (formData[i].value === "") {
+								layer.msg('内容不能为空!', {icon: 0,time:1000});
+								return;
+							}
+						}
+					//新增
+					$.ajax({
+						url:"/vivoShop/background/pages/function/productSpecifications/add",
+						data:formData,
+						dataType:'text',
+						type:'get',
+						success:function(txt){
+							if(txt=="新增成功"){
+								layer.msg('添加成功', {icon: 1});
+							}else{
+								layer.msg(txt, {icon: 0});
+							}
+							if(index){
+								 layer.close(index);
+								 //重新渲染
+								 refreshPSAndClearForm();
+							}
+						},error: function(xhr, status, error) {
+							//console.log(xhr)
+							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+						}
+					})
+				});
+				},error: function(xhr, status, error) {
+					//console.log(xhr)	
+					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+				}
+			})
+		}
+		
+		
  
 		// 触发单元格工具事件
 		table.on('tool(product-specifications-body-table)',function(obj) { // 双击 toolDouble
@@ -163,7 +276,7 @@
 		    }, {});
 			
 		    // 重新加载表格数据
-		    pavtable.reload({
+		    pstable.reload({
 		        url: '/vivoShop/background/pages/function/product_specifications/selAll',
 		        where: serializedData
 		    });

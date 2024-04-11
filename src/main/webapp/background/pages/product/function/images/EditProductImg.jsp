@@ -72,7 +72,7 @@
 		
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">文件名:</div>
-			<input type="text" name="name" value="${name}" placeholder="空则随机名称" class="layui-input right-text">
+			<input type="text" name="name" value="" placeholder="空则随机名称" class="layui-input right-text">
 		</div>
 		<!-- 分类 -->
 		<div class="layui-input-group">

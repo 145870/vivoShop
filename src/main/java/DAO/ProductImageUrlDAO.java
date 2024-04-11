@@ -93,7 +93,7 @@ public class ProductImageUrlDAO extends BaseDAO{
         return map;
    }
 	//判断指定url是否存在
-	public boolean isUrlExistsByPid(String url) {
+	public boolean isUrlExists(String url) {
 		String sql = "select * from products_images_url where url=?";
 		return this.executeQuery(sql, new Mapper<Object>() {
 
@@ -110,19 +110,40 @@ public class ProductImageUrlDAO extends BaseDAO{
 	//根据商品id增加数据
 	public String doInsertByPid(String pid,String type,String url) {
 		String sql = "INSERT INTO products_images_url (information_id, class_name, url) VALUES(?,?,?) ";
-		if (isUrlExistsByPid(url)) {
+		if (isUrlExists(url)) {
 			return "路径已经存在";
 		}
 		
 		return this.execute(sql,pid,type,url) > 0 ? "新增成功" : "新增失败";
 	}
 	
+	//判断指定url是否存在
+		public boolean isUrlExistsByPid(String id,String url) {
+			String sql = "select * from products_images_url where url=? and id <> ? ";
+			return this.executeQuery(sql, new Mapper<Object>() {
+
+				@Override
+				public List<Object> mapper(ResultSet rs) throws SQLException {
+					if (rs.next()) {
+						return new ArrayList<Object>();
+					}
+					return null;
+				}
+
+			},url,id) != null;
+		}
+	
 	public String updateById(String id,String type,String url) {
 		String sql = "update products_images_url set class_name = ?, url = ? where id = ? ";
-		if (isUrlExistsByPid(url)) {
+		if (isUrlExistsByPid(id,url)) {
 			return "路径已经存在";
 		}
 		
 		return this.execute(sql,type,url,id) > 0 ? "修改成功" : "修改失败";
+	}
+	
+	public int deleteById(String id) {
+		String sql = "delete from products_images_url where id = ? ";
+		return this.execute(sql, id);
 	}
 }

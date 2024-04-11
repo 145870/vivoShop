@@ -100,16 +100,16 @@
 			
 			<div class="layui-col-md6">
 						<span>上架时间:</span>
-						<div class="layui-inline" id="product-select-date">
+						<div class="layui-inline" id="product-img-select-date">
 							<div class="layui-input-inline">
 								<input name='startTime' type="text" autocomplete="off"
-									id="product-select-start-date" class="layui-input"
+									id="product-img-select-start-date" class="layui-input"
 									placeholder="开始日期">
 							</div>
 							<span>至</span>
 							<div class="layui-input-inline">
 								<input name='endTime' type="text" autocomplete="off"
-									id="product-select-end-date" class="layui-input"
+									id="product-img-select-end-date" class="layui-input"
 									placeholder="结束日期">
 							</div>
 						</div>
@@ -165,7 +165,11 @@
 	<script>
 		// 当表单元素被动态插入时，需主动进行组件渲染才能显示
 		form.render(); // 渲染全部表单
-		
+		laydate.render({
+			elem : '#product-img-select-date',
+			range : [ '#product-img-select-start-date',
+					'#product-img-select-end-date' ]
+		});
 		//刷新并清空表单
 		function refreshAndClearImgSelectForm(){
 			$('#product-img-select input').val('');
@@ -243,8 +247,8 @@
 		    }, {});
 			
 		    // 重新加载表格数据
-		    pdinst.reload({
-		        url: '/vivoShop/background/pages/function/product_attr_vals/selWhere',
+		    imginst.reload({
+		        url: '/vivoShop/background/pages/function/product_imgs/selAll',
 		        where: serializedData
 		    });
 		})
@@ -451,23 +455,61 @@
 		//删除图片
 		function delProductImg(data){
 			layer.confirm('确认删除么?',{icon: 3}, function(index){
+				layer.close(index);
 					$.ajax({
-				    	 url:"/vivoShop/background/pages/function/product_attr_vals/delete",
-				    	 data:{id:data.id},
+				    	 url:"/vivoShop/background/pages/function/product_imgs/delete",
+				    	 data:{
+				    		 id:data.id,
+				    		 url:data.url
+				    		 },
+				    	 type:"post",
 				    	 success:function(txt){
 							if(txt=="true"){
 								layer.msg('删除成功', {icon: 1});
 							}else{
 								layer.msg('删除失败', {icon: 2});
 							}
-							refreshPDTable();
+							refreshImgsTable();
 						},error: function(xhr, status, error) {
 							//console.log(xhr)	
 							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
 						}
 				     })
-				layer.close(index);
 			 });
+		}
+		
+		//删除选中
+		function delCheckedProductimg(){
+		    var datas=table.checkStatus("product-img-body-table");
+		    if(datas.data.length){
+		        layer.confirm('确认删除选中么?',{icon: 3}, function(index){
+		            layer.close(index);
+		            datas.data.forEach(function(row) {
+		                $.ajax({
+		                     url:"/vivoShop/background/pages/function/product_imgs/delete",
+		                     data:{
+		                         id:row.id,
+		                         url:row.url
+		                     },
+		                     type:"post",
+		                     success:function(txt){
+		                            if(txt=="true"){
+		                                
+		                            }else{
+		                                layer.msg('删除失败', {icon: 2});
+		                            }
+		                            refreshImgsTable();
+		                        },error: function(xhr, status, error) {
+		                            //console.log(xhr)    
+		                            layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
+		                        }
+		                     });
+		            });
+		            layer.msg('删除完成', {icon: 1});
+		        });
+		    }else{
+		        layer.msg('请选中一行!', {icon: 0,time:1300});
+		    }
 		}
 	
 		
@@ -476,9 +518,9 @@
 			var data = obj.data; // 获得当前行数据
 			var index1;
 			if (obj.event === 'edit') {
-				updateProductimg(data);
+				updateProductImg(data);
 			} else if (obj.event === 'del') {
-				delProductimg(data)
+				delProductImg(data);
 			}
 		});
 		

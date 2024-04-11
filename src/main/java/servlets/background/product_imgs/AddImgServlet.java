@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Base64;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,13 +48,9 @@ public class AddImgServlet extends HttpServlet{
 			}
 		}
 		
-		
-		
-		
-		
 		String name = req.getParameter("name");
 		if (name == null || name.isEmpty()) {
-		    name = String.valueOf(System.currentTimeMillis());
+		    name = String.valueOf(System.currentTimeMillis()) + new Random().nextInt(100);
 		}
 		String suffix = req.getParameter("suffix");
 		String type = req.getParameter("type");

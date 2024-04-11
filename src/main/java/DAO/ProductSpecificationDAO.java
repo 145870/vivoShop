@@ -58,32 +58,58 @@ public class ProductSpecificationDAO extends BaseDAO {
 		}, id);
 	}
 
-	public Map<String, Object> getProductSpecificationByIdAndName(String id, String name, String page, String limit) {
+	public Map<String, Object> getProductSpecificationByNames(String pname,String psname, String page, String limit) {
 		Integer li = Integer.valueOf(limit);
 		Integer pag = Integer.valueOf(page);
 
-		String sql = "SELECT * FROM products_specifications WHERE information_id = ? and specifications_name like ? LIMIT "
-				+ limit + " OFFSET " + (pag - 1) * li;
-		if (name == null) {
-			name = "";
+		String sql = "SELECT p.id,p.information_name,ps.* FROM products_specifications ps JOIN products_information p "
+				+ "ON p.id=ps.information_id "
+				+ "WHERE p.information_name LIKE ? "
+				+ "AND ps.specifications_name LIKE ? ";
+				
+		if (pname == null) {
+			pname = "";
+		}
+		if (psname == null) {
+			psname = "";
 		}
 		Map<String, Object> map = new HashMap();
 
+		List<Object> sizeList = this.executeQuery(sql, new Mapper<Object>() {
+
+			@Override
+			public List<Object> mapper(ResultSet rs) throws SQLException {
+				List<Object> list = new ArrayList<Object>();
+				while (rs.next()) {
+					list.add("1");
+				}
+				return list;
+			}
+		},"%" + pname + "%","%" + psname + "%");
+		
+		
+		sql +="LIMIT "+ limit + " OFFSET " + (pag - 1) * li;
 		List<ProductSpecification> list = this.executeQuery(sql, new Mapper<ProductSpecification>() {
 
 			@Override
 			public List<ProductSpecification> mapper(ResultSet rs) throws SQLException {
 				List<ProductSpecification> list = new ArrayList<ProductSpecification>();
 				while (rs.next()) {
-
-					list.add(new ProductSpecification(rs.getLong(1), rs.getInt(2), rs.getString(3),
-							new Gson().fromJson(rs.getString(4), String[].class)));
+					ProductSpecification ps = new ProductSpecification(
+							rs.getLong(3),
+							rs.getInt(4),
+							rs.getString(5),
+							new Gson().fromJson(rs.getString(6), String[].class));
+					ps.setPid(rs.getLong(1));
+					ps.setPname(rs.getString(2));
+					
+					list.add(ps);
 				}
 				return list;
 			}
-		}, id, "%" + name + "%");
+		},"%" + pname + "%","%" + psname + "%");
 		map.put("list", list);
-		map.put("count", list.size());
+		map.put("count", sizeList.size());
 
 		return map;
 	}

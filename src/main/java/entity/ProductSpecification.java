@@ -6,9 +6,38 @@ public class ProductSpecification {
     private String specificationsName;
     private String[] specificationsValues;
     
-    
+    private Long pid;
+    private String pname;
 
-    public ProductSpecification(Long id, Integer informationId, String specificationsName,
+    public Long getPid() {
+		return pid;
+	}
+
+
+
+
+	public void setPid(Long pid) {
+		this.pid = pid;
+	}
+
+
+
+
+	public String getPname() {
+		return pname;
+	}
+
+
+
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+
+
+
+	public ProductSpecification(Long id, Integer informationId, String specificationsName,
 			String[] specificationsValues) {
 		super();
 		this.id = id;

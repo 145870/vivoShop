@@ -1,11 +1,19 @@
+var xx=false;
+var form = layui.form;
+var laydate = layui.laydate;
+var table = layui.table;
+var dropdown = layui.dropdown;
+var layer = layui.layer;
+var util = layui.util;
+var element = layui.element;
+
+// 自定义模块
+var tableMerge = layui.tableMerge;
+
 $(function(){
 	//全局变量
 	//动态切换标题状态
-	var xx=false;
 	
-	var layer = layui.layer;
-	var util = layui.util;
-	var element = layui.element;
 	// 封装tab功能
 	var tab={
 	    tabAdd: function(title,url,id){
@@ -549,7 +557,7 @@ $(function(){
 				var $this=$(this);
 				$.ajax({
 				    // url: 'pages/home.html',
-					url:"/vivoShop/background/gopages/goProduct_information",
+					url:"/vivoShop/background/pages/home/home.jsp",
 				    method: 'GET',
 				    success: function(data) {
 						$this.html(data)

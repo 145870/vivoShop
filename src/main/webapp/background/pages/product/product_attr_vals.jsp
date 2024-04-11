@@ -151,15 +151,8 @@
 	</div>
 	
 	<script>
-		var form = layui.form;
-
 		// 当表单元素被动态插入时，需主动进行组件渲染才能显示
 		form.render(); // 渲染全部表单
-
-		//表格渲染
-		var table = layui.table;
-		var dropdown = layui.dropdown;
-		
 		
 		//刷新并清空表单
 		function refreshPDAndClearForm(){
@@ -284,7 +277,7 @@
 				//获取被选中的行的内容
 				var datas=table.checkStatus("product-attrVals-body-table");
 				if(datas.data.length){
-					console.log(datas.data[0])
+
 					updateProductAttrVals(datas.data[0]);
 				}else{
 					layer.msg('请选中一行!', {icon: 0,time:1300});
@@ -446,109 +439,7 @@
 		});
 		
 		
-		//刷新并清空表单
-		function refreshPSAndClearForm(){
-			$("#product-specifications-select input").val("");
-			
-			refreshPSTable();
-		}
-		//该页面的表格
-		var pstable;
-		// 已知数据渲染
-		function refreshPSTable(){
-			// 销毁当前表格实例
-			if(pstable){
-				pstable.reload({}); // 先清空数据
-				pstable.reload('null'); // 然后销毁表格
-			}
-			
-			var productid = $("#product-specifications-select input[name='id']").val();
-			pstable=table.render({
-				elem : '#product-specifications-body-table',
-				cols : [[ //标题栏
-					{
-						type : 'checkbox',
-						fixed : 'left'
-					},{
-		                field: 'id',
-		                hide: true // 隐藏列
-		            },{
-						field : 'ps_name',
-						title : '规格名称',
-						width : 200
-					}, {
-						field : 'ps_val',
-						title : '规格值',
-						minWidth : 400
-					}, {
-						fixed : 'right',
-						title : '操作',
-						width : 134,
-						minWidth : 125,
-						toolbar : '#product_specifications_operate'
-					} ]],
-				url : '/vivoShop/background/pages/function/product_specifications/selAll',
-				page : true, // 是否显示分页
-				limits : [ 5, 10, 15 ],
-				limit : 5
-			// 每页默认显示的数量
-			});
-		}
 		
-		
-		//新增规格
-		function addProdcutspecifications(){
-			$.ajax({
-				url:"/vivoShop/background/pages/product/function/specifications/addProductSpecifications.jsp",
-				success:function(html){
-					var index=layer.open({
-				   		type:1,
-				   		title: '新增规格',
-				   		shadeClose: true,
-				   		maxmin: true,
-				   		area: ['430px', '375px'],
-				   		content: html,
-					});
-					
-					$("#addProductSpecifications").off("submit").on("submit", function(event){
-						event.preventDefault();
-						var formData = $("#addProductSpecifications").serializeArray();
-						// 检查所有字段是否都有值
-						for (var i = 0; i < formData.length; i++) {												        
-							if (formData[i].value === "") {
-								layer.msg('内容不能为空!', {icon: 0,time:1000});
-								return;
-							}
-						}
-					//新增
-					$.ajax({
-						url:"/vivoShop/background/pages/function/productSpecifications/add",
-						data:formData,
-						dataType:'text',
-						type:'get',
-						success:function(txt){
-							if(txt=="新增成功"){
-								layer.msg('添加成功', {icon: 1});
-							}else{
-								layer.msg(txt, {icon: 0});
-							}
-							if(index){
-								 layer.close(index);
-								 //重新渲染
-								 refreshPSAndClearForm();
-							}
-						},error: function(xhr, status, error) {
-							//console.log(xhr)
-							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
-						}
-					})
-				});
-				},error: function(xhr, status, error) {
-					//console.log(xhr)	
-					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
-				}
-			})
-		}
 		
 		
 	</script>

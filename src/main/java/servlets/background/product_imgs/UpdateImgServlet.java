@@ -7,12 +7,20 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Base64;
+import java.util.Iterator;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
 
 import DAO.ProductImageUrlDAO;
 import util.AliyunOssUtil;
@@ -52,7 +60,7 @@ public class UpdateImgServlet extends HttpServlet{
 		
 		String name = req.getParameter("name");
 		if (name == null || name.isEmpty()) {
-		    name = String.valueOf(System.currentTimeMillis());
+		    name = String.valueOf(System.currentTimeMillis()) + new Random().nextInt(100);
 		}
 		String suffix = req.getParameter("suffix");
 		String type = req.getParameter("type");
@@ -65,21 +73,51 @@ public class UpdateImgServlet extends HttpServlet{
 		}
 	    //先执行sql语句
 	    String sqlJG = dao.updateById(id, type, urlName);
-	    
 	    //存储图片到云端
+	    
+	    if (isImageUrl(imagesUrl)) {
+			imagesUrl = getImageAsBase64(imagesUrl);
+		}
 	    // 解析base64编码的图片数据
 	    String[] parts = imagesUrl.split(",");
-	    String imageString = parts[1];
+	    String imageString;
+	    if (parts.length>1) {
+	    	imageString = parts[1];
+		}else {
+			imageString = parts[0];
+		}
+	    
 	    byte[] imageBytes = Base64.getDecoder().decode(imageString);
 	            
 	    // 创建 InputStream
 	    InputStream inputStream = new ByteArrayInputStream(imageBytes);
-	    //删除云端旧图片
-	    alyoss.delete(oldurl);
-	    //上传到云端
-	    alyoss.upload(urlName, inputStream);
+	    
+	    if (sqlJG.equals("修改成功")) {
+	    	//删除云端旧图片
+		    alyoss.delete(oldurl);
+		    //上传到云端
+		    alyoss.upload(urlName, inputStream);
+		}
 	    
 	    PrintWriter out = resp.getWriter();
         out.print(sqlJG);
 	}
+	public static boolean isImageUrl(String url) {
+        // 检查 URL 是否以指定域名开头，并且协议是 HTTPS
+        String targetDomain = "https://vivosp.oss-cn-guangzhou.aliyuncs.com";
+        return url.startsWith(targetDomain) && url.startsWith("https://");
+    }
+	public static String getImageAsBase64(String imageUrl) {
+        try {
+            CloseableHttpClient httpClient = HttpClients.createDefault();
+            HttpGet httpGet = new HttpGet(imageUrl);
+            HttpResponse response = httpClient.execute(httpGet);
+            byte[] imageBytes = EntityUtils.toByteArray(response.getEntity());
+            httpClient.close();
+            return Base64.getEncoder().encodeToString(imageBytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }

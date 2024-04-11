@@ -172,12 +172,9 @@
 		</div>
 	</div>
 	<script>
-		var form = layui.form;
 
 		// 当表单元素被动态插入时，需主动进行组件渲染才能显示
 		form.render(); // 渲染全部表单
-
-		var laydate = layui.laydate;
 		// 日期范围 - 左右面板独立选择模式
 		laydate
 				.render({
@@ -187,9 +184,6 @@
 				});
 
 		//表格渲染
-		var table = layui.table;
-		var dropdown = layui.dropdown;
-		
 		function refreshAndClearForm() {
 	        // 清空表单内容
 	        $('#product-name').val('');

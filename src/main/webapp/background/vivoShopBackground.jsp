@@ -8,10 +8,11 @@
 		
 		<link href="/vivoShop/background/lib/layui/css/layui.css" rel="stylesheet">
 		<script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
+		<script type="text/javascript" src="./lib/module/tableMerge.js" charset="utf-8"></script>
 		
 		<script src='js/vivo.js'></script>
 		<!-- <script type="text/javascript" src="./js/xadmin.js"></script> -->
-		
+			
 		<style type="text/css">
 			/* 重写 */
 			.layui-tab-card>.layui-tab-more .layui-this{
@@ -255,13 +256,13 @@
 				<!-- 详细菜单 -->
 				<div id="detailed-menu">
 					<ul>
-					  <li><a class="menu sidebar-menu-selected" href="pages/home.jsp"><i class="left-icon layui-icon layui-icon-home"></i><span>首页</span></a></li>
+					  <li><a class="menu sidebar-menu-selected" href="pages/home/home.jsp"><i class="left-icon layui-icon layui-icon-home"></i><span>首页</span></a></li>
 					  <li>
 					    <a href="javascript:;"><i class="left-icon layui-icon layui-icon-component"></i><span>产品管理</span><i class="layui-edge layui-edge-bottom"></i> </a>
 					    <dl class="sidebar-menu">
 					      <dd><a class="menu" href="/vivoShop/background/gopages/goProduct_information">产品信息</a></dd>
-					      <dd><a class="menu" href="javascript:;">产品类别</a></dd>
-					      <dd><a class="menu" href="javascript:;">产品规格</a></dd>
+					      <dd><a class="menu" href="pages/productType/product_type.jsp">产品类别</a></dd>
+					      <dd><a class="menu" href="pages/specifications/product_specifications.jsp">产品规格</a></dd>
 					    </dl>
 					  </li>
 					  
