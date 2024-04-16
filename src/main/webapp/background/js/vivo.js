@@ -21,14 +21,15 @@ $(function(){
 	      element.tabAdd('home-tab', {
 	        title: title,
 			type:2,
-	        content: "<div class='tab-body' tab-id='"+id+"'>测试内容因为ajax插入静态无法查看</div>",
+			//tab插入的内容
+	        content: "<div class='tab-body' tab-id='"+id+"'></div>",
 	        id: id,
 	        change: true // 是否添加完毕后即自动切换
 	      })
 		  //插入内容
 		  $("#main-body .layui-tab-content .layui-tab-item .tab-body").each(function(){
 		  	if($(this).attr('tab-id')==id){
-				
+
 		  		var $this=$(this);
 				if(url=='javascript:;'){
 					$this.html("404")
@@ -38,9 +39,7 @@ $(function(){
 		  		    url: url,
 		  		    method: 'GET',
 		  		    success: function(data) {
-						
 						$this.html(data)
-		  				
 		  			},
 		  		    error: function(xhr, status, error) {
 		  				console.log('请求失败：', error);
@@ -569,5 +568,63 @@ $(function(){
 			}
 		})
 	}
-	init()
+	init();
 });
+
+//新增规格
+		function addProdcutspecifications(){
+			$.ajax({
+				url:"/vivoShop/background/gopages/goAddProductSpecifications",
+				success:function(html){
+					var index=layer.open({
+				   		type:1,
+				   		title: '新增规格',
+				   		shadeClose: true,
+				   		maxmin: true,
+				   		area: ['430px', '400px'],
+				   		content: html,
+					});
+					form.render(); // 渲染全部表单
+					
+					$("#addProductSpecifications").off("submit").on("submit", function(event){
+						
+						event.preventDefault();
+						var formData = $("#addProductSpecifications").serializeArray();
+						// 检查所有字段是否都有值
+						for (var i = 0; i < formData.length; i++) {												        
+							if (formData[i].value === "") {
+								layer.msg('内容不能为空!', {icon: 0,time:1000});
+								return;
+							}
+						}
+						console.log(formData)
+					//新增
+					$.ajax({
+						
+						url:"/vivoShop/background/pages/function/productSpecifications/add",
+						data:formData,
+						dataType:'text',
+						type:'post',
+						success:function(txt){
+							if(txt=="新增成功"){
+								layer.msg('添加成功', {icon: 1});
+							}else{
+								layer.msg(txt, {icon: 0});
+							}
+							if(index){
+								 layer.close(index);
+								 //重新渲染
+								 refreshPSAndClearForm();
+							}
+						},error: function(xhr, status, error) {
+							//console.log(xhr)
+							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+						}
+					})
+				});
+				},error: function(xhr, status, error) {
+					//console.log(xhr)	
+					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+				}
+			})
+		}

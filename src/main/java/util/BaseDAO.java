@@ -100,7 +100,12 @@ public class BaseDAO {
 			//返回影响的行数 
 			return v;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			 if (e.getErrorCode() == 1451) { // MySQL 错误码 1451 表示外键约束错误
+	         	return -1451;
+	         } else {
+	         // 其他类型的异常，直接打印错误信息
+	        	 e.printStackTrace();
+	         }
 		}
 		return 0;
 	}

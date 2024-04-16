@@ -14,76 +14,77 @@
 </head>
 <body>
 <style>
-#addProductSpecifications .layui-form {
+#addInventoryDetails .layui-form {
 	margin: 0 auto;
 	width: 345px;
 	padding: 20px;
 }
 
-#addProductSpecifications .layui-form-onswitch {
+#addInventoryDetails .layui-form-onswitch {
 	border-color: rgb(85, 170, 255);
 	background-color: rgb(85, 170, 255);
 }
 
-#addProductSpecifications .layui-table-checked {
+#addInventoryDetails .layui-table-checked {
 	background-color: rgb(244, 244, 255);
 }
 
 /* 重写 */
-#addProductSpecifications .layui-laydate .layui-this>div {
+#addInventoryDetails .layui-laydate .layui-this>div {
 	background-color: rgb(85, 170, 255) !important;
 }
 
-#addProductSpecifications .layui-laydate .layui-this, .layui-laydate .layui-this>div
+#addInventoryDetails .layui-laydate .layui-this, .layui-laydate .layui-this>div
 	{
 	background-color: rgb(85, 170, 255) !important;
 }
 
 /* 重写 */
-#addProductSpecifications .layui-form-select dl dd.layui-this {
+#addInventoryDetails .layui-form-select dl dd.layui-this {
 	color: rgb(102, 117, 255);
 }
 
-#addProductSpecifications .layui-input-group>.layui-input-prefix {
-	width: 140px;
+#addInventoryDetails .layui-input-group>.layui-input-prefix {
+	width: 185px;
 	text-align: right;
 	font-weight: bold;
 }
 
-#addProductSpecifications .layui-input {
+#addInventoryDetails .layui-input {
 	width: 200px;
 }
 
-#addProductSpecifications .layui-input-group {
+#addInventoryDetails .layui-input-group {
 	margin-bottom: 20px;
 }
 </style>
-	<form class="layui-form" id="addProductSpecifications" style="margin-top: 30px">
-	<!-- 产品名 -->
+	<form class="layui-form" id="addInventoryDetails" style="margin-top: 30px">
+		<!-- 产品名 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">商品名称:</div>
-			<select name="pid" lay-search="">
+			<select lay-filter="pname"  name="pname" lay-search="">
      			<option value="">请选择或搜索</option>
 			    <c:forEach items="${pList}" var="p">
 			    	<option value="${p.id}">${p.informationName}</option>
 			    </c:forEach>
-    </select>
+  			</select>
 		</div>
 	
-		<!-- 规格名 -->
-		<div class="layui-input-group">
-			<div class="layui-input-prefix">规格名称:</div>
-			<input type="text" name="name" placeholder="规格名称" class="layui-input right-text">
-		</div>
 		<!-- 规格值 -->
 		<div class="layui-input-group">
-			<div class="layui-input-prefix">规格值:</div>
-			<textarea style="resize: none;width:200px;" name="val" placeholder="规格值" class="layui-textarea right-text"></textarea>
+			<div class="layui-input-prefix">未添加库存的组合:</div>
+			<select name="pav" lay-search="">
+     			<option value="">请先选择商品</option>
+  			</select>
 		</div>
-		<div style = "position: absolute;left: 140px;margin-top: -16px;font-size: 11px;color: red;">可重复添加一行一个</div>
-
+	
+		<!-- 数量 -->
+		<div class="layui-input-group">
+			<div class="layui-input-prefix">库存数量:</div> 
+			<input type="number" name="count" lay-affix="number" placeholder="数量" class="layui-input right-text" lay-precision="1" min='0'>
+		</div>
+		
 		 <button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认添加</button>
 	</form>
 </body>
-
 </html>

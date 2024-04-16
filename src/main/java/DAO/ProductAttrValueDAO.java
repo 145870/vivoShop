@@ -223,4 +223,20 @@ public class ProductAttrValueDAO extends BaseDAO {
 		String sql = "delete from product_attr_vals where id = ?";
 		return this.execute(sql, id);
 	}
+	
+	public List<ProductAttrValue> getAttrValuesByPid(String pid){
+		String sql = "SELECT * FROM product_attr_vals "
+				+ "WHERE id NOT IN (SELECT attr_vals_id FROM inventory_details) AND product_id = ? ";
+		return this.executeQuery(sql, new Mapper<ProductAttrValue>() {
+			@Override
+			public List<ProductAttrValue> mapper(ResultSet rs) throws SQLException {
+				List<ProductAttrValue> list = new ArrayList<ProductAttrValue>();
+				while (rs.next()) {
+					list.add(new ProductAttrValue(rs.getLong(1), rs.getInt(2),
+							new Gson().fromJson(rs.getString(3), String[].class), rs.getInt(4)));
+				}
+				return list;
+			}
+		},pid);
+	}
 }

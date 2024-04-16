@@ -216,6 +216,7 @@
 		    		        btn: ['确定', '关闭'] //按钮
 		    		      }, function(){
 		    		    	  addProdcutspecifications();
+		    		    	  layer.msg('操作完成请重新打开该页面', {icon: 0,time:1000});
 		    		      });
 		    			return;
 		    		}
@@ -362,11 +363,10 @@
 					    	 url:"/vivoShop/background/pages/function/product_attr_vals/delete",
 					    	 data:{id:row.id},
 					    	 success:function(txt){
-								if(txt=="true"){
-									
-								}else{
-									layer.msg('删除失败：'+row.information_name, {icon: 0});
-								}
+					    		 if(txt=="1451"){
+								    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+								    	return;
+								    }
 								refreshPDTable();
 							},error: function(xhr, status, error) {
 								//console.log(xhr)	
@@ -390,6 +390,10 @@
 				    	 url:"/vivoShop/background/pages/function/product_attr_vals/delete",
 				    	 data:{id:data.id},
 				    	 success:function(txt){
+				    		 if(txt=="1451"){
+							    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+							    	return;
+							    }
 							if(txt=="true"){
 								layer.msg('删除成功', {icon: 1});
 							}else{

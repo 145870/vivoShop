@@ -195,55 +195,82 @@
 		}
 		refreshPSTable();
 		
-		//新增规格
-		function addProdcutspecifications(){
+	
+		
+		//修改规格
+		function updateProdcutspecifications(data){
 			$.ajax({
-				url:"/vivoShop/background/pages/product/function/specifications/addProductSpecifications.jsp",
+				url:"/vivoShop/background/gopages/goUpdateProductSpecifications",
+				data:{
+					pid:data.pid,
+					psid:data.psid,
+					psname:data.ps_name,
+					psvals:data.ps_val
+				},
+				dataType:'text',
+				type:'post',
 				success:function(html){
 					var index=layer.open({
-				   		type:1,
-				   		title: '新增规格',
-				   		shadeClose: true,
-				   		maxmin: true,
-				   		area: ['430px', '375px'],
-				   		content: html,
-					});
+			        	type:1,
+			            title: '编辑规格',
+			            shadeClose: true,
+			            maxmin: true,
+			            area: ['430px', '365px'],
+			            content: html,
+			            resize: false
+			        });
 					
-					$("#addProductSpecifications").off("submit").on("submit", function(event){
-						event.preventDefault();
-						var formData = $("#addProductSpecifications").serializeArray();
-						// 检查所有字段是否都有值
-						for (var i = 0; i < formData.length; i++) {												        
-							if (formData[i].value === "") {
-								layer.msg('内容不能为空!', {icon: 0,time:1000});
-								return;
-							}
-						}
-					//新增
-					$.ajax({
-						url:"/vivoShop/background/pages/function/productSpecifications/add",
-						data:formData,
-						dataType:'text',
-						type:'get',
-						success:function(txt){
-							if(txt=="新增成功"){
-								layer.msg('添加成功', {icon: 1});
-							}else{
-								layer.msg(txt, {icon: 0});
-							}
-							if(index){
-								 layer.close(index);
-								 //重新渲染
-								 refreshPSAndClearForm();
-							}
-						},error: function(xhr, status, error) {
-							//console.log(xhr)
-							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
-						}
+					
+					 $("#updateProductSprcifications").submit(function(){
+						 event.preventDefault();
+						 layer.confirm('是否确认修改？', {icon: 3}, function(){
+								//确认
+								//var formData = $("#editProductpanel").serialize();
+								var formData = $("#updateProductSprcifications").serializeArray();
+								console.log(formData)
+
+								 // 检查除了name为isnew以外的所有字段是否都有值
+							    for (var i = 0; i < formData.length; i++) {												        if (formData[i].name !== "description" && formData[i].value === "") {
+							            isValid = false;
+										layer.msg('内容不能为空!', {icon: 0,time:1000});
+							            return;
+							        }
+							    }
+								 
+								//修改
+								$.ajax({
+									url:"/vivoShop/background/pages/function/productSpecifications/update",
+									data:formData,
+									dataType:'text',
+									type:'post',
+									success:function(txt){
+										if(txt=="修改成功"){
+											layer.msg('修改成功', {icon: 1});
+										}else{
+											layer.msg(txt, {icon: 0});
+										}
+										layer.close(index);
+										//重新渲染
+										refreshPSTable();
+									},error: function(xhr, status, error) {
+										//console.log(xhr)
+										layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+								    }
+								})
+						        
+						        
+						 }, function(){
+						        //取消
+							 if(index1){
+								 layer.close(index1);
+							 }
+						 });
+						 
+						 
 					})
-				});
+					
 				},error: function(xhr, status, error) {
-					//console.log(xhr)	
+					//console.log(xhr)
 					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
 				}
 			})
@@ -256,9 +283,9 @@
 			var data = obj.data; // 获得当前行数据
 			var index1;
 			if (obj.event === 'edit') {
-				
+				updateProdcutspecifications(data);
 			} else if (obj.event === 'del') {
-				
+				delProdcutspecifications(data)
 			}			
 		});
 		
@@ -282,14 +309,32 @@
 		    });
 		})
 		
-		//新增规格在pav.jsp中
-		//修改规格
-		function updateProdcutspecifications(){
-			
-		}
 		//删除规格
-		function delProdcutspecifications(){
-			
+		function delProdcutspecifications(data){
+			layer.confirm('确认删除吗?',{icon: 3}, function(index){
+			     $.ajax({
+			    	 url:"/vivoShop/background/pages/function/product_specifications/delete",
+			    	 data:{id:data.psid},
+			    	 type:"post",
+			    	 success:function(txt){
+			    		 if(txt=="1451"){
+						    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+						    	return;
+						    }
+						if(txt=="true"){
+							layer.msg('删除成功', {icon: 1});
+							refreshPSTable();
+						}else{
+							layer.msg('删除失败', {icon: 0});
+						}
+					},error: function(xhr, status, error) {
+						//console.log(xhr)	
+						layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+					}
+			     })
+				
+			     layer.close(index);
+			 });
 		}
 	</script>
 

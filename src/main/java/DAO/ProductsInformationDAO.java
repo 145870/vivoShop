@@ -37,7 +37,29 @@ public class ProductsInformationDAO extends BaseDAO {
 		return this.execute(sql,id);
 	}
 	
-	
+	public List<ProductsInformation> getProductsInformation(){
+		String sql = "SELECT * FROM products_information ORDER BY id DESC";
+		
+		return this.executeQuery(sql, new Mapper<ProductsInformation>() {
+			@Override
+			public List<ProductsInformation> mapper(ResultSet rs) throws SQLException {
+				List<ProductsInformation> list = new ArrayList<ProductsInformation>();
+				while (rs.next()) {
+					ProductsInformation p = new ProductsInformation(
+							rs.getLong("id"),
+							rs.getString("information_name"),
+							rs.getString("description"), 
+							rs.getInt("class_id"),
+							rs.getInt("information_status"),
+							rs.getInt("is_last"), 
+							rs.getTimestamp("create_time"),
+							rs.getTimestamp("shelves_time"));
+					list.add(p);
+				}
+				return list;
+			}
+		});
+	}
 	
 	
 	public Map<String, Object> getProductsInformationByWhere(String name,String isNew,String startTime,String endTime,String type,String status,String page,String limit) {

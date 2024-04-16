@@ -464,6 +464,10 @@
 				    		 },
 				    	 type:"post",
 				    	 success:function(txt){
+				    		 if(txt=="1451"){
+							    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+							    	return;
+							    }
 							if(txt=="true"){
 								layer.msg('删除成功', {icon: 1});
 							}else{
@@ -493,11 +497,10 @@
 		                     },
 		                     type:"post",
 		                     success:function(txt){
-		                            if(txt=="true"){
-		                                
-		                            }else{
-		                                layer.msg('删除失败', {icon: 2});
-		                            }
+		                    	 	if(txt=="1451"){
+								    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+								    	return;
+								    }
 		                            refreshImgsTable();
 		                        },error: function(xhr, status, error) {
 		                            //console.log(xhr)    

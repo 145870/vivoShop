@@ -117,8 +117,8 @@ public class ProductsClassDAO extends BaseDAO{
 		return this.execute(sql, val,id) > 0 ? "修改成功" : "修改失败";
 	}
 
-	public String deleteById(String id) {
+	public int deleteById(String id) {
 		String sql = "delete from products_class where id=?";
-		return this.execute(sql,id) > 0 ? "true" : "false";
+		return this.execute(sql,id);
 	}
 }

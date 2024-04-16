@@ -17,13 +17,21 @@ public class DeleteServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		String id = req.getParameter("id");
-		if (dao.deleteById(id)>0) {
-			 // 返回文本内容给前端
-   	    resp.setContentType("text/plain");
+		
+		resp.setContentType("text/plain");
    	    resp.setCharacterEncoding("UTF-8");
-   	    PrintWriter out = resp.getWriter();
-   	    out.print("true");
+   	    
+   	    
+		String id = req.getParameter("id");
+		
+		int sqljg = dao.deleteById(id);
+	    String jg = "";
+	    if (sqljg == -1451) {
+	    	jg = "1451";
+		}else if (sqljg>0) {
+			jg = "true";
 		}
+		
+		resp.getWriter().print(jg);
 	}
 }

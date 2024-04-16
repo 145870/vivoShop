@@ -87,8 +87,8 @@ public class ProductSpecificationDAO extends BaseDAO {
 			}
 		},"%" + pname + "%","%" + psname + "%");
 		
-		
-		sql +="LIMIT "+ limit + " OFFSET " + (pag - 1) * li;
+		sql += "ORDER BY ps.information_id DESC,ps.id DESC ";
+		sql += "LIMIT "+ limit + " OFFSET " + (pag - 1) * li;
 		List<ProductSpecification> list = this.executeQuery(sql, new Mapper<ProductSpecification>() {
 
 			@Override
@@ -128,6 +128,19 @@ public class ProductSpecificationDAO extends BaseDAO {
 		},name,pid) != null;
 	}
 	
+	public boolean isExistsByNameAndPidAndNotPSId(String name,String pid,String psid) {
+		String sql = "select * from products_specifications where specifications_name = ? and id <> ? and information_id = ?";
+		return this.executeQuery(sql, new Mapper<Object>() {
+
+			@Override
+			public List<Object> mapper(ResultSet rs) throws SQLException {
+				if (rs.next()) {
+					return new ArrayList<Object>();
+				}
+				return null;
+			}
+		},name,psid,pid) != null;
+	}
 	
 	public String doInsert(String pid,String name,String[] vals) {
 		String sql = "INSERT INTO products_specifications (information_id, specifications_name, specifications_values) VALUES "
@@ -142,5 +155,23 @@ public class ProductSpecificationDAO extends BaseDAO {
 		}
 		
 		return this.execute(sql, pid,name,jsonArray.toString()) > 0 ? "新增成功":"新增失败";
+	}
+	
+	public String doUpdateById(String pid,String psid,String name,String[] vals) {
+		String sql = "update products_specifications set specifications_name = ?,specifications_values=? where id = ? ";
+		JsonArray jsonArray = new JsonArray();
+		for (String w : vals) {
+			jsonArray.add(w);
+		}
+		if (isExistsByNameAndPidAndNotPSId(name,pid,psid)) {
+			return "该规格已经存在";
+		}
+		
+		return this.execute(sql, name,jsonArray.toString(),psid) > 0 ? "修改成功":"修改失败";
+	}
+	
+	public int doDeleteById(String id) {
+		String sql = "delete from products_specifications where id = ?";
+		return this.execute(sql, id);
 	}
 }

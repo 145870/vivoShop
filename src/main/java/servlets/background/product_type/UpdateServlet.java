@@ -27,5 +27,6 @@ public class UpdateServlet extends HttpServlet{
         String sqljg = dao.updateById(id,val);
         
         resp.getWriter().print(sqljg);
+        
 	}
 }

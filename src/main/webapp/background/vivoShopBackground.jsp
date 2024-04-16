@@ -267,7 +267,13 @@
 					  </li>
 					  
 					  <li><a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-form"></i><span>订单管理</span></a></li>
-					  <li><a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-app"></i><span>库存管理</span></a></li>
+					  <li>
+					  		<a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-app"></i><span>库存管理</span><i class="layui-edge layui-edge-bottom"></i></a>
+					  		<dl class="sidebar-menu">
+						    <dd><a class="menu" href="/vivoShop/background/gopages/goInventoryDetails">库存信息</a></dd>
+						    <dd><a class="menu" href="javascript:;">变动记录</a></dd>
+						  </dl>
+					  </li>
 					  <li>
 						  <a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-user"></i><span>用户管理</span><i class="layui-edge layui-edge-bottom"></i> </a>
 						  <dl class="sidebar-menu">
