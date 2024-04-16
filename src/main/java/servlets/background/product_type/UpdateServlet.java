@@ -25,6 +25,7 @@ public class UpdateServlet extends HttpServlet{
         String id = req.getParameter("id");
         String val = req.getParameter("value");
         String sqljg = dao.updateById(id,val);
+
         
         resp.getWriter().print(sqljg);
         
