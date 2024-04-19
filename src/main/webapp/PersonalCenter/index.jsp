@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	<img src="登录背景.jpg" />
 </body>
 </html>
