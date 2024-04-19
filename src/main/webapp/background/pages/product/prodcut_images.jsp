@@ -95,6 +95,7 @@
 					<option value="0">缩略图</option>
 					<option value="1">大图</option>
 					<option value="2">介绍图</option>
+					<option value="3">轮播图</option>
 				</select>
 			</div>
 			
@@ -254,11 +255,12 @@
 		})
 		
 		//新增图片
+		var imgindex
 		function addNewProdcutimg(){
 			$.ajax({
 		   		url:'/vivoShop/background/pages/product/function/images/addProductImg.jsp',
 		    	success:function(html){
-		    		var index=layer.open({
+		    		imgindex=layer.open({
 				   		type:1,
 				   		title: '新增图片',
 				   		shadeClose: true,
@@ -270,72 +272,7 @@
 		    		
 		    		form.render();
 		    		
-		    		$("#addProductImg").off("submit").on("submit", function(event){
-		    			  event.preventDefault(); // 阻止表单提交
 
-		    			    // 获取表单数据
-		    			    var formData = {
-		    			    	url: $("#addProductImg input[name='url']").val(),
-		    			        name: $("#addProductImg input[name='name']").val(),
-		    			        type: $("#addProductImg select[name='type']").val(),
-		    			        suffix: $("#addProductImg input[name='suffix']").val(),
-		    			        imageUrl: $('#addProductImg-upload .upload-ok img').attr('src')
-		    			    };
-
-		    			 	// 验证表单数据是否为空
-		    			    if(formData.type === "" || formData.imageUrl === "") {
-		    			    	layer.msg('请填写完整信息！', {icon: 2});
-		    			        return;
-		    			    }
-		    			    
-		    			 	// 验证路径是否合法
-		    			    var validPathRegex = /^[^\.]+$/; // 正则表达式，表示路径不能包含点号（文件后缀）
-		    			    if(!validPathRegex.test(formData.url)&&formData.url!="") {
-		    			    	layer.msg("路径不能包含文件后缀！",{icon: 0});
-		    			        return;
-		    			    }
-		    				// 包含非法字符的正则表达式
-		    				var invalidCharsRegex = /[`~!@#$%^&*()_\-+=<>?:"{}|,.;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
-		    	    		if (invalidCharsRegex.test(formData.url)) {
-		    	    			layer.msg("路径包含非法字符！",{icon: 0});
-		    	        		return;
-		    	   			}
-		    	    		
-		    				if(!validPathRegex.test(formData.name)&&formData.name!=""){
-		    					layer.msg("文件名不能包含文件后缀！",{icon: 0});
-		    			        return;
-		    				}
-		    				
-		    				var reg = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
-		    				if(reg.test(formData.name)){
-		    					layer.msg("文件名包含非法字符！",{icon: 0});
-		    					return;
-		    				}
-		    			    
-		    			    $.ajax({
-		    			   		url:'/vivoShop/background/pages/function/product_imgs/add',
-		    			   		data:formData,
-		    			   		type: 'POST',
-								dataType:'text',
-		    			   		success:function(txt){
-		    			    		if(txt=="新增成功"){
-		    			    			layer.msg('新增成功', {icon: 1});
-		    			    		}else{
-										layer.msg(txt, {icon: 2});
-									}
-		    			    		if(index){
-										 layer.close(index);
-										 //重新渲染
-										 refreshImgsTable();
-									}
-		    			    		
-		    			    	},error: function(xhr, status, error) {
-									//console.log(xhr)
-									layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
-								}
-		    			    	
-		    			    })
-					});
 		    	},error: function(xhr, status, error) {
 					//console.log(xhr)	
 					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
@@ -354,7 +291,7 @@
 			    	url:data.url
 			    }, 
 			    success: function(html) {
-			    	var index=layer.open({
+			    	imgindex=layer.open({
 				   		type:1,
 				   		title: '修改图片',
 				   		shadeClose: true,
@@ -365,74 +302,7 @@
 					});
 			    	
 			    	form.render();
-			    	$("#EditProductImg").off("submit").on("submit", function(event){
-		    			  event.preventDefault(); // 阻止表单提交
-
-		    			    // 获取表单数据
-		    			    var formData = {
-		    			    	oldurl: $("#EditProductImg input[name='oldurl']").val(),
-		    					id: $("#EditProductImg input[name='id']").val(),
-		    			    	url: $("#EditProductImg input[name='url']").val(),
-		    			        name: $("#EditProductImg input[name='name']").val(),
-		    			        type: $("#EditProductImg select[name='type']").val(),
-		    			        suffix: $("#EditProductImg input[name='suffix']").val(),
-		    			        imageUrl: $('#EditProductImg-upload .upload-ok img').attr('src')
-		    			    };
-
-		    			 	// 验证表单数据是否为空
-		    			    if(formData.type === "" || formData.imageUrl === "") {
-		    			    	layer.msg('请填写完整信息！', {icon: 2});
-		    			        return;
-		    			    }
-		    			    
-		    			 	// 验证路径是否合法
-		    			    var validPathRegex = /^[^\.]+$/; // 正则表达式，表示路径不能包含点号（文件后缀）
-		    			    if(!validPathRegex.test(formData.url)&&formData.url!="") {
-		    			    	layer.msg("路径不能包含文件后缀！",{icon: 0});
-		    			        return;
-		    			    }
-		    				// 包含非法字符的正则表达式
-		    				var invalidCharsRegex = /[`~!@#$%^&*()_\-+=<>?:"{}|,.;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
-		    	    		if (invalidCharsRegex.test(formData.url)) {
-		    	    			layer.msg("路径包含非法字符！",{icon: 0});
-		    	        		return;
-		    	   			}
-		    	    		
-		    				if(!validPathRegex.test(formData.name)&&formData.name!=""){
-		    					layer.msg("文件名不能包含文件后缀！",{icon: 0});
-		    			        return;
-		    				}
-		    				
-		    				var reg = /[`~!@#$%^&*()_\-+=<>?:"{}|,.\/;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
-		    				if(reg.test(formData.name)){
-		    					layer.msg("文件名包含非法字符！",{icon: 0});
-		    					return;
-		    				}
-		    			    
-		    			    $.ajax({
-		    			   		url:'/vivoShop/background/pages/function/product_imgs/update',
-		    			   		data:formData,
-		    			   		type: 'POST',
-								dataType:'text',
-		    			   		success:function(txt){
-		    			    		if(txt=="修改成功"){
-		    			    			layer.msg('修改成功', {icon: 1});
-		    			    		}else{
-										layer.msg(txt, {icon: 2});
-									}
-		    			    		if(index){
-										 layer.close(index);
-										 //重新渲染
-										 refreshImgsTable();
-									}
-		    			    		
-		    			    	},error: function(xhr, status, error) {
-									//console.log(xhr)
-									layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
-								}
-		    			    	
-		    			    })
-					});
+			    	
 			   	},error: function(xhr, status, error) {
 					//console.log(xhr)
 					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});

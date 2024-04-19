@@ -174,4 +174,22 @@ public class ProductSpecificationDAO extends BaseDAO {
 		String sql = "delete from products_specifications where id = ?";
 		return this.execute(sql, id);
 	}
+	
+	public Long getInsertedId(){
+		String sql = "SELECT MAX(id) FROM products_specifications";
+		return this.executeQuery(sql, new Mapper<Long>() {
+
+			@Override
+			public List<Long> mapper(ResultSet rs) throws SQLException {
+				List<Long> list = new ArrayList<Long>();
+				if (rs.next()) {
+					list.add(rs.getLong(1));
+				}else {
+					list.add((long) -1);
+				}
+				return list;
+			}
+			
+		}).get(0);
+	}
 }

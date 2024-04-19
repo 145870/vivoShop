@@ -215,8 +215,8 @@
 		    			layer.confirm('你还没有规格是否去添加规格？', {
 		    		        btn: ['确定', '关闭'] //按钮
 		    		      }, function(){
-		    		    	  addProdcutspecifications();
-		    		    	  layer.msg('操作完成请重新打开该页面', {icon: 0,time:1000});
+		    		    	  addProdcutspecifications("pav")  
+		    		    	  
 		    		      });
 		    			return;
 		    		}
@@ -226,7 +226,7 @@
 				   		title: '新增规格组合',
 				   		shadeClose: true,
 				   		maxmin: true,
-				   		area: ['430px', '430px'],
+				   		area: ['430px', '500px'],
 				   		content: html,
 					});
 		    		

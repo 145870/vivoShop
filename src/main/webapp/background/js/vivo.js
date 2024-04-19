@@ -1,5 +1,6 @@
 var xx=false;
 var form = layui.form;
+var upload = layui.upload;
 var laydate = layui.laydate;
 var table = layui.table;
 var dropdown = layui.dropdown;
@@ -572,7 +573,7 @@ $(function(){
 });
 
 //新增规格
-		function addProdcutspecifications(){
+		function addProdcutspecifications(i){
 			$.ajax({
 				url:"/vivoShop/background/gopages/goAddProductSpecifications",
 				success:function(html){
@@ -581,7 +582,7 @@ $(function(){
 				   		title: '新增规格',
 				   		shadeClose: true,
 				   		maxmin: true,
-				   		area: ['430px', '400px'],
+				   		area: ['430px', '500px'],
 				   		content: html,
 					});
 					form.render(); // 渲染全部表单
@@ -616,6 +617,9 @@ $(function(){
 								 //重新渲染
 								 refreshPSAndClearForm();
 							}
+							if(i=="pav"){
+								layer.msg('操作完成请重新打开该页面', {icon: 0,time:1500});
+							}
 						},error: function(xhr, status, error) {
 							//console.log(xhr)
 							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
@@ -628,3 +632,20 @@ $(function(){
 				}
 			})
 		}
+		//退出登录，回到登录界面并删除管理员作用域信息
+function escLogin(){
+	// 使用Ajax请求删除session中的属性
+	$.ajax({
+		url: '/vivoShop/deleteSessionAttributes',
+		type: 'POST',
+		data: {
+			keys: ['admin'] // 需要删除的session属性名
+		},success: function(response) {
+			console.log('作用域删除完成')
+		}, error: function(error) {
+			 // 删除失败
+		}
+	});
+	window.location.href = 'admin_login.jsp';
+}
+		

@@ -60,8 +60,6 @@
 }
 </style>
 	<form class="layui-form" id="addProductImg" style="margin-top: 30px">
-		<!-- 后缀 -->
-		<input name="suffix" hidden/>
 		<!--  -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">存储路径:</div>
@@ -80,6 +78,7 @@
 				<option value="0">缩略图</option>
 				<option value="1">大图</option>
 				<option value="2">介绍图</option>
+				<option value="3">轮播图</option>
 			</select>
 		</div>
 		
@@ -104,16 +103,26 @@
 			</div>
 		</div>
 
-		 <button style="position: absolute;right: 60px;bottom: 30px" class="layui-btn layui-bg-blue">确认添加</button>
+		 <button type="button" id="addProductImg-btn" style="position: absolute;right: 60px;bottom: 30px" class="layui-btn layui-bg-blue">确认添加</button>
 	</form>
 </body>
 <script type="text/javascript">
-var upload = layui.upload;
 //渲染上传组件
 upload.render({
   elem: '#addProductImg-upload',
-  url: '', // 实际使用时改成您自己的上传接口即可。
+  url: '/vivoShop/background/pages/function/product_imgs/add', // 实际使用时改成您自己的上传接口即可。
   auto:false,
+  data:{
+	  url:function(){
+		  return $("#addProductImg input[name='url']").val();
+	  },
+	  name:function(){
+		  return $("#addProductImg input[name='name']").val();
+	  },
+	  type:function(){
+		  return $("#addProductImg select[name='type']").val();
+	  }
+  },
   accept: 'images', // 只允许上传图片文件
   choose: function(obj){
     // 用户选择文件后立即渲染预览
@@ -128,7 +137,6 @@ upload.render({
      	// 获取文件名（不包括扩展名）
         var fileNameWithoutExtension = fileName.substring(0, fileName.lastIndexOf('.'));
      	
-        $("#addProductImg input[name='suffix']").val(extension);
         if($("#addProductImg input[name='name']").val()==""){
         	$("#addProductImg input[name='name']").val(fileNameWithoutExtension);
         }
@@ -136,9 +144,69 @@ upload.render({
 
     });
 
-  }
-});
+  },
+  before: function(obj) {
+	// 获取表单数据
+	    formData = {
+	    	url: $("#addProductImg input[name='url']").val(),
+	        name: $("#addProductImg input[name='name']").val(),
+	        type: $("#addProductImg select[name='type']").val()
+	    };
 
-	
+	 	// 验证表单数据是否为空
+	    if(formData.type === "" || formData.imageUrl === "") {
+	    	layer.msg('请填写完整信息！', {icon: 2});
+	    	return false;
+	    }
+	    
+	 	// 验证路径是否合法
+	    var validPathRegex = /^[^\.]+$/; // 正则表达式，表示路径不能包含点号（文件后缀）
+	    if(!validPathRegex.test(formData.url)&&formData.url!="") {
+	    	layer.msg("路径不能包含文件后缀！",{icon: 0});
+	    	return false;
+	    }
+		// 包含非法字符的正则表达式
+		var invalidCharsRegex = /[`~!@#$%^&*()_\-+=<>?:"{}|,.;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+		if (invalidCharsRegex.test(formData.url)) {
+			layer.msg("路径包含非法字符！",{icon: 0});
+			return false;
+		}
+		
+		if(!validPathRegex.test(formData.name)&&formData.name!=""){
+			layer.msg("文件名不能包含文件后缀！",{icon: 0});
+			return false;
+		}
+		
+		var reg = /[`~!@#$%^&*()\-+=<>?:"{}|,.\/;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+		if(reg.test(formData.name)){
+			layer.msg("文件名包含非法字符！",{icon: 0});
+			return false;
+		}
+  },
+  bindAction: '#addProductImg-btn',
+  done: function(res){
+	  var txt=res.msg;
+	  if(txt=="新增成功"){
+			layer.msg('新增成功', {icon: 1});
+		}else{
+			layer.msg(txt, {icon: 2});
+		}
+		if(imgindex){
+			 layer.close(imgindex);
+			 //重新渲染
+			 refreshImgsTable();
+		}
+  }
+  });
+
+	$("#addProductImg-btn").click(function(){
+		 // 如果没有选择图片，则禁止上传
+        if ($("#addProductImg-upload .upload-ok").is(":hidden")) {
+            layer.msg('请选择图片！', {
+                icon: 2
+            });
+            return;
+        }
+	})
 </script>
 </html>

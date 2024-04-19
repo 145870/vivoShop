@@ -77,12 +77,6 @@
      			<option value="">请先选择商品</option>
   			</select>
 		</div>
-	
-		<!-- 数量 -->
-		<div class="layui-input-group">
-			<div class="layui-input-prefix">库存数量:</div> 
-			<input type="number" name="count" lay-affix="number" placeholder="数量" class="layui-input right-text" lay-precision="1" min='0'>
-		</div>
 		
 		 <button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认添加</button>
 	</form>

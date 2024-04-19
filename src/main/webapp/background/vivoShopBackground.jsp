@@ -244,7 +244,7 @@
 		<!-- 加载线 -->
 		<div id="loading-line"></div>
 		<!-- openSidebar为展开菜单 hideSidebar为收缩菜单 -->
-		<div id="app" class="openSidebar">
+		<div id="app" class="openSidebar layui-anim layui-anim-fadein">
 			<!-- 左侧菜单栏 -->
 			<div id='sidebar'>
 				<!-- logo -->
@@ -322,11 +322,11 @@
 						</div>
 						<!-- 个人资料 -->
 						<div id="personal-data">
-							管理员:<span>admin</span>
+							管理员:<span>${admin.nickname}</span>
 							<!-- 悬浮划出菜单 -->
 							<div>
 								<p>个人信息</p>
-								<p>退出登录</p>
+								<p onclick=escLogin()>退出登录</p>
 							</div>
 						</div>
 					</div>

@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
 
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
@@ -117,6 +118,23 @@ public class AliyunOssUtil {
         return "https://" + bucketName + ".oss-cn-"+this.regional+".aliyuncs.com/" + objectName;
     }
 
+    /**
+     * 从OSS下载文件到InputStream
+     * 
+     * @param objectName    OSS存储的Object名称（包括路径）
+     * @return 文件的输入流
+     * @throws OSSException     OSS异常
+     * @throws ClientException  客户端异常
+     * @throws IOException      IO异常
+     */
+    public InputStream downloadToInputStream(String objectName) throws OSSException, ClientException, IOException {
+        // 创建下载Object的Request对象
+        GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, objectName);
+        // 下载文件到本地
+        OSSObject ossObject = ossClient.getObject(getObjectRequest);
+        return ossObject.getObjectContent();
+    }
+    
     /**
      * 关闭OSS客户端连接
      */

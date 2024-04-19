@@ -7,18 +7,25 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.util.Base64;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
+
+import com.google.gson.Gson;
 
 import DAO.ProductImageUrlDAO;
 import util.AliyunOssUtil;
 
 @WebServlet("/background/pages/function/product_imgs/add")
+@MultipartConfig()
 public class AddImgServlet extends HttpServlet{
 	/**
 	 * 
@@ -30,9 +37,9 @@ public class AddImgServlet extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("UTF-8");
-		
+
 		String pid = req.getSession().getAttribute("productid").toString();
-		
+
 		String url = req.getParameter("url");
 		if (url==null) {
 			url="";
@@ -52,30 +59,40 @@ public class AddImgServlet extends HttpServlet{
 		if (name == null || name.isEmpty()) {
 		    name = String.valueOf(System.currentTimeMillis()) + new Random().nextInt(100);
 		}
-		String suffix = req.getParameter("suffix");
+		//获取文件
+		Part p = req.getPart("file");
 		String type = req.getParameter("type");
-		String imagesUrl = req.getParameter("imageUrl");
+		
+		//文件属性
+		String cp = p.getHeader("content-disposition");
+		//文件名
+		String fileName = cp.split(";")[2].split("=")[1].replaceAll("\"", "");
+		//文件后缀
+		String endName = fileName.substring(fileName.lastIndexOf('.'));
 
 	    //最后存储的路径
-	    String urlName = "images/commodity/" + url + "/" + name+ "." + suffix;
+	    String urlName = "images/commodity/" + url + "/" + name + endName;
 	    if (url=="") {
-	    	urlName = "images/commodity/" + name+ "." + suffix;
+	    	urlName = "images/commodity/" + name + endName;
 		}
 	    //先执行sql语句
 	    String sqlJG = dao.doInsertByPid(pid, type, urlName);
 	    
 	    //存储图片到云端
-	    // 解析base64编码的图片数据
-	    String[] parts = imagesUrl.split(",");
-	    String imageString = parts[1];
-	    byte[] imageBytes = Base64.getDecoder().decode(imageString);
-	            
-	    // 创建 InputStream
-	    InputStream inputStream = new ByteArrayInputStream(imageBytes);
+
+	    // 获取上传的文件流
+        InputStream inputStream = p.getInputStream();
 	    //上传到云端
-	    alyoss.upload(urlName, inputStream);
+	    if (sqlJG.equals("新增成功")) {
+	    	alyoss.upload(urlName, inputStream);
+		}
 	    
 	    PrintWriter out = resp.getWriter();
-        out.print(sqlJG);
+	    Map<String, Object> map = new HashMap<String, Object>();
+		map.put("code", 0);
+		map.put("msg",sqlJG);
+		map.put("data", new HashMap<>()); 
+		String jsonOutput = new Gson().toJson(map);
+		out.print(jsonOutput);
 	}
 }

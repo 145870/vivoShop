@@ -188,7 +188,7 @@
 				limits : [ 10, 15, 20 ],
 				limit : 5,
 				done: function(){
-			        tableMerge.render(this)
+			        tableMerge.render(this);
 			    }
 			// 每页默认显示的数量
 			});

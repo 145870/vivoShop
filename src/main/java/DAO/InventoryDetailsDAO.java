@@ -48,7 +48,6 @@ public class InventoryDetailsDAO extends BaseDAO{
 		sql+="LIMIT "+limit+" OFFSET "+(pag-1)*li;
 		
 		List<InventoryDetails> list = this.executeQuery(sql, new Mapper<InventoryDetails>() {
-
 			@Override
 			public List<InventoryDetails> mapper(ResultSet rs) throws SQLException {
 				List<InventoryDetails> list = new ArrayList<InventoryDetails>();

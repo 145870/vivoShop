@@ -33,8 +33,8 @@ public class InsertServlet extends HttpServlet {
 		String pavid = req.getParameter("pav");
 		String count = req.getParameter("count");
 		
-		resp.getWriter().print(dao.doInsert(pavid, count)>0?"true":"false");
 		
+		resp.getWriter().print(dao.doInsert(pavid, count)>0?"true":"false");
 		
 	}
 }

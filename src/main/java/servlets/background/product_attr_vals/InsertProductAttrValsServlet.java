@@ -13,12 +13,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.InventoryDetailsDAO;
 import DAO.ProductAttrValueDAO;
 import DAO.ProductsInformationDAO;
 
 @WebServlet("/background/pages/function/product_attr_vals/add")
 public class InsertProductAttrValsServlet extends HttpServlet{
+	
 	private ProductAttrValueDAO dao = new ProductAttrValueDAO();
+	InventoryDetailsDAO idao = new InventoryDetailsDAO();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
@@ -35,12 +38,27 @@ public class InsertProductAttrValsServlet extends HttpServlet{
 	        }
 	    }
 	    String price = req.getParameter("price");
-
+	    String count = req.getParameter("count");
+	    
 		// 返回文本内容给前端
    	    resp.setContentType("text/plain");
    	    resp.setCharacterEncoding("UTF-8");
    	    PrintWriter out = resp.getWriter();
-   	    out.print(dao.insertByPid(pid, arrs, price));
+   	    
+		String jg = dao.insertByPid(pid, arrs, price);
+		if(jg.equals("新增成功")) {
+			String newID = dao.getInsertedId().toString();
+			if (newID!="-1") {
+				int kcjg = idao.doInsert(newID, count);
+				if (kcjg>0) {
+					//添加库存变动
+				}
+			}else {
+				jg = "规格新增成功,库存新增错误";
+			}
+		}
+   	    
+   	    out.print(jg);
    	    
 	}
 

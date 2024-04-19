@@ -62,8 +62,7 @@
 	<form class="layui-form" id="EditProductImg" style="margin-top: 30px">
 		<input name="oldurl" value = "${oldurl}" hidden/>
 		<input name="id" value = "${id}" hidden/>
-		<!-- 后缀 -->
-		<input name="suffix" value = "${suffix}" hidden/>
+
 		<!--  -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">存储路径:</div>
@@ -84,6 +83,7 @@
 			      <option value="0" selected>缩略图</option>
 			      <option value="1">大图</option>
 			      <option value="2">介绍图</option>
+			      <option value="3">轮播图</option>
 			    </select>
 			  </c:when>
 			  <c:when test="${type eq '1'}">
@@ -92,6 +92,7 @@
 			      <option value="0">缩略图</option>
 			      <option value="1" selected>大图</option>
 			      <option value="2">介绍图</option>
+			      <option value="3">轮播图</option>
 			    </select>
 			  </c:when>
 			  <c:when test="${type eq '2'}">
@@ -100,6 +101,16 @@
 			      <option value="0">缩略图</option>
 			      <option value="1">大图</option>
 			      <option value="2" selected>介绍图</option>
+			      <option value="3">轮播图</option>
+			    </select>
+			  </c:when>
+			  <c:when test="${type eq '3'}">
+			    <select name="type">
+			      <option value="">请选择</option>
+			      <option value="0">缩略图</option>
+			      <option value="1">大图</option>
+			      <option value="2">介绍图</option>
+			      <option value="3" selected>轮播图</option>
 			    </select>
 			  </c:when>
 			  <c:otherwise>
@@ -108,6 +119,7 @@
 			      <option value="0">缩略图</option>
 			      <option value="1">大图</option>
 			      <option value="2">介绍图</option>
+			      <option value="3">轮播图</option>
 			    </select>
 			  </c:otherwise>
 			</c:choose>
@@ -134,18 +146,32 @@
 			</div>
 		</div>
 
-		 <button style="position: absolute;right: 60px;bottom: 30px" class="layui-btn layui-bg-blue">确认修改</button>
+		 <button type="button" id="EditProductImg-btn" style="position: absolute;right: 60px;bottom: 30px" class="layui-btn layui-bg-blue">确认修改</button>
 	</form>
 </body>
 <script type="text/javascript">
-var upload = layui.upload;
+var isUpdateImg=false;
 //渲染上传组件
 upload.render({
   elem: '#EditProductImg-upload',
-  url: '', // 实际使用时改成您自己的上传接口即可。
+  url: '/vivoShop/background/pages/function/product_imgs/update', 
   auto:false,
+  data:{
+	  oldurl:$("#EditProductImg input[name='oldurl']").val(),
+	  id:$("#EditProductImg input[name='id']").val(),
+	  url:function(){
+		  return $("#EditProductImg input[name='url']").val();
+	  },
+	  name:function(){
+		  return $("#EditProductImg input[name='name']").val();
+	  },
+	  type:function(){
+		  return $("#EditProductImg select[name='type']").val();
+	  }
+  },
   accept: 'images', // 只允许上传图片文件
   choose: function(obj){
+	isUpdateImg=true;
     // 用户选择文件后立即渲染预览
     obj.preview(function(index, file, result){
     	$("#EditProductImg-upload .upload-no").hide()
@@ -158,16 +184,137 @@ upload.render({
      	// 获取文件名（不包括扩展名）
         var fileNameWithoutExtension = fileName.substring(0, fileName.lastIndexOf('.'));
      	
-        $("#EditProductImg input[name='suffix']").val(extension);
         if($("#EditProductImg input[name='name']").val()==""){
-        	$("#EditProductImg input[name='name']").val(fileNameWithoutExtension)
+        	$("#EditProductImg input[name='name']").val(fileNameWithoutExtension);
         }
         $("#EditProductImg .upload-ok span").html(fileName);
+
     });
 
-  }
-});
+  },
+  before: function(obj) {
+	// 获取表单数据
+	    formData = {
+	    	url: $("#EditProductImg input[name='url']").val(),
+	        name: $("#EditProductImg input[name='name']").val(),
+	        type: $("#EditProductImg select[name='type']").val()
+	    };
 
-	
+	 	// 验证表单数据是否为空
+	    if(formData.type === "" || formData.imageUrl === "") {
+	    	layer.msg('请填写完整信息！', {icon: 2});
+	    	return false;
+	    }
+	    
+	 	// 验证路径是否合法
+	    var validPathRegex = /^[^\.]+$/; // 正则表达式，表示路径不能包含点号（文件后缀）
+	    if(!validPathRegex.test(formData.url)&&formData.url!="") {
+	    	layer.msg("路径不能包含文件后缀！",{icon: 0});
+	    	return false;
+	    }
+		// 包含非法字符的正则表达式
+		var invalidCharsRegex = /[`~!@#$%^&*()_\-+=<>?:"{}|,.;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+		if (invalidCharsRegex.test(formData.url)) {
+			layer.msg("路径包含非法字符！",{icon: 0});
+			return false;
+		}
+		
+		if(!validPathRegex.test(formData.name)&&formData.name!=""){
+			layer.msg("文件名不能包含文件后缀！",{icon: 0});
+			return false;
+		}
+		
+		var reg = /[`~!@#$%^&*()\-+=<>?:"{}|,.\/;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+		if(reg.test(formData.name)){
+			layer.msg("文件名包含非法字符！",{icon: 0});
+			return false;
+		}
+  },
+  bindAction: '#EditProductImg-btn',
+  done: function(res){
+	  var txt=res.msg;
+	  	if(txt=="修改成功"){
+			layer.msg('修改成功', {icon: 1});
+		}else{
+			layer.msg(txt, {icon: 2});
+		}
+		if(imgindex){
+			 layer.close(imgindex);
+			 //重新渲染
+			 refreshImgsTable();
+		}
+  }
+  });
+
+	$("#EditProductImg-btn").click(function(){
+		 // 如果有图片则不干涉如果没有上传新图片则直接开始修改内容，则禁止上传
+        if (isUpdateImg==false) {
+        	// 获取表单数据
+    	    formData = {
+        		upType:"无图片",
+    	    	oldurl:$("#EditProductImg input[name='oldurl']").val(),
+    	    	id:$("#EditProductImg input[name='id']").val(),
+    	    	url: $("#EditProductImg input[name='url']").val(),
+    	        name: $("#EditProductImg input[name='name']").val(),
+    	        type: $("#EditProductImg select[name='type']").val()
+    	    };
+
+    	 	// 验证表单数据是否为空
+    	    if(formData.type === "" || formData.imageUrl === "") {
+    	    	layer.msg('请填写完整信息！', {icon: 2});
+    	    	return;
+    	    }
+    	    
+    	 	// 验证路径是否合法
+    	    var validPathRegex = /^[^\.]+$/; // 正则表达式，表示路径不能包含点号（文件后缀）
+    	    if(!validPathRegex.test(formData.url)&&formData.url!="") {
+    	    	layer.msg("路径不能包含文件后缀！",{icon: 0});
+    	    	return;
+    	    }
+    		// 包含非法字符的正则表达式
+    		var invalidCharsRegex = /[`~!@#$%^&*()_\-+=<>?:"{}|,.;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+    		if (invalidCharsRegex.test(formData.url)) {
+    			layer.msg("路径包含非法字符！",{icon: 0});
+    			return;
+    		}
+    		
+    		if(!validPathRegex.test(formData.name)&&formData.name!=""){
+    			layer.msg("文件名不能包含文件后缀！",{icon: 0});
+    			return;
+    		}
+    		
+    		var reg = /[`~!@#$%^&*()\-+=<>?:"{}|,.\/;'\\[\]·！#￥（——）：；“”‘、，|《。》？、【】[\]]/im;
+    		if(reg.test(formData.name)){
+    			layer.msg("文件名包含非法字符！",{icon: 0});
+    			return;
+    		}
+    		
+    		 $.ajax({
+			   		url:'/vivoShop/background/pages/function/product_imgs/update',
+			   		data:formData,
+			   		type: 'POST',
+					dataType:'text',
+			   		success: function(res){
+			   		 	var jsonResponse = JSON.parse(res);
+			   		  	var txt=jsonResponse.msg;
+			    		if(txt=="修改成功"){
+			    			layer.msg('修改成功', {icon: 1});
+			    		}else{
+							layer.msg(txt, {icon: 2});
+						}
+			    		if(imgindex){
+							 layer.close(imgindex);
+							 //重新渲染
+							 refreshImgsTable();
+						}
+			    		
+			    	},error: function(xhr, status, error) {
+						//console.log(xhr)
+						layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+					}
+			    	
+			    })
+        }
+	})
 </script>
 </html>

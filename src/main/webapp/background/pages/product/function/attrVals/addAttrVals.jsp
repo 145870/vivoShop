@@ -54,6 +54,11 @@
                 		</select>
             		</div>
         		</c:forEach>
+        		<!-- 数量 -->
+				<div class="layui-input-group">
+					<div class="layui-input-prefix">库存数量:</div> 
+					<input type="number" name="count" lay-affix="number" placeholder="数量" class="layui-input right-text" lay-precision="1" min='0'>
+				</div>
         		
         		<div class="layui-input-group">
 					<span class="layui-input-prefix">售价:</span>
