@@ -1,0 +1,26 @@
+@charset "UTF-8";
+#jian-p {
+	display: flex;
+	justify-content: center; /* 水平居中 */
+	align-items: center; /* 垂直居中 */
+	float: left;
+	width: 100%;
+	flex-wrap: wrap;
+}
+
+#u {
+	margin-right: 124px;
+}
+
+#jian-p .jian-pin {
+	width: 298px;
+	height: 380px;
+	background-color: white;
+	margin-left: 10px; /* 为每个 .jian-pin 元素设置左边距 */
+	transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
+	margin-top: 15px;
+}
+#leia{
+	 text-decoration: none;
+    color: black
+}

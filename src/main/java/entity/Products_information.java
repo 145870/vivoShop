@@ -18,7 +18,49 @@ public class Products_information {
 	private int class_name;
 	private String url;
 	
+	//临时字段
+	private int vid;
+	private int product_id;
+	private String[] attr_vals;
+	private double sale_amount;
 	
+	/**
+	 * @param information_name
+	 * @param description
+	 * @param url
+	 * @param sale_amount
+	 */
+	public Products_information(String information_name, String description, String url, double sale_amount) {
+		super();
+		this.information_name = information_name;
+		this.description = description;
+		this.url = url;
+		this.sale_amount = sale_amount;
+	}
+	public int getVid() {
+		return vid;
+	}
+	public void setVid(int vid) {
+		this.vid = vid;
+	}
+	public int getProduct_id() {
+		return product_id;
+	}
+	public void setProduct_id(int product_id) {
+		this.product_id = product_id;
+	}
+	public String[] getAttr_vals() {
+		return attr_vals;
+	}
+	public void setAttr_vals(String[] attr_vals) {
+		this.attr_vals = attr_vals;
+	}
+	public double getSale_amount() {
+		return sale_amount;
+	}
+	public void setSale_amount(double sale_amount) {
+		this.sale_amount = sale_amount;
+	}
 	/**
 	 * @param id
 	 * @param information_name

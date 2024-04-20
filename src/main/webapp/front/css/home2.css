@@ -1,107 +1,243 @@
 @charset "UTF-8";
-/*倒计时*/
-	#dao-box{
-		width: 100%;
-		height: 57px;
-		background-color: #ccc;
-		margin-top: 30px;
-		display: inline-flex;
-		align-items: center;
-	}
-	
-	#dao-box img{
-		width: 96px;
-		height: 36px;
-		display: inline;
-		margin-top: 10px;
-	}
-	
-	
-	#dao{
-		margin-left: 10px;
-	}
-	
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;    
+	background-color: #f7f7f5;
+}
+#jing {
+	width: 100%;
+	height: 880px;
+}
+#you {
+	float: right;
+	margin-left: auto;
+	margin-right: 60px;
+	display: flex;
+	list-style: none;
+}
+#box1 {
+	width: 100%;
+	height: 890px;
+	margin-top: 20px;
+}
 /*限时秒杀*/
-	#re-box{
-		width: 1511px;
-		height: 420px;
-		background-color: aqua;
-	}
-	
-	
-	#v {
-	    width: 1200px; /* 设定外部容器的宽度 */
-	    overflow: hidden;
-		margin-left: 155px;
-		
-		
-	}
-	.v:hover{
-		box-shadow:3px 3px 3px 5px rgb(200,200,200,0.2); /* 水平偏移2px，垂直偏移2px，模糊半径5px，颜色为淡黑色 */
-		 transform: translateY(-5px); /* 向上移动5px */
-	}
-	#re{
-		display:inline-block;
-		
-	}
-	
-	#ree-div {
-	    display: -webkit-inline-box;
-	    width: 700px; /* 设定内部容器的宽度，确保内容超出以便滚动 */
-	    transition: transform 0.5s; /* 添加过渡效果 */
-	}
-	
-	
-	.v {
-	    width: 293px;
-	    height: 380px;
-	    background-color: white;
-	    margin: 5px;
-		transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
-		margin-top:20px;
-		align-items:center;
-		text-align:center;
-	}
-	
-	.miao-span {
-	  width: 40px;
-	  height: 40px;
-	  border-radius: 50%;
-	  background-color: rgba(255, 255, 255, 0.5);
-	  
-	  margin-top: 185px;
-	}
-	
-	.miao-span button {
-	  background-color: transparent;
-	  border: none;
-	  cursor: pointer;
-	  width: 40px;
-	  height: 40px;
-	  align-items: center;
-	  text-align: center;
-		 
-	}
-	
-	#but-zuo {
-	  position: absolute;
-	  left: 100px;
-	}
-	
-	#but-you {
-	  position: absolute;
-	  right: 100px;
-	}
-	
-	.v-div{
-		width:157px;
-		height:138px;
-		margin-top:40px;
-		margin-left:65px;
-		
-	}
-	.tupian{
-		width:100%;
-		height:100%;
-		
-	}  	
+#re-box {
+	width: 1511px;
+	height: 485px;
+}
+
+#v {
+	width: 1200px; /* 设定外部容器的宽度 */
+	overflow: hidden;
+	margin-left: 155px;
+}
+
+.v {
+	background-color: white;
+	text-align: center;
+	width: 282px;
+	height: 380px;
+    margin-left: 20px;
+    margin-top: 25px;
+}
+
+.v:hover {
+	box-shadow: 3px 3px 3px 5px rgb(200, 200, 200, 0.2);
+	/* 水平偏移2px，垂直偏移2px，模糊半径5px，颜色为淡黑色 */
+	transform: translateY(-5px); /* 向上移动5px */
+}
+
+#re {
+	display: inline-block;
+}
+
+#ree-div {
+	display: -webkit-inline-box;
+	width: 700px; /* 设定内部容器的宽度，确保内容超出以便滚动 */
+	transition: transform 0.5s; /* 添加过渡效果 */
+}
+
+.rebox {
+	width: 293px;
+	height: 380px;
+	background-color: white;
+	margin: 5px;
+	transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
+	margin-top: 20px;
+	align-items: center;
+	text-align: center;
+}
+
+.miao-span {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: rgba(255, 255, 255, 0.5);
+	margin-top: 185px;
+}
+
+.miao-span button {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	align-items: center;
+	text-align: center;
+}
+
+#but-zuo {
+	position: absolute;
+	left: 100px;
+}
+
+#but-you {
+	position: absolute;
+	right: 100px;
+}
+
+.v-div {
+	width: 157px;
+	height: 138px;
+	margin-top: 40px;
+	margin-left: 65px;
+}
+
+.tupian {
+	max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin:auto;
+}
+#p{
+	    font-size: 20px;
+    margin: auto;
+    width: 6%;
+}
+/*导航图片样式*/
+.tu-div {
+	width: 95px;
+	height: 186px;
+}
+
+#tu-box {
+	width: 1511px;
+	height: 460px;
+}
+
+.tubox {
+	display: inline-flex;
+}
+
+.tupianx {
+	max-width: 100%;
+	max-height: 100%;
+	width: auto; /* 确保宽度按比例缩放 */
+	height: auto; /* 确保高度按比例缩放 */
+	display: block; /* 防止图片在某些情况下产生间距 */
+	margin-left: 56px;
+}
+
+.tu-div {
+	width: 200px;
+	height: 200px;
+	margin: 0 10px; /* 左右外边距为10px，上下外边距为0 */
+}
+
+.tu-div p {
+	text-align: center;
+}
+
+
+.tu-div:nth-child(3), .tu-div:nth-child(6) {
+	margin-left: 100px;
+}
+
+/* 头部隐藏列表的各个div' */
+.navDiv {
+	width: 1511px;
+	height: 350px;
+	background-color: white;
+	display: none;
+	text-align: center;
+}
+#vivo100{
+	max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin:auto;
+}
+#gerenbox{
+	width: 160px;
+    height: 126px;
+    position: absolute;
+    top: 68px;
+    z-index: 999;
+    background-color: white;
+    right: 20px;
+    border-radius: 5%;
+    text-align: center;
+    font-size:16px;
+}
+#denglubox{
+	margin-top: 19px;
+    line-height: 45px;
+}
+#sanjiao{
+	width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid white;
+    position: absolute;
+    top: 50px;
+    right: 69px;
+    z-index: 9999;
+}
+#deng_kuang{
+	display:none;
+}
+#geren{
+	width:53px;height:20px;
+}
+#xintwobox{
+	    width: 157px;
+    height: 138px;
+    margin-top: 40px;
+    margin-left: 65px;
+}
+#xintwobox img{
+	    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+#he1 #j {
+	width: 603px;
+	height: 380px;
+	background-color: white;
+}
+
+#he1 .j {
+	width: 298px;
+	height: 380px;
+	background-color: white;
+	margin-left: 10px;
+	transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
+}
+#jx .j p{
+	text-align: center;
+}
+
+.tubox a{
+	    text-decoration: none;
+    color: black
+}
+
