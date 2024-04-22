@@ -23,7 +23,7 @@ public class Sample {
                 //这里修改为我们上面生成自己的AccessKey Secret
                 .setAccessKeySecret("TNCqc22IcD5kpHpJAfnkpIhLc2qCM8");
         // 访问的域名
-        config.endpoint = "dysmsapi.aliyuncs.com";
+        //config.endpoint = "dysmsapi.aliyuncs.com";
         Client client = new Client(config);
         SendSmsRequest sendSmsRequest = new SendSmsRequest()
                 .setSignName("阿里云短信测试")//短信签名
