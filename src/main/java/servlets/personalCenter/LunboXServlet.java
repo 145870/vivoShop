@@ -1,4 +1,4 @@
-package servlets.front;
+package servlets.personalCenter;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,7 +17,7 @@ import entity.Products_information;
 @WebServlet(urlPatterns = "/front/jsp/LunboXServlet")
 public class LunboXServlet extends HttpServlet {
 	ProductsClassDAO classDAO = new ProductsClassDAO();
-	ProductsInformationDAO ifdao=new Products_informationDAO();
+	Products_informationDAO ifdao=new Products_informationDAO();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
