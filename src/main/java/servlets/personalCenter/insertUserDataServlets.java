@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.user_profileDAO;
+import DAO.UserProfileDAO;
 @WebServlet("/PersonalCenter/JSP/insertUserDataServlets")
 public class insertUserDataServlets extends HttpServlet{
 	@Override

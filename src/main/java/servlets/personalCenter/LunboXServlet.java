@@ -17,7 +17,7 @@ import entity.Products_information;
 @WebServlet(urlPatterns = "/front/jsp/LunboXServlet")
 public class LunboXServlet extends HttpServlet {
 	ProductsClassDAO classDAO = new ProductsClassDAO();
-	Products_informationDAO ifdao=new Products_informationDAO();
+	ProductsInformationDAO ifdao=new Products_informationDAO();
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

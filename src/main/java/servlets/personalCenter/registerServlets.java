@@ -8,7 +8,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import DAO.user_profileDAO;
 @WebServlet("/PersonalCenter/JSP/registerServlets")
 public class registerServlets extends HttpServlet{
 	@Override
