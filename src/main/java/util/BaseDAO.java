@@ -9,6 +9,8 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.catalina.mapper.Mapper;
+
 
 /**
  * 父类DAO，为抽象类
