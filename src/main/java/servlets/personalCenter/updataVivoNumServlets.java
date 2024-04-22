@@ -10,12 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import DAO.UserProfileDAO;
 import entity.UserProfile;
+
 @WebServlet("/PersonalCenter/JSP/updataVivoNumServlets")
 public class updataVivoNumServlets extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		UserProfile user = (entity.UserProfile) req.getSession().getAttribute("user_profile");
+		UserProfile	 user = (entity.UserProfile) req.getSession().getAttribute("user_profile");
 		String uid="1";
 		if (user==null) {
 			uid="1";
