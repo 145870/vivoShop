@@ -1,0 +1,459 @@
+body {
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
+#box {
+	margin: auto;
+	width: 100%;
+	position: relative;
+}
+
+#tou {
+	display: flex;
+	background-color: black;
+	color: white;
+	height: 50px;
+	text-align: center;
+	margin: auto;
+}
+
+#left {
+	display: flex;
+	list-style: none;
+}
+#head {
+	height: 80px;
+	align-items: center;
+	justify-content: center; /* 水平居中 */
+	line-height: 35px;
+	width: 1470px;
+	margin: auto;
+}
+#you {
+	float: right;
+	margin-left: auto;
+	margin-right: 20px;
+	display: flex;
+	list-style: none;
+}
+
+#left li, #you li {
+	margin-left: 20px;
+	font-size: 13px;
+}
+
+.nav li {
+	margin: 0 10px;
+	cursor: pointer;
+	text-align: center;
+	height: 35px;
+	line-height: 35px;
+	margin-left: 48px;
+}
+
+.nav div {
+	display: none;
+	height: 50px;
+	background-color: lightblue;
+	overflow: hidden;
+	transform: translate(-50%, -50%);
+	opacity: 0;
+	transition: opacity 0.3s ease-in-out, max-height 0.4s ease; /* 过渡效果 */
+}
+
+#navDiv {
+	width: 1470px;
+	transition: all 0.4s ease;
+	
+	height: 350px;
+	position: absolute;
+	top: 100px;
+}
+/* 头部隐藏列表的各个div' */
+.navDiv {
+	height: 350px;
+	background-color: white;
+	display: none;
+	text-align: center;
+}
+
+/*下载图片的id*/
+#xiazai {
+	line-height: 80px;
+}
+
+#vivo {
+	width: 90px;
+	filter: invert(100%);
+	margin-left: 80px;
+	margin-top: 17px;
+	height: 30px;
+}
+
+#tu {
+	align-items: center;
+	height: 0px;
+	line-height: 20px;
+	width: 100px;
+	display: block;
+}
+
+.nav {
+	flex: 1;
+	display: inline-flex;
+	margin-left: 380px;
+	list-style: none;
+	line-height: 20px;
+	height: 100%;
+}
+
+
+
+#so {
+	display: inline;
+	float: right;
+	height: 0px;
+}
+
+#sou {
+	width: 88px;
+	height: 55px;
+	margin-right: 95px;
+	margin-top: 7px;
+}
+
+#sss {
+	text-align: left;
+	background-color: white;
+	width: 1470px;
+	transition: height 0.5s ease, opacity 0.5s ease; /* 添加过渡效果 */
+	position: absolute;
+	top: 50px;
+	display: none;
+	opacity: 0; /* 初始设置透明度为0 */
+	cursor: pointer;
+	height: 430px;
+}
+
+#form {
+	transition: 1s;
+	display: inline;
+}
+
+#form-in {
+	width: 470px;
+	height: 50px;
+	border: none; /* 去掉边框 */
+	margin-left: 200px;
+}
+
+@keyframes slideulRight {from { transform:translateX(100%);
+	opacity: 0;
+}
+
+to {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+}
+#sou-ul {
+	list-style: none;
+	display: block;
+	margin-left: 270px;
+	width: 120px; /* 略大于 a 标签的宽度 */
+	height: 60px; /* 略大于 a 标签的高度 */
+}
+
+#sou-ul li a {
+	list-style: none;
+	text-decoration: none; /* 去除下划线 */
+	font-size: 12px;
+	animation: slideulRight 2s forwards; /* 应用动画效果 */
+}
+
+#form-in, #form img, #sou-div {
+	display: inline-block;
+	vertical-align: middle; /* 垂直居中对齐 */
+}
+
+#sou-shang {
+	display: flex; /* 将父元素设置为 Flex 容器 */
+	height: 55px;
+	margin: auto;
+}
+
+#form {
+	flex: 1; /* 让 form 元素自动填充剩余空间 */
+}
+
+#sss-box {
+	width: 1200px;
+	margin: auto;
+}
+
+#sou-div {
+	margin-left: 10px; /* 可以根据需要调整间距 */
+}
+
+#span-X {
+	align-items: center; /* 垂直居中 */
+	margin-top: 13px;
+}
+
+@keyframes slideFromLeft {from { transform:translateX(100%);
+	
+}
+
+to {
+	transform: translateX(1);
+}
+
+}
+#x {
+	width: 560px;
+	height: 1px;
+	background-color: #ccc;
+	animation: slideFromLeft 2s forwards; /* 应用动画效果 */
+	margin-left: 310px;
+}
+
+#sou-tu {
+	width: 88px; /* 根据需要调整宽度 */
+	height: 55px; /* 根据需要调整高度 */
+	margin-left: 290px;
+	animation: slideFromRight 1s forwards; /* 应用动画效果 */
+}
+
+@keyframes slideFromRight {from { transform:translateX(100%);
+	opacity: 0;
+}
+
+to {
+	transform: translateX(0);
+	opacity: 1;
+}
+
+}
+#sou-vivo {
+	width: 90px;
+	filter: invert(100%);
+	height: 30px;
+	display: inline-flex;
+	margin-right: 20px;
+	margin-top: 17px;
+}
+
+#foot {
+	height: 400px;
+	display: flex;
+	justify-content: center; /* 水平居中 */
+	display: block;
+}
+
+#tt {
+	text-align: center; /* 让内部文本居中显示 */
+	margin-top: 15px;
+	border-bottom: black solid 1px;
+	height: 80px;
+	width: 1300px;
+	margin-left: auto; /* 左边距自动调整 */
+	margin-right: auto; /* 右边距自动调整 */
+	display: flex;
+	justify-content: center; /* 水平居中 */
+	align-items: center; /* 垂直居中对齐 */
+}
+
+#tt p {
+	margin-left: 140px; /* 左边距为140px */
+}
+
+#tt img {
+	margin-right: 10px; /* 图片右侧间距为10px */
+}
+
+#wei {
+	list-style: none;
+	display: flex;
+	justify-content: space-around;
+	width: 700px;
+}
+
+#wei li {
+	text-align: left;
+}
+
+dt {
+	margin-left: 39px;
+	font-weight: bold;
+}
+
+dd {
+	margin-top: 15px;
+	font-size: 12px;
+}
+
+#wei a {
+	color: black; /* 设置链接文本颜色为红色 */
+	text-decoration: none; /* 去掉下划线 */
+}
+
+#zz {
+	display: inline-block;
+}
+
+#yy {
+	float: right;
+	margin-top: 18px;
+}
+
+#xin, #ip, #bo, #yx, #gz {
+	display: inline-flex;
+	float: left;
+}
+
+#yy p {
+	margin-left: 24px;
+}
+
+#yy h4 {
+	margin-left: 25px;
+}
+
+#ww {
+	width: 1300px;
+	margin: auto;
+	height: 550px;
+	border-bottom: 1px gainsboro solid;
+}
+
+.c {
+	width: 25px;
+	height: 25px;
+}
+
+#ban {
+	margin: auto;
+	width: 1300px;
+	text-align: center;
+	font-size: 13px;
+}
+
+#body {
+	margin: auto;
+	width: 1511px;
+}
+
+#X #tu-box {
+	width: 1440px;
+	height: 460px;
+}
+
+#tuu {
+	width: 100%;
+	height: 100%;
+	background-repeat: no-repeat; /* 禁止重复 */
+	background-size: contain; /* 或者使用 background-size: contain; */
+}
+
+#tuu img {
+	margin-top: 100px;
+	margin-left: 120px;
+}
+
+#tuu h1 {
+	margin-left: 120px;
+}
+
+.v {
+	display: inline;
+}
+
+
+
+#tu-box {
+	width: 1511px;
+	height: 460px;
+}
+
+.tubox {
+	display: inline-flex;
+}
+
+.tu-div {
+	width: 200px;
+	height: 200px;
+	margin: 0 10px; /* 左右外边距为10px，上下外边距为0 */
+	
+	
+}
+.tu-div p{
+	text-align: center;
+}
+.tu-div:nth-child(3),.tu-div:nth-child(6) {
+	margin-left: 100px;
+}
+#v1 {
+	width: 1200px; /* 设定外部容器的宽度 */
+	overflow: hidden;
+	margin-left: 155px;
+}
+#re1 {
+	display: inline-block;
+}
+.tubox a{
+	    text-decoration: none;
+    color: black
+}
+#leia{
+	 text-decoration: none;
+    color: black
+}
+#gerenbox{
+	width: 100px;
+    height: 70px;
+    position: absolute;
+    top: 30px;
+    z-index: 999;
+    background-color: white;
+    right: -25px;
+    border-radius: 5%;
+    text-align: center;
+    font-size:13px;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+     
+}
+
+#deng_kuang{
+	display:none;
+	
+}
+#geren{
+	width:53px;height:20px;
+}
+.tupianx{
+	    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    background: rgb(247, 248, 250);
+    border-radius: 20px;
+    transition: box-shadow 0.3s;
+}
+.tupianx:hover {
+    /* 悬停时的样式 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+#deng_kuang a{
+	color:black;
+	text-decoration:none;
+}
+#deng_kuang a:hover{
+	color:rgb(65,95,255);
+	
+}

@@ -2,7 +2,7 @@ package entity;
 
 import java.util.Date;
 
-public class user_profile {
+public class UserProfile {
 	private int id;
 	private String account_number;
 	private String user_name;
@@ -80,7 +80,7 @@ public class user_profile {
 	public void setHead_image_url(String head_image_url) {
 		this.head_image_url = head_image_url;
 	}
-	public user_profile(int id, String account_number, String user_name, String phone, String user_password,
+	public UserProfile(int id, String account_number, String user_name, String phone, String user_password,
 			String mailbox, String address, int sex, Date birthday, Date create_time, String head_image_url) {
 		super();
 		this.id = id;
@@ -95,7 +95,7 @@ public class user_profile {
 		this.create_time = create_time;
 		this.head_image_url = head_image_url;
 	}
-	public user_profile() {
+	public UserProfile() {
 		super();
 	}
 	@Override

@@ -3,6 +3,8 @@
 	padding: 0;
 	margin: 0 auto;
 	font-size: 12px;
+}
+body{
 	background-color: rgb(247, 247, 247);
 }
 #bigbox{
@@ -362,20 +364,122 @@ body #hr{
     cursor: pointer;
 }
 #btn_right{
+	font-size: 17px;
     align-items: center;
     display: flex;
     filter: none;
     float: right;
     justify-content: center;
     width: 168px;	
-	background-color: transparent !important;
+	/* background-color: transparent !important; */
     background-image: linear-gradient(90deg, rgba(66, 141, 255, .5), rgba(69, 111, 255, .5));
     cursor: not-allowed;
     height: 48px;
     line-height: 48px;
 	margin: 20px auto 0;
 	color: #fff;
+	
 }
-.operate:hover{
-	color:#fefefe;
+.operate span:hover{
+	background-color:rgb(235,235,235);
+}
+
+
+
+/* 修改vivo号 */
+
+.huibox{
+	    background-color: rgba(0, 0, 0, .4);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.vivo_modify{
+	    background-color: #fff;
+	    left: 50%;
+	    min-height: 290px;
+	    padding-bottom: 75px;
+	    padding-top: 40px;
+	    position: absolute;
+	    top: 50%;
+	    transform: translate(-50%,-50%);
+	    width: 490px;
+	    z-index: 99;
+}
+.cancel{
+	cursor: pointer;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 20px;
+}
+.vivo_box{
+	padding: 0 65px;
+}
+.updatVivotitle{
+	color: #000;
+    font-size: 24px;
+    text-align: center;
+}
+.title-tip{
+	    color: #666;
+	    font-size: 16px;
+	    margin-top: 10px;
+	    text-align: center;
+}
+.name{
+	    color: #252525;
+	    font-size: 15px;
+	    margin-top: 28px;
+}
+.input{
+	    background-color: #fff;
+	    border: 1px solid #dedfe0;
+	    color: #000;
+	    font-size: 16px;
+	    height: 48px;
+	    margin-top: 10px;
+	    padding: 0 12px;
+	    width: 360px;
+		outline: none;
+}
+.error-box{
+	    font-size: 14px;
+	    margin-top: 12px;
+	    min-height: 38px;
+}
+.error-box p{
+	color: #999;
+}
+.btn_os_pc{
+	    background-color: #456fff;
+	    background-image: linear-gradient(90deg, #418eff, #4566ff);
+	    color: #fff;
+	    cursor: pointer;
+	    display: block;
+	    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#418eff,endColorstr=#4566ff);
+	    font-size: 17px;
+	    height: 48px;
+	    line-height: 48px;
+	    margin: 20px auto 0;
+	    text-align: center;
+	    width: 360px;
+}
+.tishi{
+	color: #f51200;
+	margin-top: 5px;
+}
+
+.shake-animation {
+  animation: shake 0.5s linear;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
 }

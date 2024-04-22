@@ -37,7 +37,7 @@
 								<div class="jieshao"><span>用于vivo账号登录</span></div>
 							</div>
 							<div class="operate">
-								<span>修改</span>
+								<span id="upvivo">修改</span>
 							</div>
 						</div>
 						<div class="left_line"></div>
@@ -50,7 +50,7 @@
 								<div class="jieshao"><span>用户保护账号信息和登录安全</span></div>
 							</div>
 							<div class="operate">
-								<span>修改</span>
+								<span  id="upnumpass">修改</span>
 							</div>
 						</div>
 						<div class="left_line"></div>
@@ -63,7 +63,7 @@
 								<div class="jieshao"><span>安全手机可用于登录vivo账号，找回密码或其它安全验证</span>></div>
 							</div>
 							<div class="operate">
-								<span>修改</span>
+								<span id="upPhone">修改</span>
 							</div>
 						</div>
 						<div class="left_line"></div>
@@ -76,7 +76,7 @@
 								<div class="jieshao"><span>安全邮箱可用于登录vivo账号，找回密码或其它安全验证</span>></div>
 							</div>
 							<div class="operate">
-								<span>修改</span>
+								<span id="upem">修改</span>
 							</div>
 						</div>
 						<div class="left_line"></div>
@@ -89,7 +89,7 @@
 								<div class="jieshao"><span>密保问题可用于找回密码或其它安全验证</span>></div>
 							</div>
 							<div class="operate">
-								<span>修改</span>
+								<span id="upwenti">修改</span>
 							</div>
 						</div>
 						<div class="left_line" id="line"></div>
@@ -201,6 +201,26 @@
 			</div>
 		
 		
+		<!-- 修改vivo号 -->
+			<div class="huibox" style="display: none;" id="upVivoNum">
+				<div class = vivo_modify>
+					<div class="cancel">
+						<img src="../IMG/叉.png"/>
+					</div>
+					<div class="vivo_box">
+						<p class="updatVivotitle">修改vivo号</p>
+						<p class="title-tip">可用于登录vivo账号</p>
+						<p class="name">新的vivo号</p>
+						<input type = "text" class="input" id = "inputval"/>
+						<div class="tishi" style="display: none;">请输入vivo号</div>
+						<div class="error-box">
+							<p>vivo号不能以数字开头，必须使用6-20位字母、数字组成</p>
+						</div>
+						<div class="btn_os_pc">确认提交</div>
+					</div>
+				</div>
+			</div>
+		
 		
 		
 		
@@ -220,11 +240,90 @@
 			$('.cancel').click(function(){
 				$('#updataTx').hide();
 			});
+			
+			var selectedFile = null;
 			//获取选择的文件
 			 $('#xuanzeFile').change(function(event) {
-				 var selectedFile = $(this).prop('files')[0]; // 使用另一种方式获取用户选择的文件
-				 var fileType = selectedFile.type;
-				 console.log(selectedFile.name)
+				  selectedFile = $(this).prop('files')[0]; // 获取用户选择的文件
+				    
+				    // 读取文件内容并更新图片
+				    var reader = new FileReader();
+				    reader.onload = function(event) {
+				        $('.avater span').css('background-image', 'url(' + event.target.result + ')'); // 更新背景图片的URL
+				    };
+				    reader.readAsDataURL(selectedFile);
+				    
+				    // 启用确认按钮
+			        $('#btn_right').css({
+			            'cursor': 'pointer',
+			            'pointer-events': 'auto',
+			            'background-color':'#456fff',
+			        });
 			 });
+			 $('#btn_right').click(function(){
+				 $('#updataTx').hide()
+				 var re = new FileReader();
+				 re.onload = function(event) {
+				      $('#avater span').css('background-image', 'url(' + event.target.result + ')'); // 更新背景图片的URL
+				 };
+				 re.readAsDataURL(selectedFile);
+				 console.log(selectedFile)
+			 })
+			 
+			 
+			 //修改vivo号
+			 $('#upvivo').click(function(){
+					$('#upVivoNum').show()
+				})
+			 $('.cancel').click(function(){
+					$('.huibox').hide();
+					$('#inputval').val("");
+				})
+				
+				 $('.input').focus(function(){
+				 	$('.tishi').hide()
+				 })
+				
+				$('.btn_os_pc').click(function(){
+						var inputValues = $('.input').val();
+						// 获取输入框的值
+					    var inputValue = $('.input').val();
+					
+					    // 判断输入框的值是否以数字开头
+					    var firstCharacter = inputValue.charAt(0);
+					    var isDigit = /^\d$/.test(firstCharacter);
+					    // 如果输入框的值不是以数字开头，则执行相应操作
+						if($('.input').val()!=""){
+							if (!isDigit) {
+							   if(inputValue.length<=20&&inputValue.length>=6){
+								   $.ajax({
+									   type:'GET',
+									   url:'updataVivoNumServlets',
+									   data:{
+										   vivonum:inputValue
+									   }
+								   })
+							   }else{
+								   //添加抖动动画
+								   $('.error-box p').addClass("shake-animation");
+								   $('.error-box p').css('color','#f51200')
+								   	setTimeout(function() {
+								   	$('.error-box p').removeClass("shake-animation");
+									$('.error-box p').css('color','');
+								   }, 500);
+							   }
+							} else {
+							    //添加抖动动画
+								$('.error-box p').css('color','#f51200')
+							    $('.error-box p').addClass("shake-animation");
+							    	setTimeout(function() {
+									$('.error-box p').css('color','');
+							    	$('.error-box p').removeClass("shake-animation");
+							    }, 500);
+							}
+						}else{
+							$('.tishi').show()
+						}
+				})
 		</script>
 </html>

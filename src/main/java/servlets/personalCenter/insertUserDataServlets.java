@@ -13,7 +13,7 @@ import DAO.user_profileDAO;
 public class insertUserDataServlets extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		user_profileDAO userdao = new user_profileDAO();
+		UserProfileDAO userdao = new UserProfileDAO();
 		String phone = req.getParameter("phone");
 		String pwd = req.getParameter("password");
 		String url = "222.jpg";
