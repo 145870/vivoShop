@@ -11,14 +11,15 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
 import DAO.ProductSpecificationDAO;
 import entity.ProductSpecification;
 
-@WebServlet("/background/gopages/goProductDetaile")
-public class GoProductDetaileServlet extends HttpServlet{
+@WebServlet("/background/gopages/goProductAttrVals")
+public class GoProductAttrValsServlet extends HttpServlet{
 	ProductSpecificationDAO psdao=new ProductSpecificationDAO();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -26,17 +27,17 @@ public class GoProductDetaileServlet extends HttpServlet{
 		String id=req.getParameter("id");
 		
 		//查询商品规格内容
-		List<ProductSpecification> pslist = psdao.getProductSpecificationById(id);
+		List<ProductSpecification> pslist = (List<ProductSpecification>) psdao.getProductSpecificationById(id).get("list");
 		//存储对应值
 		List<String[]> valList = new ArrayList<String[]>();
 		
 		for(ProductSpecification p:pslist) {
 			valList.add(p.getSpecificationsValues());
 		}
-		
-		req.setAttribute("id",id);
-		req.setAttribute("psList", pslist);
-		req.setAttribute("valList", valList);
+		HttpSession session = req.getSession();
+		session.setAttribute("productid",id);
+		session.setAttribute("psList", pslist);
+		session.setAttribute("valList", valList);
 		
 		List<Map<String, Object>> columns = new ArrayList();
 		
@@ -74,13 +75,13 @@ public class GoProductDetaileServlet extends HttpServlet{
 		staticColumn4.put("fixed", "right");
 		staticColumn4.put("title", "操作");
 		staticColumn4.put("width", 134);
-		staticColumn4.put("toolbar", "#product_detailed_edit");
+		staticColumn4.put("toolbar", "#product-attrVals-table-operate");
 		columns.add(staticColumn4);
 		
 		// 将结果转换为JSON格式
 		String jsonColumns = new Gson().toJson(columns);
 		req.setAttribute("tableHead", jsonColumns);
 		
-		req.getRequestDispatcher("/background/pages/product/product_detailed.jsp").forward(req, resp);
+		req.getRequestDispatcher("/background/pages/product/product_attr_vals.jsp").forward(req, resp);
 	}
 }

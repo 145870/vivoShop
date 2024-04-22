@@ -6,8 +6,10 @@
 <head>
 <meta charset="utf-8">
 <title></title>
-	<script type="text/javascript" src="/vivoShop/background/lib/layui/layui.js"></script>
+	<!-- 
+		<script type="text/javascript" src="/vivoShop/background/lib/layui/layui.js"></script>
 	<link href="/vivoShop/background/lib/layui/css/layui.css" rel="stylesheet">
+	 -->
 </head>
 
 
@@ -95,7 +97,7 @@
 
 
 					<div class="layui-col-md6">
-						<span>日期范围:</span>
+						<span>上架时间:</span>
 						<div class="layui-inline" id="product-select-date">
 							<div class="layui-input-inline">
 								<input name='startTime' type="text" autocomplete="off"
@@ -156,7 +158,7 @@
 			<div class="tabel">
 				<table class="layui-hide" id="product-information-body-table">
 				</table>
-				<script type="text/html" id="barDemo">
+				<script type="text/html" id="product-information-table-operate">
 			  <div class="layui-clear-space">
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="more">
@@ -170,12 +172,9 @@
 		</div>
 	</div>
 	<script>
-		var form = layui.form;
 
 		// 当表单元素被动态插入时，需主动进行组件渲染才能显示
 		form.render(); // 渲染全部表单
-
-		var laydate = layui.laydate;
 		// 日期范围 - 左右面板独立选择模式
 		laydate
 				.render({
@@ -185,9 +184,6 @@
 				});
 
 		//表格渲染
-		var table = layui.table;
-		var dropdown = layui.dropdown;
-		
 		function refreshAndClearForm() {
 	        // 清空表单内容
 	        $('#product-name').val('');
@@ -220,7 +216,7 @@
 	            },{
 					field : 'information_name',
 					title : '产品名',
-					width : 100
+					width : 150
 				}, {
 					field : 'description',
 					title : '描述',
@@ -232,12 +228,12 @@
 				}, {
 					field : 'status',
 					title : '上架状态',
-					width : 100,
+					width : 120,
 					sort: true
 				}, {
 					field : 'is_last',
 					title : '是否新品',
-					width : 100,
+					width : 120,
 					sort: true
 				}, {
 					field : 'create_time',
@@ -254,7 +250,7 @@
 					title : '操作',
 					width : 134,
 					minWidth : 125,
-					toolbar : '#barDemo'
+					toolbar : '#product-information-table-operate'
 				} ] ],
 				url : "pages/function/product_information/selAll",
 				//skin: 'line', // 表格风格
@@ -306,7 +302,8 @@
 													 //查看详细
 												   	openDetaile(data);
 												 } else if(menudata.id === 'selImg'){
-												   
+													 //查看图片
+												   	openImgs(data)
 												 } else if(menudata.id === 'del'){
 													 delProdcut(data)
 												}else if(menudata.id === 'go'){
@@ -345,7 +342,7 @@
 					    fullPanel: true
 					});
 					
-					$("#addNewProduct").submit(function(){
+					$("#addNewProduct").off("submit").on("submit", function(event){
 							event.preventDefault();
 							var formData = $("#addNewProduct").serializeArray();
 							// 检查除了name为isnew以外的所有字段是否都有值
@@ -436,17 +433,18 @@
 										}else{
 											layer.msg('修改失败', {icon: 0});
 										}
+										if(index1){
+											 layer.close(index1);
+											 //重新渲染
+											 refreshPITable();
+										}
 									},error: function(xhr, status, error) {
 										//console.log(xhr)
 										layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
 								    }
 								})
 						        
-						        if(index1){
-									 layer.close(index1);
-									 //重新渲染
-									 refreshPITable();
-								}
+						        
 						 }, function(){
 						        //取消
 							 if(index1){
@@ -477,6 +475,10 @@
 			    	 url:"/vivoShop/background/pages/function/product_information/delete",
 			    	 data:{id:data.id},
 			    	 success:function(txt){
+			    		 if(txt=="1451"){
+						    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+						    	return;
+						    }
 						if(txt=="true"){
 							layer.msg('删除成功', {icon: 1});
 							refreshPITable();
@@ -503,11 +505,14 @@
 					    	 url:"/vivoShop/background/pages/function/product_information/delete",
 					    	 data:{id:row.id},
 					    	 success:function(txt){
-								if(txt=="true"){
-									
-								}else{
-									layer.msg('删除失败：'+row.information_name, {icon: 0});
-								}
+					    		 if(txt=="1451"){
+								    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+								    	return;
+								    }
+					    		 if(txt=="false"){
+										layer.msg('删除失败', {icon: 0});
+									}
+								refreshPITable();
 							},error: function(xhr, status, error) {
 								//console.log(xhr)	
 								layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
@@ -515,7 +520,7 @@
 					     })
 					});
 					layer.msg('删除完成', {icon: 1});
-					refreshPITable();
+					
 					layer.close(index);
 				 });
 				
@@ -560,7 +565,7 @@
 		//查看商品详细
 		function openDetaile(data){
 			 $.ajax({
-			   		url:'/vivoShop/background/gopages/goProductDetaile',
+			   		url:'/vivoShop/background/gopages/goProductAttrVals',
 			   		data:{id:data.id},
 			    	success:function(html){
 			    		var index=layer.open({
@@ -570,6 +575,25 @@
 					   		maxmin: true,
 					   		area: ['80%', '80%'],
 					   		content: html,
+					   		end: function() {
+					   	        // 弹窗关闭后执行的操作
+					   	        index = null; // 清除 index 变量
+
+					   	        // 使用Ajax请求删除session中的属性
+					   	        $.ajax({
+					   	            url: '/vivoShop/deleteSessionAttributes',
+					   	            type: 'POST',
+					   	            data: {
+					   	                keys: ['productid', 'psList', 'valList'] // 需要删除的session属性名
+					   	            },
+					   	            success: function(response) {
+					   	                console.log('作用域删除完成')
+					   	            },
+					   	            error: function(error) {
+					   	                // 删除失败的处理逻辑
+					   	            }
+					   	        });
+					   	    }
 						});
 			    		
 			    		form.render();
@@ -598,6 +622,50 @@
 		        where: serializedData
 		    });
 		})
+		
+		
+		//查看图片
+		function openImgs(data){
+			 $.ajax({
+			   		url:'/vivoShop/background/gopages/goProductImgs',
+			   		data:{id:data.id},
+			    	success:function(html){
+			    		var index=layer.open({
+					   		type:1,
+					   		title: '商品图片:'+data.information_name,
+					   		shadeClose: true,
+					   		maxmin: false,
+					   	 	resize: false,
+					   		area: ['1080px', '80%'],
+					   		content: html,
+					   		end: function() {
+					   	        // 弹窗关闭后执行的操作
+					   	        index = null; // 清除 index 变量
+
+					   	        // 使用Ajax请求删除session中的属性
+					   	        $.ajax({
+					   	            url: '/vivoShop/deleteSessionAttributes',
+					   	            type: 'POST',
+					   	            data: {
+					   	                keys: ['productid', 'psList', 'valList'] // 需要删除的session属性名
+					   	            },
+					   	            success: function(response) {
+					   	                console.log('作用域删除完成')
+					   	            },
+					   	            error: function(error) {
+					   	                // 删除失败的处理逻辑
+					   	            }
+					   	        });
+					   	    }
+						});
+			    		
+			    		
+					},error: function(xhr, status, error) {
+						//console.log(xhr)	
+						layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+					}
+			   	 })
+		}
 	</script>
 
 

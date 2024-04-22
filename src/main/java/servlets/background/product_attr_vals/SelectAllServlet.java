@@ -1,4 +1,4 @@
-package servlets.background.product_detailed;
+package servlets.background.product_attr_vals;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,16 +24,20 @@ import entity.ProductAttrValue;
 import entity.ProductSpecification;
 import entity.ProductsInformation;
 
-@WebServlet("/background/pages/function/product_detailed/selAll")
+@WebServlet("/background/pages/function/product_attr_vals/selAll")
 public class SelectAllServlet extends HttpServlet{
 	ProductAttrValueDAO dao=new ProductAttrValueDAO();
 	@Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("utf-8");
         resp.setCharacterEncoding("UTF-8");
-        String id = req.getParameter("id");
+        String id = req.getSession().getAttribute("productid")+"";
+        
+        //获取分页属性
+        String page = req.getParameter("page");
+        String limit = req.getParameter("limit");
 
-        Map<String, Object> map = dao.getAllAndCountByProductId(id);
+        Map<String, Object> map = dao.getAllAndCountByProductId(id,page,limit);
         Map<String, Object> jsonData = new HashMap();
         List<ProductAttrValue> list = (List<ProductAttrValue>) map.get("list");
 		jsonData.put("code", 0);
