@@ -1,12 +1,10 @@
 package servlets.personalCenter;
 import com.aliyun.dysmsapi20170525.Client;
-import com.aliyun.tea.*;
 
 import java.util.Random;
 
-import com.aliyun.dysmsapi20170525.*;
+
 import com.aliyun.dysmsapi20170525.models.*;
-import com.aliyun.teaopenapi.*;
 import com.aliyun.teaopenapi.models.*;
 
 public class Sample {
