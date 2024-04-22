@@ -84,4 +84,27 @@ public class InventoryDetailsDAO extends BaseDAO{
 		String sql = "delete from inventory_details where id = ? " ;
 		return this.execute(sql,id);
 	}
+	
+	public Long getInsertedId(){
+		String sql = "SELECT MAX(id) FROM inventory_details";
+		return this.executeQuery(sql, new Mapper<Long>() {
+
+			@Override
+			public List<Long> mapper(ResultSet rs) throws SQLException {
+				List<Long> list = new ArrayList<Long>();
+				if (rs.next()) {
+					list.add(rs.getLong(1));
+				}else {
+					list.add((long) -1);
+				}
+				return list;
+			}
+			
+		}).get(0);
+	}
+	
+	public int getQuantityById(String id) {
+		String sql = "SELECT quantity from inventory_details where id = ?";
+		return Integer.valueOf(this.singleObject(sql, id).toString());
+	}
 }

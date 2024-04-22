@@ -14,14 +14,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.InventoryDetailsDAO;
+import DAO.InventoryUpdateDAO;
 import DAO.ProductAttrValueDAO;
 import DAO.ProductsInformationDAO;
+import entity.Admin;
 
 @WebServlet("/background/pages/function/product_attr_vals/add")
 public class InsertProductAttrValsServlet extends HttpServlet{
 	
 	private ProductAttrValueDAO dao = new ProductAttrValueDAO();
 	InventoryDetailsDAO idao = new InventoryDetailsDAO();
+	InventoryUpdateDAO iudao = new InventoryUpdateDAO();
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
@@ -51,7 +54,11 @@ public class InsertProductAttrValsServlet extends HttpServlet{
 			if (newID!="-1") {
 				int kcjg = idao.doInsert(newID, count);
 				if (kcjg>0) {
+					String IDid = idao.getInsertedId()+"";
+					Admin admin = (Admin) req.getSession().getAttribute("admin");
+					String admin_id = admin.getId()+"";
 					//添加库存变动
+					iudao.doInsert(IDid,"0","0",count, admin_id,"新增规格组合");			
 				}
 			}else {
 				jg = "规格新增成功,库存新增错误";

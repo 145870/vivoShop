@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import DAO.AdminDAO;
 import entity.Admin;
@@ -29,7 +30,10 @@ public class LoginServlet extends HttpServlet{
 		if (admin==null) {
 			resp.getWriter().print("false");
 		}else {
-			req.getSession().setAttribute("admin", admin);
+			HttpSession session = req.getSession();
+			session.setAttribute("admin", admin);
+			// 设置Session的超时时间为1小时
+			session.setMaxInactiveInterval(60 * 60);
 			resp.getWriter().print("true");
 		}
 	}

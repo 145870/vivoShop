@@ -509,6 +509,9 @@
 								    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
 								    	return;
 								    }
+					    		 if(txt=="false"){
+										layer.msg('删除失败', {icon: 0});
+									}
 								refreshPITable();
 							},error: function(xhr, status, error) {
 								//console.log(xhr)	

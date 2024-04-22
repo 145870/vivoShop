@@ -21,8 +21,8 @@
 			<div class="login-center clearfix">
 				<div class="login-center-img"><img src="images/name.png"/></div>
 				<div class="login-center-input">
-					<input type="text" name="account" value="" placeholder="请输入您的用户名" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
-					<div class="login-center-input-text">用户名</div>
+					<input type="text" name="account" value="" placeholder="请输入您的账号" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
+					<div class="login-center-input-text">账号</div>
 				</div>
 			</div>
 			<div class="login-center clearfix">

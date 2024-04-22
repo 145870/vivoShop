@@ -41,4 +41,29 @@ public class AdminDAO extends BaseDAO{
 		}
 		
 	}
+	
+	public List<Admin> getAdmin() {
+		String sql = "SELECT * FROM admin ";
+		return this.executeQuery(sql, new Mapper<Admin>() {
+
+			@Override
+			public List<Admin> mapper(ResultSet rs) throws SQLException {
+				List<Admin> list = new ArrayList<Admin>();
+				while(rs.next()) {
+					list.add(new Admin(
+								rs.getLong(1),
+								rs.getString(2),
+								rs.getString(3),
+								rs.getString(4),
+								rs.getString(5),
+								rs.getInt(6),
+								rs.getString(7),
+								rs.getLong(8),
+								rs.getDate(9)
+							));
+				}
+				return list;
+			}
+		});
+	}
 }

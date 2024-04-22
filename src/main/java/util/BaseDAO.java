@@ -165,7 +165,7 @@ public class BaseDAO {
 			}
 			
 		}, params);
-		
+		System.out.println(list.get(0));
 		return list.get(0);//只需要List集合中的第0个元素
 	}
 }

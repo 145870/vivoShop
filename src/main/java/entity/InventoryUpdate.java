@@ -10,6 +10,38 @@ public class InventoryUpdate {
 	 private int oldQuantity;
 	 private int newQuantity;
 	 private long adminId;
+	 private String reason;
+	 
+	 private String pName;
+	 private String[] attr_vals;
+	 private String admin_name;
+	 
+	 
+	 
+	public String getReason() {
+		return reason;
+	}
+	public void setReason(String reason) {
+		this.reason = reason;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public String[] getAttr_vals() {
+		return attr_vals;
+	}
+	public void setAttr_vals(String[] attr_vals) {
+		this.attr_vals = attr_vals;
+	}
+	public String getAdmin_name() {
+		return admin_name;
+	}
+	public void setAdmin_name(String admin_name) {
+		this.admin_name = admin_name;
+	}
 	public long getId() {
 		return id;
 	}
@@ -53,7 +85,7 @@ public class InventoryUpdate {
 		this.adminId = adminId;
 	}
 	public InventoryUpdate(long id, long inventoryDetailsId, int updateType, Date updateTime, int oldQuantity,
-			int newQuantity, long adminId) {
+			int newQuantity, long adminId,String reason) {
 		super();
 		this.id = id;
 		this.inventoryDetailsId = inventoryDetailsId;
@@ -62,6 +94,7 @@ public class InventoryUpdate {
 		this.oldQuantity = oldQuantity;
 		this.newQuantity = newQuantity;
 		this.adminId = adminId;
+		this.reason = reason;
 	}
 	public InventoryUpdate() {
 		super();

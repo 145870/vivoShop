@@ -81,7 +81,8 @@
 		<div id='inventory-details-select'>
 			<form class="layui-form" style="padding: 20px; margin-bottom: 50px">
 				<div class="layui-col-md3 layui-input-group">
-					<span class="layui-input-prefix">产品名称:</span> <input name="name"
+					<span class="layui-input-prefix">产品名称:</span> 
+					<input name="name"
 						type="text" id="product-name" placeholder="产品名"
 						class="layui-input">
 				</div>
@@ -124,7 +125,10 @@
 				<script type="text/html" id="inventory-details-table-operate">
 			  		<div class="layui-clear-space">
 			   			<a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
-			    		<a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="del">删除</a>
+			    		<a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="more">
+			     	 	更多 
+			      		<i class="layui-icon layui-icon-down"></i>
+			   			 </a>
 					</div>
 				</script>
 			</div>
@@ -272,7 +276,7 @@
 						event.preventDefault(); // 阻止表单默认提交行为
 						var formData = $(this).serializeArray(); // 获取表单数据
 						for (var i = 0; i < formData.length; i++) {
-							if (formData[i].name !== "description" && formData[i].value === "") {
+							if (formData[i].value === "") {
 						    	layer.msg('内容不能为空!', {icon: 0, time: 1000});
 						        return false; // 返回 false 阻止表单提交
 						    }
@@ -311,8 +315,122 @@
 			var index1;
 			if (obj.event === 'edit') {
 				updateIPCount(data);
-			} else if (obj.event === 'del') {
-				deleteInventoryDetails(data);
+			} else if (obj.event === 'more') {
+				// 更多 - 下拉菜单
+				dropdown.render({
+							elem : this, // 触发事件的 DOM 对象
+							show : true, // 外部事件触发即显示
+							data : [ {
+								title : '入库',
+								id : 'enter'
+							}, {
+								title : '出库',
+								id : 'goOut'
+							}, {
+								title : '删除',
+								id : 'del'
+							} ],
+							click : function(menudata) {
+								 if(menudata.id === 'enter'){
+									 //入库
+									 layer.prompt({title: '入库'}, function(value, index, elem){
+											
+										 if(value === ''){
+										    layer.msg('请输入内容',{icon:2}); 
+										    return;
+										 }
+										 const numValue = Number(value);
+										    // 检查是否是整数
+										    if (!Number.isInteger(numValue)) {
+										        layer.msg('请输入整数',{icon:2});
+										        return false;
+										    }
+
+										    // 检查是否大于 0
+										    if (numValue <= 0) {
+										        layer.msg('请输入大于0的数字',{icon:2});
+										        return false;
+										    }
+										 
+										 layer.close(index);
+										 
+										 $.ajax({
+											 url:"/vivoShop/background/pages/function/inventory_details/enter",
+											 type:"post",
+											 data:{
+												 id:data.id,
+												 count:value
+											 },
+											 dataType:'text',
+											 success:function(txt){
+												 if(txt=="true"){
+													layer.msg('入库成功!', {icon: 1});
+												 }else{
+													 layer.msg('入库失败!', {icon: 2});
+												 }
+												 refreshIDTable();
+											 },error: function(xhr, status, error) {
+													//console.log(xhr)	
+													layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
+											}
+										 	
+										 });
+									});
+								 } else if(menudata.id === 'goOut'){
+									 //出库
+									 layer.prompt({title: '出库'}, function(value, index, elem){
+											
+										 if(value === ''){
+										    layer.msg('请输入内容',{icon:2}); 
+										    return;
+										 }
+										 const numValue = Number(value);
+										    // 检查是否是整数
+										    if (!Number.isInteger(numValue)) {
+										        layer.msg('请输入整数',{icon:2});
+										        return false;
+										    }
+
+										    // 检查是否大于 0
+										    if (numValue <= 0) {
+										        layer.msg('请输入大于0的数字',{icon:2});
+										        return false;
+										    }
+										 
+										 layer.close(index);
+										 
+										 $.ajax({
+											 url:"/vivoShop/background/pages/function/inventory_details/goOut",
+											 type:"post",
+											 data:{
+												 id:data.id,
+												 count:value
+											 },
+											 dataType:'text',
+											 success:function(txt){
+												 if(txt=="true"){
+													layer.msg('出库成功!', {icon: 1});
+												 }else if(txt=="false"){
+													 layer.msg('入库失败!', {icon: 2});
+												 }else{
+													 layer.msg(txt, {icon: 2});
+												 }
+												 refreshIDTable();
+											 },error: function(xhr, status, error) {
+													//console.log(xhr)	
+													layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
+											}
+										 	
+										 });
+									});
+								 } else if(menudata.id === 'del'){
+									 deleteInventoryDetails(data);
+								 }
+							},
+							align : 'right', // 右对齐弹出
+							style : 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' // 设置额外样式
+						})
+				
 			}
 			
 			

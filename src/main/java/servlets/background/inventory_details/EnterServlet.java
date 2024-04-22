@@ -23,25 +23,27 @@ import entity.Admin;
 import entity.InventoryDetails;
 import entity.ProductAttrValue;
 
-@WebServlet("/background/pages/function/inventory_details/add")
-public class InsertServlet extends HttpServlet {
+@WebServlet("/background/pages/function/inventory_details/enter")
+public class EnterServlet extends HttpServlet {
 	InventoryDetailsDAO dao = new InventoryDetailsDAO();
 	InventoryUpdateDAO iudao = new InventoryUpdateDAO();
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("UTF-8");
 		
-		String pavid = req.getParameter("pav");
-		String count = req.getParameter("count");
+		String id = req.getParameter("id");
+		int count = Integer.valueOf(req.getParameter("count"));
+		int oldCount = dao.getQuantityById(id);
 		
-		String jg = dao.doInsert(pavid, count)>0?"true":"false";
+		int newCount = oldCount+count;
+		
+		String jg = dao.doUpdateCountByID(id, newCount+"")>0?"true":"false";
 		if (jg == "true") {
 			Admin admin = (Admin) req.getSession().getAttribute("admin");
 			String admin_id = admin.getId()+"";
 			//添加库存变动
-			String IDid = dao.getInsertedId()+"";
-			iudao.doInsert(IDid,"0","0",count, admin_id,"新增库存");
+			iudao.doInsert(id,"0",oldCount+"",newCount+"", admin_id,"入库");
 		}
 		resp.getWriter().print(jg);
 		
