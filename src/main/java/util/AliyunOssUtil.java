@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
@@ -144,7 +143,7 @@ public class AliyunOssUtil {
         }
     }
     public static void main(String[] args) {
-    	AliyunOssUtil u = new AliyunOssUtil();
+    	//AliyunOssUtil u = new AliyunOssUtil();
     	
     		//下载图片 第一个参数是服务器图片路径 第二个是本地路径
     		//u.download("images/1.jpg","F:/o.jpg");
