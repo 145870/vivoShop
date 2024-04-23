@@ -34,7 +34,10 @@
         
         
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+<<<<<<< Upstream, based on branch 'main' of git@github.com:145870/vivoShop.git
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/test/java"/>
+=======
+>>>>>>> a84433a ADD
                                                         
         
         
@@ -42,8 +45,12 @@
         
         
         <property name="java-output-path" value="/vivoShop/target/classes"/>
+<<<<<<< Upstream, based on branch 'main' of git@github.com:145870/vivoShop.git
                 
         <property name="context-root" value="tr03802_web"/>
+=======
+        <property name="context-root" value="vivoShop"/>
+>>>>>>> a84433a ADD
                                                     
     
     
