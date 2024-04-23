@@ -17,11 +17,10 @@ public class registerPhoneServlets extends HttpServlet{
 		VerifyPhoneDAO ver = new VerifyPhoneDAO();
 		boolean zc = ver.isPhoneNumberExist(zcphone).get(0);
 		if(zc) {
-            System.out.println("号码正确");
             resp.getWriter().write("true");
         } else {
-            System.out.println("号码错误");
             resp.getWriter().write("false");
+            
         }
 	}
 }

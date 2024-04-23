@@ -148,16 +148,7 @@
 																	'color':'rgb(128,128,128)'
 															});
 															}else if(txt=='false'){
-																layer.alert('查无此账号！', {
-																	icon: 2,
-																	closeBtn: 0, // 关闭按钮不显示
-																	yes: function (index, layero) { // 点击确定按钮的回调函数
-																		//跳转
-											                   			layer.close(index); // 关闭对话框
-											                		}
-																	
-																	
-											              		});
+																layer.msg("手机号不存在!",{icon:2,time:1200})
 																$('#ip_num').val("");
 															}
 														}
@@ -253,6 +244,9 @@
 								<!-- 验证手机号是否符合规范 -->
 								<script>
 									$('#login').click(function(){
+										event.preventDefault(); // 阻止表单提交
+										var isTwo = ($("#gouxuan").css("display") === "block");
+										console.log(isTwo)
 										if ($(this).hasClass('mimalogin')) {
 										     if($('#ip_num_mm').val().length==11){
 										    	 if($('#pwdtext').val()!=""){
@@ -260,30 +254,16 @@
 										    			 type:'GET',
 										    			 url:'loginServlets',
 										    			 data:{
+										    				 is:isTwo,
 										    				 phone:$('#ip_num_mm').val(),
 										    				 pwd:$('#pwdtext').val(),
 										    			 },success:function(txt){
 										    				 if(txt=="true"){
-										    					 layer.alert('登录成功！', {
-																		icon: 1,
-																		closeBtn: 0, // 关闭按钮不显示
-																		yes: function (index, layero) { // 点击确定按钮的回调函数
-																			//跳转
-												                   			layer.close(index); // 关闭对话框
-												                   			window.location.href = "zhuye.jsp";
-												                		}
-																		
-												              		});
+										    					 layer.msg('登录成功！', {icon: 2});
+										    					 window.location.href = "zhuye.jsp";
 										    				 }else if(txt=="false"){
-										    					 layer.alert('账号或密码错误！', {
-																		icon: 2,
-																		closeBtn: 0, // 关闭按钮不显示
-																		yes: function (index, layero) { // 点击确定按钮的回调函数
-																			//跳转
-												                   			layer.close(index); // 关闭对话框
-												                		}
-																		
-												              		});
+										    					 layer.msg('账号或密码错误！', {icon: 2});
+										    					 
 										    				 }
 										    			 }
 										    		 })
@@ -296,21 +276,26 @@
 										  }else {
 											  if($('#ip_num').val().length!=11){
 													$('#tishi').show()
-													event.preventDefault(); // 阻止表单提交
 												}else if($('#yanzhenmaText').val()===""){
 													$('#shuruyanzheng').show()
-													event.preventDefault(); // 阻止表单提交
 												}else if($('#yanzhenmaText').val()===code){
-													layer.alert('登录成功！', {
-														icon: 1,
-														closeBtn: 0, // 关闭按钮不显示
-														yes: function (index, layero) { // 点击确定按钮的回调函数
-															//跳转
-								                   			layer.close(index); // 关闭对话框
-								                   			window.location.href = "zhuye.jsp";
-								                		}
+													console.log($('#ip_num_mm').val())
+													//上传该用户的资料
+													$.ajax({
+														url:"setUserSession",
+														data:{
+															is:isTwo,
+															phone:$('#ip_num').val()
+														},success:function(gohtml){
+															setTimeout(function(){
+																window.location.href = gohtml;
+															},1000)
+										    			 }
 														
-								              		});
+													})
+													layer.msg('登录成功！', {icon: 2});
+													
+													
 												}else{
 													$('#Validation_error').show();
 												}

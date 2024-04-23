@@ -350,15 +350,13 @@
 													data:formData,
 													success:function(txt){
 														if(txt=="true"){
-															layer.alert('注册成功！', {
-																icon: 1,
-																closeBtn: 0, // 关闭按钮不显示
-																yes: function (index, layero) { // 点击确定按钮的回调函数
-																	//跳转
-																	window.location.href = "login.jsp";
-										                   			layer.close(index); // 关闭对话框
-										                		}
-										              		});
+															layer.msg("注册成功！",{icon:1})
+															setTimeout(function(){
+																window.location.href = "login.jsp";
+									                   			layer.close(index); // 关闭对话框
+															},1300)
+														}else{
+															layer.msg("注册失败,该手机号已被注册！",{icon:2})
 														}
 													}
 												})

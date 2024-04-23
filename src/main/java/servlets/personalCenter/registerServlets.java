@@ -1,6 +1,7 @@
 package servlets.personalCenter;
 
 import java.io.IOException;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,12 +15,12 @@ public class registerServlets extends HttpServlet{
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 			req.setCharacterEncoding("utf-8");
 			String phone = req.getParameter("phone");
-			
-			//获取手机验证码
 		
 			try {
-				String yzm = Sample.huoquduanxin(phone);
-				resp.getWriter().write(yzm);
+				Random ran = new Random();
+		        // 生成一个10000以内的随机整数
+		        int randomNumber = ran.nextInt(9000)+1000;
+				resp.getWriter().write(randomNumber+"");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

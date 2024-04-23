@@ -3,7 +3,7 @@ package entity;
 import java.util.Date;
 
 public class UserProfile {
-	private int id;
+	private Long id;
 	private String account_number;
 	private String user_name;
 	private String phone;
@@ -14,10 +14,10 @@ public class UserProfile {
 	private Date birthday;
 	private Date create_time;
 	private String head_image_url;
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public String getAccount_number() {
@@ -80,7 +80,7 @@ public class UserProfile {
 	public void setHead_image_url(String head_image_url) {
 		this.head_image_url = head_image_url;
 	}
-	public UserProfile(int id, String account_number, String user_name, String phone, String user_password,
+	public UserProfile(Long id, String account_number, String user_name, String phone, String user_password,
 			String mailbox, String address, int sex, Date birthday, Date create_time, String head_image_url) {
 		super();
 		this.id = id;
