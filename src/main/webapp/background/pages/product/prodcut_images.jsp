@@ -447,26 +447,6 @@
 			});
 		}
 		
-		
-		// 点击图片时显示大图
-		function showImage(imgUrl) {
-		  layer.photos({
-		    photos: {
-		      "title": "商品图片", // 相册标题
-		      "data": [
-		        {
-		          "src": imgUrl // 点击的图片地址
-		        }
-		      ]
-		    },
-		    shadeClose: true, // 是否点击遮罩关闭
-		    closeBtn: 1, // 关闭按钮样式，0无，1有
-		    anim: 5 // 动画类型
-		  });
-		}
-		
-	
-		
 	</script>
 
 
