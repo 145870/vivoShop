@@ -1,5 +1,4 @@
 /build/
-target/
 .classpath
 # Built application files
 *.apk
