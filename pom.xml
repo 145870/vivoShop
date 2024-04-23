@@ -67,13 +67,7 @@
    <version>LATEST</version>
 </dependency>
 
-
-		<dependency>
-			<groupId>com.zktr.item</groupId>
-			<artifactId>tr03802ma</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-	</dependencies>
+</dependencies>
   
   <build>
 		<plugins>

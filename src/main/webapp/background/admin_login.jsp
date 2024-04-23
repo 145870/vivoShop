@@ -10,7 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" media="screen" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/reset.css"/>
-  
 </head>
 <body>
 
@@ -22,7 +21,7 @@
 			<div class="login-center clearfix">
 				<div class="login-center-img"><img src="images/name.png"/></div>
 				<div class="login-center-input">
-					<input type="text" name="account" value="${adminAccount}" placeholder="请输入您的账号" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
+					<input type="text" name="account" value="" placeholder="请输入您的账号" onfocus="this.placeholder=''" onblur="this.placeholder='请输入您的用户名'"/>
 					<div class="login-center-input-text">账号</div>
 				</div>
 			</div>
@@ -48,22 +47,6 @@
 		<script type="text/javascript" src="./lib/layui/layui.js" charset="utf-8"></script>
 
 <script type="text/javascript">
-$.ajax({
-	url: '/vivoShop/deleteSessionAttributes',
-	type: 'POST',
-	data: {
-		keys: ['admin'] // 需要删除的session属性名
-	},success: function(response) {
-		console.log('作用域删除完成')
-	}, error: function(error) {
-		 // 删除失败
-	}
-});
-
-
-
-
-
 var layer = layui.layer;
 
 $("form.login").submit(function(e){
