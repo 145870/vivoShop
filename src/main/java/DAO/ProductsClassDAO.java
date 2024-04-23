@@ -8,29 +8,28 @@ import java.util.List;
 import java.util.Map;
 
 import entity.ProductsClass;
+import util.AliyunOssUtil;
 import util.BaseDAO;
 import util.Mapper;
 
 public class ProductsClassDAO extends BaseDAO{
-	public List<ProductsClass> getProductsClasses(){
+	
+	AliyunOssUtil alyoss=new AliyunOssUtil();
+	public List<ProductsClass> getProductsClasses() {
 		String sql = "select * from products_class";
 		return this.executeQuery(sql, new Mapper<ProductsClass>() {
 
 			@Override
 			public List<ProductsClass> mapper(ResultSet rs) throws SQLException {
 				List<ProductsClass> list = new ArrayList<ProductsClass>();
-				while(rs.next()) {
-					list.add(new ProductsClass(
-								rs.getLong(1),
-								rs.getString(2)
-							));
-					
+				while (rs.next()) {
+					list.add(new ProductsClass(rs.getLong("id"), rs.getString("class_name")));
 				}
 				return list;
 			}
 		});
 	}
-	
+
 	public Map<String,Object> getProductsClassesByName(String name,String page,String limit){
 		String sql = "select * from products_class where class_name like ? ORDER BY id DESC ";
 		Map<String,Object> map = new HashMap<String, Object>();
@@ -121,4 +120,27 @@ public class ProductsClassDAO extends BaseDAO{
 		String sql = "delete from products_class where id=?";
 		return this.execute(sql,id);
 	}
+	// 查找系列的缩略图
+			public List<ProductsClass> queryclassById(Long pcId) {
+				String sql = "SELECT * FROM products_class c INNER JOIN products_information i ON c.id=i.class_id\r\n"
+						+ "			 INNER JOIN products_images_url u ON i.id=u.information_id WHERE c.id=? AND u.`class_name`=0 and u.url like '%DM_%001.%'";
+				return this.executeQuery(sql, new Mapper<ProductsClass>() {
+		
+					@Override
+					public List<ProductsClass> mapper(ResultSet rs) throws SQLException {
+						List<ProductsClass> list = new ArrayList<ProductsClass>();
+						while (rs.next()) {
+							String url = rs.getString(14);
+							
+							
+							list.add(new ProductsClass(rs.getLong(1), rs.getString(2), rs.getInt(3), rs.getString(4),
+									rs.getString(5), rs.getInt(6), rs.getInt(7), rs.getInt(8), rs.getDate(9), rs.getDate(10),
+									rs.getInt(11), rs.getInt(12), rs.getInt(13),alyoss.getImageUrl(url) , rs.getDate(15)));
+						}
+						return list;
+					}
+				},pcId);
+			}
+
+
 }

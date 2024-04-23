@@ -29,3 +29,5 @@ captures/
 # Keystore files
 *.jks
 /target/*
+/.settiongs/*
+/target/

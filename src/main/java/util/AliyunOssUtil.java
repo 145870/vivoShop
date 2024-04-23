@@ -5,7 +5,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.net.URL;
 
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSS;
@@ -143,23 +142,5 @@ public class AliyunOssUtil {
             ossClient.shutdown();
         }
     }
-    public static void main(String[] args) {
-    	AliyunOssUtil u = new AliyunOssUtil();
-    	
-    		//下载图片 第一个参数是服务器图片路径 第二个是本地路径
-    		//u.download("images/1.jpg","F:/o.jpg");
-    		
-    		//上传图片
-//    		File file = new File("F:/壁纸/2.jpg");//本地
-//            InputStream inputStream = new FileInputStream(file);
-//            //第一个是需要上传到服务器上的路径包括文件名 第二个是本地的图片
-//    		u.upload("images/2.jpg",inputStream);
-    		
-    		//删除文件
-    		//u.delete("images/2.jpg");
-    		
-    		//获取图片链接 用于发布到网页等 参数为服务器上的地址
-			//System.out.println(u.getImageUrl("images/1.jpg"));
-    	//u.outObjectListing("");
-	}
+
 }
