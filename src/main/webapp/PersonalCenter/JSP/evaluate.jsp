@@ -6,23 +6,17 @@
 		<meta charset="utf-8">
 		<title></title>
 	</head>
-	
-	<!-- 引入 layui.css -->
-	<link href="//unpkg.com/layui@2.9.8/dist/css/layui.css" rel="stylesheet">
-	<!-- 引入 layui.js -->
-	<script src="//unpkg.com/layui@2.9.8/dist/layui.js"></script>
+	<script type="text/javascript" src="/vivoShop/static/jquery-3.5.1.min.js"></script>	
+	<link rel="stylesheet" href="/vivoShop/static/css/headNav.css" />
+	<script type="text/javascript" src="/vivoShop/static/js/setNav.js"></script>
+	<script type="text/javascript" src="/vivoShop/front/js/vivohome.js"></script>
 	
 	<link rel="stylesheet" href="../CSS/evaluate.css"/>
-	<script src="../jquery-3.5.1.min.js"></script>
-	<style>
-		blockquote, body, button, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
-				margin: 0 auto;
-			}
-	</style>
 
-	
-	</head>
 	<body>
+		<div>
+		<jsp:include page="/static/jsp/head.jsp"></jsp:include>
+		</div>
 		
 		<div id="context">
 			<div id="context_head">
@@ -105,6 +99,22 @@
 						</dl>
 					</div>
 				</div>
+				
+				
+				<script>
+					$('#mypingjia').click(function(){
+						$(this).css('border-bottom','3px solid #000')
+						$('#yipingjia').css('border-bottom','')
+						$('.not_data').show()
+						$('.not_data_two').hide()
+					})
+					$('#yipingjia').click(function(){
+						$(this).css('border-bottom','3px solid #000')
+						$('#mypingjia').css('border-bottom','')
+						$('.not_data').hide()
+						$('.not_data_two').show()
+					})
+				</script>
 				<!-- 评价晒单结束 -->
 				
 				<!-- 个人资料开始 -->
@@ -122,24 +132,8 @@
 		</div>
 	<!-- 	<div id="foot_top"></div>
 		<div id="foot_but"></div> -->
+		<div>
+		<jsp:include page="/static/jsp/end.jsp"></jsp:include>
+		</div>
 	</body>
-	
-	<!-- Jq脚本 -->
-	<script>
-	
-	$('#mypingjia').click(function(){
-		$(this).css('border-bottom','3px solid #000')
-		$('#yipingjia').css('border-bottom','')
-		$('.not_data').show()
-		$('.not_data_two').hide()
-	})
-	$('#yipingjia').click(function(){
-		$(this).css('border-bottom','3px solid #000')
-		$('#mypingjia').css('border-bottom','')
-		$('.not_data').hide()
-		$('.not_data_two').show()
-	})
-		
-
-	</script>
 </html>

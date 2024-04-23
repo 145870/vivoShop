@@ -1,8 +1,5 @@
 @charset "UTF-8";
-*{
-	margin: 0 auto;
-	padding: 0;
-}
+
 body{
 	background-color: rgb(247,247,247);
 }
@@ -24,14 +21,20 @@ body{
 	line-height: 72px;
 }
 #Mall_homepage a{
-	cursor: pointer;
+	list-style: none;
+    cursor: pointer;
+    text-decoration: none;
+    color: #333;
 }
 .right_j{
 	position: relative;
-	top: -1px;
+	top: 5px;
 	width: 20px;
 	height: 20px;
 	
+}
+.geren{
+	    z-index: 999;
 }
 .page{
 	font-size: 13px;
@@ -59,9 +62,10 @@ body{
 	min-height: 750px;
 }
 #left_box ul{
-	text-align: center;
+	
 	list-style: none;
-	margin: 20px 20px;
+	    position: relative;
+    right: 8px;
 }
 #left_box ul li a{
 	cursor: pointer;
@@ -73,16 +77,19 @@ body{
 	height: 140px;
 }
 #name{
-	height: 40px;
-	line-height: 40px;
-	margin-top: 20px;
-	padding: 0 10px;
-	font-size: 18px;
-	color: #000;
+	    height: 40px;
+    line-height: 40px;
+    margin-top: 20px;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #000;
+    text-align: center;
+    padding-right: 36px;
 }
 #jifen{
-	height: 30px;
-	line-height: 30px;
+	    height: 30px;
+    line-height: 30px;
+    margin-left: 17px;
 }
 #jifen a{
 	list-style: none;
@@ -93,14 +100,14 @@ body{
 	color: #f04141;
 }
 dl .dt{
-	margin-top: 28px;
-	padding-bottom: 8px;
-	padding-left: 64px;
-	font-weight: 700;
-	height: 24px;
-	line-height: 24px;
-	font-size: 16px;
-	color: #333;
+margin-top: 28px;
+    padding-bottom: 8px;
+    padding-left: 26px;
+    font-weight: 700;
+    height: 24px;
+    line-height: 24px;
+    font-size: 16px;
+    color: #333;
 }
 #left_list dd{
 	height: 35px;
@@ -116,8 +123,9 @@ dl .dt{
 }
 #left_list dd a{
 	display: block;
-	color: #888;
-	padding: 1px 0 2px 64px;
+    color: #888;
+    padding: 1px 0 2px 64px;
+    text-decoration: none;
 }#huanyin{
 	font-size: 21px;
 	line-height: 21px;
