@@ -36,10 +36,6 @@ $(function(){
 	       });
 		
 		
-		
-		
-		
-		
 		//给搜索框添加事件
 		$("#sou").click(function(){
 			$("#sss").css('height','434px').css('display','block').css('opacity','1');
@@ -54,9 +50,6 @@ $(function(){
 			$("#sou-ul").fadeOut().css().css('transition','1s');
 		});
 			
-			
-		
-		
 		
 	});
 	

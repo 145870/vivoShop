@@ -14,139 +14,92 @@
 	<div id="box">
 		<div id="nian">
 			<div id="nian-box">
-				<div id="nian1" class="nian-he">
-												
-				</div>
+				<div id="nian1" class="nian-he"></div>
 				<div id="nian2" class="nian-he"></div>
 				<div id="nian3" class="nian-he"></div>
 			</div>
 		</div>
 		<div id="tou">
 			<ul id="left">
-			    <li>品牌</li>
-			    <li>OriginOS</li>
-			    <li>体验店</li>
-			    <li>官网社区</li>
+				<li>品牌</li>
+				<li>OriginOS</li>
+				<li>体验店</li>
+				<li>官网社区</li>
 			</ul>
 			<ul id="you">
-				<img id="xiazai" src="../image/下载.png"/>
-				<img src=""/>
+				<img id="xiazai" src="../image/下载.png" />
+				<img src="" />
 				<li>下载APP</li>
 				<li>购物车(1)</li>
-				<li>个人中心</li>
+				<li id="geren">个人中心</li>
 			</ul>
+
 		</div>
-		<div id="head">
-			<div id="tu"><img src="../image/vivo.svg" id="vivo"/></div>
-			
-			<ul id="head-nav" class="nav">
-			    <c:forEach items="${leilist}" var="lei">
-        <li>${lei.className}</li>
-    </c:forEach>
-			    <li>商城</li>
-			</ul>
-			
-			<div id="so"><img src="../image/搜索.png"/ id="sou"></div>
-			<div id="navDiv">
-				<div class="navDiv" id="X">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listX}" var="x" varStatus="loop">
-									<a id="aaa" href="DetailsServlet?id=${listX[loop.index].information_id}">
-										<div class='tu-div'>
-										<img class="tupianx" alt="" src="${x.url}">
-										<p>${x.information_name}</p>
-									</div>
-									</a>
-								</c:forEach>
-							</div>
-						</div>
-						<span class="miao-span" class="but-zuo"><button id="prevButton1" onclick="slideLeft()"><</button></span> 
-						<span class="miao-span" class="but-you"><button id="nextButton1" onclick="slideRight()">></button></span>
-					</div>
-
-
+		<div id="deng_kuang">
+			<div id="sanjiao"></div>
+			<div id="gerenbox">
+				<div id="denglubox">
+					<img alt="" src="../image/登陆icon.png"> <a>登录</a>
 				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listS}" var="s">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${s.url}">
-										<p>${s.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-						<span class="miao-span" class="but-zuo"><button id="prevButton2" onclick="slideLeft()"><</button></span> 
-						<span class="miao-span" class="but-you"><button id="nextButton2" onclick="slideRight()">></button></span>
-					</div>
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listY}" var="y">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${y.url}">
-										<p>${y.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-						<span class="miao-span"><button id="prevButton3" onclick="slideLeft()"><</button></span> 
-						<span class="miao-span"><button id="nextButton3" onclick="slideRight()">></button></span>
-					</div>
-
-
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listiQOO}" var="i">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${i.url}">
-										<p>${i.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-						<span class="miao-span" class="but-zuo"><button id="prevButton4" onclick="slideLeft()"><</button></span> 
-						<span class="miao-span" class="but-you"><button id="nextButton4" onclick="slideRight()">></button></span>
-					</div>
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listZN}" var="z">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${z.url}">
-										<p>${z.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-						<span class="miao-span" class="but-zuo"><button id="prevButton5" onclick="slideLeft()"><</button></span> 
-						<span class="miao-span" class="but-you"><button id="nextButton5" onclick="slideRight()">></button></span>
-					</div>
+				<div id="zhucebox">
+					<img alt="" src="../image/注册icon.png"> <a>注册</a>
 				</div>
 			</div>
+		</div>
+
+		<div id="head">
+			<div id="tu">
+				<img src="../image/vivo.svg" id="vivo" />
+			</div>
+
+			<ul id="head-nav" class="nav">
+				<c:forEach items="${leilist}" var="lei">
+					<li><a id="leia" href="LunboXServlet?cid=${lei.id }">${lei.className}</a></li>
+				</c:forEach>
+				<li><a class="leia" href="/vivoShop/front/jsp/HomeServlet">商城</a></li>
+			</ul>
+
+			<div id="so">
+				<img src="../image/搜索.png" / id="sou">
+			</div>
+			<div id="navDiv">
+				<c:forEach items = '${leilist}' var='type' varStatus = 'typeLoop'>
+					<div class="navDiv">
+						<div class="rebox">
+							<div class="re" style='padding:20px;padding-left:80px'>
+								<div class="tubox">
+									<c:forEach items="${productsLists[typeLoop.index]}" var="pi" varStatus="loop">
+   										<c:if test="${loop.index < 6}">
+       										<a id="aaa" href="DetailsServlet?id=${pi.information_id}">
+           										<div class='tu-div'>
+               										<img class="tupianx" alt="" src="${pi.url}">
+                									<p style="">${pi.information_name}</p>
+           										</div>
+       										</a>
+    									</c:if>
+									</c:forEach>
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+
+			</div>
+			
 			<div id="sss">
 				<div id="sss-box">
-					
+
 					<div id="sou-shang">
-						<img src="../image/vivo.svg" id="sou-vivo"/>
+						<img src="../image/vivo.svg" id="sou-vivo" />
 						<form id="form">
-							<input placeholder="iQOO Neo9" id="form-in"/>
-							
+							<input placeholder="iQOO Neo9" id="form-in" />
+
 						</form>
-						<div id="sou-div"><img src="../image/搜索.png" id="sou-tu"/></div>
+						<div id="sou-div">
+							<img src="../image/搜索.png" id="sou-tu" />
+						</div>
 						<span id="span-X">X</span>
-						
+
 					</div>
 					<div id="x"></div>
 					<ul id="sou-ul">
@@ -285,6 +238,22 @@
 			</div>
 		</div>
 	</div>
-	
+	<script>
+		$(document).ready(function() {
+			var geren = $('#geren');
+			var deng_kuang = $('#deng_kuang');
+
+			// 添加鼠标移入事件监听器
+			geren.mouseenter(function() {
+				deng_kuang.css('display', 'block');
+			});
+
+			// 添加鼠标移出事件监听器到 #deng_kuang
+			deng_kuang.mouseleave(function() {
+				deng_kuang.css('display', 'none');
+			});
+
+		});
+	</script>
 </body>
 </html>

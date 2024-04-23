@@ -23,7 +23,14 @@ body {
 	display: flex;
 	list-style: none;
 }
-
+#head {
+	height: 80px;
+	align-items: center;
+	justify-content: center; /* 水平居中 */
+	line-height: 35px;
+	width: 1470px;
+	margin: auto;
+}
 #you {
 	float: right;
 	margin-left: auto;
@@ -360,14 +367,9 @@ dd {
 	margin-left: 120px;
 }
 
-.v {
-	display: inline;
-}
 
-.tu-div {
-	width: 95px;
-	height: 186px;
-}
+
+
 
 #tu-box {
 	width: 1511px;
@@ -376,16 +378,6 @@ dd {
 
 .tubox {
 	display: inline-flex;
-}
-
-.tupianx {
-	max-width: 100%;
-	max-height: 100%;
-	width: auto; /* 确保宽度按比例缩放 */
-	height: auto; /* 确保高度按比例缩放 */
-	display: block; /* 防止图片在某些情况下产生间距 */
-	margin-left: 56px;
-	
 }
 
 .tu-div {
@@ -413,4 +405,53 @@ dd {
 	    text-decoration: none;
     color: black
 }
+.leia{
+	 text-decoration: none;
+    color: black
+}
+#gerenbox{
+	width: 100px;
+    height: 70px;
+    position: absolute;
+    top: 30px;
+    z-index: 999;
+    background-color: white;
+    right: -25px;
+    border-radius: 5%;
+    text-align: center;
+    font-size:13px;
+    
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+     
+}
 
+#deng_kuang{
+	display:none;
+	
+}
+#geren{
+	width:53px;height:20px;
+}
+.tupianx{
+	    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    background: rgb(247, 248, 250);
+    border-radius: 20px;
+    transition: box-shadow 0.3s;
+}
+.tupianx:hover {
+    /* 悬停时的样式 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
+}
+
+#deng_kuang a{
+	color:black;
+	text-decoration:none;
+}
+#deng_kuang a:hover{
+	color:rgb(65,95,255);
+	
+}

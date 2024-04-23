@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.alibaba.fastjson2.JSONObject;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -30,6 +31,18 @@ public class RefreshServlet extends HttpServlet {
 		response.setContentType("test/html;charset=utf-8");
 
 		String Jsonvals = request.getParameter("jsonavt");
+
+		String vals[] = new Gson().fromJson(Jsonvals,String[].class);
+		String val = "";
+		for(int i=0;i<vals.length;i++) {
+			if (i==vals.length-1) {
+				val+=vals[i];
+			}else {
+				val+=vals[i]+",";
+			}
+		}
+		
+		
 		// 获取产品id
 		int id = Integer.parseInt(request.getSession().getAttribute("productid").toString());
 
@@ -51,7 +64,7 @@ public class RefreshServlet extends HttpServlet {
 		// 创建一个 JSON 对象，包含 price 和 Jsonvals 字段
 		JSONObject jsonResponse = new JSONObject();
 		jsonResponse.put("price", price);
-		jsonResponse.put("Jsonvals", Jsonvals);
+		jsonResponse.put("Jsonvals", val);
 
 		// 将 JSON 对象转换为字符串，并写入响应
 		response.getWriter().write(jsonResponse.toString());

@@ -5,6 +5,9 @@ body {
 	display: flex;    
 	background-color: #f7f7f5;
 }
+#body{
+	wiidth:1511px;
+}
 #jing {
 	width: 100%;
 	height: 880px;
@@ -31,6 +34,7 @@ body {
 	width: 1200px; /* 设定外部容器的宽度 */
 	overflow: hidden;
 	margin-left: 155px;
+	  /*overflow-x: auto;  显示横向滚动条 */
 }
 
 .v {
@@ -138,7 +142,15 @@ body {
 	width: auto; /* 确保宽度按比例缩放 */
 	height: auto; /* 确保高度按比例缩放 */
 	display: block; /* 防止图片在某些情况下产生间距 */
-	margin-left: 56px;
+	background: rgb(247,248,250);
+    border-radius: 20px;
+    
+     transition: box-shadow 0.3s; /* 添加过渡效果 */
+}
+
+.tupianx:hover {
+    /* 悬停时的样式 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加阴影 */
 }
 
 .tu-div {
@@ -211,6 +223,11 @@ body {
     margin-top: 40px;
     margin-left: 65px;
 }
+.j p{
+	text-overflow: ellipsis;
+ white-space: nowrap;
+ overflow: hidden;
+}
 #xintwobox img{
 	    max-width: 100%;
     max-height: 100%;
@@ -239,5 +256,19 @@ body {
 .tubox a{
 	    text-decoration: none;
     color: black
+}
+.urlpeibox{
+	    width: 157px;
+    height: 138px;
+    margin-top: 40px;
+    margin-left: 65px;
+}
+.urlpeibox img{
+	    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
 }
 

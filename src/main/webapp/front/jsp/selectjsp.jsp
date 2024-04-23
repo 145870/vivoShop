@@ -9,6 +9,8 @@
 <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="../js/vivohome.js"></script>
 
+<script type="text/javascript" src="/vivoShop/static/js/setNav.js"></script>
+
 </head>
 <body>
 	<div id="box">
@@ -32,18 +34,48 @@
 				<img id="xiazai" src="../image/下载.png"/>
 				<img src=""/>
 				<li>下载APP</li>
-				<li>购物车(1)</li>
-				<li>个人中心</li>
+				<li>购物车</li>
+				<li id="geren" style="position: relative;">
+				个人中心
+				<div id="deng_kuang">
+				<c:choose>
+   					<c:when test="${user_profile == null}">
+        			<div id="gerenbox" style="display: flex; flex-direction: column;">
+    					<a href="/vivoShop/PersonalCenter/JSP/login.jsp" style="flex: 1;text-align: center; line-height: 35px">
+        					登录
+    					</a>
+    					<a href="/vivoShop/PersonalCenter/JSP/register.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						注册
+   						 </a>
+					</div>
+    				</c:when>
+    			<c:otherwise>
+			        <div id="gerenbox" style="display: flex;height:105px; flex-direction: column;">
+    					<a href="/vivoShop/PersonalCenter/JSP/my_Mall.jsp" style="flex: 1; text-align: center; line-height: 35px">
+        					我的商城
+    					</a>
+    					<a href="/vivoShop/PersonalCenter/JSP/my_order.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						我的订单
+   						 </a>
+   						 <a href="/vivoShop/PersonalCenter/JSP/AccountCenter.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						账户中心
+   						 </a>
+					</div>
+    			</c:otherwise>
+				</c:choose>
+					
+				</div>
+				</li>
 			</ul>
 		</div>
 		<div id="head">
 			<div id="tu"><img src="../image/vivo.svg" id="vivo"/></div>
 			
 			<ul id="head-nav" class="nav">
-			    <c:forEach items="${leilist}" var="lei">
-        <li>${lei.className}</li>
-    </c:forEach>
-			    <li>商城</li>
+			   <c:forEach items="${leilist}" var="lei">
+						<li><a id="leia" href="LunboXServlet?cid=${lei.id }">${lei.className}</a></li>
+				</c:forEach>
+				<li><a class="leia" href="/vivoShop/front/jsp/HomeServlet">商城</a></li>
 			</ul>
 			
 			<div id="so"><img src="../image/搜索.png"/ id="sou"></div>
@@ -146,8 +178,6 @@
 						<li><a href="">X100系列</a></li>
 						<li><a href="">X Flip</a></li>
 						<li><a href="">X Fold2</a></li>
-						<li><a href="">查找体验店</a></li>
-						<li><a href="">vivo Pad2</a></li>
 						<li><a href="">iQOO 12</a></li>
 					</ul>
 				</div>

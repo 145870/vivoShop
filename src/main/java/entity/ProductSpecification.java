@@ -1,5 +1,7 @@
 package entity;
 
+import java.util.Arrays;
+
 public class ProductSpecification {
 	/*
 	 * 规格配置
@@ -66,13 +68,9 @@ public class ProductSpecification {
         this.specificationsName = specificationsName;
     }
 
-    // toString() method
     @Override
-    public String toString() {
-        return "ProductSpecification{" +
-                "id=" + id +
-                ", informationId=" + informationId +
-                ", specificationsName='" + specificationsName + '\'' +
-                '}';
-    }
+	public String toString() {
+		return "ProductSpecification [id=" + id + ", informationId=" + informationId + ", specificationsName="
+				+ specificationsName + ", specificationsValues=" + Arrays.toString(specificationsValues) + "]";
+	}
 }

@@ -1,1 +1,43 @@
 @charset "UTF-8";
+body{
+	
+    background-color: #f7f7f5;
+}
+#class_ul{
+	display: -webkit-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.class_li{
+	    width: 298px;
+    height: 380px;
+    background-color: white;
+    transition: transform 0.3s;
+    text-align: center;
+    list-style: none;   
+     text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    margin-left: 50px;
+    margin-top: 20px;
+    padding:5px;
+}
+.div_tu{
+	    width: 157px;
+    height: 138px;
+    margin-top: 40px;
+    margin-left: 65px;
+}
+.div_tu img{
+	max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
+}

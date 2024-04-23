@@ -33,4 +33,3 @@
   let timer = setInterval(function() {
     plusSlides(1);
   }, 4000); // 间隔时间为 5 秒（5000 毫秒）
-  

@@ -9,10 +9,12 @@
 <meta charset="UTF-8">
 <title>商品详情</title>
 
+<link rel="stylesheet" href="/vivoShop/front/css/Xcss.css" />
 <link rel="stylesheet" type="text/css" href="../css/xiangqing.css">
 <link rel="stylesheet" type="text/css" href="../css/xiangqing2.css">
 <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="../js/vivohome.js"></script>
+<script type="text/javascript" src="/vivoShop/static/js/setNav.js"></script>
 <script>
 	//给数量的按钮添加事件
 	window.onload = function() {
@@ -41,9 +43,11 @@
 
 		// 增加数量按钮点击事件
 		btnjia.onclick = function() {
-			count++;
-			lable.innerText = count;
-			updateTotal();
+		    if (count < 5) { // 如果数量小于5才增加
+		        count++;
+		        lable.innerText = count;
+		        updateTotal();
+		    }
 		};
 
 		// 更新总价
@@ -78,152 +82,125 @@
 	});
 </script>
 
+
+
 </head>
 <body>
 	<div id="box">
 		<div id="tou">
-			<ul id="left">
-				<li>品牌</li>
-				<li>OriginOS</li>
-				<li>体验店</li>
-				<li>官网社区</li>
-			</ul>
+			<div style="width:1433px;display: flex;margin: 0 auto;">
+				<ul id="left">
+					<li>品牌</li>
+					<li>OriginOS</li>
+					<li>体验店</li>
+					<li>官网社区</li>
+				</ul>
 			<ul id="you">
-				<img id="xiazai" src="../image/下载.png" />
+				<img id="xiazai" src="/vivoShop/front/image/下载.png" />
 				<li>下载APP</li>
-				<li>购物车(1)</li>
-				<li>个人中心</li>
+				<li><a style="text-decoration:none;color:rgb(255,255,255)" href="/vivoShop/PersonalCenter/shopping_cart.jsp">购物车</a></li>
+				<li id="geren" style="position: relative;">
+				个人中心
+				<div id="deng_kuang">
+				<c:choose>
+   					<c:when test="${user_profile == null}">
+        			<div id="gerenbox" style="display: flex; flex-direction: column;">
+    					<a href="/vivoShop/PersonalCenter/JSP/login.jsp" style="flex: 1;text-align: center; line-height: 35px">
+        					登录
+    					</a>
+    					<a href="/vivoShop/PersonalCenter/JSP/register.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						注册
+   						 </a>
+					</div>
+    				</c:when>
+    			<c:otherwise>
+			        <div id="gerenbox" style="display: flex;height:105px; flex-direction: column;">
+    					<a href="/vivoShop/PersonalCenter/JSP/my_Mall.jsp" style="flex: 1; text-align: center; line-height: 35px">
+        					我的商城
+    					</a>
+    					<a href="/vivoShop/PersonalCenter/JSP/my_order.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						我的订单
+   						 </a>
+   						 <a href="/vivoShop/PersonalCenter/JSP/AccountCenter.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						账户中心
+   						 </a>
+					</div>
+    			</c:otherwise>
+				</c:choose>
+					
+				</div>
+				</li>
 			</ul>
+			</div>
 		</div>
+		
 		<div id="head">
 			<div id="tu">
-				<img src="../image/vivo.svg" id="vivo" />
+				<img src="/vivoShop/front/image/vivo.svg" id="vivo" />
 			</div>
 
 			<ul id="head-nav" class="nav">
 				 <c:forEach items="${leilist}" var="lei">
-        <li>${lei.className}</li>
-    </c:forEach>
-				<li>商城</li>
+						<li><a class="leia" href="LunboXServlet?cid=${lei.id }">${lei.className}</a></li>
+				</c:forEach>
+				
+				<li><a class="leia" href="/vivoShop/front/jsp/HomeServlet">商城</a></li>
 			</ul>
 
 			<div id="so">
-				<img src="../image/搜索.png" / id="sou">
+				<img src="/vivoShop/front/image/搜索.png" / id="sou">
 			</div>
 			<div id="navDiv">
-				<div class="navDiv" id="X">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listX}" var="x" varStatus="loop">
-									<a id="aaa"
-										href="DetailsServlet?id=${listX[loop.index].information_id}">
-										<div class='tu-div'>
-											<img class="tupianx" alt="" src="${x.url}">
-											<p>${x.information_name}</p>
-										</div>
-									</a>
-								</c:forEach>
+				<c:forEach items = '${leilist}' var='type' varStatus = 'typeLoop'>
+					<div class="navDiv">
+						<div class="rebox">
+							<div class="re" style='padding:20px;padding-left:80px'>
+								<div class="tubox">
+									<c:forEach items="${productsLists[typeLoop.index]}" var="pi" varStatus="loop">
+   										<c:if test="${loop.index < 6}">
+       										<a id="aaa" href="/vivoShop/front/jsp/DetailsServlet?id=${pi.information_id}">
+           										<div class='tu-div'>
+               										<img class="tupianx" alt="" src="${pi.url}">
+                									<p style="">${pi.information_name}</p>
+           										</div>
+       										</a>
+    									</c:if>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
-						
 					</div>
+				</c:forEach>
 
+			</div>
+				<div id="sss">
+					<div id="sss-box">
 
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listS}" var="s">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${s.url}">
-										<p>${s.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-						
-					</div>
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listY}" var="y">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${y.url}">
-										<p>${y.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-						
-					</div>
+						<div id="sou-shang">
+							<img src="/vivoShop/front/image/vivo.svg" id="sou-vivo" />
+							<form id="form">
+								<input placeholder="iQOO Neo9" id="form-in" />
 
+							</form>
+							<div id="sou-div">
+								<img src="/vivoShop/front/image/搜索.png" id="sou-tu" />
+							</div>
+							<span id="span-X">X</span>
 
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listiQOO}" var="i">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${i.url}">
-										<p>${i.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
 						</div>
-						
-					</div>
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listZN}" var="z">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${z.url}">
-										<p>${z.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-						
+						<div id="x"></div>
+						<ul id="sou-ul">
+							<li>大家都在搜</li>
+							<li><a href="">iQOO Neo9</a></li>
+							<li><a href="">S18系列</a></li>
+							<li><a href="">X100系列</a></li>
+							<li><a href="">X Flip</a></li>
+							<li><a href="">X Fold2</a></li>
+							<li><a href="">iQOO 12</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
-			<div id="sss">
-				<div id="sss-box">
-
-					<div id="sou-shang">
-						<img src="../image/vivo.svg" id="sou-vivo" />
-						<form id="form">
-							<input placeholder="iQOO Neo9" id="form-in" />
-
-						</form>
-						<div id="sou-div">
-							<img src="../image/搜索.png" id="sou-tu" />
-						</div>
-						<span id="span-X">X</span>
-
-					</div>
-					<div id="x"></div>
-					<ul id="sou-ul">
-						<li>大家都在搜</li>
-						<li><a href="">iQOO Neo9</a></li>
-						<li><a href="">S18系列</a></li>
-						<li><a href="">X100系列</a></li>
-						<li><a href="">X Flip</a></li>
-						<li><a href="">X Fold2</a></li>
-						<li><a href="">查找体验店</a></li>
-						<li><a href="">vivo Pad2</a></li>
-						<li><a href="">iQOO 12</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
 
 		<div id="body">
 			<div id="body-box">
@@ -236,9 +213,7 @@
 				</div>
 				<div id="box-left">
 					<div id="xianshi">
-						<c:forEach items="${pslistt}" var="pt">
-							<img id="xiansrc" src="${pt.url }" />
-						</c:forEach>
+						<img id="xiansrc" src="${listurl[0].url }" />
 					</div>
 					<div id="xia-box">
 						<div id="v">
@@ -267,9 +242,8 @@
 				<div id="box-right">
 					<div id="right-biti">
 						<p>
-							<span id="infname"> <c:forEach items="${listbanben}" var="b">
-								${b.information_name}
-							</c:forEach>
+							<span id="infname"> 
+							${pname}
 							</span> 
 							<span id="guige">
 								<c:forEach
@@ -308,7 +282,7 @@
 
 
 					<form style="margin-top:27px">
-						<input type="checkbox" />我已阅读并同意<a href="#" id="popupLink">《vivo服务条款》</a>
+						<input type="checkbox" name="checkbox" id="checkbox" />我已阅读并同意<a href="#" id="popupLink">《vivo服务条款》</a>
 					</form>
 					<!-- 弹出的div -->
 					<div id="ttbox">
@@ -327,7 +301,7 @@
 							<label id="lable">1</label>
 							<button id="btn-jia" class="btn">+</button>
 
-						</div>
+						</div><span style="margin-left: 20px;color: #ccc;">(仅限购5件)</span>
 					</div>
 					<div id="resu_box">
 						<lable>￥<span id="sum"> <c:forEach
@@ -347,8 +321,8 @@
 					<div id="btn_box">
 						<button>加入购物车</button>
 						<button id="libut">
-							立即购买
-							<!--<a href="DingdanServelt?id=${productid }" id="goumaia">立即购买</a>  -->
+						立即购买
+							<!-- <a href="/vivoShop/front/jsp/DingdanServelt?id=${productid }" id="goumaia">立即购买</a> -->  
 						</button>
 					</div>
 				</div>
@@ -365,11 +339,9 @@
 				<div id="footDiv">
 					<!-- 详细信息 -->
 					<div class="footDiv">
-						<c:forEach items="${listurlin }" var="in">
 							<div class="xiangdiv">
-								<img src="${in.url }">
+								<img style="width:100%" src="${listurlin[0].url }">
 							</div>
-						</c:forEach>
 					</div>
 					<div class="footDiv">2</div>
 					<div class="footDiv">3</div>
@@ -622,8 +594,23 @@
 		</div>
 	</div>
 
-	</div>
+	<script>
+		$(document).ready(function() {
+			var geren = $('#geren');
+			var deng_kuang = $('#deng_kuang');
 
+			// 添加鼠标移入事件监听器
+			geren.mouseenter(function() {
+				deng_kuang.css('display', 'block');
+			});
+
+			// 添加鼠标移出事件监听器到 #deng_kuang
+			deng_kuang.mouseleave(function() {
+				deng_kuang.css('display', 'none');
+			});
+
+		});
+	</script>
 	<script>
 		//我已阅读同意
 		// 获取链接和弹出的div
@@ -667,26 +654,38 @@
 		});
 	</script>
 	<script src="../js/xiangxilb.js"></script>
-	<script>
-	$("#libut").click(function(){
-	    var vals = [];
-	    $("#pav_box ul").each(function() {
-	        var val = $(this).find(".item.select").text();
-	        vals.push(val);
-	    });
+	<script type="text/javascript">
+//勾选复选框
+window.onload = function() {
+    var checkbox = document.getElementById("checkbox");
+    var libut = document.getElementById("libut");
 
-	    var jsonArr = JSON.stringify(vals);
-	    //价格
-	    var price=$("#price").html();
-	    //数量
-	    var num=$("#lable").html();
-	    //名称
-	    var infname=$("#infname").html();
-	    var url = "http://localhost:8080/tr03802_web/front/jsp/DingdanServelt?id=${productid}&data=" + encodeURIComponent(jsonArr)
-	    		+"&price="+encodeURIComponent(price)+"&num="+encodeURIComponent(num)+"&infname="+encodeURIComponent(infname);
-	    window.location.href = url;
-	});
-	</script>
+    libut.onclick = function(event) {
+        if (!checkbox.checked) { // 如果复选框未被勾选
+            event.preventDefault(); // 阻止默认行为，即阻止跳转页面
+        }
+        // 如果复选框被勾选，则允许跳转页面
+        $("#libut").click(function(){
+    	    var vals = [];
+    	    $("#pav_box ul").each(function() {
+    	        var val = $(this).find(".item.select").text();
+    	        vals.push(val);
+    	    });
+
+    	    var jsonArr = JSON.stringify(vals);
+    	    //价格
+    	    var price=$("#price").html();
+    	    //数量
+    	    var num=$("#lable").html();
+    	    //名称
+    	    var infname=$("#infname").html();
+    	    var url = "http://localhost:8080/vivoShop/front/jsp/DingdanServelt?id=${productid}&data=" + encodeURIComponent(jsonArr)
+    	    		+"&price="+encodeURIComponent(price)+"&num="+encodeURIComponent(num)+"&infname="+encodeURIComponent(infname);
+    	    window.location.href = url;
+    	});
+    };
+};
+</script>
 	<script>
 		$("#pav_box ul").each(function() {
 			$(this).find(".item").eq(0).css({
@@ -716,8 +715,8 @@
 
 				// 发送 AJAX 请求
 				$.ajax({
-					url : 'RefreshServlet', // 替换成你的 API 地址
-					type : 'POST', // 请求类型，这里假设是 POST 请求
+					url : 'RefreshServlet', // 
+					type : 'POST', // 请求类型
 					data : {
 						jsonavt : jsonArr
 					},

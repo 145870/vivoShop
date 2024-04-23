@@ -372,6 +372,7 @@ dd {
 	height: 30px;
 }
 
+
 #box-left {
 	display: inline-block;
 	margin-top: 40px;
@@ -392,6 +393,9 @@ dd {
 #right-biti {
 	height: 80px;
 	border-bottom: #ccc solid 1px;
+}
+#right-biti p{
+	    font-size: 40px;
 }
 
 #price-box {

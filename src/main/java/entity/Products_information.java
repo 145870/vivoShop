@@ -1,6 +1,7 @@
 package entity;
 
 import java.sql.Date;
+import java.util.Arrays;
 /*
  * 产品表
  */
@@ -36,6 +37,14 @@ public class Products_information {
 		this.description = description;
 		this.url = url;
 		this.sale_amount = sale_amount;
+	}
+	@Override
+	public String toString() {
+		return "Products_information [id=" + id + ", information_name=" + information_name + ", description="
+				+ description + ", class_id=" + class_id + ", information_status=" + information_status + ", is_last="
+				+ is_last + ", create_time=" + create_time + ", shelves_time=" + shelves_time + ", information_id="
+				+ information_id + ", class_name=" + class_name + ", url=" + url + ", vid=" + vid + ", product_id="
+				+ product_id + ", attr_vals=" + Arrays.toString(attr_vals) + ", sale_amount=" + sale_amount + "]";
 	}
 	public int getVid() {
 		return vid;
@@ -184,6 +193,35 @@ public class Products_information {
 	public Products_information() {
 		super();
 	}
+	/**
+	 * @param information_name
+	 * @param description
+	 * @param url
+	 * @param sale_amount
+	 */
+	public Products_information(String url,double sale_amount, String information_name, String description,int id) {
+		super();
+		this.information_name = information_name;
+		this.description = description;
+		this.url = url;
+		this.sale_amount = sale_amount;
+		this.id = id;
+	}
+	/**
+	 * @param id
+	 * @param information_name
+	 * @param description
+	 * @param class_id
+	 * @param url
+	 */
+	public Products_information(int id, String information_name, String description, String url) {
+		super();
+		this.id = id;
+		this.information_name = information_name;
+		this.description = description;
+		this.url = url;
+	}
+	
 	
 	
 }

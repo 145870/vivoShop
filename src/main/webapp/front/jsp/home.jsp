@@ -9,8 +9,14 @@
 <meta charset="UTF-8">
 <title>首页</title>
 </head>
+<link rel="stylesheet" href="/vivoShop/front/css/Xcss.css" />
 <link rel="stylesheet" type="text/css" href="../css/home.css">
 <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
+<script type="text/javascript" src="/vivoShop/static/js/setNav.js"></script>
+
+
+
+
 <script type="text/javascript" src="../js/vivohome.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/home2.css">
 <link rel="stylesheet" type="text/css" href="../css/home3.css">
@@ -74,171 +80,142 @@
 		window.location.href = searchUrl;
 	}
 </script>
+<script>
+	// 获取所有的列表项和相应的<div>元素
+	var listItems = document.querySelectorAll('#leia');
+	var divs = document.querySelectorAll('.navDiv');
+
+	// 遍历所有的列表项
+	listItems.forEach(function(item, index) {
+		// 添加鼠标悬停事件监听器
+		item.addEventListener('mouseover', function() {
+			// 隐藏所有的<div>元素
+			divs.forEach(function(div) {
+				div.style.display = 'none';
+			});
+			// 显示对应的<div>元素
+			divs[index].style.display = 'block';
+		});
+	});
+</script>
 <body>
 	<div id="box">
-		<div id="nian">
-			<div id="nian-box">
-				<div id="nian1" class="nian-he"></div>
-				<div id="nian2" class="nian-he"></div>
-				<div id="nian3" class="nian-he"></div>
-			</div>
-		</div>
 		<div id="tou">
-			<ul id="left">
-				<li>品牌</li>
-				<li>OriginOS</li>
-				<li>体验店</li>
-				<li>官网社区</li>
-			</ul>
+			<div style="width:1433px;display: flex;margin: 0 auto;">
+				<ul id="left">
+					<li>品牌</li>
+					<li>OriginOS</li>
+					<li>体验店</li>
+					<li>官网社区</li>
+				</ul>
 			<ul id="you">
-				<img id="xiazai" src="../image/下载.png" />
-				<img src="" />
+				<img id="xiazai" src="/vivoShop/front/image/下载.png" />
 				<li>下载APP</li>
-				<li>购物车(1)</li>
-				<li id="geren">个人中心</li>
+				<li><a style="text-decoration:none;color:rgb(255,255,255)" href="/vivoShop/PersonalCenter/shopping_cart.jsp">购物车</a></li>
+				<li id="geren" style="position: relative;">
+				个人中心
+				<div id="deng_kuang">
+				<c:choose>
+   					<c:when test="${user_profile == null}">
+        			<div id="gerenbox" style="display: flex; flex-direction: column;">
+    					<a href="/vivoShop/PersonalCenter/JSP/login.jsp" style="flex: 1;text-align: center; line-height: 35px">
+        					登录
+    					</a>
+    					<a href="/vivoShop/PersonalCenter/JSP/register.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						注册
+   						 </a>
+					</div>
+    				</c:when>
+    			<c:otherwise>
+			        <div id="gerenbox" style="display: flex;height:105px; flex-direction: column;">
+    					<a href="/vivoShop/PersonalCenter/JSP/my_Mall.jsp" style="flex: 1; text-align: center; line-height: 35px">
+        					我的商城
+    					</a>
+    					<a href="/vivoShop/PersonalCenter/JSP/my_order.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						我的订单
+   						 </a>
+   						 <a href="/vivoShop/PersonalCenter/JSP/AccountCenter.jsp" style="flex: 1; text-align: center; line-height: 35px">
+       						账户中心
+   						 </a>
+					</div>
+    			</c:otherwise>
+				</c:choose>
+					
+				</div>
+				</li>
 			</ul>
-
-		</div>
-		<div id="deng_kuang">
-			<div id="sanjiao"></div>
-			<div id="gerenbox">
-				<div id="denglubox">
-					<img alt="" src="../image/登陆icon.png"> <a>登录</a>
-				</div>
-				<div id="zhucebox">
-					<img alt="" src="../image/注册icon.png"> <a>注册</a>
-				</div>
 			</div>
 		</div>
-
+		
 		<div id="head">
 			<div id="tu">
-				<img src="../image/vivo.svg" id="vivo" />
+				<img src="/vivoShop/front/image/vivo.svg" id="vivo" />
 			</div>
 
 			<ul id="head-nav" class="nav">
-				<c:forEach items="${leilist}" var="lei">
-					<a id="leia" href="LunboXServlet?cid=${lei.id }">
-						<li>${lei.className}</li>
-					</a>
+				 <c:forEach items="${leilist}" var="lei">
+						<li><a class="leia" href="LunboXServlet?cid=${lei.id }">${lei.className}</a></li>
 				</c:forEach>
-				<li>商城</li>
+				
+				<li><a class="leia" href="/vivoShop/front/jsp/HomeServlet">商城</a></li>
 			</ul>
 
 			<div id="so">
-				<img src="../image/搜索.png" / id="sou">
+				<img src="/vivoShop/front/image/搜索.png" / id="sou">
 			</div>
 			<div id="navDiv">
-				<div class="navDiv" id="X">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listX}" var="x" varStatus="loop">
-									<a id="aaa"
-										href="DetailsServlet?id=${listX[loop.index].information_id}">
-										<div class='tu-div'>
-											<img class="tupianx" alt="" src="${x.url}">
-											<p>${x.information_name}</p>
-										</div>
-									</a>
-								</c:forEach>
+				<c:forEach items = '${leilist}' var='type' varStatus = 'typeLoop'>
+					<div class="navDiv">
+						<div class="rebox">
+							<div class="re" style='padding:20px;padding-left:80px'>
+								<div class="tubox">
+									<c:forEach items="${productsLists[typeLoop.index]}" var="pi" varStatus="loop">
+   										<c:if test="${loop.index < 6}">
+       										<a id="aaa" href="/vivoShop/front/jsp/DetailsServlet?id=${pi.information_id}">
+           										<div class='tu-div'>
+               										<img class="tupianx" alt="" src="${pi.url}">
+                									<p style="">${pi.information_name}</p>
+           										</div>
+       										</a>
+    									</c:if>
+									</c:forEach>
+								</div>
 							</div>
 						</div>
 					</div>
+				</c:forEach>
 
+			</div>
+				<div id="sss">
+					<div id="sss-box">
 
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listS}" var="s">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${s.url}">
-										<p>${s.information_name}</p>
-									</div>
-								</c:forEach>
+						<div id="sou-shang">
+							<img src="/vivoShop/front/image/vivo.svg" id="sou-vivo" />
+							<form id="form">
+								<input placeholder="iQOO Neo9" id="form-in" />
+
+							</form>
+							<div id="sou-div">
+								<img src="/vivoShop/front/image/搜索.png" id="sou-tu" />
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listY}" var="y">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${y.url}">
-										<p>${y.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
+							<span id="span-X">X</span>
 
-					</div>
-
-
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listiQOO}" var="i">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${i.url}">
-										<p>${i.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
 						</div>
-					</div>
-				</div>
-				<div class="navDiv">
-					<div class="rebox">
-						<div class="re">
-							<div class="tubox">
-								<c:forEach items="${listZN}" var="z">
-									<div class='tu-div'>
-										<img class="tupianx" alt="" src="${z.url}">
-										<p>${z.information_name}</p>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
+						<div id="x"></div>
+						<ul id="sou-ul">
+							<li>大家都在搜</li>
+							<li><a href="">iQOO Neo9</a></li>
+							<li><a href="">S18系列</a></li>
+							<li><a href="">X100系列</a></li>
+							<li><a href="">X Flip</a></li>
+							<li><a href="">X Fold2</a></li>
+							<li><a href="">iQOO 12</a></li>
+						</ul>
 					</div>
 				</div>
 			</div>
-			<div id="sss">
-				<div id="sss-box">
-
-					<div id="sou-shang">
-						<img src="../image/vivo.svg" id="sou-vivo" />
-						<form id="form">
-							<input placeholder="iQOO Neo9" id="form-in" />
-
-						</form>
-						<div id="sou-div">
-							<img src="../image/搜索.png" id="sou-tu" />
-						</div>
-						<span id="span-X">X</span>
-
-					</div>
-					<div id="x"></div>
-					<ul id="sou-ul">
-						<li>大家都在搜</li>
-						<li><a href="">iQOO Neo9</a></li>
-						<li><a href="">S18系列</a></li>
-						<li><a href="">X100系列</a></li>
-						<li><a href="">X Flip</a></li>
-						<li><a href="">X Fold2</a></li>
-						<li><a href="">查找体验店</a></li>
-						<li><a href="">vivo Pad2</a></li>
-						<li><a href="">iQOO 12</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div id="lun">
+			<div id="body">
+				<div id="lun">
 
 			<div class="slideshow-container">
 				<c:forEach items="${lunlist }" var="lun">
@@ -251,11 +228,11 @@
 				<div id="slideIndex"></div>
 
 				<div class="dot-container">
-					<span class="dot" onclick="currentSlide(1)"></span> <span
-						class="dot" onclick="currentSlide(2)"></span> <span class="dot"
-						onclick="currentSlide(3)"></span> <span class="dot"
-						onclick="currentSlide(4)"></span> <span class="dot"
-						onclick="currentSlide(5)"></span>
+  					<span class="dot" onclick="currentSlide(1)"></span>
+  					<span class="dot" onclick="currentSlide(2)"></span>
+  					<span class="dot" onclick="currentSlide(3)"></span>
+  					<span class="dot" onclick="currentSlide(4)"></span>
+  					<span class="dot" onclick="currentSlide(5)"></span>
 				</div>
 
 				<button class="prev" onclick="plusSlides(-1)">❮</button>
@@ -309,13 +286,16 @@
 		<div id="jing">
 			<p id="pin">精品手机</p>
 			<div id="he1">
-				<div id="j" class="j">
+				
+				<ul id="jx" style="display: inline-flex;">
+					<a href="/vivoShop/front/jsp/DetailsServlet?id=3">
+						<li id="j" class="j">
 					<img alt="" src="../image/vivoX100home.jpg" id="vivo100">
-				</div>
-				<div id="jx" style="display: inline-flex;">
-
+				</li>
+					</a>
 					<c:forEach items="${xinlist }" var="xin">
-						<div class="j">
+					<a href="/vivoShop/front/jsp/DetailsServlet?id=${xin.id}" style="text-decoration: none;color: black;">
+						<li class="j">
 							<div id="xintwobox">
 								<img src="${xin.url }">
 							</div>
@@ -323,16 +303,13 @@
 							<p>${xin.description }</p>
 							<p style="color: red;">￥${xin.sale_amount }</p>
 							<a style="margin-left: 135px;">购买></a>
-						</div>
+						</li>
+					</a>
+						
 					</c:forEach>
-				</div>
+				</ul>
 			</div>
-			<div id="ji">
-				<div class="ji"></div>
-				<div class="ji"></div>
-				<div class="ji"></div>
-				<div class="ji"></div>
-			</div>
+			
 		</div>
 
 		<div id="box1">
@@ -349,12 +326,18 @@
 			</div>
 			<div id="jian-p">
 				<c:forEach items="${peilist }" var="pei">
-					<div class="jian-pin">
-						<div>
-							<img alt="" src="${pei.url }">
+					<a href="/vivoShop/front/jsp/DetailsServlet?id=${pei.id}" style="text-decoration: none;color: black;">
+						<div class="jian-pin">
+						<div class="urlpeibox">
+							<img alt="" src="${pei.url }" >
 						</div>
+						<p style="text-align: center;">${pei.information_name }</p>
+						<p style="text-align: center;">${pei.description }</p>
+						<p style="color: red;text-align: center;">￥${pei.sale_amount }</p>
+						<a style="margin-left: 135px;">购买></a>
 
 					</div>
+					</a>
 				</c:forEach>
 
 
@@ -362,6 +345,7 @@
 			</div>
 
 		</div>
+			</div>
 
 
 		<div id="foot">

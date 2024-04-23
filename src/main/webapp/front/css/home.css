@@ -4,7 +4,6 @@
 
 #box {
 	margin: auto;
-	width: 1511px;
 	position: relative;
 }
 
@@ -27,9 +26,10 @@
 #left li, #you li {
 	margin-left: 20px;
 	font-size: 13px;
+	line-height: 18px;
 }
 
-.nav li {
+ #head-nav li {
 	margin: 0 10px;
 	cursor: pointer;
 	text-align: center;
@@ -55,7 +55,6 @@
 	height: 350px;
 	position: absolute;
 	top: 100px;
-	left: 0;
 	z-index: 1000;
 }
 
@@ -114,7 +113,6 @@
 #sss {
 	text-align: left;
 	background-color: white;
-	left: 0;
 	width: 1511px;
 	transition: height 0.5s ease, opacity 0.5s ease; /* 添加过渡效果 */
 	position: absolute;
@@ -291,26 +289,7 @@ to {
 	transform: translateY(-5px); /* 向上移动5px */
 }
 
-#ji {
-	display: flex; /* 使用 Flexbox 布局 */
-	justify-content: center; /* 水平居中 */
-	align-items: center; /* 垂直居中 */
-	margin-top: 20px;
-	transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
-}
 
-#ji .ji {
-	width: 298px;
-	height: 380px;
-	background-color: antiquewhite;
-	margin-left: 10px;
-}
-
-.ji:hover {
-	box-shadow: 3px 3px 3px 5px rgb(200, 200, 200, 0.2);
-	/* 水平偏移2px，垂直偏移2px，模糊半径5px，颜色为淡黑色 */
-	transform: translateY(-5px); /* 向上移动5px */
-}
 
 
 
@@ -368,7 +347,7 @@ to {
 
 /*尾部样式*/
 #foot {
-	height: 400px;
+	height: 700px;
 	display: flex;
 	justify-content: center; /* 水平居中 */
 	display: block;
@@ -462,75 +441,75 @@ dd {
 	font-size: 13px;
 }
 /*轮播*/
-.slideshow-container {
-	overflow: hidden;
-	height: 522px;
-	width: 1511px;
-	margin: auto;
-}
-
-.slide {
-	display: none;
-	width: 100%;
-	transition: opacity 5s ease; /* 添加淡出淡入动画效果 */
-}
-
-.slide img {
-	width: 100%;
-	height: 522px;
-	display: block;
-	margin: 0 auto;
-	object-fit: cover; /* 或者 object-fit: contain; */
-}
-
-#slideIndex {
-	text-align: center;
-	margin-top: 10px;
-	font-weight: bold;
-	text-decoration: underline;
-}
-
-.dot-container {
-	text-align: center;
-	position: absolute;
-	top: 600px;
-	left: 44%;
-}
-
-.dot {
-	height: 1px;
-	width: 35px;
-	background-color: white;
-	display: inline-block;
-	margin: 0 5px;
-	cursor: pointer;
-}
-
-.active {
-	background-color: white;
-	height: 4px;
-}
-
-.prev, .next {
-	position: absolute;
-	top: 400px;
-	transform: translateY(-50%);
-	background-color: transparent; /* 将背景颜色设为透明 */
-	color: white;
-	font-size: 20px;
-	padding: 10px;
-	cursor: pointer;
-	border: none;
-}
-
-.prev {
-	left: 0;
-}
-
-.next {
-	right: 0;
-}
-
+	.slideshow-container {
+	   overflow: hidden;
+	   height: 522px;
+		width: 1511px;
+		margin: auto;
+		position: relative;
+	 }
+	
+	.slide {
+	  display: none;
+	  width: 100%;
+	  transition: opacity 5s ease; /* 添加淡出淡入动画效果 */
+	}
+	.prev{
+		left:0px;
+	}
+	.next{
+		right:0px;
+	}
+	
+	.slide img {
+	  width: 100%;
+	  height: 522px;
+	  display: block;
+	  margin: 0 auto;
+	  object-fit: cover; /* 或者 object-fit: contain; */
+	}
+	
+	 #slideIndex {
+	   text-align: center;
+	   margin-top: 10px;
+	   font-weight: bold;
+	   text-decoration: underline;
+	 }
+	
+	 .dot-container {
+	   text-align: center;
+		  position: absolute;
+		  top: 487px;
+		  left: 44%;
+	 }
+	
+	 .dot {
+	   height: 1px;
+	   width: 35px;
+	   background-color: white;
+	   display: inline-block;
+	   margin: 0 5px;
+	   cursor: pointer;
+		  
+	 }
+	
+	 .active {
+	   background-color: white;
+		  height: 4px;
+	 }
+	
+	 .prev, .next {
+	   position: absolute;
+	   top:265px;
+	   transform: translateY(-50%);
+	   background-color: transparent; /* 将背景颜色设为透明 */
+	   color: white;
+	   font-size: 20px;
+	   padding: 10px;
+	   cursor: pointer;
+	   border: none;
+	 }
+	
 /*粘性*/
 #nian {
 	position: fixed;
@@ -558,8 +537,8 @@ dd {
 	background-color: white;
 	position: absolute;
 	top: 165px;
-	left: 166px;
 	background-color: rgba(255, 255, 255, 0.5); /* 设置为白色，透明度为80% */
+	margin-left: 85px;
 }
 
 #erji-ul {

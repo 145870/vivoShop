@@ -1,4 +1,4 @@
-package servlets.front;
+package servlets.statics;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,29 +15,25 @@ import DAO.ProductsClassDAO;
 import DAO.Products_images_urlDAO;
 import DAO.Products_informationDAO;
 import entity.ProductsClass;
-import entity.Products_images_url;
 import entity.Products_information;
 
-@WebServlet(urlPatterns = "/front/jsp/HomeServlet")
-public class HomeServlet extends HttpServlet {
+
+//用于获取导航栏图片及信息
+@WebServlet("/static/setNavSession")
+public class SetStaticNavSessionServlet extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	ProductsClassDAO classDAO = new ProductsClassDAO();
 	Products_informationDAO infdao = new Products_informationDAO();
 	Products_images_urlDAO urldao = new Products_images_urlDAO();
 
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// 轮播图
-		List<Products_images_url> lunlist = urldao.queryInforLun();
-		request.setAttribute("lunlist", lunlist);
-		request.setCharacterEncoding("utf-8");
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("utf-8");
 		// 查询类别
 		List<ProductsClass> leilist = classDAO.getProductsClasses();
-		// 查询新品
-		List<Products_information> xinlist = infdao.queryInforPriceTwo();
-		request.setAttribute("xinlist", xinlist);
-		// 查询智能配件
-		List<Products_information> peilist = infdao.queryInforPricePei();
 
 		// 存储所有商品图片
 		List<List<ProductsClass>> productsLists = new ArrayList<List<ProductsClass>>();
@@ -45,11 +41,17 @@ public class HomeServlet extends HttpServlet {
 			Long pcId = pc.getId();
 			productsLists.add(classDAO.queryclassById(pcId));
 		}
-		HttpSession session = request.getSession();
-		request.setAttribute("peilist", peilist);
-		session.setAttribute("productsLists", productsLists);
+
+		// 查询新品两个
+		List<Products_information> xinlist = infdao.queryInforPriceTwo();
+		req.setAttribute("xinlist", xinlist);
+		// 查询智能配件
+		List<Products_information> peilist = infdao.queryInforPricePei();
+
+		HttpSession session = req.getSession();
+		req.setAttribute("peilist", peilist);
 
 		session.setAttribute("leilist", leilist);
-		request.getRequestDispatcher("home.jsp").forward(request, response);
+		session.setAttribute("productsLists", productsLists);
 	}
 }

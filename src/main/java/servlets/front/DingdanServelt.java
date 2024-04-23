@@ -29,6 +29,7 @@ import entity.User_address_information;
 public class DingdanServelt extends HttpServlet{
 	ProductsClassDAO classDAO=new ProductsClassDAO();
 	Products_informationDAO infordao=new Products_informationDAO();
+	Products_informationDAO ifDao=new Products_informationDAO();
 	//地址
 	User_address_informationDAO adddao=new User_address_informationDAO();
 	@Override
@@ -91,21 +92,9 @@ public class DingdanServelt extends HttpServlet{
 
         // 将 JSON 数据设置为请求属性
 		session.setAttribute("jsonname", jsonname);
-		//Y系列
-				List<ProductsClass> classlistY=classDAO.queryclassY();
-				//X系列
-				List<ProductsClass> classlistX=classDAO.queryclass();
-				//S系列
-				List<ProductsClass> classlistS=classDAO.queryclassS();
-				//iQOO系列
-				List<ProductsClass> classlistiQOO=classDAO.queryclassiQOO();
-				//智能硬件
-				List<ProductsClass> classlistZN=classDAO.queryclassZN();
-				request.setAttribute("listY", classlistY);
-				request.setAttribute("listX", classlistX);
-				request.setAttribute("listS", classlistS);
-				request.setAttribute("listiQOO", classlistiQOO);
-				request.setAttribute("listZN", classlistZN);
+		//查找图片信息缩略图
+				List<Products_information> listurl=ifDao.queryInforurl(id);
+				request.setAttribute("listurl", listurl);
 		// 查询类别
 				List<ProductsClass> leilist = classDAO.getProductsClasses();
 				request.setAttribute("leilist", leilist);

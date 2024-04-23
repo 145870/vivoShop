@@ -654,3 +654,33 @@ to {
 .tubox {
 	display: inline-flex;
 }
+#gerenbox{
+	width: 160px;
+    height: 126px;
+    position: absolute;
+    top: 68px;
+    z-index: 999;
+    background-color: white;
+    right: 20px;
+    border-radius: 5%;
+    text-align: center;
+    font-size:16px;
+}
+#denglubox{
+	margin-top: 19px;
+    line-height: 45px;
+}
+#sanjiao{
+	width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-bottom: 20px solid white;
+    position: absolute;
+    top: 50px;
+    right: 69px;
+    z-index: 9999;
+}
+#deng_kuang{
+	display:none;
+}
