@@ -154,7 +154,7 @@
 
 			<ul id="head-nav" class="nav">
 				 <c:forEach items="${leilist}" var="lei">
-						<li><a class="leia" href="LunboXServlet?cid=${lei.id }">${lei.className}</a></li>
+						<li><a class="leia" href="/vivoShop/front/jsp/LunboXServlet?cid=${lei.id }">${lei.className}</a></li>
 				</c:forEach>
 				
 				<li><a class="leia" href="/vivoShop/front/jsp/HomeServlet">商城</a></li>

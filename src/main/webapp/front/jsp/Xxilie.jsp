@@ -145,7 +145,8 @@
 				<div >
 				<ul id="class_ul">
 					<c:forEach items="${leiblist }" var="lb">
-						<li class="class_li">
+						<a href="/vivoShop/front/jsp/DetailsServlet?id=${lb.id}" style="text-decoration: none;color: black;">
+							<li class="class_li">
 							<div class="div_tu">
 								<img src="${lb.url }"/>
 							</div>
@@ -153,6 +154,7 @@
 							<p>${lb.description }</p>
 							<p>购买></p>
 						</li>
+						</a>
 							
 					</c:forEach>
 				</ul>
