@@ -28,6 +28,7 @@ body {
 #re-box {
 	width: 1511px;
 	height: 485px;
+	position: relative;
 }
 
 #v {

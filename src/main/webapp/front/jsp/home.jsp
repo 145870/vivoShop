@@ -15,8 +15,6 @@
 <script type="text/javascript" src="/vivoShop/static/js/setNav.js"></script>
 
 
-
-
 <script type="text/javascript" src="../js/vivohome.js"></script>
 <link rel="stylesheet" type="text/css" href="../css/home2.css">
 <link rel="stylesheet" type="text/css" href="../css/home3.css">
