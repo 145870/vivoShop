@@ -19,7 +19,6 @@
 #user-profile .layui-table-checked {
 	background-color: rgb(244, 244, 255);
 }
-}
 #user-profile .layui-laydate .layui-this, .layui-laydate .layui-this>div {
     background-color: rgb(85, 170, 255) !important;
     color: #fff !important;
@@ -84,41 +83,40 @@
 					<!-- 账号 -->
 					<div class="layui-col-md3 layui-input-group">
 						<span class="layui-input-prefix">用户账号:</span> 
-						<input name="" type="text" id="product-name" placeholder="请输入账号" class="layui-input">
+						<input name="account" type="text" id="product-name" placeholder="请输入账号" class="layui-input">
 					</div>
 					
 					<!-- 昵称 -->
 					<div class="layui-col-md3 layui-input-group">
 						<span class="layui-input-prefix">用户昵称:</span> 
-						<input name="" type="text" id="product-name" placeholder="请输入昵称" class="layui-input">
+						<input name="name" type="text" id="product-name" placeholder="请输入昵称" class="layui-input">
 					</div>
 					
 					<!-- 手机号 -->
 					<div class="layui-col-md3 layui-input-group">
-						<span class="layui-input-prefix">用户昵称:</span> 
-						<input name="" type="text" id="product-name" placeholder="请输入手机号" class="layui-input">
+						<span class="layui-input-prefix">手机号:</span> 
+						<input name="phone" type="text" id="product-name" placeholder="请输入手机号" class="layui-input">
 					</div>
 					
 					<!-- 邮箱 -->
 					<div class="layui-col-md3 layui-input-group">
 						<span class="layui-input-prefix">用户邮箱:</span> 
-						<input name="" type="text" id="product-name" placeholder="请输入邮箱" class="layui-input">
+						<input name="email" type="text" id="product-name" placeholder="请输入邮箱" class="layui-input">
 					</div>
 
 					
 				<div class="layui-row layui-col-space16">
 				<!-- 注册时间 -->
-					<div class="layui-col-md6" id = "inventory-update-select-date">
+					<div class="layui-col-md6" id = "user-profile-select-date">
 						<div class="layui-col-md6 layui-input-group">
 							<span class="layui-input-prefix">注册时间:</span>
-							<input style="width:240px" name='startTime' type="text" autocomplete="off" id="inventory-update-select-start-date" class="layui-input" placeholder="开始日期">
+							<input style="width:240px" name='startTime' type="text" autocomplete="off" id="user-profile-select-start-date" class="layui-input" placeholder="开始日期">
 						</div>
 						
 						<div class="layui-col-md6 layui-input-group">
 							<span style="width:30px" class="layui-input-prefix">至</span>
-							<input style="width:240px" name='endTime' type="text" autocomplete="off" id="inventory-update-select-end-date" class="layui-input" placeholder="结束日期">
+							<input style="width:240px" name='endTime' type="text" autocomplete="off" id="user-profile-select-end-date" class="layui-input" placeholder="结束日期">
 						</div>
-							
 					</div>
 					
 					
@@ -127,6 +125,7 @@
 						搜索
 						</button>
 					</div>
+				</div>
 				</div>
 			</form>
 		</div>
@@ -145,6 +144,13 @@
 			<div class="tabel">
 				<table class="layui-hide" id="user-profile-body-table">
 				</table>
+				
+				<!-- 图片 -->
+				<script type="text/html" id="user-head-img-thumbnail">
+			  		<img src="{{d.img}}" style="max-height:140px;max-width:240px;cursor: pointer;" onclick="showImage('{{d.img}}')"/>
+				</script>
+				
+				
 				<script type="text/html" id="user-profile-table-operate">
 			  <div class="layui-clear-space">
 			    <a class="layui-btn layui-btn-xs layui-bg-blue" lay-event="edit">编辑</a>
@@ -165,14 +171,15 @@
 		// 日期范围 - 左右面板独立选择模式
 		laydate
 				.render({
-					elem : '#product-select-date',
-					range : [ '#product-select-start-date',
-							'#product-select-end-date' ]
+					elem : '#user-profile-select-date',
+					range : [ '#user-profile-select-start-date',
+							'#user-profile-select-end-date' ],
+							type:'datetime'
 				});
 		
 		var UPinst;
 		// 已知数据渲染
-		function refreshPITable(){
+		function refreshUPTable(){
 			// 销毁当前表格实例
 			if(UPinst){
 				UPinst.reload({}); // 先清空数据
@@ -181,53 +188,64 @@
 			
 			UPinst=table.render({
 				elem : '#user-profile-body-table',
+				lineStyle: 'height: 100px;',
 				cols : [ [ //标题栏
 				{
 					type : 'checkbox',
 					fixed : 'left'
 				},{
 	                field: 'id',
-	                hide: true // 隐藏列
+	                title:'ID',
+	               	width:120,
+	               	fixed : 'left'
 	            },{
-					field : 'information_name',
-					title : '产品名',
+					field : 'account_number',
+					title : '账号',
 					width : 150
 				}, {
-					field : 'description',
-					title : '描述',
+					field : 'user_name',
+					title : '昵称',
 					minWidth : 120
+				},{
+					title : '头像',
+					field : 'img',
+					width : 100,
+					toolbar : '#user-head-img-thumbnail'
+	            },{
+					field : 'phone',
+					title : '手机号',
+					width : 120,
 				}, {
-					field : 'type',
-					title : '分类',
-					width : 80
-				}, {
-					field : 'status',
-					title : '上架状态',
+					field : 'mailbox',
+					title : '邮箱',
+					width : 120
+				},  {
+					field : 'address',
+					title : '地址',
+					minWidth : 150
+				},{
+					field : 'sex',
+					title : '性别',
 					width : 120,
 					sort: true
 				}, {
-					field : 'is_last',
-					title : '是否新品',
-					width : 120,
+					field : 'birthday',
+					title : '生日',
+					width : 200,
 					sort: true
-				}, {
+				},{
 					field : 'create_time',
 					title : '创建时间',
 					width : 200,
 					sort: true
-				}, {
-					field : 'shelves_time',
-					title : '上市时间',
-					width : 200,
-					sort: true
-				}, {
+				},  {
 					fixed : 'right',
 					title : '操作',
 					width : 134,
 					minWidth : 125,
 					toolbar : '#user-profile-table-operate'
 				} ] ],
-				url : "pages/function/product_information/selAll",
+				url : "pages/function/user_profile/selAll",
 				//skin: 'line', // 表格风格
 				//even: true,
 				page : true, // 是否显示分页
@@ -236,6 +254,8 @@
 			// 每页默认显示的数量
 			});
 		}      
+		refreshUPTable();
+		
 		// 触发单元格工具事件
 		table.on('tool(user-profile-body-table)',function(obj) { // 双击 toolDouble
 							var data = obj.data; // 获得当前行数据

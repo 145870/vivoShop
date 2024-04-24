@@ -2,6 +2,8 @@ package entity;
 
 import java.util.Date;
 
+import com.google.protobuf.Timestamp;
+
 public class UserProfile {
 	private Long id;
 	private String account_number;
@@ -14,6 +16,7 @@ public class UserProfile {
 	private Date birthday;
 	private Date create_time;
 	private String head_image_url;
+	
 	public Long getId() {
 		return id;
 	}
