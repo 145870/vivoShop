@@ -3,11 +3,7 @@ package entity;
 import java.util.Date;
 
 public class UserProfile {
-<<<<<<< HEAD
 	private int id;
-=======
-	private Long id;
->>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 	private String account_number;
 	private String user_name;
 	private String phone;
@@ -18,17 +14,10 @@ public class UserProfile {
 	private Date birthday;
 	private Date create_time;
 	private String head_image_url;
-<<<<<<< HEAD
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
-=======
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
->>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 		this.id = id;
 	}
 	public String getAccount_number() {
@@ -91,11 +80,7 @@ public class UserProfile {
 	public void setHead_image_url(String head_image_url) {
 		this.head_image_url = head_image_url;
 	}
-<<<<<<< HEAD
 	public UserProfile(int id, String account_number, String user_name, String phone, String user_password,
-=======
-	public UserProfile(Long id, String account_number, String user_name, String phone, String user_password,
->>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 			String mailbox, String address, int sex, Date birthday, Date create_time, String head_image_url) {
 		super();
 		this.id = id;
@@ -113,6 +98,8 @@ public class UserProfile {
 	public UserProfile() {
 		super();
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "user_profile [id=" + id + ", account_number=" + account_number + ", user_name=" + user_name + ", phone="

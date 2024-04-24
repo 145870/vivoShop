@@ -193,7 +193,6 @@ public class Products_information {
 	public Products_information() {
 		super();
 	}
-<<<<<<< HEAD
 	/**
 	 * @param information_name
 	 * @param description
@@ -222,9 +221,6 @@ public class Products_information {
 		this.description = description;
 		this.url = url;
 	}
-	
-=======
->>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 	
 	
 }

@@ -30,9 +30,9 @@
 	text-decoration: none;
 	color: black
 }
-ul li{
+#jx li{
 	list-style: none;
-	margin-top: 16px;
+	margin-top: 20px;
 }
 #jx {
 	display: inline-flex;

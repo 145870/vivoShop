@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>查询</title>
 <link rel="stylesheet" type="text/css" href="../css/selectcss.css">
+<link rel="stylesheet" type="text/css" href="../css/Xcss.css">
 <script type="text/javascript" src="../js/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="../js/vivohome.js"></script>
 
