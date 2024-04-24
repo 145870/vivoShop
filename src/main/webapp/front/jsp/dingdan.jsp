@@ -89,7 +89,7 @@ $(document).ready(function(){
     		var tandiv=document.getElementById('xinzengdiv');
 			 // 为动态生成的"jia_div"元素设置点击事件
 	        $(document).on('click', '#jia_div', function() {
-	    		tandiv.style.display='block';
+	    		tandiv.style.display='block';	
 	        });
 		
 	     // 初始隐藏除前三个和最后一个地址框外的其他地址框
