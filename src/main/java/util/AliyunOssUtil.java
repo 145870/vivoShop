@@ -13,6 +13,11 @@ import com.aliyun.oss.OSSException;
 import com.aliyun.oss.common.auth.EnvironmentVariableCredentialsProvider;
 import com.aliyun.oss.model.GetObjectRequest;
 import com.aliyun.oss.model.OSSObject;
+<<<<<<< HEAD
+=======
+import com.aliyun.oss.model.OSSObjectSummary;
+import com.aliyun.oss.model.ObjectListing;
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 import com.aliyun.oss.model.PutObjectRequest;
 
 public class AliyunOssUtil {
@@ -101,6 +106,17 @@ public class AliyunOssUtil {
     	ossClient.deleteObject(bucketName, objectName);
     }
     
+<<<<<<< HEAD
+=======
+    public void outObjectListing(String objectName) {
+    	// 设置要列举的目录路径，并执行列举操作
+        ObjectListing objectListing = ossClient.listObjects(bucketName, objectName);
+        // 遍历目录下的对象信息
+        for (OSSObjectSummary objectSummary : objectListing.getObjectSummaries()) {
+            System.out.println(" - " + objectSummary.getKey());
+        }
+    }
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
     //返回拼接后的图片url
     public String getImageUrl(String objectName) {
         // 拼接图片的访问路径
@@ -108,6 +124,26 @@ public class AliyunOssUtil {
     }
 
     /**
+<<<<<<< HEAD
+=======
+     * 从OSS下载文件到InputStream
+     * 
+     * @param objectName    OSS存储的Object名称（包括路径）
+     * @return 文件的输入流
+     * @throws OSSException     OSS异常
+     * @throws ClientException  客户端异常
+     * @throws IOException      IO异常
+     */
+    public InputStream downloadToInputStream(String objectName) throws OSSException, ClientException, IOException {
+        // 创建下载Object的Request对象
+        GetObjectRequest getObjectRequest = new GetObjectRequest(bucketName, objectName);
+        // 下载文件到本地
+        OSSObject ossObject = ossClient.getObject(getObjectRequest);
+        return ossObject.getObjectContent();
+    }
+    
+    /**
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
      * 关闭OSS客户端连接
      */
     public void close() {
@@ -115,6 +151,7 @@ public class AliyunOssUtil {
             ossClient.shutdown();
         }
     }
+<<<<<<< HEAD
     public static void main(String[] args) {
     	AliyunOssUtil u = new AliyunOssUtil();
     	
@@ -133,4 +170,7 @@ public class AliyunOssUtil {
     		//获取图片链接 用于发布到网页等 参数为服务器上的地址
 			//System.out.println(u.getImageUrl("images/1.jpg"));
 	}
+=======
+
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 }

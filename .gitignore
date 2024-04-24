@@ -28,4 +28,6 @@ captures/
 *.iml
 # Keystore files
 *.jks
+/target/*
+/.settiongs/*
 /target/

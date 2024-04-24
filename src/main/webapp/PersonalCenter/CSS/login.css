@@ -1,0 +1,452 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+/* 禁用密码框明文显示开关 */
+input[type="password"]::-ms-reveal{
+    display: none !important;
+}
+
+body{
+	background-color: rgb(247, 247, 247);
+}
+#dx_loginbox{
+	display: block;
+
+}
+#mm_loginbox{
+	display: none;
+
+}
+#head_maxbox{
+	background-color: rgb(255, 255, 255);
+}
+#center_box{
+	height: 780px;
+	margin: 0 auto;
+	max-width: 1200px;
+	position: relative;
+}
+#cent_box img{
+	vertical-align: middle;
+}
+.logo{
+	background-image: url('../IMG/vivologo.png');
+	background-size: 100% 100%;
+	height: 52px;
+	left: 243px;
+	position: absolute;
+	top: 0;
+	width: 145px;
+}
+.logo a{
+	cursor: pointer;
+	    display: block;
+	    height: 52px;
+	    width: 145px;
+}
+#login_box{
+	background-color: #fff;
+	box-shadow: 0 4px 10px 0 rgba(0,0,0,.07);
+	overflow: hidden;
+	position: absolute;
+	right: 0;
+	top: 74px;
+	width: 420px;
+}
+#inner_box{
+	min-height: 513px;
+	padding: 30px 30px 20px;
+}
+#head_{
+	color: #999;
+	    font-size: 16px;
+	    margin-top: 43px;
+	    position: relative;
+	    text-align: left;
+}
+#head_ span:nth-child(1){
+	    cursor: pointer;
+	    display: inline-block;
+	    font-size: 20px;
+	    position: relative;
+	    text-align: center;
+	    width: 50%;
+		left: 5px;
+}
+#head_ span:nth-child(2){
+	color: #e9e9e9;
+	margin: 15px;
+}
+#head_ span:nth-child(3){
+	margin-left: 25px;
+	font-size: 20px;
+	cursor: pointer;
+}
+#xiahuaxian{
+		background-color: #456fff;
+	    height: 3px;
+	    left: 71px;
+	    position: relative;
+	    top: 4px;
+	    transition: left .2s ease-in-out;
+	    width: 42px;
+}
+#number{
+	border: 1px solid #dedfe0;
+	    height: 48px;
+	    margin-top: 15px;
+	    width: 358px;
+}
+#num_head{
+	    float: left;
+	    position: relative;
+	    width: 74px;
+}
+#num_head span{
+	color: #000;
+	    cursor: pointer;
+	    display: block;
+	    font-size: 16px;
+	    height: 48px;
+	    line-height: 48px;
+	    padding-left: 12px;
+	    text-align: left;
+}
+#num_head i{
+	background: url('../IMG/下箭头.png') no-repeat;
+	    background-size: 100% 100%;
+	    content: "";
+	    height: 9px;
+	    left: 61px;
+	    position: absolute;
+	    top: 21px;
+	    width: 14px;
+}
+#number input{
+    float: left;
+    width: 260px;
+    margin-left: 15px;
+    border: none;
+	height: 47px;
+	font-size: 16px;
+	color: #000;
+	letter-spacing: 1px !important;
+}
+#ip_num{
+	outline:none;
+}
+#tishicuowu{
+	/* display: none; */
+	margin: 0 auto;
+	width: 360px;
+}
+#tishicuowu div{
+	color: #ec3f3f;
+    font-size: 14px;
+    margin-top: 12px;
+    text-align: left;
+	display: none;
+}
+#yanzhen{
+	border: 1px solid #dedfe0;
+    height: 48px;
+    line-height: 48px;
+    margin-top: 15px;
+    padding-left: 12px;
+}
+#yanzhenmaText{
+	color: #000;
+    float: left;
+    font-size: 16px;
+    height: 46px;
+    line-height: 47px;
+    width: 205px;
+	outline:none;/* 去除输入框焦点事件 */
+	border: none;
+	letter-spacing: 1px !important;
+}
+#hqyanzhenma{
+	float: right;
+    font-size: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+    position: relative;
+    text-align: center;
+    width: 118px;
+}
+#hqyanzhenma span:nth-child(1){
+	color: #456fff;
+	cursor: pointer;
+}
+#hqyanzhenma span:nth-child(2){
+	background-color: #dedfe0;
+    height: 33px;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: 7px;
+    width: 1px;
+}
+#toggle-line{
+	font-size: 14px;
+    margin-top: 33px;
+    overflow: hidden;
+}
+#timeLogin{
+	color: #666;
+    float: left;
+}
+.check{
+	background-color: #fff;
+    border: 1px solid #dedfe0;
+    cursor: pointer;
+    float: left;
+    height: 18px;
+    margin-right: 5px;
+    margin-top: 1px;
+    width: 18px;
+}
+#disable{
+	color: #666;
+    cursor: pointer;
+    float: right;
+}
+#gouxuan{
+	height: 80%;
+    padding: 2px;
+    vertical-align: baseline;
+    width: 80%;
+}
+#login{
+	font-size: 17px;
+    height: 48px;
+    line-height: 48px;
+    margin: 20px auto 0;
+    text-align: center;
+    width: 360px;
+	background-color: #456fff;
+    /* background-image: linear-gradient(90deg, #418eff, #4566ff); */
+    color: #fff;
+    cursor: pointer;
+}
+#login:hover{
+	background-color: rgb(69,102,255);
+}
+#zhuce{
+	border: 1px solid #456fff;
+    color: #456fff;
+    cursor: pointer;
+    font-size: 17px;
+    height: 48px;
+    line-height: 48px;
+    margin-top: 15px;
+    text-align: center;
+    width: 358px;
+}
+#zhuce:hover{
+	background: rgb(212,223,250);
+}
+#way_login{
+	color: #999;
+    font-size: 13px;
+    margin-top: 56px;
+    text-align: center;
+}
+#l_title{
+	display: flex;
+	align-items: center;
+}
+#icon_box{
+	margin-top: 15px;
+	text-align: center;
+}
+.line{
+	background-color: #ccc;
+    flex: 1;
+    height: 1px;
+}
+#qtfs{
+	color: #999;
+    font-size: 13px;
+    margin: 0 15px;
+}
+.icon_item{
+	margin: 0 7px;
+	display: inline-block;
+	height: 26px;
+	width: 26px;
+}
+#img_weixin{
+	background-image: url('../IMG/微信.png');
+	background-repeat: no-repeat;
+    background-size: 100% 100%;
+    cursor: pointer;
+    display: block;
+    height: 26px;
+    width: 26px;
+}
+#img_zhifubao{
+	background-image: url('../IMG/支付宝.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	cursor: pointer;
+	display: block;
+	height: 26px;
+	width: 26px;
+}
+#img_weibo{
+	background-image: url('../IMG/微博.png');
+	background-repeat: no-repeat;
+	background-size: 100% 100%;
+	cursor: pointer;
+	display: block;
+	height: 26px;
+	width: 26px;
+}
+#buttom{
+	color: #9d9d9d;
+    font-size: 11px;
+    margin-bottom: 30px;
+    margin-top: 135px;
+    text-align: center;
+}
+#two_buttom{
+	box-sizing: border-box;
+    font-size: 10px;
+    padding: 10px 0;
+}
+#one_buttom a{
+	color: #666;
+    text-decoration: none;
+}
+#img_liuyan{
+	height: 15px;
+    margin-right: 10px;
+    vertical-align: text-bottom;
+    width: 18px;
+}
+#one_buttom a:nth-child(1) span{
+	color: #666;
+}
+#img_ipone{
+	height: 16px;
+    width: 12px;
+	margin-right: 10px;
+    vertical-align: text-bottom;
+}
+
+/* 密码登录样式区 */
+
+.pwd_box{
+	border: 1px solid #dedfe0;
+    height: 48px;
+    margin-top: 15px;
+    position: relative;
+    width: 360px;
+}
+.input{
+	display: block;
+    padding: 0 48px 0 12px;
+    position: absolute;
+    width: 68%;
+	color: #000;
+    font-size: 16px;
+    height: 47px;
+	outline:none;
+	border: none;
+	letter-spacing: 1px !important;
+}
+#eye_box{
+	cursor: pointer;
+    height: 18px;
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    width: 21px;
+}
+.yj_img{
+	display: block;
+    height: 100%;
+    width: 100%;s
+}
+#toggle-line{
+	font-size: 14px;
+    line-height: 19px;
+    margin-top: 10px;
+    overflow: hidden;
+    width: 360px;
+}
+.toggle{
+	color: #456fff;
+    cursor: pointer;
+    float: left;
+    max-width: 50%;
+}
+#forget_pwd{
+	    color: #666;
+    cursor: pointer;
+    float: right;
+}
+#disable:hover{
+	color: #456fff;
+}
+#forget_pwd:hover{
+	color: #456fff;
+}
+.country_box{
+	background-color: #fff;
+    border: 1px solid #dedfe0;
+    border-top: none;
+    left: -1px;
+    max-height: 204px;
+    overflow: auto;
+    position: relative;
+    top: 1px;
+    width: 358px;
+    z-index: 3;
+}
+.country_box{
+	display: none;
+}
+.country_box ul{
+	list-style: none;
+}
+.country_items{
+	border-bottom: 1px solid #dedfe0;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 39px;
+    min-height: 39px;
+}
+.country_items span:nth-child(1){
+	display: inline-block;
+    margin-left: 18px;
+    max-width: 250px;
+    word-break: break-word;
+}
+.country_items span:nth-child(2){
+	float: right;
+    margin-right: 18px;
+}
+.country_items:hover{
+	background-color: rgb(218,226,255);
+}
+#mail_login{
+	float: left;
+    padding-left: 12px;
+    width: 100%;
+}
+.tishiyanzheng{
+	margin-top: 14px;
+	font-size: 14px;
+	color: red;
+	display: none;
+}
+#tishimima{
+	color: #ec3f3f;
+    font-size: 14px;
+    margin-top: 12px;
+    text-align: left;
+    display: none;
+}

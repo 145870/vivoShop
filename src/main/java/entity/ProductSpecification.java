@@ -1,19 +1,58 @@
 package entity;
 
+<<<<<<< HEAD
 import java.util.Arrays;
 
 public class ProductSpecification {
 	/*
 	 * 规格配置
 	 */
+=======
+public class ProductSpecification {
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 	private Long id;
     private Integer informationId;
     private String specificationsName;
     private String[] specificationsValues;
     
+<<<<<<< HEAD
     
 
     public ProductSpecification(Long id, Integer informationId, String specificationsName,
+=======
+    private Long pid;
+    private String pname;
+
+    public Long getPid() {
+		return pid;
+	}
+
+
+
+
+	public void setPid(Long pid) {
+		this.pid = pid;
+	}
+
+
+
+
+	public String getPname() {
+		return pname;
+	}
+
+
+
+
+	public void setPname(String pname) {
+		this.pname = pname;
+	}
+
+
+
+
+	public ProductSpecification(Long id, Integer informationId, String specificationsName,
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 			String[] specificationsValues) {
 		super();
 		this.id = id;
@@ -68,9 +107,21 @@ public class ProductSpecification {
         this.specificationsName = specificationsName;
     }
 
+<<<<<<< HEAD
     @Override
 	public String toString() {
 		return "ProductSpecification [id=" + id + ", informationId=" + informationId + ", specificationsName="
 				+ specificationsName + ", specificationsValues=" + Arrays.toString(specificationsValues) + "]";
 	}
+=======
+    // toString() method
+    @Override
+    public String toString() {
+        return "ProductSpecification{" +
+                "id=" + id +
+                ", informationId=" + informationId +
+                ", specificationsName='" + specificationsName + '\'' +
+                '}';
+    }
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 }

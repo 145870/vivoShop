@@ -1,0 +1,382 @@
+@charset "UTF-8";
+*{
+	margin: 0;
+	padding: 0;
+}
+/* 禁用密码框明文显示开关 */
+input[type="password"]::-ms-reveal{
+    display: none !important;
+}
+
+body{
+	background-color: rgb(247, 247, 247);
+	margin: 0px auto;
+    width: 100%;
+    font-size: 12px;
+}
+#bg_box{
+	background: #fff;
+    margin: 80px auto 0;
+    min-height: 670px;
+    overflow: hidden;
+    width: 860px;
+}
+#head_logo{
+	margin-top: 60px;
+}
+#logo{
+	cursor: pointer;
+    height: 42px;
+    margin: 0 auto;
+    width: 160px;
+}
+#logo img{
+	display: block;
+    height: 100%;
+    width: 100%;
+}
+#zhucewenzi{
+	margin-top: 30px;
+}
+#zhucewenzi div{
+	font-size: 22px;
+	text-align: center;
+	color: #000;
+}
+#input_box{
+	margin: 60px auto 100px;
+    width: 360px;
+}
+#input_box_center{
+	width: 360px;
+}
+#guojia{
+	background-color: #fff;
+    border: 1px solid #dedfe0;
+    color: #000;
+    cursor: pointer;
+    font-size: 16px;
+    height: 48px;
+    line-height: 48px;
+    position: relative;
+}
+#zhuce_tishi{
+	color: #999;
+    font-size: 14px;
+    line-height: 19px;
+    margin-top: 10px;
+}
+#jutiguojia{
+	height: 46px;
+    padding-left: 12px;
+    position: relative;
+}
+#jiantou{
+	float: right;
+    height: 10.2px;
+    position: absolute;
+    right: 15.2px;
+    top: 19px;
+    width: 18.8px;
+}
+#jiantou img{
+	height: 10.2px;
+    vertical-align: top;
+    width: 18.8px;
+}
+#phone_num{
+	border: 1px solid #dedfe0;
+    cursor: pointer;
+    height: 48px;
+    margin-top: 15px;
+}
+#phone_guishu{
+	color: #000;
+    float: left;
+    font-size: 16px;
+    height: 46px;
+    line-height: 46px;
+    position: relative;
+    width: 86px;
+}
+#phone_guishu div{
+	padding-left: 12px;
+    position: relative;
+}
+#phone_guishu div::after{
+	background: url('../IMG/注册号码归属地下箭头.png');
+	background-size: 100% 100%;
+    content: "";
+    height: 7.7px;
+    position: absolute;
+    right: 19.3px;
+    top: 21.3px;
+    width: 13.2px;
+}
+#phone{
+	color: #252525;
+    float: left;
+    font-size: 16px;
+    height: 47px;
+    line-height: 47px;
+    width: 261px;
+	letter-spacing: 1px !important;
+	border: none;
+	outline: none;
+}
+#tishicuowu{
+	display: none;
+	margin: 0 auto;
+	width: 360px;
+}
+#tishicuowu div{
+	color: #ec3f3f;
+    font-size: 14px;
+    margin-top: 12px;
+    text-align: left;
+}
+#xieyi{
+	    font-size: 14px;
+    height: 20px;
+    line-height: 20px;
+    margin-top: 20px;
+}
+.gouxuan{
+	border: 1px solid #dedfe0;
+    float: left;
+    height: 18px;
+    margin-top: 1px;
+    position: relative;
+    width: 18px;
+}
+.gouxuan img{
+	height: 10px;
+    left: 2px;
+    position: absolute;
+    top: 4px;
+    width: 14px;
+	display: none;
+}
+.span1{
+	    color: #252525;
+    margin-left: 8px;
+}
+.span2{
+	    color: #456fff;
+    cursor: pointer;
+}
+#xiayibu{
+	background-color: #456fff;
+    color: #fff;
+    cursor: pointer;
+    font-size: 17px;
+    height: 48px;
+    line-height: 48px;
+    margin: 20px auto 0;
+    text-align: center;
+    width: 360px;
+}
+#xiayibu:hover{
+	background-color: rgb(69,102,255);
+}
+#buttom{
+	color: #9d9d9d;
+    font-size: 11px;
+    margin-bottom: 30px;
+    margin-top: 135px;
+    text-align: center;
+}
+#two_buttom{
+	box-sizing: border-box;
+    font-size: 10px;
+    padding: 10px 0;
+}
+#one_buttom a{
+	color: #666;
+    text-decoration: none;
+}
+/* 获取验证码 */
+#tishicuowu{
+	/* display: none; */
+	margin: 0 auto;
+	width: 360px;
+}
+#tishicuowu div{
+	color: #ec3f3f;
+    font-size: 14px;
+    margin-top: 12px;
+    text-align: left;
+	/* display: none; */
+}
+#yanzhen{
+	border: 1px solid #dedfe0;
+    height: 48px;
+    line-height: 48px;
+    margin-top: 15px;
+    padding-left: 12px;
+}
+#yanzhenmaText{
+	color: #000;
+    float: left;
+    font-size: 16px;
+    height: 46px;
+    line-height: 47px;
+    width: 205px;
+	outline:none;/* 去除输入框焦点事件 */
+	border: none;
+	letter-spacing: 1px !important;
+}
+#hqyanzhenma{
+	float: right;
+    font-size: 15px;
+    padding-left: 8px;
+    padding-right: 8px;
+    position: relative;
+    text-align: center;
+    width: 118px;
+}
+#hqyanzhenma span:nth-child(1){
+	color: #456fff;
+	cursor: pointer;
+}
+#hqyanzhenma span:nth-child(2){
+	background-color: #dedfe0;
+    height: 33px;
+    left: 0;
+    padding: 0;
+    position: absolute;
+    top: 7px;
+    width: 1px;
+}
+/* 国家归属地 */
+#country_box{
+	background-color: #fff;
+    border: 1px solid #dedfe0;
+    border-top: none;
+    left: -1px;
+    max-height: 204px;
+    overflow: auto;
+    position: relative;
+    top: 1px;
+    width: 358px;
+    z-index: 3;
+}
+#country_box{
+	display: none;
+}
+#country_box ul{
+	list-style: none;
+}
+.country_items{
+	border-bottom: 1px solid #dedfe0;
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 39px;
+    min-height: 39px;
+}
+.country_items span:nth-child(1){
+	display: inline-block;
+    margin-left: 18px;
+    max-width: 250px;
+    word-break: break-word;
+}
+.country_items span:nth-child(2){
+	float: right;
+    margin-right: 18px;
+}
+.country_items:hover{
+	background-color: rgb(218,226,255);
+}
+#country_list_box{
+	background-color: #fff;
+    border: 1px solid #dedfe0;
+    border-top: none;
+    max-height: 234px;
+    width: 358px;
+    z-index: 99;
+	display: none;
+	overflow-y: auto;
+	position: absolute;
+}
+#country_list_box ul{
+	list-style: none;
+}
+#country_list_box ul li{
+	border-bottom: 1px solid #dedfe0;
+    cursor: pointer;
+    line-height: 39px;
+    min-height: 39px;
+}
+#country_list_box ul li:hover{
+	background-color: rgb(218,226,255);
+}
+.country_name{
+	cursor: pointer;
+    height: 100%;
+    padding-left: 13px;
+    width: 95%;
+	font-size: 14px;
+}
+.tishiyanzheng{
+	margin-top: 14px;
+	font-size: 14px;
+	color: red;
+	display: none;
+}
+#xiayibuBut{
+	width: 100%;
+	height: 100%;
+	background: none;
+	border: none;
+	cursor: pointer;
+	color: #fff;
+	font-size: 17px;
+}
+/* 关键帧动画 */
+.shake-animation {
+  animation: shake 0.5s linear;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+#password_input{
+	border: 1px solid #dedfe0;
+	height: 48px;
+	line-height: 48px;
+	margin-top: 15px;
+	padding-left: 12px;
+}
+#password{
+	display: block;
+	height: 48px;
+	width: 300px;
+	 border: none; 
+	letter-spacing: 1px !important;
+	font-size: 16px;
+	outline: none;
+	position: absolute;
+}
+#shuruPasswordtishi{
+	margin-top: 14px;
+	font-size: 14px;
+	color: red;
+	display: none;
+}
+#yanjin{
+	cursor: pointer;
+    height: 18px;
+    position: relative;
+	left: 313px;
+    right: 15px;
+    top: 15px;
+    width: 21px;
+}
+.yj_img{
+	display: block;
+	height: 100%;
+	width: 100%;
+}

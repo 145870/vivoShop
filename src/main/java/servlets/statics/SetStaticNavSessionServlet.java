@@ -12,7 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import DAO.ProductsClassDAO;
+<<<<<<< HEAD
 import DAO.Products_images_urlDAO;
+=======
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 import DAO.Products_informationDAO;
 import entity.ProductsClass;
 import entity.Products_information;
@@ -27,7 +30,11 @@ public class SetStaticNavSessionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProductsClassDAO classDAO = new ProductsClassDAO();
 	Products_informationDAO infdao = new Products_informationDAO();
+<<<<<<< HEAD
 	Products_images_urlDAO urldao = new Products_images_urlDAO();
+=======
+
+>>>>>>> 38abe4d133fb810f4c226411aa1e114f49c675ae
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

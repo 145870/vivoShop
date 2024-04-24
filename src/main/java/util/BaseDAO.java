@@ -12,6 +12,7 @@ import java.util.List;
 import entity.Products_information;
 
 
+
 /**
  * 父类DAO，为抽象类
  * @author LiZanhong
@@ -77,6 +78,7 @@ public class BaseDAO {
 					e.printStackTrace();
 				}
 			}
+			System.out.println(stmt);
 		}
 	}
 	
@@ -101,7 +103,12 @@ public class BaseDAO {
 			//返回影响的行数 
 			return v;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			 if (e.getErrorCode() == 1451) { // MySQL 错误码 1451 表示外键约束错误
+	         	return -1451;
+	         } else {
+	         // 其他类型的异常，直接打印错误信息
+	        	 e.printStackTrace();
+	         }
 		}
 		return 0;
 	}
@@ -145,9 +152,8 @@ public class BaseDAO {
 	public Object singleObject(String sql, Object...params) {
 		List<Object> list = this.executeQuery(sql, new Mapper<Object>() {
 
-			@Override
 			public List<Object> mapper(ResultSet rs) {
-				List<Object> list = new ArrayList<>();
+				List<Object> list = new ArrayList<Object>();
 				try {
 					while(rs.next()) {
 						Object obj = rs.getObject(1);
@@ -161,7 +167,7 @@ public class BaseDAO {
 			}
 
 		}, params);
-		
+		System.out.println(list.get(0));
 		return list.get(0);//只需要List集合中的第0个元素
 	}
 }
