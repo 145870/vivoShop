@@ -78,7 +78,6 @@
 		<!-- 查询区域 -->
 		<div id='user-profile-select'>
 			<form class="layui-form">
-			
 				<div class="layui-row layui-col-space16">
 					<!-- 账号 -->
 					<div class="layui-col-md3 layui-input-group">
@@ -133,10 +132,10 @@
 		<!-- 显示内容 -->
 		<div id="user-profile-body">
 			<div class="buttons">
-				<button onclick="" class="layui-btn layui-bg-blue">新增用户</button>
+				<button onclick="addUserProfile()" class="layui-btn layui-bg-blue">新增用户</button>
 				<button onclick="" class="layui-btn layui-bg-blue">修改用户资料</button>
 				<button onclick="" class="layui-btn layui-bg-blue">删除用户信息</button>
-				<button onclick="" style="float: right;" class="layui-btn layui-bg-blue">
+				<button onclick="refreshAndClearUserProfileSelectForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
 			</div>
@@ -147,7 +146,7 @@
 				
 				<!-- 图片 -->
 				<script type="text/html" id="user-head-img-thumbnail">
-			  		<img src="{{d.img}}" style="max-height:140px;max-width:240px;cursor: pointer;" onclick="showImage('{{d.img}}')"/>
+			  		<img src="{{d.img}}" style="max-height:60px;max-width:60px;cursor: pointer;" onclick="showImage('{{d.img}}')"/>
 				</script>
 				
 				
@@ -177,6 +176,12 @@
 							type:'datetime'
 				});
 		
+		//刷新并清空表单
+		function refreshAndClearUserProfileSelectForm(){
+			$('#user-profile-select input').val('');
+			
+			refreshUPTable();
+		}
 		var UPinst;
 		// 已知数据渲染
 		function refreshUPTable(){
@@ -188,7 +193,7 @@
 			
 			UPinst=table.render({
 				elem : '#user-profile-body-table',
-				lineStyle: 'height: 100px;',
+				lineStyle: 'height: 90px;',
 				cols : [ [ //标题栏
 				{
 					type : 'checkbox',
@@ -196,20 +201,21 @@
 				},{
 	                field: 'id',
 	                title:'ID',
-	               	width:120,
-	               	fixed : 'left'
+	               	width:50,
+	               	fixed : 'left',
+	               	sort: true
 	            },{
 					field : 'account_number',
 					title : '账号',
-					width : 150
+					width : 120
 				}, {
 					field : 'user_name',
 					title : '昵称',
-					minWidth : 120
+					minWidth : 100
 				},{
 					title : '头像',
 					field : 'img',
-					width : 100,
+					width : 90,
 					toolbar : '#user-head-img-thumbnail'
 	            },{
 					field : 'phone',
@@ -218,7 +224,7 @@
 				}, {
 					field : 'mailbox',
 					title : '邮箱',
-					width : 120
+					width : 150
 				},  {
 					field : 'address',
 					title : '地址',
@@ -226,12 +232,12 @@
 				},{
 					field : 'sex',
 					title : '性别',
-					width : 120,
+					width : 80,
 					sort: true
 				}, {
 					field : 'birthday',
 					title : '生日',
-					width : 200,
+					width : 120,
 					sort: true
 				},{
 					field : 'create_time',
@@ -245,7 +251,7 @@
 					minWidth : 125,
 					toolbar : '#user-profile-table-operate'
 				} ] ],
-				url : "pages/function/user_profile/selAll",
+				url : "/vivoShop/background/pages/function/user_profile/selAll",
 				//skin: 'line', // 表格风格
 				//even: true,
 				page : true, // 是否显示分页
@@ -256,52 +262,91 @@
 		}      
 		refreshUPTable();
 		
+		//搜索
+		$("#user-profile-select form").submit(function(event){
+			event.preventDefault();
+
+		    // 将表单转换为序列化对象
+		    var formData = $(this).serializeArray();
+			// 将数组转换为对象
+		    var serializedData = formData.reduce(function(obj, item) {
+		        obj[item.name] = item.value;
+		        return obj;
+		    }, {});
+			
+		    // 重新加载表格数据
+		    UPinst.reload({
+		        url: '/vivoShop/background/pages/function/user_profile/selAll',
+		        where: serializedData
+		    });
+		})
+		
 		// 触发单元格工具事件
 		table.on('tool(user-profile-body-table)',function(obj) { // 双击 toolDouble
-							var data = obj.data; // 获得当前行数据
-							var index1;
-							if (obj.event === 'edit') {
-								updateProduct(data);
-							} else if (obj.event === 'more') {
-								// 更多 - 下拉菜单
-								dropdown
-										.render({
-											elem : this, // 触发事件的 DOM 对象
-											show : true, // 外部事件触发即显示
-											data : [ {
-												title : '查看详细',
-												id : 'selAll'
-											}, {
-												title : '查看产品图',
-												id : 'selImg'
-											}, {
-												title : '删除该产品',
-												id : 'del'
-											}, {
-												title : '访问商品页',
-												id : 'go'
-											}, ],
-											click : function(menudata) {
-												 if(menudata.id === 'selAll'){
-													 //查看详细
-												   	openDetaile(data);
-												 } else if(menudata.id === 'selImg'){
-													 //查看图片
-												   	openImgs(data)
-												 } else if(menudata.id === 'del'){
-													 delProdcut(data)
-												}else if(menudata.id === 'go'){
-													//跳转
-													window.location.href = "/vivoShop/";
-												}
-											},
-											align : 'right', // 右对齐弹出
-											style : 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' // 设置额外样式
-										})
-							}
-							
-							
-						});
+			var data = obj.data; // 获得当前行数据
+			var index1;
+			if (obj.event === 'edit') {
+				updateProduct(data);
+			} else if (obj.event === 'more') {
+				// 更多 - 下拉菜单
+				dropdown.render({
+					elem : this, // 触发事件的 DOM 对象
+					show : true, // 外部事件触发即显示
+					data : [ {
+						title : '查看详细',
+						id : 'selAll'
+					}, {
+						title : '查看产品图',
+						id : 'selImg'
+					}, {
+						title : '删除该产品',
+						id : 'del'
+					}, {
+						title : '访问商品页',
+						id : 'go'
+					}, ],
+					click : function(menudata) {
+						 if(menudata.id === 'selAll'){
+							 //查看详细
+						   	openDetaile(data);
+						 } else if(menudata.id === 'selImg'){
+							 //查看图片
+						   	openImgs(data)
+						 } else if(menudata.id === 'del'){
+							 delProdcut(data)
+						}else if(menudata.id === 'go'){
+							//跳转
+							window.location.href = "/vivoShop/";
+						}
+					},
+					align : 'right', // 右对齐弹出
+					style : 'box-shadow: 1px 1px 10px rgb(0 0 0 / 12%);' // 设置额外样式
+				})
+			}
+		});
+		
+		//新增用户
+		function addUserProfile(){
+			$.ajax({
+		   		url:'/vivoShop/background/pages/user/function/profile/add.jsp',
+		    	success:function(html){
+		    		imgindex=layer.open({
+				   		type:1,
+				   		title: '新增用户',
+				   		shadeClose: true,
+				   		maxmin: false,
+				   		resize:false,
+				   		area: ['444px', '560px'],
+				   		content: html,
+					});
+		    		form.render();
+		    		
+		    	},error: function(xhr, status, error) {
+					//console.log(xhr)	
+					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
+				}
+			})
+		}
 		
 		
 	</script>
