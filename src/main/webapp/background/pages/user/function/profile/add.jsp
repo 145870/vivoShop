@@ -62,31 +62,31 @@
 		<!-- 账号 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">账号:</div>
-			<input type="text" name="" placeholder="请输入账号(必填)" class="layui-input right-text">
+			<input type="text" name="account" placeholder="请输入账号(必填)" class="layui-input right-text">
 		</div>
 		
 		<!-- 昵称 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">昵称:</div>
-			<input type="text" name="" placeholder="请输入昵称(必填)" class="layui-input right-text">
+			<input type="text" name="name" placeholder="请输入昵称(必填)" class="layui-input right-text">
 		</div>
 		
 		<!-- 手机号 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">手机号:</div>
-			<input type="text" name="" placeholder="请输入手机号(必填)" class="layui-input right-text">
+			<input type="text" name="phone" placeholder="请输入手机号(必填)" class="layui-input right-text">
 		</div>
 		
 		<!-- 邮箱 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">邮箱:</div>
-			<input type="text" name="" placeholder="请输入邮箱(选填)" class="layui-input right-text">
+			<input type="text" name="mailbox" placeholder="请输入邮箱(选填)" class="layui-input right-text">
 		</div>
 	
 		<!-- 性别 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">性别:</div>
-			<select name="pav" lay-search="">
+			<select name="sex" lay-search="">
      			<option value="">请选择</option>
      			<option value="0">男</option>
      			<option value="1">女</option>
@@ -97,7 +97,7 @@
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">上市时间:</div>
 			<div class="layui-input-inline">
-			 <input type="text" class="layui-input" name='date' id="addUserDate" placeholder="请选择生日(选填)">
+			 <input type="text" class="layui-input" name='birthday' id="addUserDate" placeholder="请选择生日(选填)">
      		</div>
 		</div>
 		

@@ -341,10 +341,53 @@
 					});
 		    		form.render();
 		    		
+		    		
+		    		$("#addUserProfile").off("submit").on("submit", function(event){
+						event.preventDefault();
+						var formData = $("#addUserProfile").serializeArray();
+						console.log(formData)
+						// 检查
+						for (var i = 0; i < formData.length; i++) {												        
+							// 忽略"mailbox"和"birthday"字段
+							if (formData[i].name == "mailbox" || formData[i].name == "7") {
+							    continue;
+							}
+							
+							// 检查其他字段是否为空
+							if (formData[i].value === "") {
+							    layer.msg('内容不能为空!', {icon: 0, time: 1000});
+							    return;
+							}
+						}
+					//新增
+					$.ajax({
+						url:"/vivoShop/background/pages/function/product_information/add",
+						data:formData,
+						dataType:'text',
+						type:'get',
+						success:function(txt){
+							if(txt=="true"){
+								layer.msg('添加成功', {icon: 1});
+							}else{
+								layer.msg('添加失败', {icon: 0});
+							}
+							if(index){
+								 layer.close(index);
+								 //重新渲染
+								 refreshPITable();
+							}
+						},error: function(xhr, status, error) {
+							//console.log(xhr)
+							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+						}
+					})
+				});
+		    		
 		    	},error: function(xhr, status, error) {
 					//console.log(xhr)	
 					layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
 				}
+		    	
 			})
 		}
 		
