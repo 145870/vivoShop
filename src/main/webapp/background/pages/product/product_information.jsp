@@ -308,7 +308,7 @@
 													 delProdcut(data)
 												}else if(menudata.id === 'go'){
 													//跳转
-													window.location.href = "/vivoShop/";
+													window.location.href = "/vivoShop/front/jsp/DetailsServlet?id="+data.id;
 												}
 											},
 											align : 'right', // 右对齐弹出
@@ -382,7 +382,7 @@
 			})
 		}
 		//修改商品
-		function updateProduct (data){
+		function updateProduct(data){
 			$.ajax({
 			    url: '/vivoShop/background/gopages/goEditProductpane',
 			    data:{

@@ -14,55 +14,57 @@
 </head>
 <body>
 <style>
-#addUserProfile .layui-form {
+#updateUserProfile .layui-form {
 	margin: 0 auto;
 	width: 345px;
-	padding: 20px;
+	pupdateing: 20px;
 }
 
-#addUserProfile .layui-form-onswitch {
+#updateUserProfile .layui-form-onswitch {
 	border-color: rgb(85, 170, 255);
 	background-color: rgb(85, 170, 255);
 }
 
-#addUserProfile .layui-table-checked {
+#updateUserProfile .layui-table-checked {
 	background-color: rgb(244, 244, 255);
 }
 
 /* 重写 */
-#addUserProfile .layui-laydate .layui-this>div {
+#updateUserProfile .layui-laydate .layui-this>div {
 	background-color: rgb(85, 170, 255) !important;
 }
 
-#addUserProfile .layui-laydate .layui-this, .layui-laydate .layui-this>div
+#updateUserProfile .layui-laydate .layui-this, .layui-laydate .layui-this>div
 	{
 	background-color: rgb(85, 170, 255) !important;
 }
 
 /* 重写 */
-#addUserProfile .layui-form-select dl dd.layui-this {
+#updateUserProfile .layui-form-select dl dd.layui-this {
 	color: rgb(102, 117, 255);
 }
 
-#addUserProfile .layui-input-group>.layui-input-prefix {
+#updateUserProfile .layui-input-group>.layui-input-prefix {
 	width: 150px;
 	text-align: right;
 	font-weight: bold;
 }
 
-#addUserProfile .layui-input {
+#updateUserProfile .layui-input {
 	width: 200px;
 }
 
-#addUserProfile .layui-input-group {
+#updateUserProfile .layui-input-group {
 	margin-bottom: 20px;
 }
 </style>
-	<form class="layui-form" id="addUserProfile" style="margin-top: 30px">
+	<form class="layui-form" id="updateUserProfile" style="margin-top: 30px">
+		<input name='id' value='${id}' hidden>
+		
 		<!-- 账号 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">账号:</div>
-			<input type="text" name="account" placeholder="请输入账号(必填)" class="layui-input right-text" lay-filter="ranAccount" lay-affix="refresh">
+			<input value='${account}' type="text" name="account" placeholder="请输入账号(必填)" class="layui-input right-text">
 		</div>
 		
 		<!-- 密码 -->
@@ -75,19 +77,19 @@
 		<!-- 昵称 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">昵称:</div>
-			<input type="text" name="name" placeholder="请输入昵称(必填)" class="layui-input right-text">
+			<input value='${name}' type="text" name="name" placeholder="请输入昵称(必填)" class="layui-input right-text">
 		</div>
 		
 		<!-- 手机号 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">手机号:</div>
-			<input type="text" name="phone" placeholder="请输入手机号(必填)" class="layui-input right-text">
+			<input value='${phone}' type="text" name="phone" placeholder="请输入手机号(必填)" class="layui-input right-text">
 		</div>
 		
 		<!-- 邮箱 -->
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">邮箱:</div>
-			<input type="text" name="mailbox" placeholder="请输入邮箱(选填)" class="layui-input right-text">
+			<input value='${mailbox}' type="text" name="mailbox" placeholder="请输入邮箱(选填)" class="layui-input right-text">
 		</div>
 	
 		<!-- 性别 -->
@@ -104,7 +106,15 @@
 		<div class="layui-input-group">
 			<div class="layui-input-prefix">生日:</div>
 			<div class="layui-input-inline">
-			 <input type="text" class="layui-input" name='birthday' id="addUserDate" placeholder="请选择生日(选填)">
+			 <input value="${birthday}" type="text" class="layui-input" name='birthday' id="updateUserDate" placeholder="请选择生日(选填)">
+     		</div>
+		</div>
+		
+		<!-- 地址 -->
+		<div class="layui-input-group">
+			<div class="layui-input-prefix">地址:</div>
+			<div class="layui-input-inline">
+			<textarea style="resize: none;width:200px;" name="address" placeholder="地址(选填)" class="layui-textarea right-text">${address}</textarea>
      		</div>
 		</div>
 		
@@ -112,10 +122,8 @@
 	</form>
 	<script type="text/javascript">
 	laydate.render({
-	    elem: '#addUserDate'
+	    elem: '#updateUserDate'
 	});
-	
 	</script>
 </body>
-
 </html>

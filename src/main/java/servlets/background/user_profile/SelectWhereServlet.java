@@ -78,7 +78,12 @@ public class SelectWhereServlet extends HttpServlet{
 		    dataMap.put("sex",u.getSex()==0?"男":"女");
 		    
 		    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
-		    dataMap.put("birthday",sdf1.format(u.getBirthday()));
+		    if (u.getBirthday()==null) {
+		    	dataMap.put("birthday","");
+			}else {
+				dataMap.put("birthday",sdf1.format(u.getBirthday()));
+			}
+		    
 		    
 		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		    dataMap.put("create_time",sdf.format(u.getCreate_time()));

@@ -665,3 +665,19 @@ function escLogin(){
 		  });
 		}
 		
+		
+	function generateRandomId(prefix, length) {
+	    var characters = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+	    var randomId = prefix;
+	    for (var i = 0; i < length; i++) {
+	        var randomIndex = Math.floor(Math.random() * characters.length);
+	        randomId += characters.charAt(randomIndex);
+	    }
+	    return randomId;
+	}
+	
+	//随机账号名
+	form.on('input-affix(ranAccount)', function(data){
+	    var elem = data.elem; // 输入框
+	    elem.value = generateRandomId('vivo_', 3)+generateRandomId('_', 6); // 生成随机vivo开头的ID，并赋值给输入框
+	});

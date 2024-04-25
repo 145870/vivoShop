@@ -2,6 +2,7 @@ package DAO;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -123,5 +124,104 @@ public class UserProfileDAO extends BaseDAO{
         map.put("list", list);
         
 		return map;
+	}
+
+
+	public String doInsertByCount(String account,String pwd, String name, String phone, String mailbox, String sex,
+			String birthday) {
+		StringBuilder sqlBuilderHead = new StringBuilder("INSERT INTO user_profile (account_number, user_name, phone, user_password, head_image_url");
+		StringBuilder sqlBuilderTail = new StringBuilder("VALUES (?, ?, ?, ?, '/images/user/head_image/default.jpg'");
+		List<Object> params = new ArrayList<>();
+
+	    // 添加必填参数到 SQL 语句和参数列表中
+	    params.add(account);
+	    params.add(name);
+	    params.add(phone);
+	    params.add(pwd);
+
+	    // 添加可选参数到 SQL 语句和参数列表中
+	    if (!mailbox.isEmpty()) {
+	    	sqlBuilderHead.append(",mailbox ");
+	    	sqlBuilderTail.append(",? ");
+	        params.add(mailbox);
+	    }
+	    if (!birthday.isEmpty()) {
+	    	sqlBuilderHead.append(",birthday ");
+	    	sqlBuilderTail.append(",? ");
+	        params.add(birthday);
+	    }
+	    sqlBuilderHead.append(") ");
+	    sqlBuilderTail.append(") ");
+	    
+	    // 构建最终的 SQL 语句
+	    String sql = sqlBuilderHead.toString()+sqlBuilderTail.toString();
+	    String isExists = existsField(phone, account, mailbox);
+	    if (isExists!=null) {
+			return isExists+"已存在";
+		}
+	    
+		return this.execute(sql, params.toArray())>0?"true":"false";
+	}
+	
+	public String existsField(String phone, String account, String email) {
+	    String sql = "SELECT CASE "
+	               + "WHEN EXISTS (SELECT * FROM user_profile WHERE phone = ?) THEN '手机号' "
+	               + "WHEN EXISTS (SELECT * FROM user_profile WHERE account_number = ?) THEN '账号' "
+	               + "WHEN EXISTS (SELECT * FROM user_profile WHERE mailbox = ?) THEN '邮箱' "
+	               + "ELSE NULL END AS exists_field";
+
+	    return this.executeQuery(sql, new Mapper<String>() {
+	        @Override
+	        public List<String> mapper(ResultSet rs) throws SQLException {
+	            if (rs.next()) {
+	                return Collections.singletonList(rs.getString("exists_field"));
+	            }
+	            return null;
+	        }
+	    }, phone, account, email).get(0);
+	}
+
+	public String existsFieldByNotID(String id,String phone, String account, String email) {
+	    String sql = "SELECT CASE "
+	               + "WHEN EXISTS (SELECT * FROM user_profile WHERE phone = ? and id <> "+id+") THEN '手机号' "
+	               + "WHEN EXISTS (SELECT * FROM user_profile WHERE account_number = ? and id <> "+id+") THEN '账号' "
+	               + "WHEN EXISTS (SELECT * FROM user_profile WHERE mailbox = ? and id <> "+id+") THEN '邮箱' "
+	               + "ELSE NULL END AS exists_field ";
+
+	    return this.executeQuery(sql, new Mapper<String>() {
+	        @Override
+	        public List<String> mapper(ResultSet rs) throws SQLException {
+	            if (rs.next()) {
+	                return Collections.singletonList(rs.getString("exists_field"));
+	            }
+	            return null;
+	        }
+	    }, phone, account, email,id).get(0);
+	}
+
+	public String doUpdateById(String id, String account, String pwd, String name, String phone, String mailbox,
+			String sex, String birthday, String address) {
+		String sql = "UPDATE user_profile SET account_number=?,user_name=?,phone=?,user_password=?,mailbox=?,address=?,sex=?,birthday=? WHERE id = ?";
+	    String isExists = existsFieldByNotID(id,phone, account, mailbox);
+		if (isExists!=null) {
+			return isExists+"已存在";
+		}
+		if (birthday.isEmpty()) {
+			birthday=null;
+		}
+		
+		return this.execute(sql,account,name,phone,pwd,mailbox,address,sex,birthday,id)>0?"true":"false";
+	}
+
+
+	public int deleteById(String id) {
+		String sql="delete from user_profile where id=?";
+		return this.execute(sql, id);
+	}
+
+
+	public String doUpdateByIdAndUrl(String id, String url) {
+		String sql="update user_profile set head_image_url=? where id=?";
+		return this.execute(sql,url,id)>0?"true":"false";
 	}
 }

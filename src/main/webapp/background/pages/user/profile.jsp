@@ -133,8 +133,9 @@
 		<div id="user-profile-body">
 			<div class="buttons">
 				<button onclick="addUserProfile()" class="layui-btn layui-bg-blue">新增用户</button>
-				<button onclick="" class="layui-btn layui-bg-blue">修改用户资料</button>
-				<button onclick="" class="layui-btn layui-bg-blue">删除用户信息</button>
+				<button onclick="updateCheckUserProfile()" class="layui-btn layui-bg-blue">修改用户资料</button>
+				<button onclick="deleteCheckUserProfile()" class="layui-btn layui-bg-blue">删除用户信息</button>
+				<button onclick="resetCheckUserProfile()" class="layui-btn layui-bg-blue">重置用户头像</button>
 				<button onclick="refreshAndClearUserProfileSelectForm()" style="float: right;" class="layui-btn layui-bg-blue">
 						<i class="layui-icon layui-icon-refresh" style=""></i>
 				</button>
@@ -286,37 +287,24 @@
 			var data = obj.data; // 获得当前行数据
 			var index1;
 			if (obj.event === 'edit') {
-				updateProduct(data);
+				updateUserProfile(data);
 			} else if (obj.event === 'more') {
 				// 更多 - 下拉菜单
 				dropdown.render({
 					elem : this, // 触发事件的 DOM 对象
 					show : true, // 外部事件触发即显示
 					data : [ {
-						title : '查看详细',
-						id : 'selAll'
+						title : '重置头像',
+						id : 'resetHeadImg'
 					}, {
-						title : '查看产品图',
-						id : 'selImg'
-					}, {
-						title : '删除该产品',
+						title : '删除用户',
 						id : 'del'
-					}, {
-						title : '访问商品页',
-						id : 'go'
-					}, ],
+					} ],
 					click : function(menudata) {
-						 if(menudata.id === 'selAll'){
-							 //查看详细
-						   	openDetaile(data);
-						 } else if(menudata.id === 'selImg'){
-							 //查看图片
-						   	openImgs(data)
+						 if(menudata.id === 'resetHeadImg'){
+							 resetUserProfile(data);
 						 } else if(menudata.id === 'del'){
-							 delProdcut(data)
-						}else if(menudata.id === 'go'){
-							//跳转
-							window.location.href = "/vivoShop/";
+							 deleteUserProfile(data)
 						}
 					},
 					align : 'right', // 右对齐弹出
@@ -330,13 +318,13 @@
 			$.ajax({
 		   		url:'/vivoShop/background/pages/user/function/profile/add.jsp',
 		    	success:function(html){
-		    		imgindex=layer.open({
+		    		var index=layer.open({
 				   		type:1,
 				   		title: '新增用户',
 				   		shadeClose: true,
 				   		maxmin: false,
 				   		resize:false,
-				   		area: ['444px', '560px'],
+				   		area: ['444px', '600px'],
 				   		content: html,
 					});
 		    		form.render();
@@ -349,7 +337,7 @@
 						// 检查
 						for (var i = 0; i < formData.length; i++) {												        
 							// 忽略"mailbox"和"birthday"字段
-							if (formData[i].name == "mailbox" || formData[i].name == "7") {
+							if (formData[i].name == "mailbox" || formData[i].name == "birthday") {
 							    continue;
 							}
 							
@@ -361,20 +349,20 @@
 						}
 					//新增
 					$.ajax({
-						url:"/vivoShop/background/pages/function/product_information/add",
+						url:"/vivoShop/background/pages/function/user_profile/add",
 						data:formData,
 						dataType:'text',
-						type:'get',
+						type:'post',
 						success:function(txt){
 							if(txt=="true"){
 								layer.msg('添加成功', {icon: 1});
+								if(index){
+									 layer.close(index);
+									 //重新渲染
+									 refreshUPTable();
+								}
 							}else{
-								layer.msg('添加失败', {icon: 0});
-							}
-							if(index){
-								 layer.close(index);
-								 //重新渲染
-								 refreshPITable();
+								layer.msg('添加失败,'+txt, {icon: 2});
 							}
 						},error: function(xhr, status, error) {
 							//console.log(xhr)
@@ -389,6 +377,196 @@
 				}
 		    	
 			})
+		}
+		
+		//修改商品
+		function updateUserProfile(data){
+			$.ajax({
+			    url: '/vivoShop/background/gopages/goEditUserProfile',
+			    data:{
+			    	id:data.id,
+			    	account:data.account_number,
+			    	name:data.user_name,
+			    	phone:data.phone,
+			    	mailbox:data.mailbox,
+			    	sex:data.sex,
+			    	address:data.address,
+			    	birthday:data.birthday
+			    },
+			    success: function(html) {
+			    	var index=layer.open({
+			        	type:1,
+			            title: '编辑用户',
+			            shadeClose: true,
+			            maxmin: true,
+			            area: ['470px', '700px'],
+			            content: html,
+			            resize: false
+			        });
+			        
+			        form.render();
+			        
+			        $("#updateUserProfile").off('submit').submit(function(){
+						 event.preventDefault();
+						 layer.confirm('是否确认修改？', {icon: 3}, function(){
+								//确认
+								var formData = $("#updateUserProfile").serializeArray();
+
+								for (var i = 0; i < formData.length; i++) {												        
+									// 忽略"mailbox"和"birthday"字段
+									if (formData[i].name == "mailbox" || formData[i].name == "birthday" || formData[i].name == "address") {
+									    continue;
+									}
+									
+									// 检查其他字段是否为空
+									if (formData[i].value === "") {
+									    layer.msg('内容不能为空!', {icon: 0, time: 1000});
+									    return;
+									}
+								}
+								//修改
+								$.ajax({
+									url:"/vivoShop/background/pages/function/user_profile/update",
+									data:formData,
+									dataType:'text',
+									type:'post',
+									success:function(txt){
+										if(txt=="true"){
+											layer.msg('修改成功', {icon: 1});
+											if(index){
+												 layer.close(index);
+												 //重新渲染
+												 refreshUPTable();
+											}
+										}else{
+											layer.msg('修改失败,'+txt, {icon: 2});
+										}
+										
+									},error: function(xhr, status, error) {
+										//console.log(xhr)
+										layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
+								    }
+								})
+						        
+						        
+						 }, function(){
+						        //取消
+							 if(index){
+								 layer.close(index);
+							 }
+						 });
+						 
+						 
+					})
+			    }
+			
+			});
+		}
+		
+		function updateCheckUserProfile(){
+			//获取被选中的行的内容
+			var datas=table.checkStatus("user-profile-body-table");
+			if(datas.data.length){
+				updateUserProfile(datas.data[0]);
+			}else{
+				layer.msg('请选中一行!', {icon: 0,time:1300});
+			}
+		}
+		
+		function deleteCheckUserProfile(){
+			 var datas=table.checkStatus("user-profile-body-table");
+			    if(datas.data.length){
+			        layer.confirm('确认删除选中么?',{icon: 3}, function(index){
+			            layer.close(index);
+			            datas.data.forEach(function(row) {
+			                $.ajax({
+			                     url:"/vivoShop/background/pages/function/user_profile/delete",
+			                     data:{
+			                         id:row.id
+			                     },
+			                     type:"post",
+			                     success:function(txt){
+			                    	 	if(txt=="1451"){
+									    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+									    	return;
+									    }
+			                    	 	refreshUPTable();
+			                        },error: function(xhr, status, error) {
+			                            //console.log(xhr)    
+			                            layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
+			                        }
+			                     });
+			            });
+			            layer.msg('删除完成', {icon: 1});
+			        });
+			    }else{
+			        layer.msg('请选中一行!', {icon: 0,time:1300});
+			    }
+		}
+		
+		function deleteUserProfile(data){
+			layer.confirm('确认删除吗?',{icon: 3}, function(index){
+				layer.close(index);
+					$.ajax({
+				    	 url:"/vivoShop/background/pages/function/user_profile/delete",
+				    	 data:{
+				    		 id:data.id
+				    		 },
+				    	 type:"post",
+				    	 success:function(txt){
+				    		 if(txt=="1451"){
+							    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
+							    	return;
+							    }
+							if(txt=="true"){
+								layer.msg('删除成功', {icon: 1});
+							}else{
+								layer.msg('删除失败', {icon: 2});
+							}
+							refreshUPTable();
+						},error: function(xhr, status, error) {
+							//console.log(xhr)	
+							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
+						}
+				     })
+			 });
+		}
+		
+		function resetCheckUserProfile(){
+			var datas=table.checkStatus("user-profile-body-table");
+		    if(datas.data.length){
+		    	resetUserProfile(datas.data[0]);
+		    }else{
+		        layer.msg('请选中一行!', {icon: 0,time:1300});
+		    }
+		}
+		
+		function resetUserProfile(data){
+			layer.confirm('确认重置该用户头像吗?',{icon: 3}, function(index){
+				layer.close(index);
+					$.ajax({
+				    	 url:"/vivoShop/background/pages/function/user_profile/updateHeadImg",
+				    	 data:{
+				    		 id:data.id
+				    		 },
+				    	 type:"post",
+				    	 success:function(txt){
+				    		 if(txt=="true"){
+									layer.msg('重置成功', {icon: 1});
+									if(index){
+										 layer.close(index);
+										 //重新渲染
+										 refreshUPTable();
+									}
+								}else{
+									layer.msg('重置失败', {icon: 2});
+								 }
+						},error: function(xhr, status, error) {
+							//console.log(xhr)	
+							layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 2});
+						}
+				     })
+			 });
 		}
 		
 		
