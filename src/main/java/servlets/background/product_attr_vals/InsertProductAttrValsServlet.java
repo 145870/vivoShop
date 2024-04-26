@@ -48,22 +48,33 @@ public class InsertProductAttrValsServlet extends HttpServlet{
    	    resp.setCharacterEncoding("UTF-8");
    	    PrintWriter out = resp.getWriter();
    	    
-		String jg = dao.insertByPid(pid, arrs, price);
-		if(jg.equals("新增成功")) {
-			String newID = dao.getInsertedId().toString();
-			if (newID!="-1") {
-				int kcjg = idao.doInsert(newID, count);
-				if (kcjg>0) {
-					String IDid = idao.getInsertedId()+"";
-					Admin admin = (Admin) req.getSession().getAttribute("admin");
-					String admin_id = admin.getId()+"";
-					//添加库存变动
-					iudao.doInsert(IDid,"0","0",count, admin_id,"新增规格组合");			
-				}
-			}else {
-				jg = "规格新增成功,库存新增错误";
-			}
+   	    Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+	    if (admin != null) {
+			adminType=admin.getAdminTypeId()+"";
 		}
+	    String jg = "";
+	    if (adminType.equals("6")||adminType.equals("1")) {
+	    	jg = dao.insertByPid(pid, arrs, price);
+	    	if(jg.equals("新增成功")) {
+				String newID = dao.getInsertedId().toString();
+				if (newID!="-1") {
+					int kcjg = idao.doInsert(newID, count);
+					if (kcjg>0) {
+						String IDid = idao.getInsertedId()+"";
+						String admin_id = admin.getId()+"";
+						//添加库存变动
+						iudao.doInsert(IDid,"0","0",count, admin_id,"新增规格组合");			
+					}
+				}else {
+					jg = "规格新增成功,库存新增错误";
+				}
+			}
+		 }else {
+			jg="权限不足!";
+		}
+   	    
+		
    	    
    	    out.print(jg);
    	    

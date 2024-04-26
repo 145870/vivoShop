@@ -341,7 +341,7 @@
 							if(txt=="true"){
 								layer.msg('删除成功', {icon: 1});
 							}else{
-								layer.msg('删除失败', {icon: 2});
+								layer.msg('删除失败 '+ txt, {icon: 2});
 							}
 							refreshImgsTable();
 						},error: function(xhr, status, error) {

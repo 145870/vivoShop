@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet{
 		}else {
 			HttpSession session = req.getSession();
 			session.setAttribute("admin", admin);
+			System.out.println(admin);
 			// 设置Session的超时时间为1小时
 			session.setMaxInactiveInterval(60 * 60);
 			resp.getWriter().print("true");

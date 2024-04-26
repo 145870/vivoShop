@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import DAO.InventoryUpdateDAO;
 import DAO.ProductAttrValueDAO;
+import entity.Admin;
 
 @WebServlet("/background/pages/function/product_attr_vals/delete")
 public class DeleteServlet extends HttpServlet{
@@ -24,13 +26,24 @@ public class DeleteServlet extends HttpServlet{
    	    
 		String id = req.getParameter("id");
 		
-		int sqljg = dao.deleteById(id);
-	    String jg = "";
-	    if (sqljg == -1451) {
-	    	jg = "1451";
-		}else if (sqljg>0) {
-			jg = "true";
+		
+	    Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+	    if (admin != null) {
+			adminType=admin.getAdminTypeId()+"";
 		}
+	    String jg = "";
+	    if (adminType.equals("6")||adminType.equals("1")) {
+	    	int sqljg = dao.deleteById(id);
+		    if (sqljg == -1451) {
+		    	jg = "1451";
+			}else if (sqljg>0) {
+				jg = "true";
+			}	    
+		 }else {
+			jg="权限不足!";
+		}
+	    
 		
 		resp.getWriter().print(jg);
 	}

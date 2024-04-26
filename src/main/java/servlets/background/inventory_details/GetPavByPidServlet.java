@@ -28,7 +28,7 @@ public class GetPavByPidServlet extends HttpServlet{
         String pid = req.getParameter("pid");
         
         List<ProductAttrValue> list = dao.getAttrValuesByPid(pid);
-        System.out.println(list.size());
+
         Map<Long, String> map = new LinkedHashMap<Long, String>();
         for(ProductAttrValue pav:list) {
         	String[] vals = pav.getAttrVals();

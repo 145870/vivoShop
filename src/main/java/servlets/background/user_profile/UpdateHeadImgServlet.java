@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.UserProfileDAO;
+import entity.Admin;
 
 @WebServlet("/background/pages/function/user_profile/updateHeadImg")
 public class UpdateHeadImgServlet extends HttpServlet{
@@ -20,7 +21,17 @@ public class UpdateHeadImgServlet extends HttpServlet{
 		String id = req.getParameter("id");
 		
 		//返回结果
-		String sqlJg = dao.doUpdateByIdAndUrl(id,"/images/user/head_image/default.jpg");
-		resp.getWriter().print(sqlJg);
+		Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+		if (admin != null) {
+			adminType = admin.getAdminTypeId() + "";
+		}
+		String jg = "";
+		if (adminType.equals("7") || adminType.equals("1")) {
+			jg = dao.doUpdateByIdAndUrl(id,"/images/user/head_image/default.jpg");
+		} else {
+			jg = "权限不足!";
+		}
+		resp.getWriter().print(jg);
 	}
 }

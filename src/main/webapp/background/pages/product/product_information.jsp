@@ -362,7 +362,7 @@
 								if(txt=="true"){
 									layer.msg('添加成功', {icon: 1});
 								}else{
-									layer.msg('添加失败', {icon: 0});
+									layer.msg('添加失败 '+ txt, {icon: 0});
 								}
 								if(index){
 									 layer.close(index);
@@ -431,7 +431,7 @@
 										if(txt=="true"){
 											layer.msg('修改成功', {icon: 1});
 										}else{
-											layer.msg('修改失败', {icon: 0});
+											layer.msg('修改失败 '+ txt, {icon: 0});
 										}
 										if(index1){
 											 layer.close(index1);
@@ -483,7 +483,7 @@
 							layer.msg('删除成功', {icon: 1});
 							refreshPITable();
 						}else{
-							layer.msg('删除失败', {icon: 0});
+							layer.msg('删除失败 '+ txt, {icon: 0});
 						}
 					},error: function(xhr, status, error) {
 						//console.log(xhr)	
@@ -509,9 +509,7 @@
 								    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
 								    	return;
 								    }
-					    		 if(txt=="false"){
-										layer.msg('删除失败', {icon: 0});
-									}
+					    		 
 								refreshPITable();
 							},error: function(xhr, status, error) {
 								//console.log(xhr)	

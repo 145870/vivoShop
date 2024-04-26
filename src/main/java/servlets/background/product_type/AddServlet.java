@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.ProductsClassDAO;
+import entity.Admin;
 
 @WebServlet("/background/pages/function/product_type/add")
 public class AddServlet extends HttpServlet{
@@ -23,8 +24,19 @@ public class AddServlet extends HttpServlet{
         req.setCharacterEncoding("UTF-8");
         
         String val = req.getParameter("value");
-        String sqljg = dao.doInsert(val);
         
-        resp.getWriter().print(sqljg);
+        Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+	    if (admin != null) {
+			adminType=admin.getAdminTypeId()+"";
+		}
+	    String jg = "";
+	    if (adminType.equals("6")||adminType.equals("1")) {
+	    	jg = dao.doInsert(val);    
+		 }else {
+			jg="权限不足!";
+		}
+        
+        resp.getWriter().print(jg);
 	}
 }

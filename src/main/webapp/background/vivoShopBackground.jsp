@@ -267,6 +267,17 @@
 					  </li>
 					  
 					  <li><a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-form"></i><span>订单管理</span></a></li>
+					  
+					  <li>
+					  		<a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-star"></i><span>用户中心</span><i class="layui-edge layui-edge-bottom"></i></a>
+					  		<dl class="sidebar-menu">
+						    	<dd><a class="menu" href="javascript:;">用户足迹</a></dd>
+						    	<dd><a class="menu" href="javascript:;">用户购物车</a></dd>
+								<dd><a class="menu" href="javascript:;">用户收藏</a></dd>
+								<dd><a class="menu" href="javascript:;">用户评论</a></dd>
+						 	</dl>
+					  </li>
+					  
 					  <li>
 					  		<a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-app"></i><span>库存管理</span><i class="layui-edge layui-edge-bottom"></i></a>
 					  		<dl class="sidebar-menu">
@@ -275,20 +286,17 @@
 						  </dl>
 					  </li>
 					  <li>
-						  <a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-user"></i><span>用户管理</span><i class="layui-edge layui-edge-bottom"></i> </a>
+						  <a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-user"></i><span>角色管理</span><i class="layui-edge layui-edge-bottom"></i> </a>
 						  <dl class="sidebar-menu">
-						    <dd><a class="menu" href="/vivoShop/background/pages/user/profile.jsp">用户资料</a></dd>
-						    <dd><a class="menu" href="javascript:;">用户足迹</a></dd>
-						    <dd><a class="menu" href="javascript:;">用户购物车</a></dd>
-							<dd><a class="menu" href="javascript:;">用户收藏</a></dd>
-							<dd><a class="menu" href="javascript:;">用户评论</a></dd>
+						    <dd><a class="menu" href="/vivoShop/background/pages/user/profile.jsp">用户信息</a></dd>
+						    <dd><a class="menu" href="/vivoShop/background/gopages/goAdmin">管理员信息</a></dd>
+						    <dd><a class="menu" id='myAdminMessageA' href="/vivoShop/background/pages/myAdmin/myAdminMessage.jsp">个人信息</a></dd>
 						  </dl>
 					  </li>
 					  <li>
 						  <a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-set"></i><span>系统设置</span><i class="layui-edge layui-edge-bottom"></i> </a>
 						  <dl class="sidebar-menu">
-						    <dd><a class="menu" href="javascript:;">前台管理</a></dd>
-						    <dd><a class="menu" href="javascript:;">管理员管理</a></dd>
+						    <dd><a class="menu" href="javascript:;">前台管理</a></dd> 
 						    <dd><a class="menu" href="javascript:;">系统日志</a></dd>
 						  </dl>
 					  </li>
@@ -322,11 +330,11 @@
 						</div>
 						<!-- 个人资料 -->
 						<div id="personal-data">
-							管理员:<span>${admin.nickname}</span>
+							管理员:<span>${admin eq null ? '游客':admin.nickname}</span>
 							<!-- 悬浮划出菜单 -->
 							<div>
-								<p>个人信息</p>
-								<p onclick=escLogin()>退出登录</p>
+								<p onclick="openMyAdminMessageAFunction()">个人信息</p>
+								<p onclick="escLogin()">退出登录</p>
 							</div>
 						</div>
 					</div>

@@ -29,6 +29,7 @@ import org.apache.http.util.EntityUtils;
 import com.google.gson.Gson;
 
 import DAO.ProductImageUrlDAO;
+import entity.Admin;
 import util.AliyunOssUtil;
 
 @WebServlet("/background/pages/function/product_imgs/update")
@@ -98,10 +99,19 @@ public class UpdateImgServlet extends HttpServlet{
 		}
 
 	    //先执行sql语句
-	    String sqlJG = dao.updateById(id, type, urlName);
+		Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+	    if (admin != null) {
+			adminType=admin.getAdminTypeId()+"";
+		}
+	    String jg = "";
+	    if (adminType.equals("6")||adminType.equals("1")) {
+	    	jg = dao.updateById(id, type, urlName);    
+		 }else {
+			jg="权限不足!";
+		}
 	    //存储图片到云端
-	    
-	    if (sqlJG.equals("修改成功")) {
+	    if (jg.equals("修改成功")) {
 	    	if (p==null) {
 	    		InputStream oldImg = alyoss.downloadToInputStream(oldurl);
 	    		//删除云端旧图片
@@ -120,7 +130,7 @@ public class UpdateImgServlet extends HttpServlet{
 	    PrintWriter out = resp.getWriter();
 	    Map<String, Object> map = new HashMap<String, Object>();
 		map.put("code", 0);
-		map.put("msg",sqlJG);
+		map.put("msg",jg);
 		map.put("data", new HashMap<>()); 
 		String jsonOutput = new Gson().toJson(map);
 		out.print(jsonOutput);

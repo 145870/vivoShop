@@ -118,7 +118,7 @@
      		</div>
 		</div>
 		
-		 <button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认添加</button>
+		 <button style="margin-top: 30px;position: absolute;right: 60px;" class="layui-btn layui-bg-blue">确认修改</button>
 	</form>
 	<script type="text/javascript">
 	laydate.render({

@@ -325,7 +325,7 @@
 							layer.msg('删除成功', {icon: 1});
 							refreshPSTable();
 						}else{
-							layer.msg('删除失败', {icon: 0});
+							layer.msg('删除失败 '+ txt, {icon: 0});
 						}
 					},error: function(xhr, status, error) {
 						//console.log(xhr)	

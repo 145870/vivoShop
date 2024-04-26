@@ -13,10 +13,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.ProductSpecificationDAO;
+import entity.Admin;
 
 @WebServlet("/background/pages/function/productSpecifications/update")
-public class UpdateServlet extends HttpServlet{
+public class UpdateServlet extends HttpServlet {
 	ProductSpecificationDAO dao = new ProductSpecificationDAO();
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
@@ -25,20 +27,29 @@ public class UpdateServlet extends HttpServlet{
 		String pid = req.getParameter("pid");
 		String psid = req.getParameter("psid");
 		String name = req.getParameter("name");
-		String val = req.getParameter("val");     
+		String val = req.getParameter("val");
 		String[] vals = val.split("\\r?\\n"); // 使用正则表达式拆分多行字符串
 		Set<String> set = new HashSet(); // 使用Set来去重
-		for(String s:vals) {
-		    if (s != null && !s.isEmpty()) {
-		        set.add(s);
-		    }
+		for (String s : vals) {
+			if (s != null && !s.isEmpty()) {
+				set.add(s);
+			}
 		}
 
 		List<String> list = new ArrayList<String>(set); // 转回列表
 
-		String jg = dao.doUpdateById(pid,psid, name, list.toArray(new String[0]));
-		System.out.println(jg);
-		
+		Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+		if (admin != null) {
+			adminType = admin.getAdminTypeId() + "";
+		}
+		String jg = "";
+		if (adminType.equals("6") || adminType.equals("1")) {
+			jg = dao.doUpdateById(pid, psid, name, list.toArray(new String[0]));
+		} else {
+			jg = "权限不足!";
+		}
+
 		resp.getWriter().print(jg);
 	}
 }

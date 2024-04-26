@@ -35,14 +35,25 @@ public class InsertServlet extends HttpServlet {
 		String pavid = req.getParameter("pav");
 		String count = req.getParameter("count");
 		
-		String jg = dao.doInsert(pavid, count)>0?"true":"false";
-		if (jg == "true") {
-			Admin admin = (Admin) req.getSession().getAttribute("admin");
-			String admin_id = admin.getId()+"";
-			//添加库存变动
-			String IDid = dao.getInsertedId()+"";
-			iudao.doInsert(IDid,"0","0",count, admin_id,"新增库存");
+		Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+	    if (admin != null) {
+			adminType=admin.getAdminTypeId()+"";
 		}
+	    String jg = "";
+	    if (adminType.equals("3")||adminType.equals("1")) {
+	    	 jg = dao.doInsert(pavid, count)>0?"true":"false";
+	    	 if (jg == "true") {
+	 			String admin_id = admin.getId()+"";
+	 			//添加库存变动
+	 			String IDid = dao.getInsertedId()+"";
+	 			iudao.doInsert(IDid,"0","0",count, admin_id,"新增库存");
+	 		}
+	    }else {
+			jg="权限不足!";
+		}
+		
+		
 		resp.getWriter().print(jg);
 		
 	}

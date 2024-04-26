@@ -292,7 +292,7 @@
 								if(txt=="true"){
 									layer.msg('添加成功', {icon: 1});
 								}else{
-									layer.msg('添加失败', {icon: 0});
+									layer.msg('添加失败 '+ txt, {icon: 0});
 								}
 								if(index){
 									layer.close(index);
@@ -366,7 +366,7 @@
 												 if(txt=="true"){
 													layer.msg('入库成功!', {icon: 1});
 												 }else{
-													 layer.msg('入库失败!', {icon: 2});
+													 layer.msg('入库失败! '+ txt, {icon: 2});
 												 }
 												 refreshIDTable();
 											 },error: function(xhr, status, error) {
@@ -411,7 +411,7 @@
 												 if(txt=="true"){
 													layer.msg('出库成功!', {icon: 1});
 												 }else if(txt=="false"){
-													 layer.msg('入库失败!', {icon: 2});
+													 layer.msg('出库失败! '+ txt, {icon: 2});
 												 }else{
 													 layer.msg(txt, {icon: 2});
 												 }
@@ -471,7 +471,7 @@
 						 if(txt=="true"){
 							layer.msg('修改成功!', {icon: 1});
 						 }else{
-							 layer.msg('修改失败!', {icon: 2});
+							 layer.msg('修改失败! '+ txt, {icon: 2});
 						 }
 						 refreshIDTable();
 					 },error: function(xhr, status, error) {
@@ -500,7 +500,7 @@
 							if(txt=="true"){
 								layer.msg('删除成功', {icon: 1});
 							}else{
-								layer.msg('删除失败', {icon: 0});
+								layer.msg('删除失败 '+txt, {icon: 0});
 							}
 							refreshIDTable();
 						},error: function(xhr, status, error) {

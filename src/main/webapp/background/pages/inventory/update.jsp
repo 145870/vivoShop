@@ -295,7 +295,7 @@
 					    	 type:'post',
 					    	 success:function(txt){
 					    		 if(txt=="false"){
-									layer.msg('删除失败', {icon: 0});
+									layer.msg('删除失败 '+txt, {icon: 2});
 								 }
 					    		 refreshIUTable();
 							},error: function(xhr, status, error) {
@@ -320,7 +320,7 @@
 				    	 type:'post',
 				    	 success:function(txt){
 				    		 if(txt=="false"){
-								layer.msg('删除失败', {icon: 0});
+								layer.msg('删除失败 '+txt, {icon: 2});
 							 }else{
 								 layer.msg('删除成功', {icon: 1});
 							 }

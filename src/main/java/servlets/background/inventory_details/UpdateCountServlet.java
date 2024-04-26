@@ -36,15 +36,26 @@ public class UpdateCountServlet extends HttpServlet {
 		String count = req.getParameter("count");
 		
 		int oldCount = dao.getQuantityById(id);
-				
-		String jg = dao.doUpdateCountByID(id, count)>0?"true":"false";
-		if (jg == "true") {
-			Admin admin = (Admin) req.getSession().getAttribute("admin");
-			String admin_id = admin.getId()+"";
-			//添加库存变动
-			String IDid = dao.getInsertedId()+"";
-			iudao.doInsert(IDid,"2",oldCount+"",count, admin_id,"修改库存");
+		
+		Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+	    if (admin != null) {
+			adminType=admin.getAdminTypeId()+"";
 		}
+	    String jg = "";
+	    if (adminType.equals("3")||adminType.equals("1")) {
+	    	 jg = dao.doUpdateCountByID(id, count)>0?"true":"false";
+	    	 if (jg == "true") {
+	 			String admin_id = admin.getId()+"";
+	 			//添加库存变动
+	 			String IDid = dao.getInsertedId()+"";
+	 			iudao.doInsert(IDid,"2",oldCount+"",count, admin_id,"修改库存");
+	 		}
+	    }else {
+			jg="权限不足!";
+		}
+		
+		
 		resp.getWriter().print(jg);
 	}
 }

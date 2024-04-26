@@ -9,23 +9,35 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.UserProfileDAO;
+import entity.Admin;
 
 @WebServlet("/background/pages/function/user_profile/delete")
-public class DeleteServlet extends HttpServlet{
+public class DeleteServlet extends HttpServlet {
 	UserProfileDAO dao = new UserProfileDAO();
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8"); 
+		req.setCharacterEncoding("utf-8");
 		resp.setCharacterEncoding("UTF-8");
 		String id = req.getParameter("id");
-		
-		int sqljg = dao.deleteById(id);
-	    String jg = "";
-	    if (sqljg == -1451) {
-	    	jg = "1451";
-		}else if (sqljg>0) {
-			jg = "true";
+
+		Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+		if (admin != null) {
+			adminType = admin.getAdminTypeId() + "";
 		}
-	    resp.getWriter().print(jg);
+		String jg = "";
+		if (adminType.equals("7") || adminType.equals("1")) {
+			int sqljg = dao.deleteById(id);
+			if (sqljg == -1451) {
+				jg = "1451";
+			} else if (sqljg > 0) {
+				jg = "true";
+			}
+		} else {
+			jg = "权限不足!";
+		}
+
+		resp.getWriter().print(jg);
 	}
 }

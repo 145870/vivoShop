@@ -681,3 +681,13 @@ function escLogin(){
 	    var elem = data.elem; // 输入框
 	    elem.value = generateRandomId('vivo_', 3)+generateRandomId('_', 6); // 生成随机vivo开头的ID，并赋值给输入框
 	});
+	
+	form.on('input-affix(ranAdminAccount)', function(data){
+	    var elem = data.elem; // 输入框
+	    elem.value = generateRandomId('vivo_admin_', 6); 
+	});
+	
+	function openMyAdminMessageAFunction(){
+		$("#myAdminMessageA").click()
+	}
+	

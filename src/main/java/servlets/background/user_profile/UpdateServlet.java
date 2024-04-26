@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.UserProfileDAO;
+import entity.Admin;
 
 @WebServlet("/background/pages/function/user_profile/update")
 public class UpdateServlet extends HttpServlet{
@@ -28,7 +29,17 @@ public class UpdateServlet extends HttpServlet{
 		String address = req.getParameter("address");
 		
 		//返回结果
-		String sqlJg = dao.doUpdateById(id,account,pwd,name,phone,mailbox,sex,birthday,address);
-		resp.getWriter().print(sqlJg);
+		Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+		if (admin != null) {
+			adminType = admin.getAdminTypeId() + "";
+		}
+		String jg = "";
+		if (adminType.equals("7") || adminType.equals("1")) {
+			jg = dao.doUpdateById(id,account,pwd,name,phone,mailbox,sex,birthday,address);
+		} else {
+			jg = "权限不足!";
+		}
+		resp.getWriter().print(jg);
 	}
 }

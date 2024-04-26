@@ -366,7 +366,7 @@
 					    		 if(txt=="1451"){
 								    	layer.msg('删除失败,发生外键异常请先删除关联数据', {icon: 2});
 								    	return;
-								    }
+								}
 								refreshPDTable();
 							},error: function(xhr, status, error) {
 								//console.log(xhr)	
@@ -397,7 +397,7 @@
 							if(txt=="true"){
 								layer.msg('删除成功', {icon: 1});
 							}else{
-								layer.msg('删除失败', {icon: 0});
+								layer.msg('删除失败 '+ txt, {icon: 0});
 							}
 							refreshPDTable();
 						},error: function(xhr, status, error) {

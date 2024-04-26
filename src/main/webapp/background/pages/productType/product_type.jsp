@@ -337,7 +337,7 @@
 							if(txt=="true"){
 								layer.msg('删除成功', {icon: 1});
 							}else{
-								layer.msg('删除失败', {icon: 0});
+								layer.msg('删除失败 '+ txt, {icon: 0});
 							}
 							refreshPTTable();
 						},error: function(xhr, status, error) {

@@ -85,18 +85,21 @@ $("form.login").submit(function(e){
                     	window.location.href = "vivoShopBackground.jsp";
                     },500)
                     
+                    
                 } else {
-                	layer.msg('账号或密码错误!请重新输入!', {icon: 2,time:1500});
+                	$("#particles-js input[name=password]").val('')
+                	layer.msg('账号或密码错误!请重新输入!', {icon: 2,time:1200,offset: '20px' });// 将消息框位置设置为顶部
+                	
                 }
             },error: function(xhr, status, error) {
             	$(".login").removeClass("active");
                 $(".sk-rotating-plane").removeClass("active");
                 $(".login").css("display","block");
-    			//console.log(xhr)	
+    			//console.log(xhr)
     			layer.msg('请求出错，状态码：' + xhr.status + '，状态描述：' + xhr.statusText, {icon: 0});
     		}
         });
-    },1500)
+    },500)
 });
 </script>
 </body>

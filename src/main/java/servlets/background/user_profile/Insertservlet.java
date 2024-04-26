@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.UserProfileDAO;
+import entity.Admin;
 
 @WebServlet("/background/pages/function/user_profile/add")
 public class Insertservlet extends HttpServlet{
@@ -26,7 +27,17 @@ public class Insertservlet extends HttpServlet{
 		String birthday = req.getParameter("birthday");
 		
 		//返回结果
-		String sqlJg = dao.doInsertByCount(account,pwd,name,phone,mailbox,sex,birthday);
-		resp.getWriter().print(sqlJg);
+		Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+		if (admin != null) {
+			adminType = admin.getAdminTypeId() + "";
+		}
+		String jg = "";
+		if (adminType.equals("7") || adminType.equals("1")) {
+			jg = dao.doInsertByCount(account,pwd,name,phone,mailbox,sex,birthday);
+		} else {
+			jg = "权限不足!";
+		}
+		resp.getWriter().print(jg);
 	}
 }

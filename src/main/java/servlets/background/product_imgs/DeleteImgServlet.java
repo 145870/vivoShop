@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import DAO.ProductImageUrlDAO;
+import entity.Admin;
 import util.AliyunOssUtil;
 
 @WebServlet("/background/pages/function/product_imgs/delete")
@@ -27,15 +28,31 @@ public class DeleteImgServlet extends HttpServlet{
 		String id = req.getParameter("id");
 		String url = req.getParameter("url");
 		
-		int sqljg = dao.deleteById(id);
-	    String jg = "";
-	    if (sqljg == -1451) {
-	    	jg = "1451";
-		}else if (sqljg>0) {
-			//删除云端旧图片
-		    alyoss.delete(url);
-			jg = "true";
+		
+	    Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+	    if (admin != null) {
+			adminType=admin.getAdminTypeId()+"";
 		}
+	    String jg = "";
+	    if (adminType.equals("6")||adminType.equals("1")) {
+	    	int sqljg = dao.deleteById(id);
+		    if (sqljg == -1451) {
+		    	jg = "1451";
+			}else if (sqljg>0) {
+				jg = "true";
+			}	   
+		    if (sqljg == -1451) {
+		    	jg = "1451";
+			}else if (sqljg>0) {
+				//删除云端旧图片
+			    alyoss.delete(url);
+				jg = "true";
+			}
+		 }else {
+			jg="权限不足!";
+		}
+	    
 		
 		resp.getWriter().print(jg);
 		

@@ -109,12 +109,12 @@
 					<div class="layui-col-md6" id = "user-profile-select-date">
 						<div class="layui-col-md6 layui-input-group">
 							<span class="layui-input-prefix">注册时间:</span>
-							<input style="width:240px" name='startTime' type="text" autocomplete="off" id="user-profile-select-start-date" class="layui-input" placeholder="开始日期">
+							<input style="" name='startTime' type="text" autocomplete="off" id="user-profile-select-start-date" class="layui-input" placeholder="开始日期">
 						</div>
 						
 						<div class="layui-col-md6 layui-input-group">
 							<span style="width:30px" class="layui-input-prefix">至</span>
-							<input style="width:240px" name='endTime' type="text" autocomplete="off" id="user-profile-select-end-date" class="layui-input" placeholder="结束日期">
+							<input style="" name='endTime' type="text" autocomplete="off" id="user-profile-select-end-date" class="layui-input" placeholder="结束日期">
 						</div>
 					</div>
 					
@@ -521,7 +521,7 @@
 							if(txt=="true"){
 								layer.msg('删除成功', {icon: 1});
 							}else{
-								layer.msg('删除失败', {icon: 2});
+								layer.msg('删除失败 '+ txt, {icon: 2});
 							}
 							refreshUPTable();
 						},error: function(xhr, status, error) {
@@ -559,7 +559,7 @@
 										 refreshUPTable();
 									}
 								}else{
-									layer.msg('重置失败', {icon: 2});
+									layer.msg('重置失败 '+ txt, {icon: 2});
 								 }
 						},error: function(xhr, status, error) {
 							//console.log(xhr)	

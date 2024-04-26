@@ -18,6 +18,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import DAO.InventoryDetailsDAO;
 import DAO.ProductAttrValueDAO;
+import entity.Admin;
 import entity.InventoryDetails;
 import entity.ProductAttrValue;
 
@@ -31,12 +32,24 @@ public class DeleteServlet extends HttpServlet {
 		resp.setCharacterEncoding("UTF-8");
 		
 		String id = req.getParameter("id");
-		int sqljg = dao.doDeleteByID(id);
+		
+
+
+	    Admin admin = (Admin) req.getSession().getAttribute("admin");
+		String adminType = "4";
+	    if (admin != null) {
+			adminType=admin.getAdminTypeId()+"";
+		}
 	    String jg = "";
-	    if (sqljg == -1451) {
-	    	jg = "1451";
-		}else if (sqljg>0) {
-			jg = "true";
+	    if (adminType.equals("3")||adminType.equals("1")) {
+	    	int sqljg = dao.doDeleteByID(id);
+		    if (sqljg == -1451) {
+		    	jg = "1451";
+			}else if (sqljg>0) {
+				jg = "true";
+			}
+	    }else {
+			jg="权限不足!";
 		}
 		
 		resp.getWriter().print(jg);

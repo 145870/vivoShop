@@ -38,13 +38,25 @@ public class EnterServlet extends HttpServlet {
 		
 		int newCount = oldCount+count;
 		
-		String jg = dao.doUpdateCountByID(id, newCount+"")>0?"true":"false";
-		if (jg == "true") {
-			Admin admin = (Admin) req.getSession().getAttribute("admin");
-			String admin_id = admin.getId()+"";
-			//添加库存变动
-			iudao.doInsert(id,"0",oldCount+"",newCount+"", admin_id,"入库");
-		}
+		
+		 Admin admin = (Admin) req.getSession().getAttribute("admin");
+			String adminType = "4";
+		    if (admin != null) {
+				adminType=admin.getAdminTypeId()+"";
+			}
+		    String jg = "";
+		    if (adminType.equals("3")||adminType.equals("1")) {
+		    	jg = dao.doUpdateCountByID(id, newCount+"")>0?"true":"false";
+		    	if (jg == "true") {
+					String admin_id = admin.getId()+"";
+					//添加库存变动
+					iudao.doInsert(id,"0",oldCount+"",newCount+"", admin_id,"入库");
+				}
+		    }else {
+				jg="权限不足!";
+			}
+		
+		
 		resp.getWriter().print(jg);
 		
 	}
