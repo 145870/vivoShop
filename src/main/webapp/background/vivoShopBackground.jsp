@@ -256,7 +256,7 @@
 				<!-- 详细菜单 -->
 				<div id="detailed-menu">
 					<ul>
-					  <li><a class="menu sidebar-menu-selected" href="pages/home/home.jsp"><i class="left-icon layui-icon layui-icon-home"></i><span>首页</span></a></li>
+					  <li><a class="menu sidebar-menu-selected" href="/vivoShop/background/gopages/goHome"><i class="left-icon layui-icon layui-icon-home"></i><span>首页</span></a></li>
 					  <li>
 					    <a href="javascript:;"><i class="left-icon layui-icon layui-icon-component"></i><span>产品管理</span><i class="layui-edge layui-edge-bottom"></i> </a>
 					    <dl class="sidebar-menu">
@@ -266,7 +266,7 @@
 					    </dl>
 					  </li>
 					  
-					  <li><a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-form"></i><span>订单管理</span></a></li>
+					  <li><a class="menu" href="/vivoShop/background/pages/orders/orders.jsp"><i class="left-icon layui-icon layui-icon-form"></i><span>订单管理</span></a></li>
 					  
 					  <li>
 					  		<a class="menu" href="javascript:;"><i class="left-icon layui-icon layui-icon-star"></i><span>用户中心</span><i class="layui-edge layui-edge-bottom"></i></a>

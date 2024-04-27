@@ -557,7 +557,7 @@ $(function(){
 				var $this=$(this);
 				$.ajax({
 				    // url: 'pages/home.html',
-					url:"/vivoShop/background/pages/home/home.jsp",
+					url:"/vivoShop/background/gopages/goHome",
 				    method: 'GET',
 				    success: function(data) {
 						$this.html(data)

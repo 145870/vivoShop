@@ -188,5 +188,6 @@ public class ProductsInformationDAO extends BaseDAO {
 		return map;
 	}
 	
+	
 
 }

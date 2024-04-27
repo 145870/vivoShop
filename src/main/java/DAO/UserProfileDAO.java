@@ -224,4 +224,9 @@ public class UserProfileDAO extends BaseDAO{
 		String sql="update user_profile set head_image_url=? where id=?";
 		return this.execute(sql,url,id)>0?"true":"false";
 	}
+	
+	public int getUserCount() {
+		String sql = "SELECT COUNT(*) FROM user_profile";
+		return Integer.valueOf(this.singleObject(sql).toString());
+	}
 }

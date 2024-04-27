@@ -122,7 +122,7 @@
 			<!-- 电话 -->
 			<div class="layui-input-group">
 				<div class="layui-input-prefix">电话:</div>
-				<input value='${admin.phone}' type="text" name="phone" placeholder="请输入电话" class="layui-input right-text">
+				<input value='${admin.phone}' type="text" name="phone" placeholder="请输入电话" class="layui-input right-text" lay-verify="phone"id="validate-phone">
 			</div>
 			
 			<!-- 性别 -->
@@ -257,6 +257,13 @@
 					return;
 				}
 			}
+			var isValid = form.validate('#validate-phone');
+			if(!isValid){
+				return;
+			}
+			console.log(isValid)
+			
+			
 			layer.confirm('是否确认修改？',{icon : 3},function() {
 				
 				//修改
