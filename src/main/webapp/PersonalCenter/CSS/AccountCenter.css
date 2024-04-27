@@ -1,0 +1,679 @@
+@charset "UTF-8";
+*{
+	padding: 0;
+	margin: 0 auto;
+	font-size: 12px;
+}
+body{
+	background-color: rgb(247, 247, 247);
+}
+#bigbox{
+	margin-bottom: -105px;
+	margin-top: 60px;
+	padding-bottom: 25px;
+	text-align: center;
+	min-height: 670px;
+	padding: 60px 0 101px;
+	width: 860px;
+	background-color: #fff;
+}
+#bigbox div,img,span{
+	background-color: #fff;
+}
+#logo{
+	cursor: pointer;
+	height: 42px;
+	margin: 0 auto;
+	width: 160px;
+}
+#vivo_img{
+	display: block;
+	height: 100%;
+	width: 100%;
+}
+#title{
+	color: #000;
+	font-family: HYQiHei-FZS;
+	font-size: 22px;
+	margin-top: 30px;
+}
+#touxiang{
+	margin: 24px auto 0;
+	overflow: hidden;
+	width: 740px;
+}
+#tuichu{
+	color: #252525;
+	cursor: pointer;
+	float: right;
+	font-size: 13px;
+}
+#tuichu:hover{
+	color:rgb(69,111,255);
+}
+#avatar{
+    border-radius: 100%;
+    cursor: pointer;
+    float: left;
+    height: 30px;
+    margin-right: 10px;
+    position: relative;
+    width: 30px;
+}
+#avatar span{
+	display: block;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	/* background-image: url("../IMG/默认头像.png"); */
+	background-size: cover;
+	background-position: center center;
+}
+#name{
+	color: #252525;
+	cursor: pointer;
+	float: left;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 20px;
+	margin-top: 5px;
+	max-width: 520px;
+	position: relative;
+	text-align: left;
+	word-break: break-all;
+}
+#updataname{
+	/* position: absolute; */
+	color: #1e9fff;
+	/* display: block; */
+	width: 100px;
+	height: 20px;
+	position: absolute;
+	left: 30px;
+	top: 1px;
+ display: none;/* 初始状态隐藏 */	
+}
+body #nickname{
+	font-size: 14px;
+}
+body #hr{
+	background-color: #f2f2f2;
+	height: 1px;
+	margin: 9px auto 0;
+	width: 740px;
+}
+#small-title{
+	color: #252525;
+	font-size: 13px;
+	margin-top: 30px;
+	padding-left: 60px;
+	text-align: left;
+}
+.section{
+	padding: 30px 60px 0;
+	margin-top: 12px;
+}
+.part{
+	display: block;
+	padding-left: 60px;
+	position: relative;
+}
+.left_line{
+	border-bottom: 1px solid #f2f2f2;
+	float: right;
+	margin-right: -5px;
+	margin-top: 21px;
+	width: 685px;
+}
+.icon{
+	height: 34px;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 34px;	
+}
+.name_detail{
+	color: #252525;
+    font-size: 17px;
+    height: 100%;
+    text-align: left;
+/*    width: 500px; */	
+}
+.operate{
+	height: 30px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.icon img{
+	width: 34px;
+}
+.big_title{
+	font-size: 17px;
+}
+.jieshao{
+	    color: #999;
+	    font-size: 13px;
+	    margin-top: 9px;
+}
+.pid{
+	margin-left: 10px;
+	font-size: 17px;
+}
+#gth_box{
+	cursor: pointer;
+	    height: 36px;
+	    position: absolute;
+	   left: 280px;
+	    top: -6px;
+	    width: 36px;
+}
+#gth_box img{
+	    height: 16px;
+	    margin: 10px auto;
+	    width: 16px;
+}
+.operate span{
+	    border: 1px solid #999;
+	    border-radius: 4px;
+	    color: #818181;
+	    cursor: pointer;
+	    display: inline-block;
+	    font-size: 14px;
+	    height: 30px;
+	    line-height: 28px;
+	    padding-left: 19px;
+	    padding-right: 19px;
+	    text-align: center;
+}
+.one{
+	margin-top: 5px;
+}
+#line{
+	width: 740px;
+}
+#center_b{
+	    margin-left: 50px;
+	    margin-right: 50px;
+	    text-align: left;
+}
+#na{
+	    color: #252525;
+	    font-size: 13px;
+	    margin-top: 30px;
+	    padding-left: 10px;
+}
+.ite{
+	padding: 0 10px;
+}
+.ite_box{
+	align-items: center;
+	display: flex;
+}
+.ite_box img{
+	    height: 34px;
+	    width: 34px;
+}
+.jieshao_box{
+	    align-items: center;
+	    border-bottom: 1px solid #f2f2f2;
+	    cursor: pointer;
+	    display: flex;
+	    flex: 1;
+	    margin-left: 30px;
+	    padding: 29px 0 28px;
+}
+.jieshao_box2{
+	flex: 1;
+}
+.right_xiao{
+	height: 24px;
+	width: 24px;
+}
+.title{
+	    color: #252525;
+	    font-size: 17px;
+}
+.neiron{
+	    color: #999;
+	    font-size: 13px;
+	    margin-top: 8px;
+}
+.ite:hover{
+	background-color: rgb(247, 247, 247);
+}
+#buttom{
+	color: #9d9d9d;
+    font-size: 11px;
+    margin-bottom: 30px;
+    margin-top: 135px;
+    text-align: center;
+}
+#two_buttom{
+	box-sizing: border-box;
+    font-size: 10px;
+    padding: 10px 0;
+}
+#one_buttom a{
+	color: #666;
+    text-decoration: none;
+}
+#one_buttom a span{
+		background: none;
+}
+
+
+/* 修改头像 */
+
+
+#updataTx{
+	    background-color: rgba(0, 0, 0, .4);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.img_box{
+	background-color: #fff;
+    left: 50%;
+    padding: 40px 65px 70px;
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    width: 490px;
+	    box-sizing: inherit;
+}
+.cancel{
+	cursor: pointer;
+	    height: 24px;
+	    position: absolute;
+	    right: 20px;
+	    top: 20px;
+	    width: 24px;
+}
+.cancel img{
+	    display: block;
+	    height: 100%;
+	    width: 100%;
+}
+.txTitle{
+	    color: #000;
+	    font-family: HYQiHei-FZS;
+	    font-size: 22px;
+	    text-align: center;
+		background-color: #fff;
+}
+.avater{
+	border: 2px solid #e1e1e1;
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 100%;
+    height: 244px;
+    margin: 40px auto 0;
+    width: 100%;
+    width: 244px;
+}
+.avater span{
+	display: block;
+	    width: 240px;
+	    height: 240px;
+	    border-radius: 50%;
+	    background-image: url('../IMG/默认头像.png');
+	    background-size: cover;
+	    background-position: center center;
+}
+.tip{
+	    color: #999;
+	    font-size: 16px;
+	    margin-top: 18px;
+	    text-align: center;
+		background-color: #fff;
+}
+.btns{
+	align-items: center;
+	    margin-top: 25px;
+	    overflow: hidden;
+		background-color: #fff;
+}
+#btn_left{
+	float: left;
+	    position: relative;
+	    width: 168px;
+		    font-size: 17px;
+		    height: 48px;
+		    line-height: 48px;
+		    margin: 20px auto 0;
+		    text-align: center;
+			    background-color: #456fff;
+			    background-image: linear-gradient(90deg, #418eff, #4566ff);
+			    color: #fff;
+			    cursor: pointer;
+			    display: block;
+}
+#btn_left input{
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+#btn_right{
+	font-size: 17px;
+    align-items: center;
+    display: flex;
+    filter: none;
+    float: right;
+    justify-content: center;
+    width: 168px;	
+	/* background-color: transparent !important; */
+    background-image: linear-gradient(90deg, rgba(66, 141, 255, .5), rgba(69, 111, 255, .5));
+    cursor: not-allowed;
+    height: 48px;
+    line-height: 48px;
+	margin: 20px auto 0;
+	color: #fff;
+	
+}
+.operate span:hover{
+	background-color:rgb(235,235,235);
+}
+
+
+
+/* 修改vivo号 */
+
+.huibox{
+	    background-color: rgba(0, 0, 0, .4);
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.vivo_modify{
+	    background-color: #fff;
+	    left: 50%;
+	    min-height: 290px;
+	    padding-bottom: 75px;
+	    padding-top: 40px;
+	    position: absolute;
+	    top: 50%;
+	    transform: translate(-50%,-50%);
+	    width: 490px;
+	    z-index: 99;
+}
+.cancel{
+	cursor: pointer;
+    height: 20px;
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    width: 20px;
+}
+.vivo_box{
+	padding: 0 65px;
+}
+.updatVivotitle{
+	color: #000;
+    font-size: 24px;
+    text-align: center;
+}
+.title-tip{
+	    color: #666;
+	    font-size: 16px;
+	    margin-top: 10px;
+	    text-align: center;
+}
+.name{
+	    color: #252525;
+	    font-size: 15px;
+	    margin-top: 28px;
+}
+.input{
+	    background-color: #fff;
+	    border: 1px solid #dedfe0;
+	    color: #000;
+	    font-size: 16px;
+	    height: 48px;
+	    margin-top: 10px;
+	    padding: 0 12px;
+	    width: 360px;
+		outline: none;
+}
+.error-box{
+	    font-size: 14px;
+	    margin-top: 12px;
+	    min-height: 38px;
+}
+.error-box p{
+	color: #999;
+}
+.btn_os_pc{
+	    background-color: #456fff;
+	    background-image: linear-gradient(90deg, #418eff, #4566ff);
+	    color: #fff;
+	    cursor: pointer;
+	    display: block;
+	    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#418eff,endColorstr=#4566ff);
+	    font-size: 17px;
+	    height: 48px;
+	    line-height: 48px;
+	    margin: 20px auto 0;
+	    text-align: center;
+	    width: 360px;
+}
+.tishi{
+	color: #f51200;
+	margin-top: 5px;
+}
+
+.shake-animation {
+  animation: shake 0.5s linear;
+}
+
+@keyframes shake {
+  0% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+  100% { transform: translateX(0); }
+}
+
+
+/* 修改密码 */
+.per_passs{
+	    background-color: #fff;
+	    left: 50%;
+	    min-height: 290px;
+	    padding-bottom: 75px;
+	    padding-top: 40px;
+	    position: absolute;
+	    top: 50%;
+	    transform: translate(-50%,-50%);
+	    width: 490px;
+	    z-index: 99;
+}
+.personal_title{
+	    color: #000;
+	    font-family: HYQiHei-FZS, sans-serif;
+	    font-size: 22px;
+	    text-align: center;
+}
+.box{
+	margin-top: 30px;
+}
+.user_tip{
+	    color: #252525;
+	    font-size: 15px;
+	    margin: 0 auto;
+	    text-align: left;
+	    width: 360px;
+}
+.box .oldpwd_box{
+	    margin-top: 10px;
+	    position: relative;
+		background-color: #fff;
+		    border: 1px solid #dedfe0;
+		    height: 48px;
+		    line-height: 48px;
+		    margin: 0 auto;
+		    position: relative;
+		    width: 360px;
+}
+.ipt_pwd{
+	border: none;
+	    display: block;
+	    font-size: 16px;
+	    height: 100%;
+	    padding: 0 12px;
+	    width: 92%;
+		letter-spacing: 1px !important;
+		outline: none;
+}
+.errtip_box{
+	margin-left: 64px;
+	color: #ec3f3f;
+	margin-top: 5px;
+	font-size: 12px;
+	display:none;
+}
+.eye_box{
+	    cursor: pointer;
+	    height: 18px;
+	    position: absolute;
+	    right: 15px;
+	    top: 3px;
+	    width: 21px;
+}
+.eye_box img{
+	width: 100%;
+	height: 100%;
+}
+/* 禁用密码框明文显示开关 */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-webkit-reveal {
+    display: none !important;
+}
+.ipt_box{
+	margin-top: 10px;
+	position: relative;
+	background-color: #fff;
+	    border: 1px solid #dedfe0;
+	    height: 48px;
+	    line-height: 48px;
+	    margin: 0 auto;
+	    position: relative;
+	    width: 360px;
+}
+.newPwd{
+	    border: none;
+	    display: block;
+	    font-size: 16px;
+	    height: 100%;
+	    padding: 0 12px;
+	    width: 92%;
+		outline:none;
+		letter-spacing: 1px !important;
+}
+.new_tishi{
+	
+	    color: #999;
+	    font-size: 14px;
+	    margin: 10px auto 0;
+	    text-align: left;
+	    width: 360px;
+}
+.new_pwdtest{
+	margin-top: 15px;
+	background-color: #fff;
+	    border: 1px solid #dedfe0;
+	    height: 48px;
+	    line-height: 48px;
+	    margin: 0 auto;
+	    position: relative;
+	    width: 360px;
+}
+.ipt_newpwd{
+	border: none;
+	    display: block;
+	    font-size: 16px;
+	    height: 100%;
+	    padding: 0 12px;
+	    width: 92%;
+		outline:none;
+		    letter-spacing: 1px !important;
+}
+#btnqueren{
+	    margin-top: 30px;
+		background-color: #456fff;
+		    background-image: linear-gradient(90deg, #418eff, #4566ff);
+		    color: #fff;
+		    cursor: pointer;
+		    display: block;
+		    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#418eff,endColorstr=#4566ff);
+		    font-size: 17px;
+		    height: 48px;
+		    line-height: 48px;
+		    margin: 20px auto 0;
+		    text-align: center;
+		    width: 360px;
+}
+
+/* 修改昵称 */
+.upnamebox{
+	    background-color: #fff;
+	    left: 50%;
+	    padding: 40px 65px 70px;
+	    position: absolute;
+	    text-align: center;
+	    top: 50%;
+	    transform: translate(-50%,-50%);
+	    width: 490px;
+}
+.title_nick{
+	color: #000;
+	    font-family: HYQiHei-FZS;
+	    font-size: 22px;
+	    text-align: center;
+}
+.ipt{
+	background-color: #fff;
+	    border: 1px solid #dedfe0;
+	    height: 48px;
+	    line-height: 48px;
+	    margin-top: 40px;
+	    position: relative;
+	    width: 65%;
+	        margin-left: 82px;
+}
+.btn_quedin{
+	    background-color: #456fff;
+	    background-image: linear-gradient(90deg, #418eff, #4566ff);
+	    color: #fff;
+	    cursor: pointer;
+	    display: block;
+	    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1,startColorstr=#418eff,endColorstr=#4566ff);
+	    font-size: 17px;
+	    height: 48px;
+	    line-height: 48px;
+	    margin: 20px auto 0;
+	    text-align: center;
+	    width: 360px;
+		margin-top: 30px;
+}
+.ipt input{
+	    color: #000;
+	    font-size: 16px;
+	    height: 48px;
+	    line-height: 48px;
+	    padding-left: 12px;
+	    width: 96%;
+		letter-spacing: 1px !important;
+		border: none;
+		outline:none;
+}
