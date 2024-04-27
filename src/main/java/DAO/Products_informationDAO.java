@@ -90,7 +90,6 @@ public class Products_informationDAO extends BaseDAO {
 							List<Products_information> list = new ArrayList<Products_information>();
 							while (rs.next()) {
 								list.add(new Products_information(rs.getString("information_name"), rs.getString("description"),rs.getString("url") , rs.getDouble("sale_amount")));
-								System.out.println(list);
 							}
 							return list;
 						}

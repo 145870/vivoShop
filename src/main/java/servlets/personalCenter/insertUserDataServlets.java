@@ -17,7 +17,7 @@ public class insertUserDataServlets extends HttpServlet{
 		UserProfileDAO userdao = new UserProfileDAO();
 		String phone = req.getParameter("phone");
 		String pwd = req.getParameter("password");
-		String url = "222.jpg";
+		String url = "/images/user/head_image/default.jpg";
 		int results =  userdao.insertUserData(phone,pwd,url);
 		if (results>0){
 			System.out.println("新增成功！");

@@ -30,8 +30,10 @@ public class updataVivoNumServlets extends HttpServlet{
 
 		if(key!=0) {
 			System.out.println("修改成功！");
+			resp.getWriter().write("true");
 		}else {
 			System.out.println("修改失败！");
+			resp.getWriter().write("false");
 		}
 	}
 }

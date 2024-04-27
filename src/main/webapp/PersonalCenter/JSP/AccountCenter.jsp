@@ -22,7 +22,7 @@
 						<span></span>
 					</div>
 					<div id="name">
-						<span id="nickname">浮生</span>
+						<span id="nickname"></span>
 						<span id="updataname">修改昵称</span>
 					</div>
 				</div>
@@ -33,7 +33,7 @@
 						<div class="part">
 							<div class="icon"><img src="../IMG/头.png"/></div>
 							<div class="name_detail">
-								<div><span class="big_title">vivo号</span><span class="pid">vid_uo0023182857</span><div id="gth_box"><img src="../IMG/提示.png"/></div></div>
+								<div><span class="big_title">vivo号</span><span class="pid"></span><div id="gth_box"><img src="../IMG/提示.png"/></div></div>
 								<div class="jieshao"><span>用于vivo账号登录</span></div>
 							</div>
 							<div class="operate">
@@ -220,8 +220,59 @@
 					</div>
 				</div>
 			</div>
+			
+			
+			
+			<!-- 修改密码 -->
+			<div class="huibox" id="uppassword" style = "display:none">
+				<div class="per_passs">
+					<div class="cancel">
+						<img src="../IMG/叉.png"/>
+					</div>
+					<div class="personal_title">修改密码</div>
+					<div class="box">
+						<div class="user_tip"">原密码</div>
+						<div class="oldpwd_box" style="margin-top: 10px">
+							<input type="password"  placeholder="请输入旧密码" class="ipt_pwd">
+							<div class="eye_box">
+								<img src="../IMG/睁眼.png" style="display: none;" id="zy"/>
+								<img src="../IMG/闭眼.png" id="by"/>
+							</div>
+						</div>
+						<div class="errtip_box" id = "oldpwdnotTrue">原密码不正确</div>
+					</div>
+					<div class="box">
+						<div class="user_tip">新密码</div>
+						<div class="ipt_box" style="margin-top: 10px;">
+							<input type="password" placeholder="请输入新密码" class="newPwd"/>
+							<div class="eye_box">
+								<img src="../IMG/睁眼.png" style="display: none;" id="newpwdZY"/>
+								<img src="../IMG/闭眼.png" id="newpwdBY"/>
+							</div>
+						</div>
+						<div class="new_tishi">密码必须为8-16位字母、数字或符号的组合</div>
+						<div class="new_pwdtest" style="margin-top: 15px;">
+							<input type="password" placeholder="请再次确认密码" maxlength="16" class="ipt_newpwd"/>
+						</div>
+						<div class = "errtip_box" id = "newpwdnotTrue">两次密码不一致</div>
+					</div>
+					<div id="btnqueren">完成</div>
+				</div>
+			</div>
 		
-		
+			<!-- 修改昵称 -->
+			<div class="huibox" id="upnickname" style="display: none;">
+				<div class="upnamebox">
+					<div class="cancel">
+						<img src="../IMG/叉.png"/>
+					</div>
+					<div class="title_nick">设置昵称，让大家认识你</div>
+					<div class="ipt">
+						<input type="text" placeholder="输入昵称" id="nameVal"/>
+					</div>
+					<div class="btn_quedin">确定</div>
+				</div>
+			</div>
 		
 		
 </body>
@@ -301,6 +352,12 @@
 									   url:'updataVivoNumServlets',
 									   data:{
 										   vivonum:inputValue
+									   },success:function(key){
+										   if(key=="true"){
+											   layer.msg("修改成功!",{icon:1,time:1200})
+										   }else if(key=="false"){
+											   layer.msg("修改失败!",{icon:2,time:1200})
+										   }
 									   }
 								   })
 							   }else{
@@ -324,6 +381,136 @@
 						}else{
 							$('.tishi').show()
 						}
+				})
+				
+				
+				
+				//修改密码
+				$('#upnumpass').click(function(){
+					$('#uppassword').show()
+				})
+				
+				//修改密码区域
+					//密码明文开关显示
+				$('#by').click(function(){
+					$(this).hide()
+					$('#zy').show()
+					$('.ipt_pwd').attr("type",'text')
+				})
+				$('#zy').click(function(){
+					$('#by').show()
+					$('#zy').hide()
+					$('.ipt_pwd').attr("type",'password')
+				})
+				
+				
+				$('#newpwdBY').click(function(){
+					$(this).hide()
+					$('#newpwdZY').show()
+					$('.newPwd').attr("type",'text')
+				})
+				$('#newpwdZY').click(function(){
+					$('#newpwdBY').show()
+					$('#newpwdZY').hide()
+					$('.newPwd').attr("type",'password')
+				})
+				
+				
+				//点击完成进行判断
+				$('#btnqueren').click(function(){
+				    if($('.ipt_pwd').val() !== ""){
+				        if($('.newPwd').val() !== "" && $('.newPwd').val().length >= 8 && $('.newPwd').val().length <= 16){
+				            if($('.ipt_newpwd').val()!="" && $('.ipt_newpwd').val()==$('.newPwd').val()){
+								$.ajax({
+									type:'GET',
+									url:'UpdataPasswordTestServlets',
+									data:{
+										oldpwd:$('.ipt_pwd').val(),
+										newpwd:$('.newPwd').val()
+									},success:function(key){
+										if(key=="true"){
+											layer.msg("修改成功!",{icon:1,time:1200})
+											$('.ipt_pwd').val('');
+											$('.newPwd').val('');
+											$('.ipt_newpwd').val('');
+										}else if(key=="false"){
+											$('#oldpwdnotTrue').show();
+										}
+									}
+								})
+							}else{
+								$('#newpwdnotTrue').show()
+							}
+				        } else {
+				           //添加抖动动画
+				           $('.new_tishi').addClass("shake-animation");
+						   $('.new_tishi').css('color','red');
+				           	setTimeout(function() {
+				           	$(".new_tishi").removeClass("shake-animation");
+							$('.new_tishi').css('color','');
+				           }, 500);
+				        }
+				    } else {
+				        alert("请输入旧密码");
+				    }
+				});
+				
+				$('.ipt_newpwd').focus(function(){
+					$('#newpwdnotTrue').hide()
+				})
+				
+				$('.ipt_pwd').focus(function(){
+					$('#oldpwdnotTrue').hide()
+				})
+				
+				
+				//修改昵称
+				$('#nickname').click(function(){
+					$('#upnickname').show()
+					$('#nameVal').val("")
+				})
+				
+				$('.btn_quedin').click(function(){
+					    $.ajax({
+					        type: 'GET',
+					        url: 'updatenickNameServlets',
+					        data: {
+					            newNickName: $('#nameVal').val(),
+					            oldNickName: $('#nickname').val(),
+					        },
+					        success: function(txt) {
+					            if (txt == "false") {
+					                alert("修改失败");
+					            } else if (txt != null) {
+					                var namenvl = txt;
+					                $('#nickname').text(namenvl);
+					                layer.msg('修改成功！', {icon: 1})
+					                $('#upnickname').hide();
+					     
+					            } else {
+					                alert("更新失败");
+					            }
+					        }
+					    });
+					  });
+				
+				//刷新页面数据
+				$.ajax({
+					type:'GET',
+					url:'selectAllCenterDataServlets',
+					dataType: 'json',
+					success:function(txt){
+						var data = txt;
+						console.log(data)
+						var vid = (data[0].account_number); //vid
+						var nickname = (data[0].user_name);	//昵称
+						var phone = (data[0].phone);//手机
+						var mailbox = (data[0].mailbox)//邮箱
+						var imageurl =	(data[0].head_image_url) //头像url
+						$('#nickname').text(nickname);
+						$('.pid').text(vid);
+						$('#avatar span').css('background-image','url('+imageurl+')');
+					}
 				})
 		</script>
 </html>

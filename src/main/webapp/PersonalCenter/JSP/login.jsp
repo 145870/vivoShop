@@ -259,7 +259,7 @@
 										    				 pwd:$('#pwdtext').val(),
 										    			 },success:function(txt){
 										    				 if(txt=="true"){
-										    					 layer.msg('登录成功！', {icon: 2});
+										    					 layer.msg('登录成功！', {icon: 1});
 										    					 window.location.href = "zhuye.jsp";
 										    				 }else if(txt=="false"){
 										    					 layer.msg('账号或密码错误！', {icon: 2});
@@ -293,7 +293,7 @@
 										    			 }
 														
 													})
-													layer.msg('登录成功！', {icon: 2});
+													layer.msg('登录成功！', {icon: 1});
 													
 													
 												}else{

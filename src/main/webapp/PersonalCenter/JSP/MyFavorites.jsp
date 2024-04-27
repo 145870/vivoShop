@@ -7,23 +7,20 @@
 		<title></title>
 	</head>
 	
-	<!-- 引入 layui.css -->
-	<link href="//unpkg.com/layui@2.9.8/dist/css/layui.css" rel="stylesheet">
-	<!-- 引入 layui.js -->
-	<script src="//unpkg.com/layui@2.9.8/dist/layui.js"></script>
+
 	
 	<link rel="stylesheet" href="../CSS/MyFavorites.css"/>
-	<script src="../jquery-3.5.1.min.js"></script>
-	<style>
-		blockquote, body, button, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, input, li, ol, p, pre, td, textarea, th, ul {
-				margin: 0 auto;
-			}
-	</style>
-
+	<script type="text/javascript" src="/vivoShop/static/jquery-3.5.1.min.js"></script>	
+	<link rel="stylesheet" href="/vivoShop/static/css/headNav.css" />
+	<script type="text/javascript" src="/vivoShop/static/js/setNav.js"></script>
+	<script type="text/javascript" src="/vivoShop/front/js/vivohome.js"></script>
+	
 	
 	</head>
 	<body>
-		
+		<div>
+		<jsp:include page="/static/jsp/head.jsp"></jsp:include>
+		</div>
 		<div id="context">
 			<div id="context_head">
 				<div id="Mall_homepage">
@@ -93,7 +90,7 @@
 					<div>
 						<div class="title">我的收藏</div>
 						<div>
-							<div style="width: 925px;">
+							<div style="width: 960px;">
 								<table class="common">
 									<thead>
 										<th></th>
@@ -139,6 +136,9 @@
 				
 				</div><!-- 右半部分主页面结束标记 -->
 			</div>
+		</div>
+		<div>
+		<jsp:include page="/static/jsp/end.jsp"></jsp:include>
 		</div>
 	</body>
 	

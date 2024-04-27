@@ -73,7 +73,7 @@
 			<div id="so">
 				<img src="/vivoShop/front/image/搜索.png" / id="sou">
 			</div>
-			<div id="navDiv" style="z-index: 1000;">
+			<div id="navDiv" style="z-index: 1000;display: none;">
 				<c:forEach items = '${leilist}' var='type' varStatus = 'typeLoop'>
 					<div class="navDiv">
 						<div class="rebox">
