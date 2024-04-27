@@ -1,0 +1,664 @@
+@charset "UTF-8";
+body {
+		    margin: 0;
+		    padding: 0;
+		    display: flex;
+			    background-color: #f7f7f7;
+		}
+		#box{
+			margin: auto;
+			width: 100%;
+			position: relative;
+		}
+	
+	    
+		#tou{
+			 display: flex;
+			 background-color: black;
+			 color: white;
+			 height: 50px;
+			 text-align: center;
+			 margin:auto;
+		}
+		
+		#left {
+		    display: flex;
+		    list-style: none;
+		}
+		#you {
+			float: right;
+			margin-left: auto;
+			margin-right: 20px;
+			display: flex;
+			list-style: none;
+	}
+		#left li, #you li {
+		    margin-left: 20px;
+			font-size: 13px;
+		}
+	    .nav li {
+	        margin: 0 10px;
+	        cursor: pointer;
+			text-align: center;
+			height: 35px;
+			line-height: 35px;
+			margin-left: 48px;	
+	    }
+	
+	    .nav div {
+	        display: none;
+	        height: 50px;
+	        background-color: lightblue;
+	        overflow: hidden;
+	        transform: translate(-50%, -50%);
+	        opacity: 0;
+	        transition: opacity 0.3s ease-in-out, max-height 0.4s ease; /* 过渡效果 */
+	    
+	    }
+	    
+	    #navDiv {
+	        width: 1470px;
+	        transition: all 0.4s ease;
+	        overflow: hidden;
+	        height: 350px;
+	        position: absolute;
+	        top: 125px;
+	        display:none;
+	    }
+		/* 头部隐藏列表的各个div' */
+		.navDiv{
+			height: 350px;
+			background-color: white;
+			display: none;
+		}
+		/*下载图片的id*/
+		#xiazai{
+			line-height: 80px;
+		}
+		#vivo {
+		    width: 90px;
+		    filter: invert(100%);
+		    margin-left: 80px; 
+		    margin-top: 17px;
+			height: 30px;
+		}
+		
+		#tu {
+		    align-items: center;
+		    height: 0px;
+		    line-height: 20px;
+		    width: 100px; 
+		    display: block;
+		}
+	
+	.nav {
+	    flex: 1; 
+	    display: inline-flex;
+	    margin-left: 380px;
+		list-style: none;
+		line-height: 20px;
+		height: 100%;
+	}
+	
+		#head{
+			height: 80px;
+			align-items: center;
+			justify-content: center; /* 水平居中 */
+			line-height: 35px;
+			width: 1470px;
+			margin: auto;
+		}
+		#so{
+			display: inline;
+			float: right;
+			height: 0px;
+			
+		}
+		#sou{
+			width: 88px;
+			height: 55px;
+			margin-right: 95px;
+			margin-top: 7px;
+		}
+		#sss {
+		    text-align: left;
+		    background-color: white;
+		    width: 1470px;
+		    transition: height 0.5s ease, opacity 0.5s ease; /* 添加过渡效果 */
+		    position: absolute;
+		    top: 50px;
+		    display: none;
+		    opacity: 0; /* 初始设置透明度为0 */
+			cursor: pointer;
+			height: 430px;
+		}
+		
+		#form{
+			transition:1s;
+			display: inline;
+		}
+		#form-in{
+			width: 470px;
+			height: 50px;    
+			border: none; /* 去掉边框 */
+			margin-left:200px;
+		}
+		@keyframes slideulRight {
+		    from {
+		        transform: translateX(100%);
+		        opacity: 0;
+		    }
+		    to {
+		        transform: translateX(0);
+		        opacity: 1;
+		    }
+		}
+		#sou-ul{
+			list-style: none;
+			display: block;
+			margin-left: 270px;
+			width: 120px; /* 略大于 a 标签的宽度 */
+			height: 60px; /* 略大于 a 标签的高度 */
+		}
+		#sou-ul li a {
+		    list-style: none;
+			text-decoration: none; /* 去除下划线 */
+			font-size:12px;
+			animation: slideulRight 2s forwards; /* 应用动画效果 */
+		}
+		#form-in, #form img ,#sou-div {
+		    display: inline-block;
+		    vertical-align: middle; /* 垂直居中对齐 */
+		}
+		
+		#sou-shang {
+		    display: flex; /* 将父元素设置为 Flex 容器 */
+			height:55px;
+			margin: auto;
+		}
+		
+		#form {
+		    flex: 1; /* 让 form 元素自动填充剩余空间 */
+		}
+		
+		#sss-box{
+			width: 1200px;
+			margin: auto;
+		}
+		#sou-div {
+		    margin-left: 10px; /* 可以根据需要调整间距 */
+		}
+		#span-X {
+		    align-items: center; /* 垂直居中 */
+			margin-top: 13px;
+		}
+		@keyframes slideFromLeft {
+		    from {
+		        transform: translateX(100%);
+		    }
+		    to {
+		        transform: translateX(1);
+		    }
+		}
+		#x {
+		    width: 560px;
+		    height: 1px;
+		    background-color: #ccc;
+		    animation: slideFromLeft 2s forwards; /* 应用动画效果 */
+		    margin-left: 310px; 
+		}
+		#sou-tu {
+		    width: 88px; /* 根据需要调整宽度 */
+		    height: 55px; /* 根据需要调整高度 */
+		    margin-left: 290px;
+		    animation: slideFromRight 1s forwards; /* 应用动画效果 */
+		}
+		
+		@keyframes slideFromRight {
+		    from {
+		        transform: translateX(100%);
+		        opacity: 0;
+		    }
+		    to {
+		        transform: translateX(0);
+		        opacity: 1;
+		    }
+		}
+		#sou-vivo{
+			width: 90px;
+			filter: invert(100%);
+			height: 30px;
+			display: inline-flex;
+			margin-right: 20px;
+			 margin-top: 17px;
+		}
+		#foot {
+		    height: 400px;
+		    display: flex;
+		    justify-content: center; /* 水平居中 */
+			display: block;
+		}
+		
+		#tt {
+		    text-align: center; /* 让内部文本居中显示 */
+		    margin-top: 85px;
+		    border-bottom: black solid 1px;
+		    height: 80px;
+		    width: 1300px;
+		    margin-left: auto; /* 左边距自动调整 */
+		    margin-right: auto; /* 右边距自动调整 */
+		    display: inherit;
+		    justify-content: center; /* 水平居中 */
+		    align-items: center; /* 垂直居中对齐 */
+		}
+		
+		#tt p {
+		    margin-left: 188px; /* 左边距为140px */
+		    float:left;
+		}
+		
+		#tt img {
+		    margin-right: 10px; /* 图片右侧间距为10px */
+		}
+		#wei {
+		  list-style: none;
+		  display: flex;
+		  justify-content: space-around;
+		  width: 700px;
+		}
+		#wei li {
+		    text-align: left;
+		}
+		dt {
+			margin-left: 39px;
+			font-weight: bold;
+		}
+		dd{
+			margin-top: 15px;
+			font-size: 12px;
+		}
+		
+		#wei a {
+		    color: black; /* 设置链接文本颜色为红色 */
+		    text-decoration: none; /* 去掉下划线 */
+		}
+		#zz{
+			display: inline-block;
+		}
+		#yy{
+			float: right;
+			margin-top: 18px;
+		}
+		#xin,#ip,#bo,#yx,#gz{
+			display: inline-flex;
+			float: left;
+		}
+		#yy p{
+			margin-left: 24px;
+		}
+		#yy h4{
+			margin-left: 25px;
+		}
+		#ww{
+			width: 1300px;
+			margin: auto;
+			height: 550px;
+			border-bottom: 1px gainsboro solid;
+		}
+		.c{
+			width: 25px;
+			height: 25px;
+		}
+		#ban{
+			margin: auto;
+			width: 1300px;
+			text-align: center;
+			font-size: 13px;
+		}
+		
+	
+
+#lie {
+	margin-left: 120px;
+}
+
+#body-box {
+	width: 1511px;
+	height: 900px;
+	background-color: antiquewhite;
+}
+
+#xianshi {
+	width: 515px;
+	height: 400px;
+	margin-top: 20px;
+}
+
+#xia-box {
+	display: inline-flex;
+	position: relative;
+	margin-top: 40px;
+}
+
+#xia-box button {
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+}
+
+#box-left {
+	display: inline-block;
+	margin-top: 40px;
+	margin-left: 40px;
+}
+
+#box-right {
+	float: right;
+	width: 700px;
+	height:700px;
+	 overflow-y: scroll; /* 允许内容在垂直方向上滚动 */
+    scrollbar-width: none; /* 隐藏标准的滚动条 */
+    -ms-overflow-style: none; /* IE/Edge */
+}
+#box-right ::-webkit-scrollbar {
+    display: none; /* 隐藏 WebKit 浏览器的滚动条 */
+}
+#right-biti {
+	height: 80px;
+	border-bottom: #ccc solid 1px;
+}
+
+#price-box {
+	color: red;
+	height: 70px;
+	width: 640px;
+	border-bottom: #ccc solid 1px;
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+#old-price {
+	color: gray;
+	text-decoration: line-through;
+	font-size: 14px;
+}
+
+#footDiv {
+	width: 1470px;
+	transition: all 0.4s ease;
+	overflow: hidden;
+	height: 350px;
+	margin-top: 20px;
+}
+/* 头部隐藏列表的各个div' */
+.footDiv {
+	height: 100%;
+	background-color: white;
+	display: none;
+	margin-top: 20px;
+}
+
+#ul-box {
+	list-style: none;
+	height: 25px;
+}
+
+#ul-box li {
+	float: left;
+	margin-right: 60px;
+}
+
+#ul-box li:hover {
+	cursor: pointer;
+}
+
+.action {
+	color: green;
+}
+
+@keyframes x {from { transform:translateX(0px);
+	
+}
+
+to {
+	transform: translateX(43px);
+}
+
+}
+.x {
+	transition: 1s;
+}
+
+.x {
+	width: 50px;
+	height: 1px;
+	background-color: black;
+	position: absolute;
+	top: 38px;
+	left: 43px;
+}
+
+#xiang-box {
+	height: 400px;
+	position: relative;
+}
+
+#v {
+	width: 350px; /* 设定外部容器的宽度 */
+	overflow: hidden;
+	margin-left: 55px;
+}
+
+.v:hover {
+	box-shadow: 3px 3px 3px 5px rgb(200, 200, 200, 0.2);
+	/* 水平偏移2px，垂直偏移2px，模糊半径5px，颜色为淡黑色 */
+	transform: translateY(-5px); /* 向上移动5px */
+}
+
+#re {
+	display: -webkit-inline-box;
+	width: 700px; /* 设定内部容器的宽度，确保内容超出以便滚动 */
+	transition: transform 0.5s; /* 添加过渡效果 */
+}
+
+.v {
+	width: 85px;
+	height: 85px;
+	background-color: white;
+	margin: 5px;
+	transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
+	margin-top: 20px;
+}
+
+#but-zuo {
+	position: absolute;
+	top: 48px;
+	left: 15px;
+}
+
+#but-you {
+	position: absolute;
+	top: 48px;
+	left: 435px;
+}
+
+#banben {
+	margin-top: 20px;
+}
+
+.ban-li {
+	text-decoration: black;
+	width: 243px;
+	height: 57px;
+	line-height: 57px;
+	border: 1px #ccc solid;
+	list-style: none;
+	display: inline-block;
+	margin-top: 20px;
+	margin-left: 15px;
+	text-align: center;
+	border-radius: 6px;
+}
+
+#ban-color {
+	margin-top: 20px;
+}
+
+.color-li {
+	text-decoration: black;
+	width: 243px;
+	height: 57px;
+	line-height: 57px;
+	border: 1px #ccc solid;
+	list-style: none;
+	display: inline-block;
+	margin-top: 20px;
+	margin-left: 15px;
+	text-align: center;
+	border-radius: 6px;
+}
+
+.popup {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background-color: #ffffff;
+	padding: 20px;
+	border: 1px solid #cccccc;
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+	/* 固定高度并允许溢出时显示滚动条 */
+	max-height: 500px; /* 修改为你想要的高度 */
+	overflow-y: auto;
+	z-index: 999;
+}
+
+#close {
+	border-radius: 50px;
+	background-color: red;
+	color: white;
+	width: 150px;
+	height: 50px;
+	border: none;
+	margin: auto;
+	text-align: center;
+}
+
+#close-box {
+	width: 200px;
+	height: 50px;
+	margin-left: 40%;
+}
+
+#popupDiv h2 {
+	margin-left: 38%;
+}
+
+#num-box {
+	margin-top: 20px;
+}
+
+#num {
+	border-radius: 6px;
+	border: 1px #ccc solid;
+	width: 150px;
+	margin-top: 20px;
+	display: inline-block;
+}
+
+#num label {
+	margin-left: 13px;
+}
+
+.btn {
+	width: 50px;
+	height: 50px;
+	border: #ccc 1px solid;
+	background-color: white;
+}
+
+#btn-jia {
+	float: right;
+}
+
+.v-icon {
+	font-size: 16px;
+	color: #acacac;
+	transition: color .2s ease-in-out;
+}
+
+#shoucang-box {
+	margin-left: 145px;
+	margin-top: 20px;
+}
+.lunbo_div{
+	width:150px;
+	height:150px;
+}
+.lunbo_div img{
+	max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin-left: 56px;
+}
+#resu_box{
+	margin-top: 20px;
+}
+#resu_box lable:nth-child(1) {
+	color:red;
+	width:40px;
+	border-right:1px solid #ccc;
+	margin-right:10px;
+	padding-right:10px;
+	
+}
+#btn_box{
+	margin-top: 20px;
+}
+#btn_box button{
+	width: 170px;
+    height: 46px;
+    line-height: 46px;
+    text-align: center;
+    color: #fff;
+    font-size: 18px;
+    border-radius: 20px / 50%;
+    margin-right: 27px;
+    border:none;
+}
+#btn_box button:nth-child(1) {
+		background-color: black;
+}
+#btn_box button:nth-child(2) {
+		background-color: red;
+}
+#xiansrc{
+	max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin-left: 56px;
+}
+.xiangdiv img{
+	max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+}
+.tubox {
+	display: inline-flex;
+}
+
+
+
+
+
+
+
+
+

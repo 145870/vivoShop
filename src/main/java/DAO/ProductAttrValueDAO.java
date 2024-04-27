@@ -167,7 +167,7 @@ public class ProductAttrValueDAO extends BaseDAO {
 	// 查询是否存在 商品id,json数据, 长度
 	public boolean isAttrValsExistsByPid(String pid, String attr_vals, int attr_valsLen) {
 		String sql = "SELECT * FROM product_attr_vals WHERE JSON_CONTAINS(attr_vals, ?) "
-				+ "  AND JSON_LENGTH(attr_vals) = ? AND product_id ?;";
+				+ "  AND JSON_LENGTH(attr_vals) = ? AND product_id = ?;";
 
 		return this.executeQuery(sql, new Mapper<Object>() {
 
@@ -181,22 +181,6 @@ public class ProductAttrValueDAO extends BaseDAO {
 
 		}, attr_vals, attr_valsLen, pid) != null;
 	}
-		public boolean isAttrValsExistsByPid(String id,String pid, String attr_vals, int attr_valsLen) {
-			String sql = "SELECT * FROM product_attr_vals WHERE JSON_CONTAINS(attr_vals, ?) "
-					+ "AND JSON_LENGTH(attr_vals) = ? AND product_id = ? and id <> ?";
-
-			return this.executeQuery(sql, new Mapper<Object>() {
-
-				@Override
-				public List<Object> mapper(ResultSet rs) throws SQLException {
-					if (rs.next()) {
-						return new ArrayList<Object>();
-					}
-					return null;
-				}
-
-			}, attr_vals, attr_valsLen, pid,id) != null;
-		}
 
 	public String insertByPid(String id, List<String> attr_vals, String price) {
 		String sql = "INSERT INTO product_attr_vals (product_id, attr_vals, sale_amount) VALUES (?, ?, ?)";
@@ -220,7 +204,7 @@ public class ProductAttrValueDAO extends BaseDAO {
 	public String updateById(String pid,List<String> attr_vals, String price,String pavid) {
 		String sql = "UPDATE product_attr_vals SET attr_vals = ?,sale_amount = ? WHERE id = ?";
 		List<Object> params = new ArrayList<>();
-		
+		;
 		JsonArray jsonArray = new JsonArray();
 		for (String w : attr_vals) {
 			jsonArray.add(w);
@@ -229,7 +213,7 @@ public class ProductAttrValueDAO extends BaseDAO {
 		params.add(price);
 		params.add(pavid);
 
-		if (isAttrValsExistsByPid(pavid,pid, jsonArray.toString(), attr_vals.size())) {
+		if (isAttrValsExistsByPid(pid, jsonArray.toString(), attr_vals.size())) {
 			return "搭配已存在!";
 		}
 		return this.execute(sql, params.toArray()) > 0 ? "修改成功" : "修改失败";

@@ -6,7 +6,50 @@ public class OrdersDetails {
     private Long productAttrValsId;
     private int quantity;
     
+    private String imgURL;
+    private String pName;
+    private String pavVals;
+    private Double sumPrice;
     
+    private Double saleAmount;
+    
+    
+	public Double getSaleAmount() {
+		return saleAmount;
+	}
+	public void setSaleAmount(Double saleAmount) {
+		this.saleAmount = saleAmount;
+	}
+	@Override
+	public String toString() {
+		return "OrdersDetails [id=" + id + ", orderId=" + orderId + ", productAttrValsId=" + productAttrValsId
+				+ ", quantity=" + quantity + ", imgURL=" + imgURL + ", pName=" + pName + ", pavVals=" + pavVals
+				+ ", sumPrice=" + sumPrice + "]";
+	}
+	public String getImgURL() {
+		return imgURL;
+	}
+	public void setImgURL(String imgURL) {
+		this.imgURL = imgURL;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public String getPavVals() {
+		return pavVals;
+	}
+	public void setPavVals(String pavVals) {
+		this.pavVals = pavVals;
+	}
+	public Double getSumPrice() {
+		return sumPrice;
+	}
+	public void setSumPrice(Double sumPrice) {
+		this.sumPrice = sumPrice;
+	}
 	public OrdersDetails() {
 		super();
 		// TODO Auto-generated constructor stub

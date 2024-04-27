@@ -193,6 +193,51 @@ public class Products_information {
 	public Products_information() {
 		super();
 	}
+	/**
+	 * @param information_name
+	 * @param description
+	 * @param url
+	 * @param sale_amount
+	 */
+	public Products_information(String url,double sale_amount, String information_name, String description,int id) {
+		super();
+		this.information_name = information_name;
+		this.description = description;
+		this.url = url;
+		this.sale_amount = sale_amount;
+		this.id = id;
+	}
+	/**
+	 * @param id
+	 * @param information_name
+	 * @param description
+	 * @param class_id
+	 * @param url
+	 */
+	public Products_information(int id, String information_name, String description, String url) {
+		super();
+		this.id = id;
+		this.information_name = information_name;
+		this.description = description;
+		this.url = url;
+	}
+	/**
+	 * @param information_name
+	 * @param description
+	 * @param information_id
+	 * @param url
+	 * @param sale_amount
+	 */
+	public Products_information( int information_id,String information_name, String description, String url,
+			double sale_amount) {
+		super();
+		this.information_name = information_name;
+		this.description = description;
+		this.information_id = information_id;
+		this.url = url;
+		this.sale_amount = sale_amount;
+	}
+	
 	
 	
 }

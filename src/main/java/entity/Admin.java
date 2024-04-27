@@ -12,15 +12,6 @@ public class Admin {
     private String adminPassword;
     private Long adminTypeId;
     private Date createTime;
-    
-    private String typeName;
-    
-	public String getTypeName() {
-		return typeName;
-	}
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
-	}
 	public Long getId() {
 		return id;
 	}
@@ -91,12 +82,6 @@ public class Admin {
 		this.adminPassword = adminPassword;
 		this.adminTypeId = adminTypeId;
 		this.createTime = createTime;
-	}
-	@Override
-	public String toString() {
-		return "Admin [id=" + id + ", account=" + account + ", nickname=" + nickname + ", adminName=" + adminName
-				+ ", phone=" + phone + ", sex=" + sex + ", adminPassword=" + adminPassword + ", adminTypeId="
-				+ adminTypeId + ", createTime=" + createTime + "]";
 	}
     
     

@@ -1,0 +1,47 @@
+@charset "UTF-8";
+
+#jian-p {
+	display: flex;
+	align-items: center; /* 垂直居中 */
+	float: left;
+	width: 100%;
+	flex-wrap: wrap;
+	margin-left: 140px;
+}
+
+#u {
+	margin-right: 124px;
+}
+
+#jian-p .jian-pin {
+	width: 298px;
+	height: 380px;
+	background-color: white;
+	margin-left: 10px; /* 为每个 .jian-pin 元素设置左边距 */
+	transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
+	margin-top: 15px;
+}
+.jian-pin p{
+	text-overflow: ellipsis;
+ white-space: nowrap;
+ overflow: hidden;
+}
+.leia {
+	text-decoration: none;
+	color: black
+}
+#jx li{
+	list-style: none;
+	margin-top: 20px;
+}
+#jx {
+	display: inline-flex;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	width: 100%;
+	-ms-flex-pack: justify;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	margin-left: 99px;
+}

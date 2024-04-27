@@ -1,0 +1,440 @@
+@charset "UTF-8";
+/*body里面的样式*/
+
+/*中间部分*/
+#body{
+	width: 1511px;
+	margin: auto;
+}
+/* 核对信息 */
+#hedui{
+	background-color: white;
+	width: 1511px;
+	height: 66px;
+	text-align: center;
+	align-items: center;
+	line-height: 66px;
+}
+/* 收获人信息大盒子 */
+#address_box{
+	width: 1511px;
+	margin-top: 30px;
+	background-color: white;
+    padding-bottom: 20px;
+}
+/* 收货人p标签 */
+#shou{
+	margin-bottom: 25px;
+	padding-top: 20px; 
+	padding-left: 30px;
+}
+/* 温馨提示 */
+#address_box p span{
+	margin-left: 36px;
+	font-size: 12px;
+	color: #bbb;
+	vertical-align: bottom;
+}
+/* 每个收货地址的div */
+.address_div{
+	border: 1px solid #ccc;
+	width: 272px;
+	height: 157px;
+	margin-left: 10px;
+    display: inline-block;
+	flex: 1 1 24%;
+	align-items: center;
+	justify-content: center;
+}
+.address_divold{
+	border: 1px solid #ccc;
+	width: 272px;
+	height: 157px;
+	margin-left: 24px;
+    display: inline-block;
+	flex: 1 1 24%;
+	margin: 10px;
+	align-items: center;
+	justify-content: center;
+}
+.adddiv{
+	margin-left: 20px;
+	margin-top:20px; 	
+}
+/* 收货人名字 */
+.name{
+	float: left;
+	width: 125px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin-left: 20px;
+}
+#jia_div div{
+	text-align: center; /* 水平居中 */
+	justify-content: center; /* 垂直居中 */
+	margin-top:2px;
+}
+/*姓名电话的盒子div*/
+.namediv{
+	margin-top:25px;
+}
+/* 添加收获地址图片 */
+#jia_div img{ 
+	display: inline;
+	
+}
+/* 收货地址的大div */
+#address_divid{
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap; 
+	margin: -5px; 
+}
+
+/* 按钮显示更多 */
+#showButton{
+	display: block;
+	margin: auto;
+	margin-top: 40px;
+	border: none;
+	background: white;
+}
+/* 确认商品 */
+#probox{
+	background-color: white;
+	margin-top: 25px;
+}
+#probox p{
+	padding-top: 20px;    
+	padding-left: 30px;
+}
+/* table表格 */
+#protab{
+	width: 1511px;
+	margin: auto;
+	text-align: center;
+	padding-bottom: 20px;
+}
+/* 设置上下边框*/
+#protab tr:first-child td {
+  border-top: 1px solid #ccc;
+  border-bottom: 1px solid #ccc; 
+}
+/* 给单元格设置 */
+#protab tr td{
+	height: 100px;
+	
+}
+#protab .tab-body td{
+	 vertical-align: middle;
+	 border-bottom: 0.5px solid rgb(237,237,235);
+}
+ 
+#protab .img_box{
+	width: 120px;
+	display: inline-block;
+	margin-right: 15px;
+}
+
+
+#protab img{
+	width: 80px;
+	height: 80px;
+	display: inline-block;
+    vertical-align: middle; /* 设置表格单元格内容垂直居中 */
+}
+#xiang_box{
+	margin-top: 30px;
+	background-color: white;
+}
+/* 已选商品盒子 */
+#yixuan_box{
+	text-align: right;
+	    height: 34px;
+	    line-height: 34px;
+    padding-top: 20px;       
+}
+#yixuan_box div:first-child{
+	    display: inline-block;
+	    text-align: right;
+	    margin-right: 20px;
+}
+#yixuan_box div:nth-child(2){
+	    display: inline-block;
+	    min-width: 45px;
+	    text-align: right;
+    margin-right: 25px;
+}
+/* 运费盒子 */
+#yunfei_box{
+	text-align: right;
+	    height: 34px;
+	    line-height: 34px;
+}
+#yunfei_box div:first-child{
+	display: inline-block;
+	    text-align: right;
+	    margin-right: 20px;
+}
+#yunfei_box div:nth-child(2){
+	display: inline-block;
+	    min-width: 63px;
+	    text-align: right;
+}
+/* 应付金额盒子 */
+#yingfu_box{
+	    border-top: 1px solid #eee;
+	    margin: 20px 0 0;
+	    padding: 20px 0 0;
+	    text-align: right;
+}
+#yingfu_box label{
+	color: #666;
+	    margin-right: 10px;
+	    font-size: 18px;
+}
+#price_sum{
+	color: red;
+    font-size: 32px;
+    margin-right: 25px;
+}
+/* 收件人盒子 */
+#shoujian_box{
+	text-align: right;
+	    height: 34px;
+	    line-height: 34px;
+    margin-right: 25px;
+}
+#shoujian_box div:first-child{
+	display: inline-block;
+	    text-align: right;
+		margin-right: 5px;
+}
+#shoujian_box div:nth-child(2){
+	display: inline-block;
+}
+/* 配送地址盒子 */
+#pei_box{
+	    text-align: right;
+	    height: 34px;
+	    line-height: 34px;
+}
+#pei_box div:first-child{
+	display: inline-block;
+	text-align: right;
+	margin-right: 5px;
+}
+#add_div{
+	display: inline-block;
+	    min-width: 63px;
+	    text-align: right;
+    margin-right: 25px;
+}
+/* 提交订单按钮 */
+#btn_sumbit{
+	       font-size: 18px;
+    background-color: #f51200;
+    height: 46px;
+    line-height: 46px;
+    border-radius: 23px;
+    display: inline-block;
+    color: #fff;
+    padding: 0 31px;
+    min-width: 170px;
+    text-align: center;
+    cursor: pointer;
+    /* float: right; */
+    border: none;
+    margin-left: 1313px;
+    margin-top: 12px;
+    margin-bottom: 25px;
+}
+/* 新建收货地址样式 */
+#xinzengdiv{
+	height: 100%;
+	    width: 100%;
+	    filter: alpha(opacity = 50);
+	    position: fixed;
+	    left: 0;
+	    top: 0;
+	    background-color: rgba(0, 0, 0, .5);
+	    z-index: 999;
+		display: none;
+}
+#xinzengbox{
+	background-color: white;
+	width: 730px;
+	    display: block;
+	    padding: 35px 5px;
+	    position: fixed;
+	    top: 50%;
+	    left: 50%;
+	    margin-top: -255.5px;
+	    margin-left: -363px;
+	    border-radius: 1px;
+	    box-shadow: 0 0 53px rgba(0,0,0,.15);
+	    text-align: center;
+	    z-index: 100;
+	    
+}
+/*给新增页面的保存写点击事件*/
+#baocun{
+	width: 158px;
+    height: 40px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 27px;
+    font-size: 16px;
+    color: #fff;
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #e51422), to(#ff0c53));
+    background-image: linear-gradient(90deg, #e51422, #ff0c53);
+    cursor: pointer;
+    border: none;
+    margin-left:195px;
+}
+.sinp{
+	    height: 38px;
+    line-height: 38px;
+    width: 123px;
+    text-indent: 13px;
+    border-radius: 2px;
+    padding: 3px 6px;
+    border: 1px solid #ccc;
+}
+/* X样式 */
+#close_X{
+	    position: absolute;
+	    right: 10px;
+	    top: 10px;
+	    margin-right: 0;
+	    width: 25px;
+	    height: 25px;
+	    background: none;
+	    cursor: pointer;
+}
+#form_box{
+	margin: 25px 0 20px;
+	    overflow-y: auto;
+	    text-align: left;
+		    margin-left: 90px;
+}
+#form_box div{
+	margin-bottom: 30px;
+}
+#form_box .input{
+	    height: 38px;
+	    line-height: 38px;
+	    width: 407px;
+	    text-indent: 13px;
+	    border-radius: 2px;
+	    padding: 3px 6px;
+	    border: 1px solid #ccc;
+}
+/*给收货信息的按钮添加样式*/
+.btn_mo{
+	border: none;
+    background-color: transparent;
+    /* opacity: 49%; */
+    color: blue;
+}
+/* 隐藏属性 */
+.hidden {
+	  display: none; 
+	}
+.butdiv{
+	margin-left: 12px;
+    margin-top: 10px;
+}
+.tu-div{
+	    width: 200px;
+    height: 200px;
+    margin: 0 10px;
+}
+.tu-div img{
+	    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin-left: 56px;
+}
+.tubox a{
+	    text-decoration: none;
+    color: black
+}
+#leia{
+	 text-decoration: none;
+    color: black
+}
+#updatediv{
+	    height: 100%;
+    width: 100%;
+    filter: alpha(opacity = 50);
+    position: fixed;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 999;
+    display: none;
+}
+#updatebox{
+	    background-color: white;
+    width: 730px;
+    display: block;
+    padding: 35px 5px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -255.5px;
+    margin-left: -363px;
+    border-radius: 1px;
+    box-shadow: 0 0 53px rgba(0, 0, 0, .15);
+    text-align: center;
+    z-index: 100;
+}
+#update_X{
+	    position: absolute;
+    right: 10px;
+    top: 10px;
+    margin-right: 0;
+    width: 25px;
+    height: 25px;
+    background: none;
+    cursor: pointer;	
+}
+#form_boxup{
+	    margin: 25px 0 20px;
+    overflow-y: auto;
+    text-align: left;
+    margin-left: 90px;
+}
+#form_boxup div{
+	        margin-bottom: 30px;
+}
+#form_boxup .input{
+	    height: 38px;
+    line-height: 38px;
+    width: 407px;
+    text-indent: 13px;
+    border-radius: 2px;
+    padding: 3px 6px;
+    border: 1px solid #ccc;
+}
+#update{
+	    width: 158px;
+    height: 40px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+    border-radius: 27px;
+    font-size: 16px;
+    color: #fff;
+    background-image: -webkit-gradient(linear, left top, right top, color-stop(0, #e51422), to(#ff0c53));
+    background-image: linear-gradient(90deg, #e51422, #ff0c53);
+    cursor: pointer;
+    border: none;
+    margin-left: 195px;
+}
+#name{
+	margin-right: 25px;
+}

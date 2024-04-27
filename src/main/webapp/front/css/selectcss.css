@@ -1,0 +1,180 @@
+@charset "UTF-8";
+
+		#body{
+			width: 1511px;
+			background-color: white;
+			margin: auto;
+		}
+		#sou-form{
+			width: 1511px;
+			height: 80px;
+			margin-top: 10px;
+		}
+		#sou-kuang{
+			 border-radius: 20px; /* 设置圆角半径，可以根据需要调整数值 */
+			padding: 10px; /* 可选，设置内边距 */
+			border: 1px solid #ccc; /* 可选，设置边框样式 */
+			width: 400px;
+			 background-image: url('../image/搜索1.png'); /* 图标图片的路径 */
+			background-position: 380px center; /* 图标在搜索框中的位置 */
+			background-repeat: no-repeat; /* 禁止重复 */
+			margin-left:30px;
+		}
+		.hezi{
+				width: 380px;
+				height: 440px;
+				margin: 0px auto;
+				margin-top: 40px;
+			}
+			.shang{
+			margin: 18px 0px 10px 0px;
+			border-bottom: 1px solid #CCCCCC;
+			margin: 0 auto;
+			height: 46px;
+			position: relative;
+		}
+		.xia{
+			width: 1511px;
+			margin-top: 21px;
+			
+		}
+		.shang a{
+			width: 165px;
+			text-align: center;
+			height: 30px;
+			line-height: 30px;
+			margin:33px;
+			padding: 20px;
+		}
+		a:hover{
+			cursor: pointer;
+		}
+		.action{
+			color: green;
+		}
+			from{
+				transform: translateX(0px);
+			}
+			to{
+				transform: translateX(50px);
+			}
+		.x{
+			transition:1s;
+		}
+		.div1{
+			width: 100%;
+			height: 100%;
+			display: none;
+			margin-left: 28px;
+		}
+		.x{
+			width: 80px;
+			height: 3px;
+			background-color: skyblue;
+			position: absolute;
+			top: 45px;
+			left: 35px;
+		}
+		
+/*div2的样式*/
+#re-box{
+		width: 1511px;
+		height: 500px;
+		background-color: white;
+	}
+	#v {
+	    width: 1200px; /* 设定外部容器的宽度 */
+	    overflow: hidden;
+		margin-left: 155px;
+	}
+	.v:hover{
+		box-shadow:3px 3px 3px 5px rgb(200,200,200,0.2); /* 水平偏移2px，垂直偏移2px，模糊半径5px，颜色为淡黑色 */
+		 transform: translateY(-5px); /* 向上移动5px */
+	}
+	
+	#re {
+	    display: -webkit-inline-box;
+	    width: 700px; /* 设定内部容器的宽度，确保内容超出以便滚动 */
+	    transition: transform 0.5s; /* 添加过渡效果 */
+	}
+	
+	.v {
+	    width: 293px;
+	    height: 380px;
+	    background-color: white;
+	    margin: 5px;
+		transition: transform 0.3s; /* 添加transform属性的过渡效果，持续时间0.3秒 */
+		margin-top:20px;
+	}
+	
+	.miao-span {
+	  width: 40px;
+	  height: 40px;
+	  border-radius: 50%;
+	  background-color: rgba(255, 255, 255, 0.5);
+	  
+	  margin-top: 185px;
+	}
+	
+	.miao-span button {
+	  background-color: transparent;
+	  border: none;
+	  cursor: pointer;
+	  width: 40px;
+	  height: 40px;
+	  align-items: center;
+	  text-align: center;
+		 
+	}
+	
+	
+	#but-zuo {
+	  position: absolute;
+	  left: 690px;
+	  top: 536px;
+	}
+	
+	#but-you {
+	  position: absolute;
+	  right: 690px;
+	  top: 536px;
+	}
+	.tubox a{
+	    text-decoration: none;
+    color: black
+}
+#leia{
+	 text-decoration: none;
+    color: black
+}
+.soudiv{
+	    width: 298px;
+    height: 380px;
+    background-color: white;
+    margin-left: 10px;
+    transition: transform 0.3s;
+    margin: 30px;
+        display: inline-grid;
+}
+.soudiv:hover {
+	box-shadow: 3px 3px 3px 5px rgb(200, 200, 200, 0.2);
+	/* 水平偏移2px，垂直偏移2px，模糊半径5px，颜色为淡黑色 */
+	transform: translateY(-5px); /* 向上移动5px */
+}
+.imgdiv{
+	    width: 157px;
+    height: 138px;
+    margin-top: 40px;
+    margin-left: 65px;
+}
+.imgdiv img{
+	    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin: auto;
+}
+.p{
+	    text-align: center;
+}

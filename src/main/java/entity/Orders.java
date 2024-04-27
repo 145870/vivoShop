@@ -1,36 +1,36 @@
 package entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Orders {
-	private Long id;
-	private Long userId;
-	private String addressName;
+	private int id;
+	private int user_id;
+	private String address_name;
 	private String phone;
 	private String province;
 	private String city;
 	private String district;
 	private String address;
-	private Date createTime;
-	private int ordersStatus;
-	private Long serviceId;
-	public Long getId() {
+	private Date create_time;
+	private Date orders_status;
+	private int service_id;
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public Long getUserId() {
-		return userId;
+	public int getUser_id() {
+		return user_id;
 	}
-	public void setUserId(Long userId) {
-		this.userId = userId;
+	public void setUser_id(int user_id) {
+		this.user_id = user_id;
 	}
-	public String getAddressName() {
-		return addressName;
+	public String getAddress_name() {
+		return address_name;
 	}
-	public void setAddressName(String addressName) {
-		this.addressName = addressName;
+	public void setAddress_name(String address_name) {
+		this.address_name = address_name;
 	}
 	public String getPhone() {
 		return phone;
@@ -62,43 +62,57 @@ public class Orders {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Date getCreateTime() {
-		return createTime;
+	public Date getCreate_time() {
+		return create_time;
 	}
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setCreate_time(Date create_time) {
+		this.create_time = create_time;
 	}
-	public int getOrdersStatus() {
-		return ordersStatus;
+	public Date getOrders_status() {
+		return orders_status;
 	}
-	public void setOrdersStatus(int ordersStatus) {
-		this.ordersStatus = ordersStatus;
+	public void setOrders_status(Date orders_status) {
+		this.orders_status = orders_status;
 	}
-	public Long getServiceId() {
-		return serviceId;
+	public int getService_id() {
+		return service_id;
 	}
-	public void setServiceId(Long serviceId) {
-		this.serviceId = serviceId;
+	public void setService_id(int service_id) {
+		this.service_id = service_id;
 	}
-	public Orders(Long id, Long userId, String addressName, String phone, String province, String city, String district,
-			String address, Date createTime, int ordersStatus, Long serviceId) {
+	/**
+	 * @param id
+	 * @param user_id
+	 * @param address_name
+	 * @param phone
+	 * @param province
+	 * @param city
+	 * @param district
+	 * @param address
+	 * @param create_time
+	 * @param orders_status
+	 * @param service_id
+	 */
+	public Orders(int id, int user_id, String address_name, String phone, String province, String city, String district,
+			String address, Date create_time, Date orders_status, int service_id) {
 		super();
 		this.id = id;
-		this.userId = userId;
-		this.addressName = addressName;
+		this.user_id = user_id;
+		this.address_name = address_name;
 		this.phone = phone;
 		this.province = province;
 		this.city = city;
 		this.district = district;
 		this.address = address;
-		this.createTime = createTime;
-		this.ordersStatus = ordersStatus;
-		this.serviceId = serviceId;
+		this.create_time = create_time;
+		this.orders_status = orders_status;
+		this.service_id = service_id;
 	}
+	/**
+	 * 
+	 */
 	public Orders() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	
 	
 }

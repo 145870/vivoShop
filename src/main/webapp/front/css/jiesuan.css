@@ -1,0 +1,58 @@
+@charset "UTF-8";
+body{
+				background-color: #f2f2f2;
+			}
+			#titlebox{
+				background-color: white;
+				    height: 72px;
+				    margin-bottom: 17px;
+				    line-height: 72px;
+				    font-size: 21px;
+				    text-align: center;
+					font-weight: bold;
+			}
+			#sub_box{
+				    padding: 40px 40px 30px;
+				    background: #fff;
+			}
+			#sub{
+				display: inline-flex;
+				margin-left: 80px;
+			}
+			#sub_wen{
+				margin-left: 35px;
+			}
+			#sub_img{
+				margin-top: 15px;
+			}
+			#wen{
+				margin-left: 174px;
+			}
+			#wen div span {
+			    padding: 2px;
+			    display: block;
+			    background-color: white;
+			    width: 800px;
+    			margin-top: 15px;
+    			color:#999;
+			}
+			#zhifu{
+				background-color: white;
+				margin-top: 20px;
+				padding: 18px;
+			}
+			#sub_btn{
+				    font-size: 18px;
+				    background-color: #f51200;
+				    height: 46px;
+				    line-height: 46px;
+				    border-radius: 23px;
+				    display: inline-block;
+				    color: #fff;
+				    padding: 0 31px;
+				    min-width: 170px;
+				    text-align: center;
+				    cursor: pointer;
+				    border: none;
+					margin-left: 200px;
+			}

@@ -1,0 +1,88 @@
+@charset "UTF-8";
+.tu-div{
+	    width: 200px;
+    height: 200px;
+    margin: 0 10px;
+}
+.tupianx{
+	max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+    margin-left: 56px;
+}
+#goumaia{
+	    text-decoration: none;
+    color: white;
+}
+#footDiv {
+	width: 1470px;
+	transition: all 0.4s ease;
+	overflow: hidden;
+	height: 100%;
+	margin-top: 20px;
+}
+#b1{
+	position: absolute;
+    top: 98px;
+    left: 0;
+    width: 116px;
+    height: 116px;
+    overflow: hidden;
+    background: url(https://shopstatic.vivo.com.cn/vivoshop/spaweb/static/img/icon-afterservice.7054b58a.png) no-repeat;
+	background-position: 0px 3px;
+}
+#b2{
+	position: absolute;
+    top: 444px;
+    left: 0;
+    width: 116px;
+    height: 116px;
+    overflow: hidden;
+    background: url(https://shopstatic.vivo.com.cn/vivoshop/spaweb/static/img/icon-afterservice.7054b58a.png) no-repeat;
+	background-position: 0px -129px;
+}
+#b3{
+	position: absolute;
+    top: 623px;
+    left: 0;
+    width: 116px;
+    height: 116px;
+    overflow: hidden;
+    background: url(https://shopstatic.vivo.com.cn/vivoshop/spaweb/static/img/icon-afterservice.7054b58a.png) no-repeat;
+	background-position: 0px -260px;
+}
+#b4{
+	position: absolute;
+    top: 819px;
+    left: 0;
+    width: 116px;
+    height: 116px;
+    overflow: hidden;
+    background: url(https://shopstatic.vivo.com.cn/vivoshop/spaweb/static/img/icon-afterservice.7054b58a.png) no-repeat;
+	background-position: 0px -391px;
+}
+#fuwu_ul{
+	height:100%;
+}
+#fuwu_ul li{
+	margin-left: 146px;
+	list-style: none;
+	margin-top: 40px;
+	margin-bottom: 120px;
+	line-height: 25px;
+}
+#body-box {
+	width: 1511px;
+	height: 900px;
+	background-color: white;
+}
+.tubox a{
+	    text-decoration: none;
+    color: black
+}
+#leia{
+	 text-decoration: none;
+    color: black
+}

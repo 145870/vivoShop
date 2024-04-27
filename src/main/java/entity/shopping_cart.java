@@ -1,7 +1,5 @@
 package entity;
 
-import ch.qos.logback.classic.Logger;
-
 public class shopping_cart {
 	private Integer id;//主键
 	private Integer user_id;//用户id
@@ -9,7 +7,7 @@ public class shopping_cart {
 	private Integer quantity;//数量
 	public Integer getId() {
 		return id;
-	}
+	} 
 	public void setId(Integer id) {
 		this.id = id;
 	}

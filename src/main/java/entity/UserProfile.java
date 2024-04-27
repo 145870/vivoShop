@@ -1,11 +1,10 @@
 package entity;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
-import com.google.protobuf.Timestamp;
-
 public class UserProfile {
-	private Long id;
+	private int id;
 	private String account_number;
 	private String user_name;
 	private String phone;
@@ -16,11 +15,10 @@ public class UserProfile {
 	private Date birthday;
 	private Date create_time;
 	private String head_image_url;
-	
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	public String getAccount_number() {
@@ -83,7 +81,7 @@ public class UserProfile {
 	public void setHead_image_url(String head_image_url) {
 		this.head_image_url = head_image_url;
 	}
-	public UserProfile(Long id, String account_number, String user_name, String phone, String user_password,
+	public UserProfile(int id, String account_number, String user_name, String phone, String user_password,
 			String mailbox, String address, int sex, Date birthday, Date create_time, String head_image_url) {
 		super();
 		this.id = id;
@@ -101,6 +99,8 @@ public class UserProfile {
 	public UserProfile() {
 		super();
 	}
+	
+	
 	@Override
 	public String toString() {
 		return "user_profile [id=" + id + ", account_number=" + account_number + ", user_name=" + user_name + ", phone="
